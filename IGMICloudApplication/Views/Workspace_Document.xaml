@@ -1,0 +1,190 @@
+﻿<Window x:Class="IGMICloudApplication.Views.Workspace_Document"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IGMICloudApplication.Views" xmlns:usrControl="clr-namespace:IGMICloudApplication"
+        mc:Ignorable="d"
+        Title="Workspace_Document" Height="450" Width="800">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <usrControl:SideMenuPanel/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,0">
+                        <Button ToolTip="Minimize" Width="20" Height="28" Style="{StaticResource WindowActionButtonClose}" Margin="0,0,10,0">
+                            <Image Width="32" Height="28" Source="Icons\Search.png" Stretch="Fill"></Image>
+                            <!--<Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Margin="0,16,1,2" Width="9" Height="2" VerticalAlignment="Bottom" d:LayoutOverrides="Height"/>-->
+                        </Button>
+                        <Button ToolTip="Close" Width="32" Height="28" Style="{StaticResource WindowActionButtonClose}">
+                            <Image Width="32" Height="28" Source="Icons\Notification.png" Stretch="Fill"></Image>
+                            <!--<Path Width="10" Height="10" Stretch="Fill" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z "/>-->
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1" Margin="10,10,0,0">
+                    <Image Width="32" HorizontalAlignment="Left" Height="28" Source="Icons\Cloud-user.png" Stretch="Fill"></Image>
+                    <Label Content="Workspace Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,0"/>
+
+                </Grid>
+                <Grid Grid.Row="2" Margin="0,10,0,0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                    <Grid>
+                        <TabControl>
+                            <TabItem>
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="DOCUMENTS"/>
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Row="0" Grid.Column="0">
+                                        <Button HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="195" Height="35" Background="{DynamicResource MainWhiteFontColor}" BorderBrush="{DynamicResource MainWhiteFontColor}">
+                                            <WrapPanel Height="30" Width="190">
+                                                <Image Height = "28" Width = "28" Source = "Icons\Home.png" />
+                                                <TextBlock TextWrapping = "Wrap" Text = "Home" Width = "50" FontSize = "12" VerticalAlignment = "Center" Foreground="#FF270707"  />
+                                            </WrapPanel>
+                                        </Button>
+                                    </Grid>
+                                    <Grid Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"  Margin="0,0,5,0">
+
+                                        <Button Content="Create New" TabIndex="4" HorizontalAlignment="Right" VerticalAlignment="Top" Width="95" Background="#FF3A889E" FontSize="12"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,5,0">
+                                        <DataGrid HorizontalAlignment="Left" Height="13" VerticalAlignment="Top" Width="12" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Name" HeaderStringFormat="Name"/>
+                                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Role" HeaderStringFormat="Role"/>
+                                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Joined" HeaderStringFormat="Joined"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
+                            <TabItem>
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="CONTENT LIBRARY"/>
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Row="0" Grid.Column="0">
+                                        <StackPanel Orientation="Horizontal"  Width="200">
+                                            <Image Source="Icons/Search.png" Visibility="{Binding ElementName=searchLibrary, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                            <TextBlock Margin="0,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" Height="24" Width="200" Text="Search Contrny Library" Foreground="{StaticResource UserControlButtonIsPressedBrush}"
+                                           Visibility="{Binding ElementName=searchLibrary, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                                        </StackPanel>
+                                        <TextBox Margin="0,2" Style="{StaticResource LoginTextBoxStyle}" Name="searchLibrary" CharacterCasing="Lower" TabIndex="0" Width="220" Grid.ColumnSpan="5" />
+                                    </Grid>
+                                    <Grid Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0">
+                                        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Margin="10,0"/>
+
+                                    </Grid>
+                                    <Grid Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,5,0">
+                                        <DataGrid HorizontalAlignment="Left" Height="13" VerticalAlignment="Top" Width="12" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Name" HeaderStringFormat="Name"/>
+                                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Role" HeaderStringFormat="Role"/>
+                                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Joined" HeaderStringFormat="Joined"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
+                            <TabItem>
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="INSIGHTS"/>
+                                    </StackPanel>
+                                </TabItem.Header>
+                            </TabItem>
+                            <TabItem>
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="SETTINGS"/>
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Margin="15,0,0,0">
+                                        <Label Content="Workspace Name" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1" Margin="15,0,0,0">
+                                        <!--<TextBlock Margin="4,1,2,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" Height="24" Text="Name" Foreground="{StaticResource UserControlButtonIsPressedBrush}"
+                                           Visibility="{Binding ElementName=name, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+                                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Name="name" CharacterCasing="Lower" TabIndex="0" Width="400" />
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="15,0,0,0">
+                                        <Label Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                                    </Grid>
+                                    <Grid Grid.Row="3" Margin="15,0,0,0">
+                                        <!--<TextBlock Margin="4,1,2,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" Height="24" Text="Description" Foreground="{StaticResource UserControlButtonIsPressedBrush}"
+                                           Visibility="{Binding ElementName=description, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+                                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Name="description" CharacterCasing="Lower" TabIndex="0" Width="400" />
+                                    </Grid>
+                                    <Grid Grid.Row="4" Margin="15,0,0,0">
+                                        <Label Content="Change Workspace Icon Color" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                                    </Grid>
+                                    <Grid Grid.Row="5" Margin="15,0,0,0">
+                                        <Ellipse HorizontalAlignment="Left" Margin="0,0"  Stroke="Black" VerticalAlignment="Top" Width="30" Height="30" Fill="#FF31FBFB"/>
+                                        <Ellipse HorizontalAlignment="Left" Margin="40,0"  Stroke="Black" VerticalAlignment="Top" Width="30" Height="30" Fill="#FFCB1B6B"/>
+                                        <Ellipse HorizontalAlignment="Left" Margin="80,0"  Stroke="Black" VerticalAlignment="Top" Width="30" Height="30" Fill="#FFE45D1F"/>
+                                        <Ellipse HorizontalAlignment="Left" Margin="120,0"  Stroke="Black" VerticalAlignment="Top" Width="30" Height="30" Fill="{DynamicResource MainWhiteFontColor}"/>
+                                        <Ellipse HorizontalAlignment="Left" Margin="160,0"  Stroke="Black" VerticalAlignment="Top" Width="30" Height="30" Fill="#FF2DE066"/>
+                                        <Ellipse HorizontalAlignment="Left" Margin="200,0"  Stroke="Black" VerticalAlignment="Top" Width="30" Height="30" Fill="#FF2D86E0"/>
+                                        <Ellipse HorizontalAlignment="Left" Margin="240,0"  Stroke="Black" VerticalAlignment="Top" Width="30" Height="30" Fill="#FFC37CC3"/>
+                                        <Ellipse HorizontalAlignment="Left" Margin="280,0"  Stroke="Black" VerticalAlignment="Top" Width="30" Height="30" Fill="#FFEE533B"/>
+                                    </Grid>
+                                    <Grid Grid.Row="6" Margin="15,20,0,0">
+                                        <Button Content="Save Changes" TabIndex="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Background="#FF3A889E" FontSize="12"/>
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

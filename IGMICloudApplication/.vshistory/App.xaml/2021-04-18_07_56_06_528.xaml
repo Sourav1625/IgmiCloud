@@ -1,0 +1,11 @@
+﻿<Application x:Class="IGMICloudApplication.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    DispatcherUnhandledException="APP_DispatcherUnhandledException"
+    Startup="OnStartup">
+    <Application.Resources>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="ModernButtonTheme"/>
+        </ResourceDictionary.MergedDictionaries>
+    </Application.Resources>
+</Application>

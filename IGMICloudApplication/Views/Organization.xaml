@@ -1,0 +1,115 @@
+﻿<Window x:Class="IGMICloudApplication.Views.Organization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IGMICloudApplication.Views" xmlns:usrControl="clr-namespace:IGMICloudApplication.UserControl" xmlns:usrControl1="clr-namespace:IGMICloudApplication"
+        mc:Ignorable="d"
+        Title="Organization" Height="480" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="170" />
+            <ColumnDefinition Width="160" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <usrControl1:SideMenuPanel/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="150" Margin="10,10,0,10">
+                <usrControl:ProfileMenu Width="150"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="2">
+            <StackPanel Orientation="Horizontal">
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="20,70,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Organization"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="16"/>
+                        <Ellipse Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Row="1" HorizontalAlignment="Left" Stroke="Black" VerticalAlignment="Top" Height="50" Width="50"/>
+                        <TextBlock Text="Test" Grid.Row="1" Margin="15 15"/>
+
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" Margin="15,0,0,0">
+                    <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                </Grid>
+                <Grid Grid.Row="2" Margin="15,0,0,0">
+                    <TextBlock Margin="4,1,2,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" Height="24" Text="Name" Foreground="{StaticResource UserControlButtonIsPressedBrush}"
+                                           Visibility="{Binding ElementName=name, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <TextBox Style="{StaticResource LoginTextBoxStyle}" Name="name" CharacterCasing="Lower" TabIndex="0" Width="400" />
+                </Grid>
+                <Grid Grid.Row="3" Margin="15,20,0,0">
+                    <Label Content="Organization Subdomain" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                </Grid>
+                <Grid Grid.Row="4" Margin="15,20,0,0">
+                    <TextBlock Margin="4,1,2,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" Height="24" Text="Sub Domain" Foreground="{StaticResource UserControlButtonIsPressedBrush}"
+                                           Visibility="{Binding ElementName=subDomain, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <TextBox Style="{StaticResource LoginTextBoxStyle}" Name="subDomain" CharacterCasing="Lower" TabIndex="1" Width="400" />
+                </Grid>
+                <Grid Grid.Row="5" Margin="15,0,0,0">
+                    <Label Content="Website" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                </Grid>
+                <Grid Grid.Row="6" Margin="15,0,0,0">
+                    <TextBlock Margin="4,1,2,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" Height="24" Text="Website" Foreground="{StaticResource UserControlButtonIsPressedBrush}"
+                                           Visibility="{Binding ElementName=website, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <TextBox Style="{StaticResource LoginTextBoxStyle}" Name="website" CharacterCasing="Lower" TabIndex="2" Width="400" />
+                </Grid>
+                <Grid Grid.Row="7" Margin="0,0,0,0">
+                    <Label Content="Billing Email" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                </Grid>
+                <Grid Grid.Row="8" Margin="20,0,0,0">
+                    <TextBlock Margin="4,1,2,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" Height="24" Text="Billing Email" Foreground="{StaticResource UserControlButtonIsPressedBrush}"
+                                           Visibility="{Binding ElementName=billingEmail, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <TextBox Style="{StaticResource LoginTextBoxStyle}" Name="billingEmail" CharacterCasing="Lower" TabIndex="3" Width="400" />
+                </Grid>
+                <Grid Grid.Row="9" Margin="20,20,0,0">
+                    <Button Content="Save Changes" TabIndex="4" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Background="#FF3A889E" FontSize="12"/>
+                </Grid>
+                <Grid Grid.Row="10" Margin="15,20,0,0">
+                    <Rectangle  HorizontalAlignment="Stretch"  VerticalAlignment="Center" Fill="#FFD4D1D1" Height="1" />
+                </Grid>
+                <Grid Grid.Row="11" Margin="15,20,0,0">
+                    <!--<Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Do you want to delete this Organizatiuon?"  Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="14"/>
+                        
+                        <TextBlock TextWrapping="Wrap" Text="By doing so it will remove all team member's access, workspaces, documents, sharable links, trackable links, contents library assets, analytics tracking and more." Grid.Row="1" Margin="0,5" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
+                        <TextBlock TextWrapping="Wrap" Text="If you are sure then move forward and email us at...." Grid.Row="2" Margin="0,5" Foreground="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"/>
+
+                    </Grid>-->
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

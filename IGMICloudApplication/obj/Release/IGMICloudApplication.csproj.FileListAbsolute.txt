@@ -1,0 +1,53 @@
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\IGMICloudApplication.exe.config
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\IGMICloudApplication.exe
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\IGMICloudApplication.pdb
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\MahApps.Metro.IconPacks.Core.dll
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\MahApps.Metro.IconPacks.Material.dll
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\RestSharp.dll
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\MahApps.Metro.IconPacks.Core.pdb
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\MahApps.Metro.IconPacks.Core.xml
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\MahApps.Metro.IconPacks.Material.pdb
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\MahApps.Metro.IconPacks.Material.xml
+D:\IGMICloudApp\IGMICloudApplication\bin\Release\RestSharp.xml
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.csprojAssemblyReference.cache
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\Views\ModernButtonTheme\ModernButton.baml
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\App.baml
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\Views\MainView.g.cs
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\App.g.cs
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\GeneratedInternalTypeHelper.g.cs
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication_MarkupCompile.cache
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication_MarkupCompile.lref
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\Views\MainView.baml
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.g.resources
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.Properties.Resources.resources
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.csproj.GenerateResource.cache
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.csproj.CoreCompileInputs.cache
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.csproj.CopyComplete
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.exe
+D:\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.pdb
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.csprojAssemblyReference.cache
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\Styles\Blue.baml
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\ModernButtonTheme\ModernButton.baml
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\Styles\CoreResourceDictionary.baml
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\Styles\DataWindowResourceDictionary.baml
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\Styles\UserControlResourceDictionary.baml
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\App.baml
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\UserControl\ProfileMenu.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\UserControl\SideMenuPanel.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\Account.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\Dashboard.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\InvitePerson.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\MainView.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\Organization.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\Profile.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\TeamManagement.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\App.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\GeneratedInternalTypeHelper.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication_MarkupCompile.cache
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication_MarkupCompile.lref
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.exe
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\IGMICloudApplication.pdb
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\Workspace.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\Workspace_Document.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\ProfileMenu.g.cs
+D:\D\windows application\VisualStudio2019\IGMICloudApp\IGMICloudApplication\obj\Release\Views\SideMenuPanel.g.cs
