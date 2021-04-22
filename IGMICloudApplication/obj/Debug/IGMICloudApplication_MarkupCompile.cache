@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\IGMICloudApp\IGMICloudApplication\obj\Debug\
+F:\MyTest\IgmiCloud\IGMICloudApplication\obj\Debug\
 IGMICloudApplication
 none
 false
 DEBUG;TRACE
-D:\IGMICloudApp\IGMICloudApplication\App.xaml
-21588130061
+F:\MyTest\IgmiCloud\IGMICloudApplication\App.xaml
+16-2015568303
 
-12361415094
-151051288285
-Views\MainView.xaml;Views\ModernButtonTheme\ModernButton.xaml;
+23-502936621
+15-297485480
+Views\Styles\Blue.xaml;Views\ProfileMenu.xaml;Views\SideMenuPanel.xaml;Views\Account.xaml;Views\Dashboard.xaml;Views\InvitePerson.xaml;Views\MainView.xaml;Views\ModernButtonTheme\ModernButton.xaml;Views\Organization.xaml;Views\Profile.xaml;Views\Styles\CoreResourceDictionary.xaml;Views\Styles\DataWindowResourceDictionary.xaml;Views\Styles\UserControlResourceDictionary.xaml;Views\TeamManagement.xaml;Views\Workspace.xaml;Views\Workspace_Document.xaml;
 
-False
+True
 
