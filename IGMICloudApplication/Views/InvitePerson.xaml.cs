@@ -19,9 +19,23 @@ namespace IGMICloudApplication.Views
     /// </summary>
     public partial class InvitePerson : Window
     {
-        public InvitePerson()
+        string person_Type = "";
+        public InvitePerson(string type)
         {
             InitializeComponent();
+            person_Type = "Invite " + type;
+            personType.Text = person_Type;
+        }
+
+        private void Thumb_OnDragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            Left = Left + e.HorizontalChange;
+            Top = Top + e.VerticalChange;
+        }
+
+        private void btnActionClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:loginstate="clr-namespace:IGMICloudApplication.ViewModels"
+        xmlns:data="clr-namespace:IGMICloudApplication.ViewModels"
         xmlns:ff="clr-namespace:IGMICloudApplication.Views.Extensions"
         mc:Ignorable="d"
         Title="IGMI Cloud" Height="450" Width="380" 
@@ -91,11 +91,11 @@
                                 <Button Width="100" Height="40" Name="LoginButton" Content="LOGIN" Command="{Binding LoginViewModel.LoginCommand}" Margin="60,0,60,0" Cursor="Hand"/>
                                 <Button Width="100" Height="40" Content="REGISTER" Cursor="Hand"/>
                             </StackPanel>
-                        </StackPanel>                        
+                        </StackPanel>
                     </Grid>
                 </Grid>
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="{x:Static loginstate:LoginState.LoggingIn}">
+                    <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="{x:Static data:LoginState.LoggingIn}">
                         <Setter TargetName="LoginButton" Property="IsEnabled" Value="False" />
                         <Setter TargetName="LoggingMsg" Property="Visibility" Value="Visible" />
                     </DataTrigger>
@@ -140,7 +140,7 @@
                     </Grid>
                 </Grid>
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="{x:Static loginstate:LoginState.LoggedIn}">
+                    <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="{x:Static data:LoginState.LoggedIn}">
                         <Setter TargetName="LoginControl" Property="Visibility" Value="Collapsed" />
                         <Setter TargetName="DashboardPanel" Property="Visibility" Value="Visible" />
                     </DataTrigger>

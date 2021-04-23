@@ -23,5 +23,16 @@ namespace IGMICloudApplication.Views
         {
             InitializeComponent();
         }
+
+        private void Invite_Guest_Click(object sender, RoutedEventArgs e)
+        {
+            InvitePerson invite = new InvitePerson("Guest");
+            invite.ShowDialog();
+        }
+        private void Invite_Member_Click(object sender, RoutedEventArgs e)
+        {
+            InvitePerson invite = new InvitePerson("Member");
+            invite.ShowDialog();
+        }
     }
 }

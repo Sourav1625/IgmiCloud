@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:IGMICloudApplication.Views" xmlns:usrControl="clr-namespace:IGMICloudApplication.UserControl" xmlns:usrControl1="clr-namespace:IGMICloudApplication"
+        xmlns:local="clr-namespace:IGMICloudApplication.Views"
         mc:Ignorable="d"
         Title="Organization" Height="480" Width="800">
     <Grid>
@@ -14,11 +14,11 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <usrControl1:SideMenuPanel/>
+            <local:SideMenuPanel/>
         </Grid>
         <Grid Grid.Column="1">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="150" Margin="10,10,0,10">
-                <usrControl:ProfileMenu Width="150"/>
+                <local:ProfileMenu Width="150"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="2">
