@@ -1,5 +1,7 @@
 ﻿using IGMICloudApplication.APIs;
 using IGMICloudApplication.Commands;
+using IGMICloudApplication.Models;
+using IGMICloudApplication.Views;
 using RestSharp;
 using System;
 
@@ -50,11 +52,17 @@ namespace IGMICloudApplication.ViewModels
                         string responseStatus = (string)jObj["_status"];
                         if (responseStatus == "success")
                         {
+                            UserProfile.userName = userName;
                             string access_token = (string)((JsonObject)jObj["data"])[0];
                             string account_id = (string)((JsonObject)jObj["data"])[1];
                             Console.WriteLine("User Access Token: " + access_token);
                             Console.WriteLine("User Account id: " + account_id);
                             LoginState = LoginState.LoggedIn;
+                            Dashboard dashboard = new Dashboard() { DataContext = new MainViewModel() };
+                            dashboard.Show();
+
+                            App.Current.MainWindow.Close();
+                            App.Current.MainWindow = dashboard;
                         }
                         else
                         {

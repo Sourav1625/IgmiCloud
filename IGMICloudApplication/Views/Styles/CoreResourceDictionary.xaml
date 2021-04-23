@@ -52,24 +52,11 @@
                         <ScrollViewer  Margin="{TemplateBinding Padding}" VerticalScrollBarVisibility="Hidden" x:Name="PART_ContentHost" Foreground="{TemplateBinding Foreground}"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MainBlackFontColor}"/>
-                            <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MainBlackFontColor}"/>
-                            <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MainBlackFontColor}"/>
-                            <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
-                        </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter TargetName="PART_ContentHost"  Property="Opacity" Value="0.5"></Setter>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}"/>
-                            <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
                             <Setter Property="Background" Value="{StaticResource DisabledBackgroundBrush}"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -125,25 +112,12 @@
                         <ScrollViewer  Margin="{TemplateBinding Padding}" VerticalScrollBarVisibility="Hidden" x:Name="PART_ContentHost" Foreground="{TemplateBinding Foreground}"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MainBlackFontColor}"/>
-                            <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MainBlackFontColor}"/>
-                            <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MainBlackFontColor}"/>
-                            <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
-                        </Trigger>
+                        
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter TargetName="PART_ContentHost"  Property="Opacity" Value="0.5"></Setter>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <!--<Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}"/>-->
-                            <Setter TargetName="Border" Property="BorderBrush" Value="Black"/>
-                            <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
                             <Setter Property="Background" Value="{StaticResource DisabledBackgroundBrush}"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>

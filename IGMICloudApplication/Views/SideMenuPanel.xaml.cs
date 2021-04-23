@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IGMICloudApplication.Models;
+using IGMICloudApplication.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +29,20 @@ namespace IGMICloudApplication.Views
 
         private void mnuDashboard_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Dashboard");
+            Dashboard dashboard = new Dashboard() { DataContext = new MainViewModel() };
+            dashboard.Show();
+
+            App.Current.MainWindow.Close();
+            App.Current.MainWindow = dashboard;
+        }
+
+        private void mnuWorkspaces_Click(object sender, RoutedEventArgs e)
+        {
+            Workspace dashboard = new Workspace() { DataContext = new MainViewModel() };
+            dashboard.Show();
+
+            App.Current.MainWindow.Close();
+            App.Current.MainWindow = dashboard;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -38,6 +53,25 @@ namespace IGMICloudApplication.Views
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Clicked on Menu Item 1...", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void LeftMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+            lblName.Content = UserProfile.userName;
+
+            string[] multiArray = UserProfile.userName.Split(new Char[] { ' ', ',', '.', '-', '\n', '\t' });
+            string uname = UserProfile.userName.Replace(",", " ");
+            string initialLetter = "";
+            int count = 0;
+            if (multiArray.Length > 1)
+            {
+                while (count < 2)
+                {
+                    initialLetter = initialLetter + multiArray[count].Substring(0, 1);
+                    count++;
+                }
+            }
+            initial.Text = initialLetter;
         }
     }
 }

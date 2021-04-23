@@ -7,7 +7,7 @@
         xmlns:data="clr-namespace:IGMICloudApplication.ViewModels"
         xmlns:ff="clr-namespace:IGMICloudApplication.Views.Extensions"
         mc:Ignorable="d"
-        Title="IGMI Cloud" Height="450" Width="380" 
+        Title="IGMI Cloud" Height="700" Width="950" 
         Icon="Icons/IGMICloud.ico"
         Background="Transparent"
         ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None">
@@ -29,7 +29,7 @@
                             </Border.Background>
                         </Border>
                         <StackPanel VerticalAlignment="Center">
-                            <Image Source="Icons/IGMICloud.png" Width="150"/>
+                            <Image Source="Icons/IGMICloud.png" Width="250"/>
                             <TextBlock Text="Empowered By Innovation"
                            FontWeight="Light"
                            FontFamily="helvetica"
@@ -37,7 +37,7 @@
                            Foreground="White"
                            HorizontalAlignment="Center"/>
                         </StackPanel>
-                        <StackPanel Grid.Row="1" >
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
                                 <TextBox FontFamily="Helvetica"
                              FontWeight="Light"
@@ -51,7 +51,7 @@
                              HorizontalContentAlignment="Left"
                              Opacity="0.5"
                              Height="25"
-                             Margin="63,0,0,0"
+                             Margin="0,0,0,0"
                              GotFocus="OnInputFieldFocused" LostFocus="OnInputFieldFocusedLost"/>
                                 <iconPacks:PackIconMaterial Kind="Account" 
                                                 VerticalAlignment="Center" 
@@ -75,7 +75,7 @@
                              HorizontalContentAlignment="Left"
                              Opacity="0.5"
                              Height="25"
-                             Margin="63,0,0,0"
+                             Margin="0,0,0,0"
                              GotFocus="OnInputFieldFocused" LostFocus="OnInputFieldFocusedLost"
                              ff:PasswordBoxAssistant.BindPassword="true"  ff:PasswordBoxAssistant.BoundPassword="{Binding Path=LoginViewModel.password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 <iconPacks:PackIconMaterial Kind="Key"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
@@ -88,7 +88,7 @@
                                 <TextBlock Text="Please Wait..."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
-                                <Button Width="100" Height="40" Name="LoginButton" Content="LOGIN" Command="{Binding LoginViewModel.LoginCommand}" Margin="60,0,60,0" Cursor="Hand"/>
+                                <Button Width="100" Height="40" Name="LoginButton" Content="LOGIN" Command="{Binding LoginViewModel.LoginCommand}" Margin="0,0,50,0" Cursor="Hand"/>
                                 <Button Width="100" Height="40" Content="REGISTER" Cursor="Hand"/>
                             </StackPanel>
                         </StackPanel>
