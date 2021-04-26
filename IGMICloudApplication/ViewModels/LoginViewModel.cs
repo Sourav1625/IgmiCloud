@@ -5,6 +5,7 @@ using IGMICloudApplication.Views;
 using NLog;
 using RestSharp;
 using System;
+using System.ComponentModel;
 
 namespace IGMICloudApplication.ViewModels
 {
@@ -16,12 +17,33 @@ namespace IGMICloudApplication.ViewModels
         LoggingOut
     }
 
-    public class LoginViewModel
+    public class LoginViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyRaised(string propertyname)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
+            }
+        }
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public string userName { get; set; }
         public string password { get; set; }
-        public LoginState LoginState { get; set; }
+        private LoginState loginState;
+        public LoginState LoginState
+        {
+            get
+            {
+                return loginState;
+            }
+            set
+            {
+                loginState = value;
+                OnPropertyRaised("loginState");
+            }
+        }
         public bool isForgotPasswordFormVisible { get; set; }
         public DelegateCommand LoginCommand { get; private set; }
         public DelegateCommand ShowAndHideForgotPasswordForm { get; private set; }        
