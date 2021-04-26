@@ -8,7 +8,18 @@ namespace IGMICloudApplication.ViewModels
     public class MainViewModel : ViewModelBase
     {
         private DelegateCommand exitCommand;
-
+        static MainViewModel s_Instance = null;
+        public static MainViewModel Instance
+        {
+            get
+            {
+                if (s_Instance == null)
+                {
+                    s_Instance = new MainViewModel();                    
+                }
+                return s_Instance;
+            }
+        }
         #region Constructor
 
         public LoginViewModel LoginViewModel { get; private set; }
