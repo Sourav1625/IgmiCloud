@@ -40,7 +40,11 @@ namespace IGMICloudApplication.Views
                 if (userNameField.Text=="Username")
                 {
                     userNameField.Text = "";
-                }                
+                }
+                if (userNameField.Text == "Email")
+                {
+                    userNameField.Text = "";
+                }
             }
             else
             {
@@ -55,10 +59,13 @@ namespace IGMICloudApplication.Views
         {
             if (e.OriginalSource is TextBox)
             {
-                var userNameField = sender as TextBox;
-                if (string.IsNullOrEmpty(userNameField.Text))
+                var inputField = sender as TextBox;
+                if (inputField.Name== "UserNameField" && string.IsNullOrEmpty(inputField.Text))
                 {
-                    userNameField.Text = "Username";
+                    inputField.Text = "Username";
+                }else if (inputField.Name == "SendEmailField" && string.IsNullOrEmpty(inputField.Text))              
+                {
+                    inputField.Text = "Email";
                 }
             }
             else

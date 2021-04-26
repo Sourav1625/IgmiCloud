@@ -67,6 +67,7 @@
                                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                                                 </StackPanel>
                                                 <TextBox FontFamily="Helvetica"
+                                                Name="UserNameField"
                                          FontWeight="Light"
                                          Text="{Binding Path=LoginViewModel.userName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          FontSize="12"
@@ -150,8 +151,9 @@
                                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                                                 </StackPanel>
                                                 <TextBox FontFamily="Helvetica"
+                                                Name="SendEmailField"
                                          FontWeight="Light"
-                                         Text="{Binding Path=LoginViewModel.userName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Text="{Binding Path=LoginViewModel.sendPasswordEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          FontSize="12"
                                          HorizontalAlignment="Center"
                                          BorderBrush="#ebebec"
@@ -367,7 +369,7 @@
                     </Grid>
                 </Grid>
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="LoggedIn">
+                    <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="x:Static data:LoginState.LoggedIn">
                         <Setter TargetName="LoginControl" Property="Visibility" Value="Collapsed" />
                         <Setter TargetName="DashboardPanel" Property="Visibility" Value="Visible" />
                     </DataTrigger>
