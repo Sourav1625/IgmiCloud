@@ -2,6 +2,7 @@
 using IGMICloudApplication.Commands;
 using IGMICloudApplication.Models;
 using IGMICloudApplication.Views;
+using NLog;
 using RestSharp;
 using System;
 
@@ -17,10 +18,13 @@ namespace IGMICloudApplication.ViewModels
 
     public class LoginViewModel
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public string userName { get; set; }
         public string password { get; set; }
         public LoginState LoginState { get; set; }
+        public bool isForgotPasswordFormVisible { get; set; }
         public DelegateCommand LoginCommand { get; private set; }
+        public DelegateCommand ShowAndHideForgotPasswordForm { get; private set; }        
         private string loginEndpoint = "/authorize";
         public LoginViewModel()
         {
@@ -32,43 +36,67 @@ namespace IGMICloudApplication.ViewModels
             {
                 userName = "Username";
             }
+            ShowAndHideForgotPasswordForm = new DelegateCommand(() =>
+            {
+                isForgotPasswordFormVisible = !isForgotPasswordFormVisible;
+            });
             LoginCommand = new DelegateCommand(() =>
             {
+                Logger.Info("Checking username and password for log in");
                 if (string.IsNullOrEmpty(userName))
                 {
                     Console.WriteLine("Username is empty");
-                }else if (string.IsNullOrEmpty(password) || password == "Password")
+                    Logger.Info("Can not Login as Username is empty");
+                }
+                else if (string.IsNullOrEmpty(password) || password == "Password")
                 {
                     Console.WriteLine("Password is empty");
+                    Logger.Info("Can not Login as Password is empty");
                 }
-                //Now Calling Login API
-                var cloudAPIObj = new IGMICloudAPIs();
-                string loginResponse = cloudAPIObj.DoLogin(loginEndpoint, userName, password);
-                if (loginResponse!=null)
+                try
                 {
-                    var responseJson = SimpleJson.DeserializeObject(loginResponse);
-                    if (responseJson is JsonObject jObj)
+                    LoginState = LoginState.LoggingIn;
+                    //Now Calling Login API
+                    Logger.Debug("username and password is ok..now calling login api...");
+                    Logger.Debug("loginEndpoint: " + loginEndpoint);
+                    Logger.Debug("userName: " + userName);
+                    var cloudAPIObj = new IGMICloudAPIs();
+                    string loginResponse = cloudAPIObj.DoLogin(loginEndpoint, userName, password);
+                    if (loginResponse != null)
                     {
-                        string responseStatus = (string)jObj["_status"];
-                        if (responseStatus == "success")
+                        var responseJson = SimpleJson.DeserializeObject(loginResponse);
+                        if (responseJson is JsonObject jObj)
                         {
-                            UserProfile.userName = userName;
-                            string access_token = (string)((JsonObject)jObj["data"])[0];
-                            string account_id = (string)((JsonObject)jObj["data"])[1];
-                            Console.WriteLine("User Access Token: " + access_token);
-                            Console.WriteLine("User Account id: " + account_id);
-                            LoginState = LoginState.LoggedIn;
-                            Dashboard dashboard = new Dashboard() { DataContext = new MainViewModel() };
-                            dashboard.Show();
-
-                            App.Current.MainWindow.Close();
-                            App.Current.MainWindow = dashboard;
+                            string responseStatus = (string)jObj["_status"];
+                            Logger.Debug("response  status: " + responseStatus);
+                            if (responseStatus == "success")
+                            {
+                                UserProfile.userName = userName;
+                                string access_token = (string)((JsonObject)jObj["data"])[0];
+                                string account_id = (string)((JsonObject)jObj["data"])[1];
+                                Console.WriteLine("User Access Token: " + access_token);
+                                Console.WriteLine("User Account id: " + account_id);
+                                Logger.Info("User Account id: " + account_id);
+                                LoginState = LoginState.LoggedIn;
+                            }
+                            else
+                            {
+                                LoginState = LoginState.LoggedOut;
+                            }
                         }
                         else
                         {
                             LoginState = LoginState.LoggedOut;
                         }
                     }
+                    else
+                    {
+                        LoginState = LoginState.LoggedOut;
+                    }
+                }catch(Exception ex)
+                {
+                    Logger.Debug("Error occurred while loggin....Error: "+ex.Message);
+                    LoginState = LoginState.LoggedOut;
                 }
             });
         }

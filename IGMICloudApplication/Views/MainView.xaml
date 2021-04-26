@@ -6,98 +6,196 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:data="clr-namespace:IGMICloudApplication.ViewModels"
         xmlns:ff="clr-namespace:IGMICloudApplication.Views.Extensions"
+        xmlns:interactivity="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:Views="clr-namespace:IGMICloudApplication.Views"
         mc:Ignorable="d"
         Title="IGMI Cloud" Height="700" Width="950" 
-        Icon="Icons/IGMICloud.ico"
+        Icon="Icons/Logo.ico"
         Background="Transparent"
-        ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None">
+        WindowStyle="ThreeDBorderWindow" WindowState="Normal"
+        ResizeMode="NoResize" >
     <Window.Resources>
         <ResourceDictionary>
+            <Style x:Key="LoginStackPanel" TargetType="StackPanel">
+                <Setter Property="StackPanel.Background" Value="#f7f7f7" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="StackPanel.Background" Value="White"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="ForgotPasswordTextBlock" TargetType="TextBlock">
+                <Setter Property="TextBlock.Foreground" Value="#7d7a7a"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="TextBlock.Foreground" Value="Black"/>                        
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="InformationVariant" TargetType="iconPacks:PackIconMaterial">
+                <Setter Property="iconPacks:PackIconMaterial.Foreground" Value="#7d7a7a"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="iconPacks:PackIconMaterial.Foreground" Value="Black"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>            
             <DataTemplate x:Key="A_DataTemplate_LoginForm" >
                 <Grid>
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*"/>
                             <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Border CornerRadius="10" Grid.RowSpan="2">
-                            <Border.Background>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="#cae9ed" Offset="0.0"/>
-                                    <GradientStop Color="#070a2b" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
+                        </Grid.RowDefinitions>                   
+                        <StackPanel VerticalAlignment="Center" >
+                            <Image Source="Icons/Logo.PNG" Width="420" />                      
+                        </StackPanel>
+                        <Border Grid.Row="1" BorderBrush="#999999" BorderThickness="1" Padding="40" Background="White" Width="450" VerticalAlignment="Top">
+                            <StackPanel  HorizontalAlignment="Center">
+                                <StackPanel x:Name="LoginForm" >
+                                    <TextBlock Foreground="#79869a" FontSize="12" Margin="0 0 28 20" Text="Please enter your username and password below to login."/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#ebebec" BorderThickness="1" CornerRadius="2" >
+                                            <StackPanel Orientation="Horizontal" Width="320">
+                                                <iconPacks:PackIconMaterial Kind="Account" 
+                                                    Foreground="#919191"
+                                                    Margin="10"/>
+                                                <StackPanel Orientation="Horizontal" Margin="0 8">
+                                                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                                                </StackPanel>
+                                                <TextBox FontFamily="Helvetica"
+                                         FontWeight="Light"
+                                         Text="{Binding Path=LoginViewModel.userName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         FontSize="12"
+                                         HorizontalAlignment="Center"
+                                         BorderBrush="#ebebec"
+                                         Background="#ffffff"
+                                        Foreground="#79869a"
+                                         BorderThickness="0"                                         
+                                         HorizontalContentAlignment="Left"
+                                         Padding="4 0"
+                                         Height="25"
+                                        Cursor="Hand"
+                                        Width="320"
+                                         GotFocus="OnInputFieldFocused" LostFocus="OnInputFieldFocusedLost"/>
+                                            </StackPanel>                                            
+                                        </Border>                                     
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0 20">
+                                        <Border BorderBrush="#ebebec" BorderThickness="1" CornerRadius="2" >
+                                            <StackPanel Orientation="Horizontal" Width="320">
+                                                <iconPacks:PackIconMaterial Kind="Key" 
+                                                    Foreground="#919191"
+                                                    Margin="10"/>
+                                                <StackPanel Orientation="Horizontal" Margin="0 8">
+                                                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                                                </StackPanel>
+                                                <PasswordBox FontFamily="Helvetica"
+                                                    FontWeight="Light"
+                                                    Password="Password"
+                                                    FontSize="12"
+                                                    HorizontalAlignment="Center"
+                                                    BorderBrush="#ebebec"
+                                                    Background="#ffffff"
+                                                    Foreground="#79869a"
+                                                    BorderThickness="0"                                         
+                                                    HorizontalContentAlignment="Left"
+                                                    Padding="8 5"
+                                                    Height="25"
+                                                    Cursor="Hand"
+                                                    Width="320"
+                                                    GotFocus="OnInputFieldFocused" LostFocus="OnInputFieldFocusedLost"
+                                                    ff:PasswordBoxAssistant.BindPassword="true"  ff:PasswordBoxAssistant.BoundPassword="{Binding Path=LoginViewModel.password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"  Style="{StaticResource LoginStackPanel}" Width="322" HorizontalAlignment="Left"  Cursor="Hand">
+                                        <interactivity:Interaction.Triggers>
+                                            <interactivity:EventTrigger EventName="MouseDown">
+                                                <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.LoginCommand}"/>
+                                            </interactivity:EventTrigger>
+                                        </interactivity:Interaction.Triggers>
+                                        <Button Style="{DynamicResource RoundCorner}" Height="50"  Width="322"   Foreground="#79869a" Name="LoginButton" HorizontalContentAlignment="Left" Cursor="Hand">
+                                            <StackPanel x:Name="ButtonContent" Orientation="Horizontal" Cursor="Hand">
+                                                <TextBlock Text="    Login" VerticalAlignment="Center" FontSize="15" />
+                                                <iconPacks:PackIconMaterial Kind="ExitToApp" 
+                                                    Foreground="#919191" Padding="1"
+                                                    Margin="245 0 0 0" HorizontalAlignment="Right"/>
+                                            </StackPanel>
+                                        </Button>                                        
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20" >
+                                        <interactivity:Interaction.Triggers>
+                                            <interactivity:EventTrigger EventName="MouseDown">
+                                                <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.ShowAndHideForgotPasswordForm}"/>
+                                            </interactivity:EventTrigger>
+                                        </interactivity:Interaction.Triggers>
+                                        <iconPacks:PackIconMaterial Kind="InformationVariant" x:Name="InformationVariant"
+                                                    HorizontalAlignment="Left" Style="{StaticResource InformationVariant}"/>
+                                        <TextBlock Style="{StaticResource ForgotPasswordTextBlock}" x:Name="ForgotPasswordTB" Text="Forgot Password?" FontSize="15" Cursor="Hand"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel x:Name="ForgotPasswordForm" Visibility="Collapsed">
+                                    <TextBlock Foreground="#79869a" FontSize="12" Margin="0 0 28 20" Text="Enter your email address below to receive further instructions on how to reset your account password."/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border BorderBrush="#ebebec" BorderThickness="1" CornerRadius="2" >
+                                            <StackPanel Orientation="Horizontal" Width="320">
+                                                <iconPacks:PackIconMaterial Kind="Email" 
+                                                    Foreground="#919191"
+                                                    Margin="10"/>
+                                                <StackPanel Orientation="Horizontal" Margin="0 8">
+                                                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                                                </StackPanel>
+                                                <TextBox FontFamily="Helvetica"
+                                         FontWeight="Light"
+                                         Text="{Binding Path=LoginViewModel.userName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         FontSize="12"
+                                         HorizontalAlignment="Center"
+                                         BorderBrush="#ebebec"
+                                         Background="#ffffff"
+                                        Foreground="#79869a"
+                                         BorderThickness="0"                                         
+                                         HorizontalContentAlignment="Left"
+                                         Padding="4 0"
+                                         Height="25"
+                                        Cursor="Hand"
+                                        Width="320"
+                                         GotFocus="OnInputFieldFocused" LostFocus="OnInputFieldFocusedLost"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>                                    
+                                    <StackPanel Orientation="Horizontal"  Style="{StaticResource LoginStackPanel}" Width="322" HorizontalAlignment="Left"  Cursor="Hand">
+                                        <interactivity:Interaction.Triggers>
+                                            <interactivity:EventTrigger EventName="MouseDown">
+                                                <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.LoginCommand}"/>
+                                            </interactivity:EventTrigger>
+                                        </interactivity:Interaction.Triggers>
+                                        <Button Style="{DynamicResource RoundCorner}" Height="50"  Width="322"   Foreground="#79869a" Name="RequestResetButton" HorizontalContentAlignment="Left" Cursor="Hand">
+                                            <StackPanel x:Name="RequestResetButtonContent" Orientation="Horizontal" Cursor="Hand">
+                                                <TextBlock Text="    Request Reset" VerticalAlignment="Center" FontSize="15" />
+                                                <iconPacks:PackIconMaterial Kind="AccountArrowRight" 
+                                                    Foreground="#919191" Padding="1"
+                                                    Margin="245 0 0 0" HorizontalAlignment="Right"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20" >
+                                        <iconPacks:PackIconMaterial Kind="Lock" x:Name="BackToLoginForm"
+                                                    HorizontalAlignment="Left" Style="{StaticResource InformationVariant}"/>
+                                        <TextBlock Style="{StaticResource ForgotPasswordTextBlock}" x:Name="BackToLoginFormTB" Text="Login Form" FontSize="15" Cursor="Hand"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
                         </Border>
-                        <StackPanel VerticalAlignment="Center">
-                            <Image Source="Icons/IGMICloud.png" Width="250"/>
-                            <TextBlock Text="Empowered By Innovation"
-                           FontWeight="Light"
-                           FontFamily="helvetica"
-                           FontSize="22"
-                           Foreground="White"
-                           HorizontalAlignment="Center"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" HorizontalAlignment="Center">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBox FontFamily="Helvetica"
-                             FontWeight="Light"
-                             Text="{Binding Path=LoginViewModel.userName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             FontSize="20"
-                             HorizontalAlignment="Center"
-                             Foreground="White"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Width="235"
-                             HorizontalContentAlignment="Left"
-                             Opacity="0.5"
-                             Height="25"
-                             Margin="0,0,0,0"
-                             GotFocus="OnInputFieldFocused" LostFocus="OnInputFieldFocusedLost"/>
-                                <iconPacks:PackIconMaterial Kind="Account" 
-                                                VerticalAlignment="Center" 
-                                                HorizontalAlignment="Center" 
-                                                Foreground="White"/>
-                            </StackPanel>
-                            <Border Width="250"
-                        Height="2"
-                        Background="White"
-                        Opacity="0.5"/>
-                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                                <PasswordBox FontFamily="Helvetica"
-                             FontWeight="Light"
-                             Password="Password"
-                             FontSize="20"
-                             HorizontalAlignment="Center"
-                             Foreground="White"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Width="235"
-                             HorizontalContentAlignment="Left"
-                             Opacity="0.5"
-                             Height="25"
-                             Margin="0,0,0,0"
-                             GotFocus="OnInputFieldFocused" LostFocus="OnInputFieldFocusedLost"
-                             ff:PasswordBoxAssistant.BindPassword="true"  ff:PasswordBoxAssistant.BoundPassword="{Binding Path=LoginViewModel.password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <iconPacks:PackIconMaterial Kind="Key"   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
-                            </StackPanel>
-                            <Border Width="250"
-                        Height="2"
-                        Background="White"
-                        Opacity="0.5"/>
-                            <StackPanel Name="LoggingMsg" Orientation="Horizontal" Margin="0,40,0,0" Visibility="Collapsed">
-                                <TextBlock Text="Please Wait..."/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
-                                <Button Width="100" Height="40" Name="LoginButton" Content="LOGIN" Command="{Binding LoginViewModel.LoginCommand}" Margin="0,0,50,0" Cursor="Hand"/>
-                                <Button Width="100" Height="40" Content="REGISTER" Cursor="Hand"/>
-                            </StackPanel>
-                        </StackPanel>
                     </Grid>
                 </Grid>
                 <DataTemplate.Triggers>
                     <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="{x:Static data:LoginState.LoggingIn}">
-                        <Setter TargetName="LoginButton" Property="IsEnabled" Value="False" />
-                        <Setter TargetName="LoggingMsg" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="LoginButton" Property="IsEnabled" Value="False" />                        
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=LoginViewModel.isForgotPasswordFormVisible}" Value="True">
+                        <Setter TargetName="ForgotPasswordForm" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="LoginForm" Property="Visibility" Value="Collapsed" />
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
@@ -114,41 +212,23 @@
                             <ContentControl Name="LoginControl" Content="{Binding}" ContentTemplate="{StaticResource A_DataTemplate_LoginForm}" />
                         </DockPanel>
                         <StackPanel x:Name="DashboardPanel" Visibility="Collapsed">
-                            <Grid>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Border CornerRadius="10" Grid.RowSpan="2">
-                                        <Border.Background>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="#cae9ed" Offset="0.0"/>
-                                                <GradientStop Color="#070a2b" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-                                    </Border>
-                                    <StackPanel Grid.Row="0" >
-                                        <TextBlock Text="sdsds"/>
-                                    </StackPanel>
-                                    <StackPanel Grid.Row="1" >
-                                        <TextBlock Text="sdsdssdsd"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Grid>
+                            <Views:Dashboard x:Name="DashboardView" />                            
                         </StackPanel>
                     </Grid>
                 </Grid>
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="{x:Static data:LoginState.LoggedIn}">
+                    <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="LoggedIn">
                         <Setter TargetName="LoginControl" Property="Visibility" Value="Collapsed" />
                         <Setter TargetName="DashboardPanel" Property="Visibility" Value="Visible" />
                     </DataTrigger>
                 </DataTemplate.Triggers>
-            </DataTemplate>
+            </DataTemplate>            
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Icons/IGMICloudBG.png" />
+        </Grid.Background>
         <ContentPresenter  x:Name="mainLayout" Content="{Binding}" ContentTemplate="{StaticResource A_DataTemplate_MainLayout}" />
     </Grid>
 </Window>

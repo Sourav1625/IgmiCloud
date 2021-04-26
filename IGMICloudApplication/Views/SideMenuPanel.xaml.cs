@@ -29,11 +29,11 @@ namespace IGMICloudApplication.Views
 
         private void mnuDashboard_Click(object sender, RoutedEventArgs e)
         {
-            Dashboard dashboard = new Dashboard() { DataContext = new MainViewModel() };
+            /*Dashboard dashboard = new Dashboard() { DataContext = new MainViewModel() };
             dashboard.Show();
 
             App.Current.MainWindow.Close();
-            App.Current.MainWindow = dashboard;
+            App.Current.MainWindow = dashboard;*/
         }
 
         private void mnuWorkspaces_Click(object sender, RoutedEventArgs e)
