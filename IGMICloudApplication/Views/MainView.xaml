@@ -242,7 +242,7 @@
                                                         <StackPanel />
                                                     </ItemsPanelTemplate>
                                                 </Menu.ItemsPanel>
-                                                <MenuItem Header="Dashboard" >
+                                                <MenuItem Header="Dashboard" Click="mnuDashboard_Click">
                                                     <MenuItem.Icon>
                                                         <Image Source="Icons/Dashboard.PNG" />
                                                     </MenuItem.Icon>
