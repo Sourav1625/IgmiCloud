@@ -369,7 +369,7 @@
                     </Grid>
                 </Grid>
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="x:Static data:LoginState.LoggedIn">
+                    <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="{x:Static data:LoginState.LoggedIn}">
                         <Setter TargetName="LoginControl" Property="Visibility" Value="Collapsed" />
                         <Setter TargetName="DashboardPanel" Property="Visibility" Value="Visible" />
                     </DataTrigger>
