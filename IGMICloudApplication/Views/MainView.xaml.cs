@@ -81,6 +81,8 @@ namespace IGMICloudApplication.Views
         private void mnuDashboard_Click(object sender, RoutedEventArgs e)
         {
             DataContext = new Dashboard();
+        
+
             //Dashboard dashboard = new Dashboard() { DataContext = new MainViewModel() };
             //dashboard.Show();
 

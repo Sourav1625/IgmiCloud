@@ -363,6 +363,7 @@
                                 </Grid>
                                 <Grid Grid.Column="1">
                                     <ContentControl Name="ViewContainer" Content="{Binding}"/>
+                                    <!--<Frame x:Name="mainContainer"/>-->
                                 </Grid>
                             </Grid>
                         </StackPanel>
