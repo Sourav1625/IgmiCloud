@@ -25,53 +25,25 @@ namespace IGMICloudApplication.Views
         public SideMenuPanel()
         {
             InitializeComponent();
-        }
-
-        private void mnuDashboard_Click(object sender, RoutedEventArgs e)
-        {
-            /*Dashboard dashboard = new Dashboard() { DataContext = new MainViewModel() };
-            dashboard.Show();
-
-            App.Current.MainWindow.Close();
-            App.Current.MainWindow = dashboard;*/
-        }
-
-        private void mnuWorkspaces_Click(object sender, RoutedEventArgs e)
-        {
-            Workspace dashboard = new Workspace() { DataContext = new MainViewModel() };
-            dashboard.Show();
-
-            App.Current.MainWindow.Close();
-            App.Current.MainWindow = dashboard;
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            //convert datasource to datatable and pass it to the method that converts datatable to Excel  
-        }
-
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Clicked on Menu Item 1...", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
+        }      
+       
+      
         private void LeftMenu_Loaded(object sender, RoutedEventArgs e)
-        {
-            lblName.Content = UserProfile.userName;
+        {        
 
-            string[] multiArray = UserProfile.userName.Split(new Char[] { ' ', ',', '.', '-', '\n', '\t' });
-            string uname = UserProfile.userName.Replace(",", " ");
-            string initialLetter = "";
-            int count = 0;
-            if (multiArray.Length > 1)
-            {
-                while (count < 2)
-                {
-                    initialLetter = initialLetter + multiArray[count].Substring(0, 1);
-                    count++;
-                }
-            }
-            initial.Text = initialLetter;
+            //string[] multiArray = UserProfile.userName.Split(new Char[] { ' ', ',', '.', '-', '\n', '\t' });
+            //string uname = UserProfile.userName.Replace(",", " ");
+            //string initialLetter = "";
+            //int count = 0;
+            //if (multiArray.Length > 1)
+            //{
+            //    while (count < 2)
+            //    {
+            //        initialLetter = initialLetter + multiArray[count].Substring(0, 1);
+            //        count++;
+            //    }
+            //}
+            //initial.Text = initialLetter;
         }
     }
 }

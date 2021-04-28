@@ -5,7 +5,7 @@ using IGMICloudApplication.Commands;
 
 namespace IGMICloudApplication.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : LoginViewModel
     {
         private DelegateCommand exitCommand;
         static MainViewModel s_Instance = null;
