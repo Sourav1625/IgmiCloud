@@ -142,9 +142,9 @@
                                         <TextBlock Style="{StaticResource ForgotPasswordTextBlock}" x:Name="ForgotPasswordTB" Text="Forgot Password?" FontSize="15" Cursor="Hand"/>
                                     </StackPanel>
                                 </StackPanel>
-                                <StackPanel x:Name="ForgotPasswordForm" Visibility="Collapsed">
-                                    <TextBlock Foreground="#79869a" FontSize="12" Margin="0 0 28 20" Text="Enter your email address below to receive further instructions on how to reset your account password."/>
-                                    <StackPanel Orientation="Horizontal">
+                                <StackPanel x:Name="ForgotPasswordForm" Visibility="Collapsed" >
+                                    <TextBlock Foreground="#79869a" FontSize="12" Margin="0 0 28 10" TextWrapping="Wrap" Text="Enter your email address below to receive further instructions on how to reset your account password."/>
+                                    <StackPanel Orientation="Horizontal" Margin="0 20">
                                         <Border BorderBrush="#ebebec" BorderThickness="1" CornerRadius="2" >
                                             <StackPanel Orientation="Horizontal" Width="320">
                                                 <iconPacks:PackIconMaterial Kind="Email" 
@@ -188,9 +188,14 @@
                                         </Button>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20" >
+                                        <interactivity:Interaction.Triggers>
+                                            <interactivity:EventTrigger EventName="MouseDown">
+                                                <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.ShowAndHideForgotPasswordForm}"/>
+                                            </interactivity:EventTrigger>
+                                        </interactivity:Interaction.Triggers>
                                         <iconPacks:PackIconMaterial Kind="Lock" x:Name="BackToLoginForm"
                                                     HorizontalAlignment="Left" Style="{StaticResource InformationVariant}"/>
-                                        <TextBlock Style="{StaticResource ForgotPasswordTextBlock}" x:Name="BackToLoginFormTB" Text="Login Form" FontSize="15" Cursor="Hand"/>
+                                        <TextBlock Style="{StaticResource ForgotPasswordTextBlock}" x:Name="BackToLoginFormTB" Margin="5 0 0 0 " Text="Login Form" FontSize="15" Cursor="Hand"/>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
@@ -370,10 +375,10 @@
                                             <ContentControl.Style>
                                                 <Style TargetType="{x:Type ContentControl}">                                                  
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="Dashboard">
+                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.Dashboard}">
                                                             <Setter Property="ContentTemplate" Value="{StaticResource Dashboard_Template}" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="Workspace">
+                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.Workspace}">
                                                             <Setter Property="ContentTemplate" Value="{StaticResource Workspace_Template}" />
                                                         </DataTrigger>
                                                     </Style.Triggers>

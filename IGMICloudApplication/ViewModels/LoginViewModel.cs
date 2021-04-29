@@ -37,7 +37,7 @@ namespace IGMICloudApplication.ViewModels
             set
             {
                 loginState = value;
-                OnPropertyChanged("loginState");
+                OnPropertyChanged("LoginState");
             }
         }
         private bool isForgotPasswordFormVisible;
@@ -53,17 +53,17 @@ namespace IGMICloudApplication.ViewModels
                 OnPropertyChanged("IsForgotPasswordFormVisible");
             }
         }
-        private string switchView;
-        public string SwitchView
+        private SwitchViewEnum switchView;
+        public SwitchViewEnum SwitchView
         {
             get
             {
-                return this.switchView;
+                return switchView;
             }
             set
             {
-                this.switchView = value;
-                OnPropertyChanged("switchView");
+                switchView = value;
+                OnPropertyChanged("SwitchView");
             }
         }
         public DelegateCommand LoginCommand { get; private set; }
@@ -127,7 +127,7 @@ namespace IGMICloudApplication.ViewModels
                                 Console.WriteLine("User Account id: " + account_id);
                                 Logger.Info("User Account id: " + account_id);
                                 LoginState = LoginState.LoggedIn;
-                                SwitchView = SwitchViewEnum.Dashboard.ToString();
+                                SwitchView = SwitchViewEnum.Dashboard;
                             }
                             else
                             {
@@ -151,11 +151,11 @@ namespace IGMICloudApplication.ViewModels
             });
             DashboardCommand = new DelegateCommand(() =>
             {
-                SwitchView = SwitchViewEnum.Dashboard.ToString();
+                SwitchView = SwitchViewEnum.Dashboard;
             });
             WorkspaceCommand = new DelegateCommand(() =>
             {
-                SwitchView = SwitchViewEnum.Workspace.ToString();
+                SwitchView = SwitchViewEnum.Workspace;
             });
         }
     }
