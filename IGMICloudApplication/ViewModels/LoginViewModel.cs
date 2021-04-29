@@ -19,12 +19,38 @@ namespace IGMICloudApplication.ViewModels
     public enum SwitchViewEnum
     {
         Dashboard,
-        Workspace
+        Workspace,
+        UserProfile
     }
     public class LoginViewModel : ViewModelBase
     {       
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        public string userName { get; set; }
+        public string userName;
+        public string UserName
+        {
+            get
+            {
+                return userName;
+            }
+            set
+            {
+                userName = value;
+                OnPropertyChanged("userName");
+            }
+        }
+        public string initial;
+        public string Initial
+        {
+            get
+            {
+                return initial;
+            }
+            set
+            {
+                initial = value;
+                OnPropertyChanged("initial");
+            }
+        }
         public string password { get; set; }
         private LoginState loginState;
         public LoginState LoginState
@@ -39,8 +65,8 @@ namespace IGMICloudApplication.ViewModels
                 OnPropertyChanged("loginState");
             }
         }
-        private string switchView;
-        public string SwitchView
+        private SwitchViewEnum switchView;
+        public SwitchViewEnum SwitchView
         {
             get
             {
@@ -56,6 +82,9 @@ namespace IGMICloudApplication.ViewModels
         public DelegateCommand LoginCommand { get; private set; }
         public DelegateCommand DashboardCommand { get; private set; }
         public DelegateCommand WorkspaceCommand { get; private set; }
+        public DelegateCommand LogoutCommand { get; private set; }
+        public DelegateCommand SettingsCommand { get; private set; }
+        
         public DelegateCommand ShowAndHideForgotPasswordForm { get; private set; }        
         private string loginEndpoint = "/authorize";
         public LoginViewModel()
@@ -109,16 +138,17 @@ namespace IGMICloudApplication.ViewModels
                                 Console.WriteLine("User Access Token: " + access_token);
                                 Console.WriteLine("User Account id: " + account_id);
                                 Logger.Info("User Account id: " + account_id);
+                                Initial = getInitial(userName);
                                 LoginState = LoginState.LoggedIn;
-                                SwitchView = SwitchViewEnum.Dashboard.ToString();
+                                SwitchView = SwitchViewEnum.Dashboard;
                             }
                             else
-                            {
+                            {                             
                                 LoginState = LoginState.LoggedOut;
                             }
                         }
                         else
-                        {
+                        {                          
                             LoginState = LoginState.LoggedOut;
                         }
                     }
@@ -134,12 +164,37 @@ namespace IGMICloudApplication.ViewModels
             });
             DashboardCommand = new DelegateCommand(() =>
             {
-                SwitchView = SwitchViewEnum.Dashboard.ToString();
+                SwitchView = SwitchViewEnum.Dashboard;
             });
             WorkspaceCommand = new DelegateCommand(() =>
             {
-                SwitchView = SwitchViewEnum.Workspace.ToString();
+                SwitchView = SwitchViewEnum.Workspace;
             });
+            SettingsCommand = new DelegateCommand(() =>
+            {
+                SwitchView = SwitchViewEnum.UserProfile;
+            });
+            LogoutCommand = new DelegateCommand(() =>
+            {
+                LoginState = LoginState.LoggedOut;
+            });
+           
+        }
+        private string getInitial(string userName)
+        {
+            string[] multiArray = userName.Split(new Char[] { ' ', ',', '.', '-', '\n', '\t' });
+            string uname = userName.Replace(",", " ");
+            string initialLetter = "";
+            int count = 0;
+            if (multiArray.Length > 1)
+            {
+                while (count < 2)
+                {
+                    initialLetter = initialLetter + multiArray[count].Substring(0, 1);
+                    count++;
+                }
+            }
+            return initialLetter;
         }
     }
 }

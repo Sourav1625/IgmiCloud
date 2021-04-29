@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IGMICloudApplication.Views"
         mc:Ignorable="d"
-        Height="450" Width="800">
-    <Grid Background="{DynamicResource MainWhiteFontColor}">
+        Height="700" Width="900">
+    <Grid Background="{DynamicResource MainWhiteFontColor}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <!--<ColumnDefinition Width="*" />-->
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <Border CornerRadius="6" Margin="10,0,0,5"
+            <Border CornerRadius="6" Margin="10,10,10,10"
                 BorderBrush="Gray"               
                 BorderThickness="2"
                 Padding="8">
@@ -21,7 +21,7 @@
                 </StackPanel>
             </Border>
         </Grid>
-        <Grid Grid.Column="1">
+        <!--<Grid Grid.Column="1">
             <Border CornerRadius="6" Margin="15,0,10,5"
                 BorderBrush="Gray"               
                 BorderThickness="2"
@@ -30,6 +30,6 @@
                     <Label Content="Latest Ativity" Margin="0,4,0,12" HorizontalAlignment="Left" Foreground="{DynamicResource MainBlackFontColor}" FontFamily="Segoe UI Semilight" FontSize="14" FontWeight="Bold"></Label>
                 </StackPanel>
             </Border>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

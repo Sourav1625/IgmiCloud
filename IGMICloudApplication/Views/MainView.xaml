@@ -12,15 +12,18 @@
         Title="IGMI Cloud" Height="700" Width="950" 
         Icon="Icons/Logo.ico"
         Background="Transparent"
-        WindowStyle="ThreeDBorderWindow" WindowState="Normal"
+        WindowStyle="ThreeDBorderWindow" WindowState="Maximized"
         ResizeMode="NoResize" >
     <Window.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Name="Dashboard_Template" x:Key="Dashboard_Template" DataType="x:Type data:MainViewModel" >
+            <DataTemplate x:Name="Dashboard_Template" x:Key="Dashboard_Template" DataType="x:Type data:MainViewModel"  >
                 <Views:Dashboard/>
             </DataTemplate>
             <DataTemplate x:Name="Workspace_Template" x:Key="Workspace_Template" DataType="x:Type data:MainViewModel" >
                 <Views:Workspace/>
+            </DataTemplate>
+            <DataTemplate x:Name="Profile_Template" x:Key="Profile_Template" DataType="x:Type data:MainViewModel" >
+                <Views:UserProfile/>
             </DataTemplate>
             <Style x:Key="LoginStackPanel" TargetType="StackPanel">
                 <Setter Property="StackPanel.Background" Value="#f7f7f7" />
@@ -124,7 +127,7 @@
                                         </interactivity:Interaction.Triggers>
                                         <Button Style="{DynamicResource RoundCorner}" Height="50"  Width="322"   Foreground="#79869a" Name="LoginButton" HorizontalContentAlignment="Left" Cursor="Hand">
                                             <StackPanel x:Name="ButtonContent" Orientation="Horizontal" Cursor="Hand">
-                                                <TextBlock Text="    Login" VerticalAlignment="Center" FontSize="15" />
+                                                <TextBlock Text="Login" VerticalAlignment="Center" FontSize="15" />
                                                 <iconPacks:PackIconMaterial Kind="ExitToApp" 
                                                     Foreground="#919191" Padding="1"
                                                     Margin="245 0 0 0" HorizontalAlignment="Right"/>
@@ -216,11 +219,12 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid>
-                        <DockPanel x:Name="LoginPanel">
+                        <DockPanel x:Name="LoginPanel" >
                             <ContentControl Name="LoginControl" Content="{Binding}" ContentTemplate="{StaticResource A_DataTemplate_LoginForm}" />
                         </DockPanel>
                         <StackPanel x:Name="DashboardPanel" Visibility="Collapsed">
-                            <Grid>
+                            <Grid Height="{Binding ActualHeight, 
+              RelativeSource ={RelativeSource AncestorType = {x:Type Window}}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="160" />
                                     <ColumnDefinition Width="*" />
@@ -311,7 +315,7 @@
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-                                        <Grid Grid.Row="6" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
+                                        <Grid Grid.Row="6" Margin="0,0,0,45" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
@@ -329,13 +333,13 @@
                                                                 <ColumnDefinition Width="*" />
                                                             </Grid.ColumnDefinitions>
                                                             <Ellipse Fill="Gray" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Stroke="Black" VerticalAlignment="Top" Height="50" Width="50"/>
-                                                            <TextBlock Text="SM" Margin="15 15"/>
+                                                            <TextBlock Text="{Binding Path=LoginViewModel.Initial}" Margin="16 15"/>
 
-                                                            <Label x:Name="lblName" Grid.Row="0"  Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding UserName}"/>
+                                                            <Label x:Name="lblName" Grid.Row="0"  Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding Path=LoginViewModel.UserName}"/>
                                                             <Rectangle Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Fill="#FFD4D1D1" Height="1"/>
                                                         </Grid>
 
-                                                        <MenuItem Header="Setting" >
+                                                        <MenuItem Header="Setting" Command="{Binding LoginViewModel.SettingsCommand}">
                                                             <MenuItem.Icon>
                                                                 <Image Source="Icons/Setting.png" />
                                                             </MenuItem.Icon>
@@ -345,7 +349,7 @@
                                                                 <Image Source="Icons/TeamManagement.png" />
                                                             </MenuItem.Icon>
                                                         </MenuItem>
-                                                        <MenuItem Header="Signout">
+                                                        <MenuItem Header="Signout" Command="{Binding LoginViewModel.LogoutCommand}">
                                                             <MenuItem.Icon>
                                                                 <Image Source="Icons/Signout.png" />
                                                             </MenuItem.Icon>
@@ -354,10 +358,10 @@
                                                 </Grid.ContextMenu>
                                                 <Grid Grid.Column="0">
                                                     <Ellipse Fill="#FF5AC948" HorizontalAlignment="Left" Stroke="Black" VerticalAlignment="Top" Height="50" Width="50"/>
-                                                    <TextBlock x:Name="initial" Text="SM" Margin="17 16"/>
+                                                    <TextBlock x:Name="initial" Text="{Binding Path=LoginViewModel.Initial}" Margin="20 16"/>
                                                 </Grid>
                                                 <Grid Grid.Column="1">
-                                                    <Label x:Name="lblUName" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding UserName}"/>
+                                                    <Label x:Name="lblUName" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding Path=LoginViewModel.UserName}"/>
 
                                                 </Grid>
                                             </Grid>
@@ -365,17 +369,21 @@
                                     </Grid>
                                 </Grid>
                                 <Grid Grid.Column="1">
-                                    <Grid>
+                                    <Grid Height="{Binding ActualHeight, 
+              RelativeSource ={RelativeSource AncestorType = {x:Type Window}}}">
                                         <ContentControl Content="{Binding }">
                                             <ContentControl.Style>
                                                 <Style TargetType="{x:Type ContentControl}">                                                  
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="Dashboard">
+                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.Dashboard}">
                                                             <Setter Property="ContentTemplate" Value="{StaticResource Dashboard_Template}" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="Workspace">
+                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.Workspace}">
                                                             <Setter Property="ContentTemplate" Value="{StaticResource Workspace_Template}" />
                                                         </DataTrigger>
+                                                        <!--<DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.UserProfile}">
+                                                            <Setter Property="ContentTemplate" Value="{StaticResource Profile_Template}" />
+                                                        </DataTrigger>-->
                                                     </Style.Triggers>
                                                 </Style>
                                             </ContentControl.Style>
