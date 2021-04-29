@@ -198,7 +198,7 @@
                     <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="{x:Static data:LoginState.LoggingIn}">
                         <Setter TargetName="LoginButton" Property="IsEnabled" Value="False" />                        
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=LoginViewModel.isForgotPasswordFormVisible}" Value="True">
+                    <DataTrigger Binding="{Binding LoginViewModel.IsForgotPasswordFormVisible}" Value="True">
                         <Setter TargetName="ForgotPasswordForm" Property="Visibility" Value="Visible" />
                         <Setter TargetName="LoginForm" Property="Visibility" Value="Collapsed" />
                     </DataTrigger>

@@ -31,6 +31,7 @@ namespace IGMICloudApplication.ViewModels
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public string userName { get; set; }
         public string password { get; set; }
+        public string sendPasswordEmail { get; set; }
         private LoginState loginState;
         public LoginState LoginState
         {
@@ -41,10 +42,22 @@ namespace IGMICloudApplication.ViewModels
             set
             {
                 loginState = value;
-                OnPropertyRaised("loginState");
+                OnPropertyRaised("LoginState");
             }
         }
-        public bool isForgotPasswordFormVisible { get; set; }
+        private bool isForgotPasswordFormVisible;
+        public bool IsForgotPasswordFormVisible
+        {
+            get
+            {
+                return isForgotPasswordFormVisible;
+            }
+            set
+            {
+                isForgotPasswordFormVisible = value;
+                OnPropertyRaised("IsForgotPasswordFormVisible");
+            }
+        }
         public DelegateCommand LoginCommand { get; private set; }
         public DelegateCommand ShowAndHideForgotPasswordForm { get; private set; }        
         private string loginEndpoint = "/authorize";
@@ -58,9 +71,13 @@ namespace IGMICloudApplication.ViewModels
             {
                 userName = "Username";
             }
+            if (string.IsNullOrEmpty(sendPasswordEmail))
+            {
+                userName = "Email";
+            }
             ShowAndHideForgotPasswordForm = new DelegateCommand(() =>
             {
-                isForgotPasswordFormVisible = !isForgotPasswordFormVisible;
+                IsForgotPasswordFormVisible = !IsForgotPasswordFormVisible;
             });
             LoginCommand = new DelegateCommand(() =>
             {
