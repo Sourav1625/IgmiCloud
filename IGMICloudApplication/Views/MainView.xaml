@@ -16,8 +16,11 @@
         ResizeMode="NoResize" >
     <Window.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Name="Dashboard_Template" x:Key="Dashboard_Template" DataType="x:Type data:DashboardViewModel" >
-                <Views:Dashboard x:Name="Dashboard_Template_context" DataContext="{Binding}"/>
+            <DataTemplate x:Name="Dashboard_Template" x:Key="Dashboard_Template" DataType="x:Type data:MainViewModel" >
+                <Views:Dashboard/>
+            </DataTemplate>
+            <DataTemplate x:Name="Workspace_Template" x:Key="Workspace_Template" DataType="x:Type data:MainViewModel" >
+                <Views:Workspace/>
             </DataTemplate>
             <Style x:Key="LoginStackPanel" TargetType="StackPanel">
                 <Setter Property="StackPanel.Background" Value="#f7f7f7" />
@@ -244,12 +247,12 @@
                                                         <StackPanel />
                                                     </ItemsPanelTemplate>
                                                 </Menu.ItemsPanel>
-                                                <MenuItem Header="Dashboard" Click="mnuDashboard_Click">
+                                                <MenuItem Header="Dashboard" Command="{Binding LoginViewModel.DashboardCommand}">
                                                     <MenuItem.Icon>
                                                         <Image Source="Icons/Dashboard.PNG" />
                                                     </MenuItem.Icon>
                                                 </MenuItem>
-                                                <MenuItem Header="Workspaces" >
+                                                <MenuItem Header="Workspaces" Command="{Binding LoginViewModel.WorkspaceCommand}">
                                                     <MenuItem.Icon>
                                                         <Image Source="Icons/Workspace.PNG" />
                                                     </MenuItem.Icon>
@@ -337,12 +340,12 @@
                                                                 <Image Source="Icons/Setting.png" />
                                                             </MenuItem.Icon>
                                                         </MenuItem>
-                                                        <MenuItem Header="Team Management" >
+                                                        <MenuItem Header="Team Management">
                                                             <MenuItem.Icon>
                                                                 <Image Source="Icons/TeamManagement.png" />
                                                             </MenuItem.Icon>
                                                         </MenuItem>
-                                                        <MenuItem Header="Signout" >
+                                                        <MenuItem Header="Signout">
                                                             <MenuItem.Icon>
                                                                 <Image Source="Icons/Signout.png" />
                                                             </MenuItem.Icon>
@@ -362,7 +365,22 @@
                                     </Grid>
                                 </Grid>
                                 <Grid Grid.Column="1">
-                                    <ContentControl Name="ViewContainer" Content="{Binding}"/>
+                                    <Grid>
+                                        <ContentControl Content="{Binding }">
+                                            <ContentControl.Style>
+                                                <Style TargetType="{x:Type ContentControl}">                                                  
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="Dashboard">
+                                                            <Setter Property="ContentTemplate" Value="{StaticResource Dashboard_Template}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="Workspace">
+                                                            <Setter Property="ContentTemplate" Value="{StaticResource Workspace_Template}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </StackPanel>

@@ -16,18 +16,13 @@ namespace IGMICloudApplication.ViewModels
         LoggingIn,
         LoggingOut
     }
-
-    public class LoginViewModel : INotifyPropertyChanged
+    public enum SwitchViewEnum
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyRaised(string propertyname)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
-            }
-        }
+        Dashboard,
+        Workspace
+    }
+    public class LoginViewModel : ViewModelBase
+    {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public string userName { get; set; }
         public string password { get; set; }
@@ -42,7 +37,7 @@ namespace IGMICloudApplication.ViewModels
             set
             {
                 loginState = value;
-                OnPropertyRaised("LoginState");
+                OnPropertyChanged("loginState");
             }
         }
         private bool isForgotPasswordFormVisible;
@@ -55,10 +50,25 @@ namespace IGMICloudApplication.ViewModels
             set
             {
                 isForgotPasswordFormVisible = value;
-                OnPropertyRaised("IsForgotPasswordFormVisible");
+                OnPropertyChanged("IsForgotPasswordFormVisible");
+            }
+        }
+        private string switchView;
+        public string SwitchView
+        {
+            get
+            {
+                return this.switchView;
+            }
+            set
+            {
+                this.switchView = value;
+                OnPropertyChanged("switchView");
             }
         }
         public DelegateCommand LoginCommand { get; private set; }
+        public DelegateCommand DashboardCommand { get; private set; }
+        public DelegateCommand WorkspaceCommand { get; private set; }
         public DelegateCommand ShowAndHideForgotPasswordForm { get; private set; }        
         private string loginEndpoint = "/authorize";
         public LoginViewModel()
@@ -110,13 +120,14 @@ namespace IGMICloudApplication.ViewModels
                             Logger.Debug("response  status: " + responseStatus);
                             if (responseStatus == "success")
                             {
-                                UserProfile.userName = userName;
+                               // UserProfile.userName = userName;
                                 string access_token = (string)((JsonObject)jObj["data"])[0];
                                 string account_id = (string)((JsonObject)jObj["data"])[1];
                                 Console.WriteLine("User Access Token: " + access_token);
                                 Console.WriteLine("User Account id: " + account_id);
                                 Logger.Info("User Account id: " + account_id);
                                 LoginState = LoginState.LoggedIn;
+                                SwitchView = SwitchViewEnum.Dashboard.ToString();
                             }
                             else
                             {
@@ -137,6 +148,14 @@ namespace IGMICloudApplication.ViewModels
                     Logger.Debug("Error occurred while loggin....Error: "+ex.Message);
                     LoginState = LoginState.LoggedOut;
                 }
+            });
+            DashboardCommand = new DelegateCommand(() =>
+            {
+                SwitchView = SwitchViewEnum.Dashboard.ToString();
+            });
+            WorkspaceCommand = new DelegateCommand(() =>
+            {
+                SwitchView = SwitchViewEnum.Workspace.ToString();
             });
         }
     }

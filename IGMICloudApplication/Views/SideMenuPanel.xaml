@@ -26,12 +26,12 @@
                     <StackPanel />
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            <MenuItem Header="Dashboard" Click="mnuDashboard_Click">
+            <MenuItem Header="Dashboard" >
                 <MenuItem.Icon>
                     <Image Source="Icons/Dashboard.PNG" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Workspaces" Click="mnuWorkspaces_Click">
+            <MenuItem Header="Workspaces">
                 <MenuItem.Icon>
                     <Image Source="Icons/Workspace.PNG" />
                 </MenuItem.Icon>
@@ -114,17 +114,17 @@
                         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Fill="#FFD4D1D1" Height="1"/>
                     </Grid>
 
-                    <MenuItem Header="Setting" Click="MenuItem_Click">
+                    <MenuItem Header="Setting" >
                         <MenuItem.Icon>
                             <Image Source="Icons/Setting.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Team Management" Click="MenuItem_Click">
+                    <MenuItem Header="Team Management" >
                         <MenuItem.Icon>
                             <Image Source="Icons/TeamManagement.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Signout" Click="MenuItem_Click">
+                    <MenuItem Header="Signout" >
                         <MenuItem.Icon>
                             <Image Source="Icons/Signout.png" />
                         </MenuItem.Icon>
