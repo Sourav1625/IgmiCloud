@@ -23,7 +23,7 @@ namespace IGMICloudApplication.ViewModels
         UserProfile
     }
     public class LoginViewModel : ViewModelBase
-    {       
+    {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public string userName;
         public string UserName
@@ -52,6 +52,7 @@ namespace IGMICloudApplication.ViewModels
             }
         }
         public string password { get; set; }
+        public string sendPasswordEmail { get; set; }
         private LoginState loginState;
         public LoginState LoginState
         {
@@ -62,7 +63,20 @@ namespace IGMICloudApplication.ViewModels
             set
             {
                 loginState = value;
-                OnPropertyChanged("loginState");
+                OnPropertyChanged("LoginState");
+            }
+        }
+        private bool isForgotPasswordFormVisible;
+        public bool IsForgotPasswordFormVisible
+        {
+            get
+            {
+                return isForgotPasswordFormVisible;
+            }
+            set
+            {
+                isForgotPasswordFormVisible = value;
+                OnPropertyChanged("IsForgotPasswordFormVisible");
             }
         }
         private SwitchViewEnum switchView;
@@ -70,15 +84,14 @@ namespace IGMICloudApplication.ViewModels
         {
             get
             {
-                return this.switchView;
+                return switchView;
             }
             set
             {
-                this.switchView = value;
-                OnPropertyChanged("switchView");
+                switchView = value;
+                OnPropertyChanged("SwitchView");
             }
         }
-        public bool isForgotPasswordFormVisible { get; set; }
         public DelegateCommand LoginCommand { get; private set; }
         public DelegateCommand DashboardCommand { get; private set; }
         public DelegateCommand WorkspaceCommand { get; private set; }
@@ -97,9 +110,13 @@ namespace IGMICloudApplication.ViewModels
             {
                 userName = "Username";
             }
+            if (string.IsNullOrEmpty(sendPasswordEmail))
+            {
+                userName = "Email";
+            }
             ShowAndHideForgotPasswordForm = new DelegateCommand(() =>
             {
-                isForgotPasswordFormVisible = !isForgotPasswordFormVisible;
+                IsForgotPasswordFormVisible = !IsForgotPasswordFormVisible;
             });
             LoginCommand = new DelegateCommand(() =>
             {
