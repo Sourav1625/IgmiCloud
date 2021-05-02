@@ -128,7 +128,7 @@
                                         </interactivity:Interaction.Triggers>
                                         <Button Style="{DynamicResource RoundCorner}" Height="50"  Width="322"   Foreground="#79869a" Name="LoginButton" HorizontalContentAlignment="Left" Cursor="Hand">
                                             <StackPanel x:Name="ButtonContent" Orientation="Horizontal" Cursor="Hand">
-                                                <TextBlock Text="Login" VerticalAlignment="Center" FontSize="15" />
+                                                <TextBlock Text="    Login" VerticalAlignment="Center" FontSize="15" />
                                                 <iconPacks:PackIconMaterial Kind="ExitToApp" 
                                                     Foreground="#919191" Padding="1"
                                                     Margin="245 0 0 0" HorizontalAlignment="Right"/>
