@@ -13,16 +13,43 @@
         Title="IGMI Cloud" 
         Icon="Icons/Logo.ico"
         Background="Transparent"
-        WindowStyle="ThreeDBorderWindow" WindowState="Normal"
+        WindowStyle="ThreeDBorderWindow" WindowState="Maximized"
         ResizeMode="NoResize" >
     <Window.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Name="Dashboard_Template" x:Key="Dashboard_Template" DataType="x:Type data:MainViewModel" >
+            <DataTemplate x:Name="Dashboard_Template" x:Key="Dashboard_Template" DataType="x:Type data:MainViewModel"  >
                 <Views:Dashboard/>
             </DataTemplate>
             <DataTemplate x:Name="Workspace_Template" x:Key="Workspace_Template" DataType="x:Type data:MainViewModel" >
                 <Views:Workspace/>
-            </DataTemplate>                        
+            </DataTemplate>
+            <DataTemplate x:Name="Profile_Template" x:Key="Profile_Template" DataType="x:Type data:MainViewModel" >
+                <Views:UserProfile/>
+            </DataTemplate>
+            <Style x:Key="LoginStackPanel" TargetType="StackPanel">
+                <Setter Property="StackPanel.Background" Value="#f7f7f7" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="StackPanel.Background" Value="White"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="ForgotPasswordTextBlock" TargetType="TextBlock">
+                <Setter Property="TextBlock.Foreground" Value="#7d7a7a"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="TextBlock.Foreground" Value="Black"/>                        
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="InformationVariant" TargetType="iconPacks:PackIconMaterial">
+                <Setter Property="iconPacks:PackIconMaterial.Foreground" Value="#7d7a7a"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="iconPacks:PackIconMaterial.Foreground" Value="Black"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
             <DataTemplate x:Key="A_DataTemplate_LoginForm" >
                 <Grid>
                     <Grid>
@@ -101,7 +128,7 @@
                                         </interactivity:Interaction.Triggers>
                                         <Button Style="{DynamicResource RoundCorner}" Height="50"  Width="322"   Foreground="#79869a" Name="LoginButton" HorizontalContentAlignment="Left" Cursor="Hand">
                                             <StackPanel x:Name="ButtonContent" Orientation="Horizontal" Cursor="Hand">
-                                                <TextBlock Text="    Login" VerticalAlignment="Center" FontSize="15" />
+                                                <TextBlock Text="Login" VerticalAlignment="Center" FontSize="15" />
                                                 <iconPacks:PackIconMaterial Kind="ExitToApp" 
                                                     Foreground="#919191" Padding="1"
                                                     Margin="245 0 0 0" HorizontalAlignment="Right"/>
@@ -198,7 +225,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid>
-                        <DockPanel x:Name="LoginPanel">
+                        <DockPanel x:Name="LoginPanel" >
                             <ContentControl Name="LoginControl" Content="{Binding}" ContentTemplate="{StaticResource A_DataTemplate_LoginForm}" />
                         </DockPanel>
                         <DockPanel x:Name="DashboardPanel" LastChildFill="True" Visibility="Collapsed">
@@ -238,25 +265,7 @@
                             </Border>
                             <Border Background="White">
                                 <TextBlock Foreground="Black">This content will "Fill" the remaining space</TextBlock>
-                            </Border>
-                            <!--<Grid Grid.Column="1">
-                                    <Grid>
-                                        <ContentControl Content="{Binding }">
-                                            <ContentControl.Style>
-                                                <Style TargetType="{x:Type ContentControl}">                                                  
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.Dashboard}">
-                                                            <Setter Property="ContentTemplate" Value="{StaticResource Dashboard_Template}" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.Workspace}">
-                                                            <Setter Property="ContentTemplate" Value="{StaticResource Workspace_Template}" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </ContentControl.Style>
-                                        </ContentControl>
-                                    </Grid>
-                                </Grid>-->
+                            </Border>                            
                         </DockPanel>
                     </Grid>
                 </Grid>

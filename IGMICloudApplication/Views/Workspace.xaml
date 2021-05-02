@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IGMICloudApplication.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="700" d:DesignWidth="900">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -14,7 +14,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Background="{DynamicResource MainWhiteFontColor}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,0">
                     <Button ToolTip="Minimize" Width="20" Height="28" Style="{StaticResource WindowActionButtonClose}" Margin="0,0,10,0">
                         <Image Width="32" Height="28" Source="Icons\Search.png" Stretch="Fill"></Image>
@@ -26,13 +26,17 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid Grid.Row="1" Margin="0,0,0,0" Background="{DynamicResource MainWhiteFontColor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="92*"/>
+                    <ColumnDefinition Width="133*"/>
+                </Grid.ColumnDefinitions>
 
-                <Label  VerticalAlignment="Center" Margin="10,0,0,0" FontSize="16"  Content="Bookmerked Workspaces" />
-                <Button Content="Create Workspace" Margin="0,0,10,0" TabIndex="4" HorizontalAlignment="Right" VerticalAlignment="Top" Width="95" Background="#FF3A889E" FontSize="12"/>
+                <Label  VerticalAlignment="Center" Margin="10,0,0,0" FontSize="16"  Content="Bookmerked Workspaces" Grid.ColumnSpan="2" />
+                <Button Content="Create Workspace" Margin="0,0,10,0" TabIndex="4" HorizontalAlignment="Right" VerticalAlignment="Top" Width="95" Background="#FF3A889E" FontSize="12" Grid.Column="1"/>
 
             </Grid>
-            <Grid Grid.Row="2" Margin="0,10,0,0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <Grid Grid.Row="2" Margin="0,0,0,0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,10,0,10">
                     <Label Content="Bookmerked workspaces icons placed here" Margin="0,4,0,12" HorizontalAlignment="Left" Foreground="{DynamicResource MainBlackFontColor}" FontFamily="Segoe UI Semilight" FontSize="14" FontWeight="Bold"></Label>
                 </StackPanel>

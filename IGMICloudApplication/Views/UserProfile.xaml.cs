@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace IGMICloudApplication.Views
 {
     /// <summary>
-    /// Interaction logic for Account.xaml
+    /// Interaction logic for UserProfile.xaml
     /// </summary>
-    public partial class Account : UserControl
+    public partial class UserProfile : UserControl
     {
-        public Account()
+        public UserProfile()
         {
             InitializeComponent();
         }
