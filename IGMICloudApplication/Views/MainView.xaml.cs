@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IGMICloudApplication.ViewModels;
 
+
 namespace IGMICloudApplication.Views
 {
     /// <summary>
@@ -29,7 +30,7 @@ namespace IGMICloudApplication.Views
             double windowWidth = this.Width;
             double windowHeight = this.Height;
             this.Left = (screenWidth / 2) - (windowWidth / 2);
-            this.Top = (screenHeight / 2) - (windowHeight / 2);
+            this.Top = (screenHeight / 2) - (windowHeight / 2);            
         }
 
         void OnInputFieldFocused(object sender, RoutedEventArgs e)
@@ -77,17 +78,9 @@ namespace IGMICloudApplication.Views
                 }
             }
         }
-
-        private void mnuDashboard_Click(object sender, RoutedEventArgs e)
+        private void showFolderActions_MouseRightClick(object sender, MouseButtonEventArgs e)
         {
-            DataContext = new Dashboard();
-        
-
-            //Dashboard dashboard = new Dashboard() { DataContext = new MainViewModel() };
-            //dashboard.Show();
-
-            //App.Current.MainWindow.Close();
-            //App.Current.MainWindow = dashboard;
+            
         }
     }
 }

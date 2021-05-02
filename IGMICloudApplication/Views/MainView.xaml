@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:data="clr-namespace:IGMICloudApplication.ViewModels"
         xmlns:ff="clr-namespace:IGMICloudApplication.Views.Extensions"
         xmlns:interactivity="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:Views="clr-namespace:IGMICloudApplication.Views"
         mc:Ignorable="d"
-        Title="IGMI Cloud" Height="700" Width="950" 
+        Title="IGMI Cloud" 
         Icon="Icons/Logo.ico"
         Background="Transparent"
         WindowStyle="ThreeDBorderWindow" WindowState="Normal"
@@ -21,40 +22,16 @@
             </DataTemplate>
             <DataTemplate x:Name="Workspace_Template" x:Key="Workspace_Template" DataType="x:Type data:MainViewModel" >
                 <Views:Workspace/>
-            </DataTemplate>
-            <Style x:Key="LoginStackPanel" TargetType="StackPanel">
-                <Setter Property="StackPanel.Background" Value="#f7f7f7" />
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="StackPanel.Background" Value="White"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style x:Key="ForgotPasswordTextBlock" TargetType="TextBlock">
-                <Setter Property="TextBlock.Foreground" Value="#7d7a7a"/>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="TextBlock.Foreground" Value="Black"/>                        
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style x:Key="InformationVariant" TargetType="iconPacks:PackIconMaterial">
-                <Setter Property="iconPacks:PackIconMaterial.Foreground" Value="#7d7a7a"/>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="iconPacks:PackIconMaterial.Foreground" Value="Black"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>            
+            </DataTemplate>                        
             <DataTemplate x:Key="A_DataTemplate_LoginForm" >
                 <Grid>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="0.6*"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>                   
-                        <StackPanel VerticalAlignment="Center" >
-                            <Image Source="Icons/Logo.PNG" Width="420" />                      
+                        <StackPanel VerticalAlignment="Bottom" >
+                            <Image Source="Icons/Logo.PNG" Width="230" Margin="0 40" />                      
                         </StackPanel>
                         <Border Grid.Row="1" BorderBrush="#999999" BorderThickness="1" Padding="40" Background="White" Width="450" VerticalAlignment="Top">
                             <StackPanel  HorizontalAlignment="Center">
@@ -80,7 +57,7 @@
                                         Foreground="#79869a"
                                          BorderThickness="0"                                         
                                          HorizontalContentAlignment="Left"
-                                         Padding="4 0"
+                                         Padding="4 5"
                                          Height="25"
                                         Cursor="Hand"
                                         Width="320"
@@ -215,7 +192,7 @@
             <DataTemplate x:Key="A_DataTemplate_MainLayout">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -224,152 +201,45 @@
                         <DockPanel x:Name="LoginPanel">
                             <ContentControl Name="LoginControl" Content="{Binding}" ContentTemplate="{StaticResource A_DataTemplate_LoginForm}" />
                         </DockPanel>
-                        <StackPanel x:Name="DashboardPanel" Visibility="Collapsed">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="160" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
+                        <DockPanel x:Name="DashboardPanel" LastChildFill="True" Visibility="Collapsed">
+                            <Border Width="240" Background="#313131" DockPanel.Dock="Left">
+                                <StackPanel Cursor="Hand" >
+                                    <Image x:Name="img" Source="Icons/Logo.PNG"  Margin="25"/>
+                                    <TreeView>
+                                        <TreeViewItem Style="{StaticResource styleTreeView}" ContextMenuService.Placement="Bottom">
+                                            <TreeViewItem.Header>
+                                                <StackPanel Orientation="Horizontal" Margin="0 2" PreviewMouseRightButtonDown="showFolderActions_MouseRightClick" >
+                                                    <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
+                                                    HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
+                                                    <Label FontSize="14" FontWeight="SemiBold" Content="My Files"></Label>                                                    
+                                                </StackPanel>
+                                            </TreeViewItem.Header>
+                                            <TreeViewItem.ContextMenu>
+                                                <ContextMenu PlacementRectangle="100,38,0,0">
+                                                    <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
+                                                    <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
+                                                    <Separator Template="{StaticResource VsMenuSep}" />
+                                                    <MenuItem Header="_Add Folder" Template="{StaticResource VsMenuSub}" Icon="FolderPlus" />
+                                                </ContextMenu>
+                                            </TreeViewItem.ContextMenu>
+                                            <TreeViewItem>
+                                                <TreeViewItem.Header>
+                                                    <StackPanel Orientation="Horizontal" Background="#ffffff">
+                                                        <iconPacks:PackIconMaterial Kind="FolderOpen"
+                                                    HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
+                                                        <Label FontSize="14" FontWeight="SemiBold">soutest</Label>
+                                                    </StackPanel>
+                                                </TreeViewItem.Header>
+                                            </TreeViewItem>
+                                        </TreeViewItem>
+                                    </TreeView>
 
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0">
-                                            <Image x:Name="img" Source="Icons/Logo.PNG" Height="54" Width="160" Margin="0,5,0,0" Stretch="Fill"/>
-                                        </Grid>
-                                        <Grid Grid.Row="1">
-                                            <Menu HorizontalAlignment="Left" Width="155">
-                                                <Menu.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <StackPanel />
-                                                    </ItemsPanelTemplate>
-                                                </Menu.ItemsPanel>
-                                                <MenuItem Header="Dashboard" Command="{Binding LoginViewModel.DashboardCommand}">
-                                                    <MenuItem.Icon>
-                                                        <Image Source="Icons/Dashboard.PNG" />
-                                                    </MenuItem.Icon>
-                                                </MenuItem>
-                                                <MenuItem Header="Workspaces" Command="{Binding LoginViewModel.WorkspaceCommand}">
-                                                    <MenuItem.Icon>
-                                                        <Image Source="Icons/Workspace.PNG" />
-                                                    </MenuItem.Icon>
-                                                </MenuItem>
-                                                <MenuItem Header="Trackable Links">
-                                                    <MenuItem.Icon>
-                                                        <Image Source="Icons/trackableLink.png" />
-                                                    </MenuItem.Icon>
-                                                </MenuItem>
-                                            </Menu>
-                                        </Grid>
-                                        <Grid Grid.Row="2">
-                                            <Rectangle  HorizontalAlignment="Stretch"  VerticalAlignment="Center" Fill="#FFD4D1D1" Height="1"/>
-                                        </Grid>
-                                        <Grid Grid.Row="3">
-                                            <Menu HorizontalAlignment="Left" Width="155">
-                                                <Menu.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <StackPanel />
-                                                    </ItemsPanelTemplate>
-                                                </Menu.ItemsPanel>
-                                                <MenuItem Header="Favourites">
-                                                    <MenuItem.Icon>
-                                                        <Image Source="Icons/Favourites.png" />
-                                                    </MenuItem.Icon>
-                                                </MenuItem>
-                                                <MenuItem Header="Recent">
-                                                    <MenuItem.Icon>
-                                                        <Image Source="Icons/Recent.png" />
-                                                    </MenuItem.Icon>
-                                                </MenuItem>
-                                            </Menu>
-                                        </Grid>
-                                        <Grid Grid.Row="4">
-                                            <Rectangle  HorizontalAlignment="Stretch"  VerticalAlignment="Center" Fill="#FFD4D1D1" Height="1"/>
-                                        </Grid>
-                                        <Grid Grid.Row="5">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="*" />
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="*" />
-                                                </Grid.RowDefinitions>
-                                                <Grid Grid.Row="0" Margin="0,20,0,0">
-                                                    <Label Content="BOOKEDMARKED WORKSPACES" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="10"/>
-                                                </Grid>
-                                                <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
-                                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Width="150" TextAlignment="Center" Text="Bookmerked your workspaces for quick access" Foreground="#FF473838" VerticalAlignment="Top"/>
-                                                </Grid>
-                                                <Grid Grid.Row="2">
-                                                    <Rectangle  HorizontalAlignment="Stretch"  VerticalAlignment="Center" Fill="#FFD4D1D1" Height="1"/>
-                                                </Grid>
-                                                <Grid Grid.Row="3">
-
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                        <Grid Grid.Row="6" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.ContextMenu>
-                                                    <ContextMenu BorderBrush="Black" BorderThickness="1">
-                                                        <Grid>
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="Auto" />
-                                                                <RowDefinition Height="Auto" />
-                                                            </Grid.RowDefinitions>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto" />
-                                                                <ColumnDefinition Width="*" />
-                                                            </Grid.ColumnDefinitions>
-                                                            <Ellipse Fill="Gray" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Stroke="Black" VerticalAlignment="Top" Height="50" Width="50"/>
-                                                            <TextBlock Text="SM" Margin="15 15"/>
-
-                                                            <Label x:Name="lblName" Grid.Row="0"  Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding UserName}"/>
-                                                            <Rectangle Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Fill="#FFD4D1D1" Height="1"/>
-                                                        </Grid>
-
-                                                        <MenuItem Header="Setting" >
-                                                            <MenuItem.Icon>
-                                                                <Image Source="Icons/Setting.png" />
-                                                            </MenuItem.Icon>
-                                                        </MenuItem>
-                                                        <MenuItem Header="Team Management">
-                                                            <MenuItem.Icon>
-                                                                <Image Source="Icons/TeamManagement.png" />
-                                                            </MenuItem.Icon>
-                                                        </MenuItem>
-                                                        <MenuItem Header="Signout">
-                                                            <MenuItem.Icon>
-                                                                <Image Source="Icons/Signout.png" />
-                                                            </MenuItem.Icon>
-                                                        </MenuItem>
-                                                    </ContextMenu>
-                                                </Grid.ContextMenu>
-                                                <Grid Grid.Column="0">
-                                                    <Ellipse Fill="#FF5AC948" HorizontalAlignment="Left" Stroke="Black" VerticalAlignment="Top" Height="50" Width="50"/>
-                                                    <TextBlock x:Name="initial" Text="SM" Margin="17 16"/>
-                                                </Grid>
-                                                <Grid Grid.Column="1">
-                                                    <Label x:Name="lblUName" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding UserName}"/>
-
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid Grid.Column="1">
+                                </StackPanel>
+                            </Border>
+                            <Border Background="White">
+                                <TextBlock Foreground="Black">This content will "Fill" the remaining space</TextBlock>
+                            </Border>
+                            <!--<Grid Grid.Column="1">
                                     <Grid>
                                         <ContentControl Content="{Binding }">
                                             <ContentControl.Style>
@@ -386,9 +256,8 @@
                                             </ContentControl.Style>
                                         </ContentControl>
                                     </Grid>
-                                </Grid>
-                            </Grid>
-                        </StackPanel>
+                                </Grid>-->
+                        </DockPanel>
                     </Grid>
                 </Grid>
                 <DataTemplate.Triggers>

@@ -75,15 +75,17 @@ namespace IGMICloudApplication.ViewModels
         {
             if (string.IsNullOrEmpty(password))
             {
-                password = "Password";
+                //password = "Password";
+                password = "igmi@123";
             }
             if (string.IsNullOrEmpty(userName))
             {
-                userName = "Username";
+                //userName = "Username";
+                userName = "niloy.bauri";
             }
             if (string.IsNullOrEmpty(sendPasswordEmail))
             {
-                userName = "Email";
+                sendPasswordEmail = "Email";
             }
             ShowAndHideForgotPasswordForm = new DelegateCommand(() =>
             {
