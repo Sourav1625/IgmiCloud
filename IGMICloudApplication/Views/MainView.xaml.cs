@@ -78,9 +78,5 @@ namespace IGMICloudApplication.Views
                 }
             }
         }
-        private void showFolderActions_MouseRightClick(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
     }
 }

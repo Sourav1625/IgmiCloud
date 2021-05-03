@@ -229,40 +229,69 @@
                             <ContentControl Name="LoginControl" Content="{Binding}" ContentTemplate="{StaticResource A_DataTemplate_LoginForm}" />
                         </DockPanel>
                         <DockPanel x:Name="DashboardPanel" LastChildFill="True" Visibility="Collapsed">
-                            <Border Width="240" Background="#313131" DockPanel.Dock="Left">
+                            <DockPanel Width="240" Background="#313131" DockPanel.Dock="Left" >
                                 <StackPanel Cursor="Hand" >
                                     <Image x:Name="img" Source="Icons/Logo.PNG"  Margin="25"/>
-                                    <TreeView>
-                                        <TreeViewItem Style="{StaticResource styleTreeView}" ContextMenuService.Placement="Bottom">
-                                            <TreeViewItem.Header>
-                                                <StackPanel Orientation="Horizontal" Margin="0 2" PreviewMouseRightButtonDown="showFolderActions_MouseRightClick" >
-                                                    <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
-                                                    HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
-                                                    <Label FontSize="14" FontWeight="SemiBold" Content="My Files"></Label>                                                    
-                                                </StackPanel>
-                                            </TreeViewItem.Header>
-                                            <TreeViewItem.ContextMenu>
-                                                <ContextMenu PlacementRectangle="100,38,0,0">
-                                                    <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
-                                                    <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
-                                                    <Separator Template="{StaticResource VsMenuSep}" />
-                                                    <MenuItem Header="_Add Folder" Template="{StaticResource VsMenuSub}" Icon="FolderPlus" />
-                                                </ContextMenu>
-                                            </TreeViewItem.ContextMenu>
-                                            <TreeViewItem>
+                                    <TreeView ContextMenuService.Placement="Left"    ContextMenuService.PlacementRectangle="10 5 0 0"                 
+                                            ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" 
+                                            ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
+                                            <TreeViewItem Style="{StaticResource styleTreeView}">
                                                 <TreeViewItem.Header>
-                                                    <StackPanel Orientation="Horizontal" Background="#ffffff">
+                                                    <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
+                                                        <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
+                                                    HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
+                                                        <Label FontSize="14" FontWeight="SemiBold" Content="My Files"></Label>
+                                                    </StackPanel>
+                                                </TreeViewItem.Header>
+                                                <!--<TreeViewItem>
+                                                <TreeViewItem.Header>
+                                                    <StackPanel Orientation="Horizontal">
                                                         <iconPacks:PackIconMaterial Kind="FolderOpen"
                                                     HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
                                                         <Label FontSize="14" FontWeight="SemiBold">soutest</Label>
                                                     </StackPanel>
                                                 </TreeViewItem.Header>
+                                            </TreeViewItem>-->
                                             </TreeViewItem>
-                                        </TreeViewItem>
-                                    </TreeView>
-
+                                            <TreeView.ContextMenu>
+                                                <ContextMenu Placement="Relative">
+                                                    <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
+                                                    <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
+                                                    <Separator Template="{StaticResource VsMenuSep}" />
+                                                    <MenuItem Header="_Add Folder" Template="{StaticResource VsMenuSub}" Icon="FolderPlus" />
+                                                </ContextMenu>
+                                            </TreeView.ContextMenu>
+                                        </TreeView>
+                                    <StackPanel Orientation="Horizontal" Style="{StaticResource menuItem}">
+                                        <StackPanel Margin="27 5" Orientation="Horizontal" >
+                                            <iconPacks:PackIconMaterial Kind="AccountMultiple" 
+                                                        HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
+                                            <Label FontSize="14" FontWeight="Normal" Content="Shared With Me" Foreground="#ffffff"></Label>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Style="{StaticResource menuItem}">
+                                        <StackPanel Margin="27 5" Orientation="Horizontal" >
+                                            <iconPacks:PackIconMaterial Kind="ClockOutline" 
+                                                        HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
+                                            <Label FontSize="14" FontWeight="Normal" Content="Recent Files" Foreground="#ffffff"></Label>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Style="{StaticResource menuItem}">
+                                        <StackPanel Margin="27 5" Orientation="Horizontal" >
+                                            <iconPacks:PackIconMaterial Kind="FileMultiple" 
+                                                    HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
+                                            <Label FontSize="14" FontWeight="Normal" Content="All Files" Foreground="#ffffff"></Label>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Style="{StaticResource menuItem}">
+                                        <StackPanel Margin="27 5" Orientation="Horizontal" >
+                                            <iconPacks:PackIconMaterial Kind="Delete" 
+                                                    HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
+                                            <Label FontSize="14" FontWeight="Normal" Content="Trash Can" Foreground="#ffffff"></Label>
+                                        </StackPanel>
+                                    </StackPanel>
                                 </StackPanel>
-                            </Border>
+                            </DockPanel>
                             <Border Background="White">
                                 <TextBlock Foreground="Black">This content will "Fill" the remaining space</TextBlock>
                             </Border>                            
