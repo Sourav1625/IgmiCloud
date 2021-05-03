@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:data="clr-namespace:IGMICloudApplication.ViewModels"
         xmlns:ff="clr-namespace:IGMICloudApplication.Views.Extensions"
         xmlns:interactivity="http://schemas.microsoft.com/xaml/behaviors"
@@ -13,18 +12,15 @@
         Title="IGMI Cloud" 
         Icon="Icons/Logo.ico"
         Background="Transparent"
-        WindowStyle="ThreeDBorderWindow" WindowState="Normal"
+        WindowStyle="ThreeDBorderWindow" WindowState="Maximized"
         ResizeMode="NoResize" >
     <Window.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Name="Dashboard_Template" x:Key="Dashboard_Template" DataType="x:Type data:MainViewModel"  >
-                <Views:Dashboard/>
+            <DataTemplate x:Name="Dashboard_Template" x:Key="FolderManagement_Template" DataType="x:Type data:MainViewModel"  >
+                <Views:FolderManagement/>
             </DataTemplate>
-            <DataTemplate x:Name="Workspace_Template" x:Key="Workspace_Template" DataType="x:Type data:MainViewModel" >
-                <Views:Workspace/>
-            </DataTemplate>
-            <DataTemplate x:Name="Profile_Template" x:Key="Profile_Template" DataType="x:Type data:MainViewModel" >
-                <Views:UserProfile/>
+            <DataTemplate x:Name="MySharedResources_Template" x:Key="MySharedResources_Template" DataType="x:Type data:MainViewModel"  >
+                <Views:MySharedResources/>
             </DataTemplate>
             <Style x:Key="LoginStackPanel" TargetType="StackPanel">
                 <Setter Property="StackPanel.Background" Value="#f7f7f7" />
@@ -38,7 +34,7 @@
                 <Setter Property="TextBlock.Foreground" Value="#7d7a7a"/>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="TextBlock.Foreground" Value="Black"/>                        
+                        <Setter Property="TextBlock.Foreground" Value="Black"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -56,9 +52,9 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.6*"/>
                             <RowDefinition/>
-                        </Grid.RowDefinitions>                   
+                        </Grid.RowDefinitions>
                         <StackPanel VerticalAlignment="Bottom" >
-                            <Image Source="Icons/Logo.PNG" Width="230" Margin="0 40" />                      
+                            <Image Source="Icons/Logo.PNG" Width="230" Margin="0 40" />
                         </StackPanel>
                         <Border Grid.Row="1" BorderBrush="#999999" BorderThickness="1" Padding="40" Background="White" Width="450" VerticalAlignment="Top">
                             <StackPanel  HorizontalAlignment="Center">
@@ -89,8 +85,8 @@
                                         Cursor="Hand"
                                         Width="320"
                                          GotFocus="OnInputFieldFocused" LostFocus="OnInputFieldFocusedLost"/>
-                                            </StackPanel>                                            
-                                        </Border>                                     
+                                            </StackPanel>
+                                        </Border>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0 20">
                                         <Border BorderBrush="#ebebec" BorderThickness="1" CornerRadius="2" >
@@ -133,7 +129,7 @@
                                                     Foreground="#919191" Padding="1"
                                                     Margin="245 0 0 0" HorizontalAlignment="Right"/>
                                             </StackPanel>
-                                        </Button>                                        
+                                        </Button>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20" >
                                         <interactivity:Interaction.Triggers>
@@ -175,7 +171,7 @@
                                          GotFocus="OnInputFieldFocused" LostFocus="OnInputFieldFocusedLost"/>
                                             </StackPanel>
                                         </Border>
-                                    </StackPanel>                                    
+                                    </StackPanel>
                                     <StackPanel Orientation="Horizontal"  Style="{StaticResource LoginStackPanel}" Width="322" HorizontalAlignment="Left"  Cursor="Hand">
                                         <interactivity:Interaction.Triggers>
                                             <interactivity:EventTrigger EventName="MouseDown">
@@ -208,7 +204,7 @@
                 </Grid>
                 <DataTemplate.Triggers>
                     <DataTrigger Binding="{Binding LoginViewModel.LoginState}" Value="{x:Static data:LoginState.LoggingIn}">
-                        <Setter TargetName="LoginButton" Property="IsEnabled" Value="False" />                        
+                        <Setter TargetName="LoginButton" Property="IsEnabled" Value="False" />
                     </DataTrigger>
                     <DataTrigger Binding="{Binding LoginViewModel.IsForgotPasswordFormVisible}" Value="True">
                         <Setter TargetName="ForgotPasswordForm" Property="Visibility" Value="Visible" />
@@ -234,18 +230,29 @@
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="65">
                                         <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 15 10 15" />
                                     </StackPanel>
-                                    <TreeView ContextMenuService.Placement="Left"    ContextMenuService.PlacementRectangle="10 5 0 0"                 
+                                    <StackPanel>
+                                        <interactivity:Interaction.Triggers>
+                                            <interactivity:EventTrigger EventName="MouseDown">
+                                                <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
+                                            </interactivity:EventTrigger>
+                                        </interactivity:Interaction.Triggers>
+                                        <TreeView ContextMenuService.Placement="Left"    ContextMenuService.PlacementRectangle="10 5 0 0"                 
                                             ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" 
                                             ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
-                                        <TreeViewItem Style="{StaticResource styleTreeView}">
-                                            <TreeViewItem.Header>
-                                                <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
-                                                    <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
+                                            <TreeViewItem Style="{StaticResource styleTreeView}">
+                                                <TreeViewItem.Header>
+                                                    <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
+                                                        <interactivity:Interaction.Triggers>
+                                                            <interactivity:EventTrigger EventName="MouseDown">
+                                                                <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
+                                                            </interactivity:EventTrigger>
+                                                        </interactivity:Interaction.Triggers>
+                                                        <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
                                                 HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
-                                                    <Label FontSize="14" FontWeight="SemiBold" Content="My Files"></Label>
-                                                </StackPanel>
-                                            </TreeViewItem.Header>
-                                            <!--<TreeViewItem>
+                                                        <Label FontSize="14" FontWeight="SemiBold" Content="My Files"></Label>
+                                                    </StackPanel>
+                                                </TreeViewItem.Header>
+                                                <!--<TreeViewItem>
                                             <TreeViewItem.Header>
                                                 <StackPanel Orientation="Horizontal">
                                                     <iconPacks:PackIconMaterial Kind="FolderOpen"
@@ -254,18 +261,29 @@
                                                 </StackPanel>
                                             </TreeViewItem.Header>
                                         </TreeViewItem>-->
-                                        </TreeViewItem>
-                                        <TreeView.ContextMenu>
-                                            <ContextMenu Placement="Relative">
-                                                <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
-                                                <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
-                                                <Separator Template="{StaticResource VsMenuSep}" />
-                                                <MenuItem Header="_Add Folder" Template="{StaticResource VsMenuSub}" Icon="FolderPlus" />
-                                            </ContextMenu>
-                                        </TreeView.ContextMenu>
-                                    </TreeView>
-                                    <StackPanel Orientation="Horizontal" Style="{StaticResource MenuItem}">
-                                        <StackPanel Margin="27 5" Orientation="Horizontal" >
+                                            </TreeViewItem>
+                                            <TreeView.ContextMenu>
+                                                <ContextMenu Placement="Relative">
+                                                    <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
+                                                    <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
+                                                    <Separator Template="{StaticResource VsMenuSep}" />
+                                                    <MenuItem Header="_Add Folder" Template="{StaticResource VsMenuSub}" Icon="FolderPlus" />
+                                                </ContextMenu>
+                                            </TreeView.ContextMenu>
+                                        </TreeView>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Style="{StaticResource MenuItem}" >
+                                        <interactivity:Interaction.Triggers>
+                                            <interactivity:EventTrigger EventName="MouseDown">
+                                                <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.MySharedResourcesCommand}"/>
+                                            </interactivity:EventTrigger>
+                                        </interactivity:Interaction.Triggers>
+                                        <StackPanel Margin="27 5" Orientation="Horizontal" Cursor="Hand">
+                                            <interactivity:Interaction.Triggers>
+                                                <interactivity:EventTrigger EventName="MouseDown">
+                                                    <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.MySharedResourcesCommand}"/>
+                                                </interactivity:EventTrigger>
+                                            </interactivity:Interaction.Triggers>
                                             <iconPacks:PackIconMaterial Kind="AccountMultiple" 
                                                         HorizontalAlignment="Left" Style="{StaticResource OtherMenuItem}" Margin="0 5 4 0" />
                                             <Label FontSize="14" FontWeight="Normal" Content="Shared With Me" Foreground="#ffffff"></Label>
@@ -295,8 +313,23 @@
                                 </StackPanel>
                             </DockPanel>
                             <Border Background="White">
-                                <TextBlock Foreground="Black">This content will "Fill" the remaining space</TextBlock>
-                            </Border>                            
+                                <Grid Height="{Binding ActualHeight, RelativeSource ={RelativeSource AncestorType = {x:Type Window}}}">
+                                    <ContentControl Content="{Binding }">
+                                        <ContentControl.Style>
+                                            <Style TargetType="{x:Type ContentControl}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.FolderManagement}">
+                                                        <Setter Property="ContentTemplate" Value="{StaticResource FolderManagement_Template}" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.MySharedResources}">
+                                                        <Setter Property="ContentTemplate" Value="{StaticResource MySharedResources_Template}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
+                                </Grid>
+                            </Border>
                         </DockPanel>
                     </Grid>
                 </Grid>
@@ -306,7 +339,7 @@
                         <Setter TargetName="DashboardPanel" Property="Visibility" Value="Visible" />
                     </DataTrigger>
                 </DataTemplate.Triggers>
-            </DataTemplate>            
+            </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>

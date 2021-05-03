@@ -116,6 +116,9 @@
     <Compile Include="Views\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MySharedResources.xaml.cs">
+      <DependentUpon>MySharedResources.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Organization.xaml.cs">
       <DependentUpon>Organization.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MySharedResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,7 +158,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Dashboard.xaml">
+    <Page Include="Views\FolderManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,8 +183,8 @@
       <DependentUpon>SideMenuPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="Views\Dashboard.xaml.cs">
-      <DependentUpon>Dashboard.xaml</DependentUpon>
+    <Compile Include="Views\FolderManagement.xaml.cs">
+      <DependentUpon>FolderManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Extensions\PasswordBoxAssistant.cs" />
     <Compile Include="Views\InvitePerson.xaml.cs">

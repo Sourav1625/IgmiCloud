@@ -18,8 +18,8 @@ namespace IGMICloudApplication.ViewModels
     }
     public enum SwitchViewEnum
     {
-        Dashboard,
-        Workspace,
+        FolderManagement,
+        MySharedResources,
         UserProfile
     }
     public class LoginViewModel : ViewModelBase
@@ -93,8 +93,8 @@ namespace IGMICloudApplication.ViewModels
             }
         }
         public DelegateCommand LoginCommand { get; private set; }
-        public DelegateCommand DashboardCommand { get; private set; }
-        public DelegateCommand WorkspaceCommand { get; private set; }
+        public DelegateCommand FolderManagementCommand { get; private set; }
+        public DelegateCommand MySharedResourcesCommand { get; private set; }
         public DelegateCommand LogoutCommand { get; private set; }
         public DelegateCommand SettingsCommand { get; private set; }
         
@@ -159,7 +159,7 @@ namespace IGMICloudApplication.ViewModels
                                 Logger.Info("User Account id: " + account_id);
                                 Initial = getInitial(userName);
                                 LoginState = LoginState.LoggedIn;
-                                SwitchView = SwitchViewEnum.Dashboard;
+                                SwitchView = SwitchViewEnum.FolderManagement;
                             }
                             else
                             {                             
@@ -181,13 +181,13 @@ namespace IGMICloudApplication.ViewModels
                     LoginState = LoginState.LoggedOut;
                 }
             });
-            DashboardCommand = new DelegateCommand(() =>
+            FolderManagementCommand = new DelegateCommand(() =>
             {
-                SwitchView = SwitchViewEnum.Dashboard;
+                SwitchView = SwitchViewEnum.FolderManagement;
             });
-            WorkspaceCommand = new DelegateCommand(() =>
+            MySharedResourcesCommand = new DelegateCommand(() =>
             {
-                SwitchView = SwitchViewEnum.Workspace;
+                SwitchView = SwitchViewEnum.MySharedResources;
             });
             SettingsCommand = new DelegateCommand(() =>
             {

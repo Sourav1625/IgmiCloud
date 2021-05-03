@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace IGMICloudApplication.Views
 {
     /// <summary>
-    /// Interaction logic for Dashboard.xaml
+    /// Interaction logic for FolderManagementCommand.xaml
     /// </summary>
-    public partial class Dashboard : UserControl
+    public partial class FolderManagement : UserControl
     {
-        public Dashboard()
+        public FolderManagement()
         {
             InitializeComponent();
         }
