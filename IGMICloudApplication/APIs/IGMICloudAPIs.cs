@@ -13,7 +13,6 @@ namespace IGMICloudApplication.APIs
         private readonly RestClient _restClient;
         private readonly JsonSerializer _serializer;
         private string baseUrl = "https://igmigroup.com/ucloud/ucloud/api/v2";        
-        private string userDetailsEndpoint = "/account/info";
         public IGMICloudAPIs()
         {
             var serviceBaseUri = $"{baseUrl}";
@@ -26,6 +25,20 @@ namespace IGMICloudApplication.APIs
             var request = new RestRequest($"{endpoint}");
             AddRequestBoilerplate(ref request);
             request.AddParameter("application/x-www-form-urlencoded", $"username={username}&password={password}", ParameterType.RequestBody);
+            var response = _restClient.Post(request);
+            if (!response.IsSuccessful)
+            {
+                NotifyRequestFailure(request, response);
+                return null;
+            }
+
+            return response.Content;
+        }
+        public string FetchUserDetails(string endpoint, string access_token, int account_id)
+        {
+            var request = new RestRequest($"{endpoint}");
+            AddRequestBoilerplate(ref request);
+            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&account_id={account_id}", ParameterType.RequestBody);
             var response = _restClient.Post(request);
             if (!response.IsSuccessful)
             {

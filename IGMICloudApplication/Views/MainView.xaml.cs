@@ -13,7 +13,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IGMICloudApplication.ViewModels;
 
-
 namespace IGMICloudApplication.Views
 {
     /// <summary>

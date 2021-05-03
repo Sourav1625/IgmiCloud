@@ -13,9 +13,9 @@
         Icon="Icons/Logo.ico"
         Background="Transparent"
         WindowStyle="ThreeDBorderWindow" WindowState="Maximized"
-        ResizeMode="NoResize" >
+        ResizeMode="NoResize" >    
     <Window.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary>            
             <DataTemplate x:Name="FolderManagement_Template" x:Key="FolderManagement_Template" DataType="x:Type data:MainViewModel"  >
                 <Views:FolderManagement/>
             </DataTemplate>
@@ -57,7 +57,7 @@
                             <Image Source="Icons/Logo.PNG" Width="230" Margin="0 40" />
                         </StackPanel>
                         <Border Grid.Row="1" BorderBrush="#999999" BorderThickness="1" Padding="40" Background="White" Width="450" VerticalAlignment="Top">
-                            <StackPanel  HorizontalAlignment="Center">
+                            <StackPanel HorizontalAlignment="Center">
                                 <StackPanel x:Name="LoginForm" >
                                     <TextBlock Foreground="#79869a" FontSize="12" Margin="0 0 28 20" Text="Please enter your username and password below to login."/>
                                     <StackPanel Orientation="Horizontal">
@@ -225,7 +225,7 @@
                             <ContentControl Name="LoginControl" Content="{Binding}" ContentTemplate="{StaticResource A_DataTemplate_LoginForm}" />
                         </DockPanel>
                         <DockPanel x:Name="DashboardPanel" LastChildFill="True" Visibility="Collapsed">
-                            <DockPanel Width="240" Background="#313131" DockPanel.Dock="Left" >
+                            <DockPanel Width="240" Background="#313131" >
                                 <StackPanel Cursor="Hand" >
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
                                         <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 12 10 8" />
@@ -322,31 +322,55 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Row="0" Height="50" VerticalAlignment="Top">
-                                        <Border BorderBrush="#c2c2c2" BorderThickness="0 0 0 1">
-                                            <StackPanel Orientation="Horizontal" Margin="10 0" VerticalAlignment="Center">
-                                                <TextBox Text="Search your files..." Foreground="#949494" FontSize="12" SnapsToDevicePixels="True" Width="150" Height="30" BorderThickness="1 1 0 1" Opacity="0.3" Padding="10 5">
+                                        <Border BorderBrush="#c2c2c2" BorderThickness="0 0 0 1" >
+                                            <DockPanel>
+                                                <DockPanel Margin="10 0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                                    <TextBox Text="Search your files..." Foreground="#949494" FontSize="12" SnapsToDevicePixels="True" Width="150" Height="30" BorderThickness="1 1 0 1" Opacity="0.3" Padding="10 5">
                                                     <TextBox.Resources>
                                                         <Style TargetType="{x:Type Border}">
                                                             <Setter Property="CornerRadius" Value="17 0 0 17"/>
                                                         </Style>
                                                     </TextBox.Resources>
                                                 </TextBox>
-                                                <Border Background="#edf1f2" BorderBrush="#ebebeb" CornerRadius="0 20 20 0" Cursor="Hand">
+                                                    <Border Background="#edf1f2" BorderBrush="#ebebeb" CornerRadius="0 20 20 0" Cursor="Hand">
                                                     <TextBlock Foreground="#58666e">
                                                         <iconPacks:PackIconMaterial Kind="Magnify" Margin="10 6" Padding="0 2" />
                                                         <iconPacks:PackIconMaterial Kind="Cog" Margin="0 7 12 7" Padding="0 2 2 2"/>
                                                     </TextBlock>   
                                                 </Border>                                                
-                                                <Button Padding="10 2" Margin="8 0" Cursor="Hand" >
+                                                    <Button Padding="10 2" Margin="8 0" Cursor="Hand" >
                                                     <Button.Content>
                                                         <StackPanel Orientation="Horizontal">
                                                             <TextBlock Text="Upload" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
                                                             <iconPacks:PackIconMaterial Kind="CloudUpload" Margin="0 8 8 8"/>
                                                         </StackPanel>
                                                     </Button.Content>
-                                                </Button>
-                                            </StackPanel>
-                                        </Border>
+                                                </Button>                                                
+                                                </DockPanel>
+                                                <DockPanel LastChildFill="True">
+                                                    <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Cursor="Hand">
+                                                        <TextBlock Text="{Binding LoginViewModel.DisplayName}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#58666e" Margin="15 0 0 0"/>
+                                                        <iconPacks:PackIconMaterial Kind="Triangle" Flip="Vertical" HorizontalAlignment="Right" Margin="0 18 0 0" Padding="0 6" Foreground="#58666e"/>
+                                                        <Image Source="Icons/avatar_default.png" Width="40" Height="40" VerticalAlignment="Top" Margin="0 0 15 10">
+                                                            <Image.Resources>
+                                                                <Style TargetType="Border">
+                                                                    <Setter Property="CornerRadius" Value=" 0 0 70 70"/>
+                                                                </Style>
+                                                            </Image.Resources>
+                                                        </Image>
+                                                        <StackPanel.Resources>
+                                                            <Style TargetType="StackPanel">
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#f2f2f2"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>                                                                
+                                                            </Style>
+                                                        </StackPanel.Resources>
+                                                    </StackPanel>                                                    
+                                                </DockPanel>
+                                            </DockPanel>
+                                        </Border>                                       
                                     </Grid>
                                     <Grid Grid.Row="1" Height="{Binding ActualHeight, RelativeSource ={RelativeSource AncestorType = {x:Type Window}}}">
                                         <ContentControl Content="{Binding }">

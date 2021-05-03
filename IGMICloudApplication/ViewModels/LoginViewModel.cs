@@ -53,6 +53,19 @@ namespace IGMICloudApplication.ViewModels
         }
         public string password { get; set; }
         public string sendPasswordEmail { get; set; }
+        public string displayName { get; set; }
+        public string DisplayName
+        {
+            get
+            {
+                return displayName;
+            }
+            set
+            {
+                displayName = value;
+                OnPropertyChanged("DisplayName");
+            }
+        }
         private LoginState loginState;
         public LoginState LoginState
         {
@@ -100,6 +113,7 @@ namespace IGMICloudApplication.ViewModels
         
         public DelegateCommand ShowAndHideForgotPasswordForm { get; private set; }        
         private string loginEndpoint = "/authorize";
+        private string userDetailsEndpoint = "/account/info";
         public LoginViewModel()
         {
             if (string.IsNullOrEmpty(password))
@@ -153,13 +167,29 @@ namespace IGMICloudApplication.ViewModels
                             {
                                // UserProfile.userName = userName;
                                 string access_token = (string)((JsonObject)jObj["data"])[0];
-                                string account_id = (string)((JsonObject)jObj["data"])[1];
+                                int account_id = Int16.Parse((string)((JsonObject)jObj["data"])[1]);
                                 Console.WriteLine("User Access Token: " + access_token);
                                 Console.WriteLine("User Account id: " + account_id);
                                 Logger.Info("User Account id: " + account_id);
                                 Initial = getInitial(userName);
-                                LoginState = LoginState.LoggedIn;
-                                SwitchView = SwitchViewEnum.FolderManagement;
+                                //Calling User details API
+                                string userDetailsResponse = cloudAPIObj.FetchUserDetails(userDetailsEndpoint, access_token, account_id);
+                                if (userDetailsResponse != null)
+                                {
+                                    var userResponseJson = SimpleJson.DeserializeObject(userDetailsResponse);
+                                    if (userResponseJson is JsonObject userObj)
+                                    {
+                                        string useresponseStatus = (string)userObj["_status"];
+                                        Logger.Debug("response  status: " + useresponseStatus);
+                                        if (useresponseStatus == "success")
+                                        {
+                                            DisplayName = (string)((JsonObject)userObj["data"])["firstname"];
+                                            Logger.Info("User Display Name: " + displayName);
+                                            LoginState = LoginState.LoggedIn;
+                                            SwitchView = SwitchViewEnum.FolderManagement;
+                                        }
+                                    }
+                                }
                             }
                             else
                             {                             
