@@ -16,7 +16,7 @@
         ResizeMode="NoResize" >
     <Window.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Name="Dashboard_Template" x:Key="FolderManagement_Template" DataType="x:Type data:MainViewModel"  >
+            <DataTemplate x:Name="FolderManagement_Template" x:Key="FolderManagement_Template" DataType="x:Type data:MainViewModel"  >
                 <Views:FolderManagement/>
             </DataTemplate>
             <DataTemplate x:Name="MySharedResources_Template" x:Key="MySharedResources_Template" DataType="x:Type data:MainViewModel"  >
@@ -227,8 +227,8 @@
                         <DockPanel x:Name="DashboardPanel" LastChildFill="True" Visibility="Collapsed">
                             <DockPanel Width="240" Background="#313131" DockPanel.Dock="Left" >
                                 <StackPanel Cursor="Hand" >
-                                    <StackPanel Background="#373737" Margin="0 0 0 5" Height="65">
-                                        <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 15 10 15" />
+                                    <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
+                                        <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 12 10 8" />
                                     </StackPanel>
                                     <StackPanel>
                                         <interactivity:Interaction.Triggers>
@@ -313,21 +313,57 @@
                                 </StackPanel>
                             </DockPanel>
                             <Border Background="White">
-                                <Grid Height="{Binding ActualHeight, RelativeSource ={RelativeSource AncestorType = {x:Type Window}}}">
-                                    <ContentControl Content="{Binding }">
-                                        <ContentControl.Style>
-                                            <Style TargetType="{x:Type ContentControl}">
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.FolderManagement}">
-                                                        <Setter Property="ContentTemplate" Value="{StaticResource FolderManagement_Template}" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.MySharedResources}">
-                                                        <Setter Property="ContentTemplate" Value="{StaticResource MySharedResources_Template}" />
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </ContentControl.Style>
-                                    </ContentControl>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Row="0" Height="50" VerticalAlignment="Top">
+                                        <Border BorderBrush="#c2c2c2" BorderThickness="0 0 0 1">
+                                            <StackPanel Orientation="Horizontal" Margin="10 0" VerticalAlignment="Center">
+                                                <TextBox Text="Search your files..." Foreground="#949494" FontSize="12" SnapsToDevicePixels="True" Width="150" Height="30" BorderThickness="1 1 0 1" Opacity="0.3" Padding="10 5">
+                                                    <TextBox.Resources>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="CornerRadius" Value="17 0 0 17"/>
+                                                        </Style>
+                                                    </TextBox.Resources>
+                                                </TextBox>
+                                                <Border Background="#edf1f2" BorderBrush="#ebebeb" CornerRadius="0 20 20 0" Cursor="Hand">
+                                                    <TextBlock Foreground="#58666e">
+                                                        <iconPacks:PackIconMaterial Kind="Magnify" Margin="10 6" Padding="0 2" />
+                                                        <iconPacks:PackIconMaterial Kind="Cog" Margin="0 7 12 7" Padding="0 2 2 2"/>
+                                                    </TextBlock>   
+                                                </Border>                                                
+                                                <Button Padding="10 2" Margin="8 0" Cursor="Hand" >
+                                                    <Button.Content>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Upload" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
+                                                            <iconPacks:PackIconMaterial Kind="CloudUpload" Margin="0 8 8 8"/>
+                                                        </StackPanel>
+                                                    </Button.Content>
+                                                </Button>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                    <Grid Grid.Row="1" Height="{Binding ActualHeight, RelativeSource ={RelativeSource AncestorType = {x:Type Window}}}">
+                                        <ContentControl Content="{Binding }">
+                                            <ContentControl.Style>
+                                                <Style TargetType="{x:Type ContentControl}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.FolderManagement}">
+                                                            <Setter Property="ContentTemplate" Value="{StaticResource FolderManagement_Template}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.MySharedResources}">
+                                                            <Setter Property="ContentTemplate" Value="{StaticResource MySharedResources_Template}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
+                                    </Grid>
                                 </Grid>
                             </Border>
                         </DockPanel>

@@ -170,5 +170,22 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="#ffffff"/>
+        <Setter Property="Background" Value="#21a9e1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="#21a9e1" CornerRadius="2">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#1a8fbf"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
