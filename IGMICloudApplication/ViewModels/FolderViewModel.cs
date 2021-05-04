@@ -19,11 +19,7 @@ namespace IGMICloudApplication.ViewModels
             {
                 return folderDetails;
             }
-            set
-            {
-                folderDetails = value;
-               
-            }
+            set { SetProperty(ref folderDetails, value); }          
         }
 
     }
