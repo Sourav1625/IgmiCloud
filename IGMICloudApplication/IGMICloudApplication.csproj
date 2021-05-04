@@ -109,10 +109,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="APIs\IGMICloudFolderAPIs.cs" />
     <Compile Include="Models\Folders.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserAuth.cs" />
     <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="ViewModels\FolderViewModel.cs" />
     <Compile Include="Views\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
