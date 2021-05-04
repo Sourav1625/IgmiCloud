@@ -6,6 +6,7 @@ using System.Windows;
 using System.Linq;
 
 using System.Windows.Threading;
+using IGMICloudApplication.ViewModels;
 
 namespace IGMICloudApplication
 {
@@ -18,7 +19,6 @@ namespace IGMICloudApplication
         {
             // Create the ViewModel and expose it using the View's DataContext
             Views.MainView view = new Views.MainView();
-            view.DataContext = new ViewModels.MainViewModel();
             view.Show();
         }
 

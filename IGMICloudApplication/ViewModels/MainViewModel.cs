@@ -1,14 +1,17 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
-
+using System.Windows.Threading;
 using IGMICloudApplication.Commands;
 
 namespace IGMICloudApplication.ViewModels
 {
-    public class MainViewModel : LoginViewModel
+    public class MainViewModel
     {
         private DelegateCommand exitCommand;
-        static MainViewModel s_Instance = null;
+        static MainViewModel s_Instance = null;       
+
         public static MainViewModel Instance
         {
             get
