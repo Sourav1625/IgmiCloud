@@ -6,6 +6,7 @@ using NLog;
 using RestSharp;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace IGMICloudApplication.ViewModels
 {
@@ -25,85 +26,57 @@ namespace IGMICloudApplication.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        public string userName;
+        private string userName;
         public string UserName
         {
-            get
-            {
-                return userName;
-            }
-            set
-            {
-                userName = value;
-                OnPropertyChanged("userName");
-            }
+            get { return userName; }
+            set { SetProperty(ref userName, value); }
         }
-        public string initial;
-        public string Initial
+        private string password;
+        public string Password
         {
-            get
-            {
-                return initial;
-            }
-            set
-            {
-                initial = value;
-                OnPropertyChanged("initial");
-            }
+            get { return password; }
+            set { SetProperty(ref password, value); }
         }
-        public string password { get; set; }
-        public string sendPasswordEmail { get; set; }
-        public string displayName { get; set; }
+        private string sendPasswordEmail;
+        public string SendPasswordEmail
+        {
+            get { return sendPasswordEmail; }
+            set { SetProperty(ref sendPasswordEmail, value); }
+        }
+        private string displayName;
         public string DisplayName
         {
-            get
-            {
-                return displayName;
-            }
-            set
-            {
-                displayName = value;
-                OnPropertyChanged("DisplayName");
-            }
+            get { return displayName; }
+            set { SetProperty(ref displayName, value); }
         }
         private LoginState loginState;
         public LoginState LoginState
         {
-            get
-            {
-                return loginState;
-            }
+            get { return loginState; }
+            set { SetProperty(ref loginState, value); }
+        }
+        private int progressbarPercentage;
+        public int ProgressbarPercentage
+        {
+            get { return progressbarPercentage; }
             set
             {
-                loginState = value;
-                OnPropertyChanged("LoginState");
+                progressbarPercentage = value;
+                base.NotifyPropertyChanged("ProgressbarPercentage");
             }
         }
         private bool isForgotPasswordFormVisible;
         public bool IsForgotPasswordFormVisible
         {
-            get
-            {
-                return isForgotPasswordFormVisible;
-            }
-            set
-            {
-                isForgotPasswordFormVisible = value;
-                OnPropertyChanged("IsForgotPasswordFormVisible");
-            }
+            get { return isForgotPasswordFormVisible; }
+            set { SetProperty(ref isForgotPasswordFormVisible, value); }
         }
         private SwitchViewEnum switchView;
         public SwitchViewEnum SwitchView
         {
-            get
-            {
-                return switchView;
-            }
-            set
-            {
-                switchView = value;
-                OnPropertyChanged("SwitchView");
-            }
+            get { return switchView; }
+            set { SetProperty(ref switchView, value); }
         }
         public DelegateCommand LoginCommand { get; private set; }
         public DelegateCommand FolderManagementCommand { get; private set; }
@@ -116,19 +89,19 @@ namespace IGMICloudApplication.ViewModels
         private string userDetailsEndpoint = "/account/info";
         public LoginViewModel()
         {
-            if (string.IsNullOrEmpty(password))
-            {
-                //password = "Password";
-                password = "igmi@123";
-            }
             if (string.IsNullOrEmpty(userName))
             {
-                //userName = "Username";
-                userName = "niloy.bauri";
+                //UserName = "Username";
+                UserName = "niloy.bauri";
+            }
+            if (string.IsNullOrEmpty(password))
+            {
+                //Password = "Password";
+                Password = "igmi@123";
             }
             if (string.IsNullOrEmpty(sendPasswordEmail))
             {
-                sendPasswordEmail = "Email";
+                SendPasswordEmail = "Email";
             }
             ShowAndHideForgotPasswordForm = new DelegateCommand(() =>
             {
@@ -147,9 +120,14 @@ namespace IGMICloudApplication.ViewModels
                     Console.WriteLine("Password is empty");
                     Logger.Info("Can not Login as Password is empty");
                 }
-                try
+                else
                 {
                     LoginState = LoginState.LoggingIn;
+                }
+                /*try
+                {
+                    LoginState = LoginState.LoggingIn;
+                    ProgressbarPercentage = 40;
                     //Now Calling Login API
                     Logger.Debug("username and password is ok..now calling login api...");
                     Logger.Debug("loginEndpoint: " + loginEndpoint);
@@ -165,7 +143,8 @@ namespace IGMICloudApplication.ViewModels
                             Logger.Debug("response  status: " + responseStatus);
                             if (responseStatus == "success")
                             {
-                               // UserProfile.userName = userName;
+                                ProgressbarPercentage = 80;
+                                // UserProfile.userName = userName;
                                 string access_token = (string)((JsonObject)jObj["data"])[0];
                                 int account_id = Int16.Parse((string)((JsonObject)jObj["data"])[1]);
                                 Console.WriteLine("User Access Token: " + access_token);
@@ -183,10 +162,12 @@ namespace IGMICloudApplication.ViewModels
                                         Logger.Debug("response  status: " + useresponseStatus);
                                         if (useresponseStatus == "success")
                                         {
+                                            ProgressbarPercentage = 90;
                                             DisplayName = (string)((JsonObject)userObj["data"])["firstname"];
                                             Logger.Info("User Display Name: " + displayName);
                                             LoginState = LoginState.LoggedIn;
                                             SwitchView = SwitchViewEnum.FolderManagement;
+                                            ProgressbarPercentage = 100;
                                         }
                                     }
                                 }
@@ -205,11 +186,11 @@ namespace IGMICloudApplication.ViewModels
                     {
                         LoginState = LoginState.LoggedOut;
                     }
-                }catch(Exception ex)
+            }catch (Exception ex)
                 {
                     Logger.Debug("Error occurred while loggin....Error: "+ex.Message);
                     LoginState = LoginState.LoggedOut;
-                }
+                }*/
             });
             FolderManagementCommand = new DelegateCommand(() =>
             {
@@ -229,21 +210,74 @@ namespace IGMICloudApplication.ViewModels
             });
            
         }
-        private string getInitial(string userName)
+        public async Task ProcessLoginAsync(IProgress<int> progress)
         {
-            string[] multiArray = userName.Split(new Char[] { ' ', ',', '.', '-', '\n', '\t' });
-            string uname = userName.Replace(",", " ");
-            string initialLetter = "";
-            int count = 0;
-            if (multiArray.Length > 1)
+            try
             {
-                while (count < 2)
+                progress.Report(40);
+                //Now Calling Login API
+                Logger.Debug("username and password is ok..now calling login api...");
+                Logger.Debug("loginEndpoint: " + loginEndpoint);
+                Logger.Debug("userName: " + UserName);
+                var cloudAPIObj = new IGMICloudAPIs();
+                string loginResponse = cloudAPIObj.DoLogin(loginEndpoint, userName, password);
+                if (loginResponse != null)
                 {
-                    initialLetter = initialLetter + multiArray[count].Substring(0, 1);
-                    count++;
+                    var responseJson = SimpleJson.DeserializeObject(loginResponse);
+                    if (responseJson is JsonObject jObj)
+                    {
+                        string responseStatus = (string)jObj["_status"];
+                        Logger.Debug("response  status: " + responseStatus);
+                        if (responseStatus == "success")
+                        {
+                            progress.Report(70);
+                            // UserProfile.userName = userName;
+                            string access_token = (string)((JsonObject)jObj["data"])[0];
+                            int account_id = Int16.Parse((string)((JsonObject)jObj["data"])[1]);
+                            Console.WriteLine("User Access Token: " + access_token);
+                            Console.WriteLine("User Account id: " + account_id);
+                            Logger.Info("User Account id: " + account_id);
+                            //Calling User details API
+                            string userDetailsResponse = cloudAPIObj.FetchUserDetails(userDetailsEndpoint, access_token, account_id);
+                            if (userDetailsResponse != null)
+                            {
+                                var userResponseJson = SimpleJson.DeserializeObject(userDetailsResponse);
+                                if (userResponseJson is JsonObject userObj)
+                                {
+                                    string useresponseStatus = (string)userObj["_status"];
+                                    Logger.Debug("response  status: " + useresponseStatus);
+                                    if (useresponseStatus == "success")
+                                    {
+                                        progress.Report(100);
+                                        await Task.Delay(1000);
+                                        DisplayName = (string)((JsonObject)userObj["data"])["firstname"];
+                                        Logger.Info("User Display Name: " + displayName);
+                                        LoginState = LoginState.LoggedIn;
+                                        SwitchView = SwitchViewEnum.FolderManagement;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            LoginState = LoginState.LoggedOut;
+                        }
+                    }
+                    else
+                    {
+                        LoginState = LoginState.LoggedOut;
+                    }
+                }
+                else
+                {
+                    LoginState = LoginState.LoggedOut;
                 }
             }
-            return initialLetter;
+            catch (Exception ex)
+            {
+                Logger.Debug("Error occurred while loggin....Error: " + ex.Message);
+                LoginState = LoginState.LoggedOut;
+            }
         }
     }
 }
