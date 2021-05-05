@@ -147,46 +147,52 @@ namespace IGMICloudApplication.ViewModels
         {
             try
             {
-                progress.Report(40);
+                progress.Report(10);
                 //Now Calling Login API
                 Logger.Debug("username and password is ok..now calling login api...");
                 Logger.Debug("loginEndpoint: " + loginEndpoint);
                 Logger.Debug("userName: " + UserName);
                 var cloudAPIObj = new IGMICloudAPIs();
+                progress.Report(20);
                 string loginResponse = cloudAPIObj.DoLogin(loginEndpoint, userName, password);
                 if (loginResponse != null)
                 {
+                    progress.Report(30);
                     var responseJson = SimpleJson.DeserializeObject(loginResponse);
                     if (responseJson is JsonObject jObj)
                     {
+                        progress.Report(40);
                         string responseStatus = (string)jObj["_status"];
                         Logger.Debug("response  status: " + responseStatus);
                         if (responseStatus == "success")
                         {
-                            progress.Report(70);
-                            // UserProfile.userName = userName;
+                            progress.Report(50);
                             string access_token = (string)((JsonObject)jObj["data"])[0];
                             int account_id = Int16.Parse((string)((JsonObject)jObj["data"])[1]);
                             Console.WriteLine("User Access Token: " + access_token);
                             Console.WriteLine("User Account id: " + account_id);
                             Logger.Info("User Account id: " + account_id);
                             //Calling User details API
+                            progress.Report(60);
                             string userDetailsResponse = cloudAPIObj.FetchUserDetails(userDetailsEndpoint, access_token, account_id);
+                            progress.Report(70);
                             if (userDetailsResponse != null)
                             {
                                 var userResponseJson = SimpleJson.DeserializeObject(userDetailsResponse);
                                 if (userResponseJson is JsonObject userObj)
                                 {
+                                    progress.Report(80);
                                     string useresponseStatus = (string)userObj["_status"];
                                     Logger.Debug("response  status: " + useresponseStatus);
                                     if (useresponseStatus == "success")
                                     {
-                                        progress.Report(100);
-                                        await Task.Delay(1000);
+                                        progress.Report(90);
                                         DisplayName = (string)((JsonObject)userObj["data"])["firstname"];
                                         Logger.Info("User Display Name: " + displayName);
+                                        progress.Report(100);
+                                        await Task.Delay(1000);
                                         LoginState = LoginState.LoggedIn;
-                                        SwitchView = SwitchViewEnum.FolderManagement;
+                                        SwitchView = SwitchViewEnum.FolderManagement;                                        
                                     }
                                 }
                             }

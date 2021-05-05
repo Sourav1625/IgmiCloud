@@ -19,7 +19,7 @@
                     <Border BorderBrush="#e0e0e0" BorderThickness="1" Margin="14 12" CornerRadius="3">
                         <StackPanel Orientation="Horizontal" Width="240" Height="45">
                             <DockPanel HorizontalAlignment="Left">
-                                <iconPacks:PackIconMaterial Kind="ArrowRightThick" Name="HomeLink" Height="60" Width="80" Margin="-42 -18 0 2"  VerticalAlignment="Top">
+                                <iconPacks:PackIconMaterial Kind="ArrowRightThick"  Name="HomeLink" Height="60" Width="80" Margin="-42 -18 0 2"  VerticalAlignment="Top">
                                     <iconPacks:PackIconMaterial.Style>
                                         <Style TargetType="iconPacks:PackIconMaterial">
                                             <Setter Property="Foreground" Value="White"/>
@@ -34,7 +34,7 @@
                                 <iconPacks:PackIconMaterial Kind="Home" Margin="-34 4 0 4" Width="14"/>
                             </DockPanel>
                             <DockPanel LastChildFill="True" Name="FolderAndFiles">
-                                <TextBlock Text="Root Folder - 0 Folder" Margin="0 5" Foreground="#303641"/>                                
+                                <TextBlock Text="Root Folder - 0 Folder" Margin="0 4" Foreground="#303641"/>                                
                             </DockPanel>                            
                         </StackPanel>
                         <Border.Style>
@@ -48,25 +48,48 @@
                         </Border.Style>
                     </Border>                    
                     <DockPanel LastChildFill="True">
-                        <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Cursor="Hand">
-                            <TextBlock Text="{Binding LoginViewModel.DisplayName}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#58666e" Margin="15 0 0 0"/>
-                            <iconPacks:PackIconMaterial Kind="Triangle" Flip="Vertical" HorizontalAlignment="Right" Margin="0 18 0 0" Padding="0 6" Foreground="#58666e"/>
-                            <Image Source="Icons/avatar_default.png" Width="40" Height="40" VerticalAlignment="Top" Margin="0 0 15 10">
-                                <Image.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value=" 0 0 70 70"/>
-                                    </Style>
-                                </Image.Resources>
-                            </Image>
-                            <StackPanel.Resources>
-                                <Style TargetType="StackPanel">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#f2f2f2"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </StackPanel.Resources>
+                        <StackPanel Height="32"  HorizontalAlignment="Right" Orientation="Horizontal" >
+                            <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False" >
+                                <Button.Content>
+                                    <iconPacks:Entypo Kind="Share" Width="10"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False">
+                                <Button.Content>
+                                    <iconPacks:Entypo Kind="Link" Width="10"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False">
+                                <Button.Content>
+                                    <iconPacks:Entypo Kind="Cross" Width="6"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" Cursor="Hand">
+                                <Button.Content>
+                                    <iconPacks:Entypo Kind="List" Width="10"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" Cursor="Hand">
+                                <Button.Content>
+                                    <iconPacks:Entypo Kind="ResizeFullScreen" Width="10"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" Margin="4 0 0 0" Width="125" Opacity=".8"  Cursor="Hand">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="Filename ASC" Margin="0 0 8 0" />
+                                        <iconPacks:Entypo Kind="SelectArrows" Width="6"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" Margin="0 0 15 0" Width="60" Opacity=".8"  Cursor="Hand">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="30" Margin="0 0 8 0" />
+                                        <iconPacks:Entypo Kind="SelectArrows" Width="6"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
                         </StackPanel>
                     </DockPanel>
                 </DockPanel>

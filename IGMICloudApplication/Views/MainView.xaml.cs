@@ -98,7 +98,6 @@ namespace IGMICloudApplication.Views
             }
             else
             {
-                MainViewModel.Instance.LoginViewModel.ProgressbarPercentage = 10;
                 MainViewModel.Instance.LoginViewModel.LoginState = LoginState.LoggingIn;                
                 var progress = new Progress<int>(x => MainViewModel.Instance.LoginViewModel.ProgressbarPercentage = x);
                 await Task.Run(() => MainViewModel.Instance.LoginViewModel.ProcessLoginAsync(progress));

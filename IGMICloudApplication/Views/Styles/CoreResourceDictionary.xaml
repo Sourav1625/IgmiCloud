@@ -170,7 +170,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="{x:Type Button}">
+    <Style TargetType="{x:Type Button}" x:Key="Style_UploadButton">
         <Setter Property="Foreground" Value="#ffffff"/>
         <Setter Property="Background" Value="#21a9e1"/>
         <Setter Property="Template">
@@ -185,6 +185,27 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#1a8fbf"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type Button}" x:Key="Style_RightActionButton">
+        <Setter Property="Background" Value="#ffffff"/>
+        <Setter Property="BorderBrush" Value="#ebebeb"/>
+        <Setter Property="Width" Value="42.8"/>
+        <Setter Property="Opacity" Value=".6"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="#e0e0e0" CornerRadius="1" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#ebebeb"/>
+                <Setter Property="Foreground" Value="#303641"/>
             </Trigger>
         </Style.Triggers>
     </Style>
