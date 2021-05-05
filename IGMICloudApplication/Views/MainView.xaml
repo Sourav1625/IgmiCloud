@@ -236,7 +236,7 @@
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
                                             </interactivity:EventTrigger>
                                         </interactivity:Interaction.Triggers>
-                                        <TreeView ContextMenuService.Placement="Left"    ContextMenuService.PlacementRectangle="10 5 0 0"                 
+                                        <TreeView ContextMenuService.Placement="Left" ContextMenuService.PlacementRectangle="4 5 0 0"                 
                                             ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" 
                                             ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
                                             <TreeViewItem Style="{StaticResource styleTreeView}">
@@ -263,7 +263,7 @@
                                         </TreeViewItem>-->
                                             </TreeViewItem>
                                             <TreeView.ContextMenu>
-                                                <ContextMenu Placement="Relative">
+                                                <ContextMenu Placement="Relative" >
                                                     <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
                                                     <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
                                                     <Separator Template="{StaticResource VsMenuSep}" />
