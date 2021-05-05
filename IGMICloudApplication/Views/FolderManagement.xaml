@@ -16,16 +16,36 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0" VerticalAlignment="Top">
                 <DockPanel>
-                    <Border BorderBrush="#c2c2c2" BorderThickness="1" Margin="14 10" >
-                        <StackPanel Orientation="Horizontal" >
-                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
-                                <iconPacks:PackIconMaterial Kind="Home"/>
-                                <iconPacks:PackIconMaterial Kind="ArrowRightBold" />
-                            </StackPanel>
-                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left">
-
-                            </StackPanel>
+                    <Border BorderBrush="#e0e0e0" BorderThickness="1" Margin="14 12" CornerRadius="3">
+                        <StackPanel Orientation="Horizontal" Width="240" Height="45">
+                            <DockPanel HorizontalAlignment="Left">
+                                <iconPacks:PackIconMaterial Kind="ArrowRightThick" Name="HomeLink" Height="60" Width="80" Margin="-42 -18 0 2"  VerticalAlignment="Top">
+                                    <iconPacks:PackIconMaterial.Style>
+                                        <Style TargetType="iconPacks:PackIconMaterial">
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="#ebebeb"/>
+                                                </Trigger>
+                                            </Style.Triggers>                                            
+                                        </Style>
+                                    </iconPacks:PackIconMaterial.Style>
+                                </iconPacks:PackIconMaterial>
+                                <iconPacks:PackIconMaterial Kind="Home" Margin="-34 4 0 4" Width="14"/>
+                            </DockPanel>
+                            <DockPanel LastChildFill="True" Name="FolderAndFiles">
+                                <TextBlock Text="Root Folder - 0 Folder" Margin="0 5" Foreground="#303641"/>                                
+                            </DockPanel>                            
                         </StackPanel>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#ebebeb"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
                     </Border>                    
                     <DockPanel LastChildFill="True">
                         <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Cursor="Hand">

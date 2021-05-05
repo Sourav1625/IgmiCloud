@@ -251,7 +251,7 @@
                                                             </interactivity:EventTrigger>
                                                         </interactivity:Interaction.Triggers>
                                                         <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
-                                                HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
+                                                HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
                                                         <Label FontSize="14" FontWeight="SemiBold" Content="My Files"></Label>
                                                     </StackPanel>
                                                 </TreeViewItem.Header>
@@ -325,30 +325,30 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Row="0" VerticalAlignment="Top">
-                                        <Border BorderBrush="#c2c2c2" BorderThickness="0 0 0 1" >
+                                        <Border BorderBrush="#c2c2c2" BorderThickness="0 0 0 1"  >
                                             <DockPanel>
                                                 <DockPanel Margin="10 0" VerticalAlignment="Center" HorizontalAlignment="Left">
                                                     <TextBox Text="Search your files..." Foreground="#949494" FontSize="12" SnapsToDevicePixels="True" Width="150" Height="31" BorderThickness="1 1 0 1" Opacity="0.3" Padding="10 5">
-                                                    <TextBox.Resources>
-                                                        <Style TargetType="{x:Type Border}">
-                                                            <Setter Property="CornerRadius" Value="17 0 0 17"/>
-                                                        </Style>
-                                                    </TextBox.Resources>
-                                                </TextBox>
+                                                        <TextBox.Resources>
+                                                            <Style TargetType="{x:Type Border}">
+                                                                <Setter Property="CornerRadius" Value="17 0 0 17"/>
+                                                            </Style>
+                                                        </TextBox.Resources>
+                                                    </TextBox>
                                                     <Border Background="#edf1f2" BorderBrush="#ebebeb" CornerRadius="0 20 20 0" Cursor="Hand">
-                                                    <TextBlock Foreground="#58666e">
+                                                        <TextBlock Foreground="#58666e">
                                                         <iconPacks:PackIconEntypo Kind="MagnifyingGlass"  Margin="10 6" Padding="0 2" />
                                                         <iconPacks:PackIconEntypo Kind="Cog" Margin="0 7 12 7" Padding="0 2 2 2"/>
-                                                    </TextBlock>   
-                                                </Border>                                                
+                                                        </TextBlock>
+                                                    </Border>
                                                     <Button Padding="10 2" Margin="8 0" Cursor="Hand" >
-                                                    <Button.Content>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="Upload" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
-                                                            <iconPacks:PackIconEntypo Kind="UploadToCloud" Margin="0 8 8 8"/>
-                                                        </StackPanel>
-                                                    </Button.Content>
-                                                </Button>                                                
+                                                        <Button.Content>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="Upload" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
+                                                                <iconPacks:PackIconEntypo Kind="UploadToCloud" Margin="0 8 8 8"/>
+                                                            </StackPanel>
+                                                        </Button.Content>
+                                                    </Button>
                                                 </DockPanel>
                                                 <DockPanel LastChildFill="True">
                                                     <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Cursor="Hand">
@@ -367,13 +367,13 @@
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Background" Value="#f2f2f2"/>
                                                                     </Trigger>
-                                                                </Style.Triggers>                                                                
+                                                                </Style.Triggers>
                                                             </Style>
                                                         </StackPanel.Resources>
-                                                    </StackPanel>                                                    
+                                                    </StackPanel>
                                                 </DockPanel>
                                             </DockPanel>
-                                        </Border>                                       
+                                        </Border>                                        
                                     </Grid>
                                     <Grid Grid.Row="1" VerticalAlignment="Top">
                                         <ContentControl Content="{Binding }">
