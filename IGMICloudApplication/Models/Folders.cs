@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IGMICloudApplication.ViewModels;
 using Newtonsoft.Json;
 namespace IGMICloudApplication.Models
 {
@@ -24,7 +25,7 @@ namespace IGMICloudApplication.Models
         public List<object> Files { get; set; }
     }
 
-    public partial class FolderElement
+    public class FolderElement : ViewModelBase
     {
         [JsonProperty("id")]        
         public long Id { get; set; }
@@ -42,7 +43,7 @@ namespace IGMICloudApplication.Models
         public long IsPublic { get; set; }
 
         [JsonProperty("date_added")]
-        public DateTimeOffset DateAdded { get; set; }
+        public DateTime? DateAdded { get; set; }
 
         [JsonProperty("date_updated")]
         public object DateUpdated { get; set; }

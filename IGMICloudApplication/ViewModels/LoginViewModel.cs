@@ -173,6 +173,8 @@ namespace IGMICloudApplication.ViewModels
                             Console.WriteLine("User Account id: " + account_id);
                             Logger.Info("User Account id: " + account_id);
                             //Calling User details API
+                            LoggedinProfile.accessToken = access_token;
+                            LoggedinProfile.accountId = account_id;
                             progress.Report(60);
                             string userDetailsResponse = cloudAPIObj.FetchUserDetails(userDetailsEndpoint, access_token, account_id);
                             progress.Report(70);
@@ -192,7 +194,9 @@ namespace IGMICloudApplication.ViewModels
                                         progress.Report(100);
                                         await Task.Delay(1000);
                                         LoginState = LoginState.LoggedIn;
-                                        SwitchView = SwitchViewEnum.FolderManagement;                                        
+                                        SwitchView = SwitchViewEnum.FolderManagement;                                       
+                                        MainViewModel.Instance.FolderViewModel.GetFolderList(access_token, -1);
+                                        Console.WriteLine("Folder list value : " + MainViewModel.Instance.FolderViewModel.FolderList.Count);
                                     }
                                 }
                             }
