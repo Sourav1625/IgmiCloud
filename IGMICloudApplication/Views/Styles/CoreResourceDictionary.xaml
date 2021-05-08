@@ -134,7 +134,7 @@
     <ControlTemplate x:Key="VsMenuSub" TargetType="MenuItem">
         <DockPanel TextBlock.FontSize="14"  x:Name="panel" Cursor="Hand" >
             <iconPacks:PackIconMaterial Kind="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}}" Width="16" Margin="15 6 0 5" Foreground="#646464"></iconPacks:PackIconMaterial>
-            <Label Content="{TemplateBinding Header}" x:Name="nameContent" Foreground="#646464" Margin="0,1,35,4" />
+            <Label Content="{TemplateBinding Header}" x:Name="nameContent" Foreground="#646464" Margin="4,1,35,4" />
         </DockPanel>
         <ControlTemplate.Triggers>
             <Trigger Property="IsHighlighted" Value="True">
@@ -202,6 +202,24 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <Style TargetType="{x:Type Button}" x:Key="Style_PopupCancel">
+        <Setter Property="Foreground" Value="#303641"/>
+        <Setter Property="Background" Value="#eeeeee"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="#d0d0d3" CornerRadius="2">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#dbdbdd"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     <Style TargetType="{x:Type Button}" x:Key="Style_RightActionButton">
         <Setter Property="Background" Value="#ffffff"/>
         <Setter Property="BorderBrush" Value="#ebebeb"/>
@@ -222,5 +240,39 @@
                 <Setter Property="Foreground" Value="#303641"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    <Style x:Key="Popup_Header" TargetType="{x:Type StackPanel}">
+        <Setter Property="Height" Value="15" />
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="Padding" Value="15" />
+                <Setter Property="BorderBrush" Value="#e5e5e5" />
+                <Setter Property="BorderThickness" Value="0 0 0 1" />
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style TargetType="TextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
+                  BorderBrush="{TemplateBinding Border.BorderBrush}"
+                  Background="{TemplateBinding Panel.Background}"
+                  Name="border"
+                  SnapsToDevicePixels="True">
+                        <ScrollViewer HorizontalScrollBarVisibility="Hidden"
+                           VerticalScrollBarVisibility="Hidden"
+                           Name="PART_ContentHost"
+                           Focusable="False" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="UIElement.IsMouseOver" Value="True">
+                            <Setter Property="Border.BorderBrush" TargetName="border" 
+                    Value="#c1c1c1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

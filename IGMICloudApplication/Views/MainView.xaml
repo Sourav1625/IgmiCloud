@@ -12,7 +12,7 @@
         Title="IGMI Cloud" 
         Icon="Icons/Logo.ico"
         Background="Transparent"
-        WindowStyle="ThreeDBorderWindow" WindowState="Maximized">    
+        WindowStyle="ThreeDBorderWindow" WindowState="Maximized" >    
     <Window.Resources>
         <ResourceDictionary>
             <DataTemplate x:Name="FolderManagement_Template" x:Key="FolderManagement_Template" DataType="x:Type data:MainViewModel"  >
@@ -224,7 +224,7 @@
                         <DockPanel x:Name="LoginPanel" >
                             <ContentControl Name="LoginControl" Content="{Binding}" ContentTemplate="{StaticResource A_DataTemplate_LoginForm}" />
                         </DockPanel>
-                        <DockPanel x:Name="DashboardPanel" LastChildFill="True" Visibility="Collapsed">
+                        <DockPanel x:Name="DashboardPanel" LastChildFill="True" Visibility="Collapsed" Tag="DashbaordPanel">
                             <DockPanel Width="240" Background="#313131" >
                                 <StackPanel Cursor="Hand" >
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
@@ -267,7 +267,7 @@
                                                     <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
                                                     <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
                                                     <Separator Template="{StaticResource VsMenuSep}" />
-                                                    <MenuItem Header="_Add Folder" Template="{StaticResource VsMenuSub}" Icon="FolderPlus" />
+                                                    <MenuItem Header="_Add Folder" Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Click="Open_Folder_Creation_Popup"/>
                                                 </ContextMenu>
                                             </TreeView.ContextMenu>
                                         </TreeView>
@@ -370,7 +370,126 @@
                                                     </StackPanel>
                                                 </DockPanel>
                                             </DockPanel>
-                                        </Border>                                        
+                                        </Border>
+                                        <Popup Name="AddFolderPopup" PlacementTarget="{Binding ElementName=DashboardPanel}" Placement="Center" VerticalAlignment="Top" HorizontalOffset="-30" VerticalOffset="-240" AllowsTransparency="True">
+                                            <DockPanel>
+                                                <Border BorderBrush="#e5e5e5" BorderThickness="1" CornerRadius="4" Margin="40" Width="880" Height="470">
+                                                    <StackPanel Background="White" >
+                                                        <Border Name="PopupHeader" Padding="15" BorderBrush="#e5e5e5" BorderThickness="0 0 0 1">
+                                                            <StackPanel Orientation="Horizontal" Width="880" >
+                                                                <DockPanel Width="800">
+                                                                    <TextBlock FontSize="15" Foreground="#373e4a" Text="Add Folder" HorizontalAlignment="Left"/>
+                                                                </DockPanel>
+                                                                <DockPanel LastChildFill="true" >
+                                                                    <Button Style="{StaticResource Style_RightActionButton}" HorizontalAlignment="Right" Click="Close_Folder_Creation_Popup" Cursor="Hand" >
+                                                                        <Button.Content>
+                                                                            <iconPacks:Entypo Kind="Cross" Width="8"/>
+                                                                        </Button.Content>
+                                                                    </Button>                                                                                                                                
+                                                                </DockPanel>                                                                
+                                                            </StackPanel>
+                                                        </Border>
+                                                        <Border Name="PopupBody" Padding="20" Height="350" VerticalAlignment="Top">
+                                                            <StackPanel Orientation="Horizontal" >
+                                                                <Image Source="Icons/FolderAddIcon.png" Width="180" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="12 0"/>
+                                                                <Border Padding="20 0" Width="650">
+                                                                    <DockPanel>
+                                                                        <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15">
+                                                                            <TextBlock Text="Folder Name:" FontSize="13" Margin="0 0 0 8" Foreground="#555555" Padding="0 0 15 0"/>
+                                                                            <TextBox Height="35" Foreground="#555555" Background="#ffffff"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
+                                                                                <TextBox.Resources>
+                                                                                    <Style TargetType="Border">
+                                                                                        <Setter Property="CornerRadius" Value="3"/>
+                                                                                        <Setter Property="Padding" Value="0 0 15 0"/>
+                                                                                    </Style>
+                                                                                </TextBox.Resources>
+                                                                            </TextBox>
+                                                                        </StackPanel>
+                                                                        <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Orientation="Horizontal" >
+                                                                            <StackPanel Width="305">
+                                                                                <TextBlock Text="Parent Folder:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
+                                                                                <ComboBox Height="35" Margin="0 0 30 0" IsEditable="True" Foreground="#555555"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
+                                                                                    <ComboBoxItem Content="-None-" IsSelected="True"/>                                                                                    
+                                                                                </ComboBox>
+                                                                            </StackPanel>
+                                                                            <StackPanel Width="305">
+                                                                                <TextBlock Text="Folder Privacy:" FontSize="13" Margin="5 0 0 8" Foreground="#555555"/>
+                                                                                <ComboBox Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
+                                                                                    <ComboBoxItem Content="Public Limited - access only if users know the sharing link." IsSelected="True"/>
+                                                                                    <ComboBoxItem Content="Private, no access outside of your account."/>
+                                                                                </ComboBox>
+                                                                            </StackPanel>
+                                                                        </StackPanel>
+                                                                        <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Orientation="Horizontal" >
+                                                                            <StackPanel Width="200" Margin="0 0 20 0">
+                                                                                <TextBlock Text="Optional Password:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
+                                                                                <StackPanel Orientation="Horizontal">
+                                                                                    <CheckBox Margin="20 10 20 0"/>
+                                                                                    <TextBox Height="35" IsEnabled="False" Foreground="#555555" Width="120" Background="#eeeeee"  BorderThickness="1"  BorderBrush="#dedcdc" Padding="6 8" >
+                                                                                        <TextBox.Resources>
+                                                                                            <Style TargetType="Border">
+                                                                                                <Setter Property="CornerRadius" Value="3"/>
+                                                                                                <Setter Property="Padding" Value="0 0 15 0"/>
+                                                                                            </Style>
+                                                                                        </TextBox.Resources>
+                                                                                    </TextBox>
+                                                                                </StackPanel>
+                                                                            </StackPanel>
+                                                                            <StackPanel Width="200">
+                                                                                <TextBlock Text="Watermark Image Previews: *" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
+                                                                                <ComboBox Height="35" Margin="0 0 30 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
+                                                                                    <ComboBoxItem Content="Yes" />
+                                                                                    <ComboBoxItem Content="No" IsSelected="True"/>
+                                                                                </ComboBox>
+                                                                            </StackPanel>
+                                                                            <StackPanel Width="190">
+                                                                                <TextBlock Text="Allow Downloading When Shared:" FontSize="13" Margin="5 0 0 8" Foreground="#555555"/>
+                                                                                <ComboBox Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
+                                                                                    <ComboBoxItem Content="Yes" IsSelected="True"/>
+                                                                                    <ComboBoxItem Content="No" />
+                                                                                </ComboBox>
+                                                                            </StackPanel>
+                                                                        </StackPanel>
+                                                                        <StackPanel DockPanel.Dock="Top" Margin="-22 0 0 15">
+                                                                            <FlowDocumentReader Width="640">
+                                                                                <FlowDocument>
+                                                                                    <Section FontSize="14" Foreground="#aaa">
+                                                                                        <Paragraph LineHeight="4">
+                                                                                            * You can set or update your watermark via your
+                                                                                            <Hyperlink Foreground="Black">account settings</Hyperlink>
+                                                                                            page. The original images will not be watermarked.                                                                                            
+                                                                                        </Paragraph>
+                                                                                    </Section>
+                                                                                </FlowDocument>
+                                                                            </FlowDocumentReader>
+                                                                        </StackPanel>
+                                                                    </DockPanel>
+                                                                </Border>
+                                                            </StackPanel>
+                                                        </Border>
+                                                        <Border Name="PopupFooter" Padding="20" BorderBrush="#e5e5e5" VerticalAlignment="Top" BorderThickness="0 1 0 0" Height="75">
+                                                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                                                <Button Padding="6 12" Click="Close_Folder_Creation_Popup" Cursor="Hand" Style="{StaticResource Style_PopupCancel}" >
+                                                                    <Button.Content>
+                                                                        <StackPanel Orientation="Horizontal" >
+                                                                            <TextBlock Text="Cancel" FontWeight="Normal" FontSize="12" Padding="10 6 8 6"/>
+                                                                        </StackPanel>
+                                                                    </Button.Content>
+                                                                </Button>
+                                                                <Button Padding="10 5" Margin="8 0" Cursor="Hand" Style="{StaticResource Style_UploadButton}" >
+                                                                    <Button.Content>
+                                                                        <StackPanel Orientation="Horizontal" >
+                                                                            <TextBlock Text="Add Folder" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
+                                                                            <iconPacks:PackIconMaterial Kind="FolderPlus" Margin="0 8 8 8"/>
+                                                                        </StackPanel>
+                                                                    </Button.Content>
+                                                                </Button>
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </StackPanel>
+                                                </Border>
+                                            </DockPanel>
+                                        </Popup>
                                     </Grid>
                                     <Grid Grid.Row="1" VerticalAlignment="Top">
                                         <ContentControl Content="{Binding }">

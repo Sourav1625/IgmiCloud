@@ -148,6 +148,7 @@ namespace IGMICloudApplication.ViewModels
             try
             {
                 progress.Report(10);
+                await Task.Delay(400);
                 //Now Calling Login API
                 Logger.Debug("username and password is ok..now calling login api...");
                 Logger.Debug("loginEndpoint: " + loginEndpoint);
@@ -158,15 +159,18 @@ namespace IGMICloudApplication.ViewModels
                 if (loginResponse != null)
                 {
                     progress.Report(30);
+                    await Task.Delay(400);
                     var responseJson = SimpleJson.DeserializeObject(loginResponse);
                     if (responseJson is JsonObject jObj)
                     {
                         progress.Report(40);
+                        await Task.Delay(400);
                         string responseStatus = (string)jObj["_status"];
                         Logger.Debug("response  status: " + responseStatus);
                         if (responseStatus == "success")
                         {
                             progress.Report(50);
+                            await Task.Delay(400);
                             string access_token = (string)((JsonObject)jObj["data"])[0];
                             int account_id = Int16.Parse((string)((JsonObject)jObj["data"])[1]);
                             Console.WriteLine("User Access Token: " + access_token);
@@ -176,21 +180,24 @@ namespace IGMICloudApplication.ViewModels
                             progress.Report(60);
                             string userDetailsResponse = cloudAPIObj.FetchUserDetails(userDetailsEndpoint, access_token, account_id);
                             progress.Report(70);
+                            await Task.Delay(400);
                             if (userDetailsResponse != null)
                             {
                                 var userResponseJson = SimpleJson.DeserializeObject(userDetailsResponse);
                                 if (userResponseJson is JsonObject userObj)
                                 {
                                     progress.Report(80);
+                                    await Task.Delay(400);
                                     string useresponseStatus = (string)userObj["_status"];
                                     Logger.Debug("response  status: " + useresponseStatus);
                                     if (useresponseStatus == "success")
                                     {
                                         progress.Report(90);
+                                        await Task.Delay(400);
                                         DisplayName = (string)((JsonObject)userObj["data"])["firstname"];
                                         Logger.Info("User Display Name: " + displayName);
                                         progress.Report(100);
-                                        await Task.Delay(1000);
+                                        await Task.Delay(400);
                                         LoginState = LoginState.LoggedIn;
                                         SwitchView = SwitchViewEnum.FolderManagement;                                        
                                     }
