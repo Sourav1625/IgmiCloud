@@ -38,6 +38,15 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref folderList, value); }
         }
+        private ObservableCollection<FolderElement> folderListForComboBox;
+        public ObservableCollection<FolderElement> FolderListForComboBox
+        {
+            get
+            {
+                return folderListForComboBox;
+            }
+            set { SetProperty(ref folderListForComboBox, value); }
+        }
         private int selectedFolderId;
         public int SelectedFolderId
         {
@@ -74,13 +83,15 @@ namespace IGMICloudApplication.ViewModels
 
             Folder folder = JsonConvert.DeserializeObject<Folder>(response);           
             FolderList = new ObservableCollection<FolderElement>();
+            FolderListForComboBox = new ObservableCollection<FolderElement>();
             FolderElement defaultSelected = new FolderElement();
             defaultSelected.FolderName = "-None-";
             defaultSelected.Id = 0;
-            FolderList.Add(defaultSelected);
+            FolderListForComboBox.Add(defaultSelected);
             foreach (FolderElement folderElement in folder.Data.Folders)
             {
                 FolderList.Add(folderElement);
+                FolderListForComboBox.Add(folderElement);
             }
             SelectedFolderId = 0;
             SelectedFolder = FolderList[0];

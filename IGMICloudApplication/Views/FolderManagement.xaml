@@ -16,6 +16,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition />
+                <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -101,24 +102,76 @@
                 </DockPanel>
             </Grid>
             <Grid Grid.Row="1">
-                <!--<TextBlock Text="Test"/>-->
                 <Grid>
-                    <ListView Margin="10" Name="lvUsers" ItemsSource="{Binding FolderViewModel.FolderList}">
+                    <ListView Margin="10" Name="lvUsers" ItemContainerStyle="{DynamicResource ListViewContainerStyle}" ItemsSource="{Binding FolderViewModel.FolderList}" BorderThickness="0">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"></StackPanel>
+                                <StackPanel Orientation="Horizontal" ></StackPanel>
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
                         <ListView.ItemTemplate>
                             <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
-                                <StackPanel Orientation="Horizontal">
-                                    <iconPacks:PackIconMaterial Kind="Folder" Width="80" Height="50" Foreground="#f8b84e"/>
-                                    <TextBlock Text="{Binding FolderName}" Margin="0,20"></TextBlock>
+                                <StackPanel Name="EachFolder" Height="165" Cursor="Hand">
+                                    <Image Name="FolderIcon" Source="Icons/PublicFolder.png" Width="65" Height="50" Margin="40" />
+                                    <TextBlock Text="{Binding FolderName}" HorizontalAlignment="Center" FontSize="13" Foreground="#646464"></TextBlock>
                                 </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Id}" Value="0">
+                                        <Setter TargetName="EachFolder" Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsPublic}" Value="0">
+                                        <Setter TargetName="FolderIcon" Property="Image.Source" Value="Icons/ProtectedFolder.png" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
+                        </ListView.ItemTemplate>                     
+                    </ListView>                    
+                </Grid>                
+            </Grid>
+            <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                <Border BorderBrush="#dddddd" BorderThickness="1" CornerRadius="3" Height="32" Width="320"  >
+                    <StackPanel Orientation="Horizontal" Background="#ffffff">
+                        <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False" Foreground="#646464" Width="60" >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" >
+                                    <iconPacks:PackIconMaterial Kind="SkipPrevious" Width="8" Margin="10 5 5 5"/>
+                                    <TextBlock Text="First" Margin="0 5 5 5"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False" Foreground="#646464" Width="90" >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" >
+                                    <iconPacks:PackIconMaterial Kind="Triangle" RotationAngle="270" Width="8" Margin="5"/>
+                                    <TextBlock Text="Previous" Margin="0 5 5 5"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button IsEnabled="False" Foreground="#ffffff" Background="Black" BorderThickness="0" Width="30">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" Background="Black">
+                                    <TextBlock Text="1" Margin="8"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False" Foreground="#646464" Width="80" >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Next" Margin="0 5 5 5"/>
+                                    <iconPacks:PackIconMaterial Kind="Triangle" RotationAngle="90" Width="8" Margin="0 5 5 5"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False" Foreground="#646464" Width="60" >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Last" Margin="0 5 5 5"/>
+                                    <iconPacks:PackIconMaterial Kind="SkipNext" Width="8" Margin="5"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </Border>
             </Grid>
         </Grid>
     </Grid>
