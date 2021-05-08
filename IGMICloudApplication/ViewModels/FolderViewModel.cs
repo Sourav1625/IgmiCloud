@@ -52,6 +52,15 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref folderList, value); }
         }
+        private ObservableCollection<FolderElement> folderListForComboBox;
+        public ObservableCollection<FolderElement> FolderListForComboBox
+        {
+            get
+            {
+                return folderListForComboBox;
+            }
+            set { SetProperty(ref folderListForComboBox, value); }
+        }
         private int selectedFolderId;
         public int SelectedFolderId
         {
@@ -109,6 +118,12 @@ namespace IGMICloudApplication.ViewModels
                 return folderCreationRequest;
             }
             set { SetProperty(ref folderCreationRequest, value); }
+        }
+        private string folderCountMsg;
+        public string FolderCountMsg
+        {
+            get { return folderCountMsg; }
+            set { SetProperty(ref folderCountMsg, value); }
         }
         private Tuple<string> firstValueFolderPrivacy;
         public Tuple<string> FirstValueFolderPrivacy
@@ -185,9 +200,18 @@ namespace IGMICloudApplication.ViewModels
 
             Folder folder = JsonConvert.DeserializeObject<Folder>(response);           
             FolderList = new ObservableCollection<FolderElement>();
+            FolderListForComboBox = new ObservableCollection<FolderElement>();
             FolderElement defaultSelected = new FolderElement();
             defaultSelected.FolderName = "-None-";
             defaultSelected.Id = 0;
+            FolderListForComboBox.Add(defaultSelected);
+            foreach (FolderElement folderElement in folder.Data.Folders)
+            {
+                if (folderElement.ParentId==null){
+                    FolderList.Add(folderElement);
+                }                
+                FolderListForComboBox.Add(folderElement);
+            }
             FolderList.Add(defaultSelected);
             if (folder != null && folder.Data != null)
             {
@@ -198,6 +222,7 @@ namespace IGMICloudApplication.ViewModels
             }
             SelectedFolderId = 0;
             SelectedFolder = FolderList[0];
+            FolderCountMsg = "Root Folder - "+ FolderList.Count+ " Folders";
             return FolderList;
         }
 

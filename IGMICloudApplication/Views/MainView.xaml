@@ -230,7 +230,7 @@
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
                                         <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 12 10 8" />
                                     </StackPanel>
-                                    <StackPanel>
+                                    <StackPanel >
                                         <interactivity:Interaction.Triggers>
                                             <interactivity:EventTrigger EventName="MouseDown">
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
@@ -238,8 +238,9 @@
                                         </interactivity:Interaction.Triggers>
                                         <TreeView ContextMenuService.Placement="Left" ContextMenuService.PlacementRectangle="4 5 0 0"                 
                                             ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" 
-                                            ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}">
-                                            <TreeViewItem Style="{StaticResource styleTreeView}">
+                                            ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
+                                             ItemContainerStyle="{StaticResource styleTreeView}" >
+                                            <TreeViewItem ItemsSource="{Binding FolderViewModel.FolderList}">
                                                 <TreeViewItem.Header>
                                                     <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
                                                         <interactivity:Interaction.Triggers>
@@ -252,16 +253,21 @@
                                                         <Label FontSize="14" FontWeight="SemiBold" Content="My Files"></Label>
                                                     </StackPanel>
                                                 </TreeViewItem.Header>
-                                                <!--<TreeViewItem>
-                                            <TreeViewItem.Header>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <iconPacks:PackIconMaterial Kind="FolderOpen"
-                                                HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="0 5 4 0"/>
-                                                    <Label FontSize="14" FontWeight="SemiBold">soutest</Label>
-                                                </StackPanel>
-                                            </TreeViewItem.Header>
-                                        </TreeViewItem>-->
-                                            </TreeViewItem>
+                                                <TreeViewItem.ItemTemplate>
+                                                    <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
+                                                        <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
+                                                            <interactivity:Interaction.Triggers>
+                                                                <interactivity:EventTrigger EventName="MouseDown">
+                                                                    <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
+                                                                </interactivity:EventTrigger>
+                                                            </interactivity:Interaction.Triggers>
+                                                            <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
+                                                HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
+                                                            <Label FontSize="14" FontWeight="SemiBold" Content="{Binding FolderName}"></Label>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </TreeViewItem.ItemTemplate>                                                
+                                            </TreeViewItem>                                            
                                             <TreeView.ContextMenu>
                                                 <ContextMenu Placement="Relative" >
                                                     <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
@@ -408,7 +414,7 @@
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Orientation="Horizontal" >
                                                                             <StackPanel Width="305">
                                                                                 <TextBlock Text="Parent Folder:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
-                                                                                <ComboBox Name="folderLists" ItemsSource="{Binding FolderViewModel.FolderList}" DisplayMemberPath="FolderName" SelectedValuePath="Id" SelectedValue="{Binding SelectedFolderId}" SelectedItem="{Binding SelectedFolder}" Height="35" Margin="0 0 30 0" IsEditable="True" Foreground="#555555"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" IsSynchronizedWithCurrentItem="True" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged"/>
+                                                                                <ComboBox Name="folderLists" ItemsSource="{Binding FolderViewModel.FolderListForComboBox}" DisplayMemberPath="FolderName" SelectedValuePath="Id" SelectedValue="{Binding SelectedFolderId}" SelectedItem="{Binding SelectedFolder}" Height="35" Margin="0 0 30 0" IsEditable="True" Foreground="#555555"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" IsSynchronizedWithCurrentItem="True" SelectedIndex="0"/>
                                                                             </StackPanel>
                                                                             <StackPanel Width="305">
                                                                                 <TextBlock Text="Folder Privacy:" FontSize="13" Margin="5 0 0 8" Foreground="#555555"/>
