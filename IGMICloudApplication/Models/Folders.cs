@@ -28,7 +28,7 @@ namespace IGMICloudApplication.Models
     public class FolderElement
     {
         [JsonProperty("id")]        
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("parentId")]
         public object ParentId { get; set; }
@@ -40,7 +40,7 @@ namespace IGMICloudApplication.Models
         public long TotalSize { get; set; }
 
         [JsonProperty("isPublic")]        
-        public long IsPublic { get; set; }
+        public int IsPublic { get; set; }
 
         [JsonProperty("date_added")]
         public DateTime? DateAdded { get; set; }
@@ -73,7 +73,7 @@ namespace IGMICloudApplication.Models
         public string folder_name { get; set; }
         public string parent_id { get; set; }
         public string isPublic { get; set; }
-        public string enablePassword { get; set; }
+        public int enablePassword { get; set; }
         public string password { get; set; }
         public string watermarkPreviews { get; set; }
         public string showDownloadLinks { get; set; }

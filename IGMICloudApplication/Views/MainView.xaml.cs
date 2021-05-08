@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using IGMICloudApplication.Models;
 using IGMICloudApplication.ViewModels;
 using NLog;
 
@@ -136,5 +137,55 @@ namespace IGMICloudApplication.Views
                 Window_MouseDown(null, null);
             }
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {          
+            var comboBox = sender as ComboBox;
+            if (comboBox.SelectedItem != null)
+            {
+                MainViewModel.Instance.FolderViewModel.SelectedFolderId = ((FolderElement)comboBox.SelectedItem).Id;
+            }
+           
+        }
+
+        private void ComboBox_WaterMarks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            if (comboBox.SelectedItem != null && (comboBox.SelectedItem).Equals(WaterMarkPreview.Yes))
+            {
+                MainViewModel.Instance.FolderViewModel.IsWatermarkPreviews = 1;
+            }
+            else
+            {
+                MainViewModel.Instance.FolderViewModel.IsWatermarkPreviews = 0;
+            }
+
+        }
+
+        private void ComboBox_Allow_Downloading_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            if (comboBox.SelectedItem != null && comboBox.SelectedItem.Equals(AllowDownloading.Yes))
+            {
+                MainViewModel.Instance.FolderViewModel.IsShowDownloadLinks = 1;
+            }
+            else
+            {
+                MainViewModel.Instance.FolderViewModel.IsShowDownloadLinks = 0;
+            }
+        }
+        private void FolderPrivacy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            if (comboBox.SelectedItem != null && comboBox.SelectedItem.Equals(MainViewModel.Instance.FolderViewModel.FirstValueFolderPrivacy))
+            {
+                MainViewModel.Instance.FolderViewModel.SelectedValueFolderPrivacy = 1;
+            }
+            else
+            {
+                MainViewModel.Instance.FolderViewModel.SelectedValueFolderPrivacy = 0;
+            }
+        }       
+
     }
 }

@@ -18,11 +18,12 @@ namespace IGMICloudApplication.APIs
             _serializer = new JsonSerializer();
         }
 
-        public Folder CreateFolder(string endpoint, string access_token, int account_id, string folder_name, int parent_id, int is_public, int enablePassword, string password, int watermarkPreviews, int showDownloadLinks)
+        public string CreateFolder(string endpoint, string access_token, int account_id, string folder_name, int parent_id, int is_public, int enablePassword, string password, int watermarkPreviews, int showDownloadLinks)
         {            
             var request = new RestRequest($"{endpoint}");
             AddRequestBoilerplate(ref request);
-            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&account_id={account_id}&folder_name={folder_name}&parent_id={parent_id}&is_public={is_public}&enablePassword={enablePassword}&password={password}&watermarkPreviews={watermarkPreviews}&showDownloadLinks={showDownloadLinks}", ParameterType.RequestBody);
+            //request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&account_id={account_id}&folder_name={folder_name}&parent_id={parent_id}&is_public={is_public}&enablePassword={enablePassword}&password={password}&watermarkPreviews={watermarkPreviews}&showDownloadLinks={showDownloadLinks}", ParameterType.RequestBody);
+            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&account_id={account_id}&folder_name={folder_name}&parent_id={parent_id}&is_public={is_public}&password={password}&watermarkPreviews={watermarkPreviews}&showDownloadLinks={showDownloadLinks}", ParameterType.RequestBody);
             var response = _restClient.Post(request);
             if (!response.IsSuccessful)
             {
@@ -30,8 +31,10 @@ namespace IGMICloudApplication.APIs
                 return null;
             }
 
-            var folder = JsonConvert.DeserializeObject<Folder>(response.Content);           
-            return folder;
+            //var folder = JsonConvert.DeserializeObject<Folder>(response.Content);           
+            //return folder;
+
+            return response.Content;
         }
 
         public Folder EditFolder(string endpoint, string access_token, int folder_id, int account_id, string folder_name, int parent_id, int is_public, string access_password, int parent_folder_id)
