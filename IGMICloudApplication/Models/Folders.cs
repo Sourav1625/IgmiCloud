@@ -25,7 +25,7 @@ namespace IGMICloudApplication.Models
         public List<object> Files { get; set; }
     }
 
-    public class FolderElement : ViewModelBase
+    public class FolderElement
     {
         [JsonProperty("id")]        
         public long Id { get; set; }
@@ -65,5 +65,17 @@ namespace IGMICloudApplication.Models
 
         [JsonProperty("file_count")]
         public long FileCount { get; set; }
+    }
+    public class FolderCreationRequest
+    {
+        public string access_token { get; set; }
+        public string account_id { get; set; }
+        public string folder_name { get; set; }
+        public string parent_id { get; set; }
+        public string isPublic { get; set; }
+        public string enablePassword { get; set; }
+        public string password { get; set; }
+        public string watermarkPreviews { get; set; }
+        public string showDownloadLinks { get; set; }
     }
 }

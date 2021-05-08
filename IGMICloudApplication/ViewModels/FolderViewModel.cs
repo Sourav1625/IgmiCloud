@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace IGMICloudApplication.ViewModels
 {
@@ -18,9 +19,7 @@ namespace IGMICloudApplication.ViewModels
         string editFolderEndPoint = "/folder/edit";
         string deleteFolderEndPoint = "/folder/delete";
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private Folder folderDetails;
-
-
+        private Folder folderDetails;   
         public Folder FolderDetails
         {
             get
@@ -31,7 +30,6 @@ namespace IGMICloudApplication.ViewModels
         }
 
         private ObservableCollection<FolderElement> folderList;
-
         public ObservableCollection<FolderElement> FolderList
         {
             get
@@ -40,7 +38,29 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref folderList, value); }
         }
+        private int selectedFolderId;
+        public int SelectedFolderId
+        {
+            get { return selectedFolderId; }
+            set { SetProperty(ref selectedFolderId, value); }
+        }
 
+        private FolderElement selectedFolder;
+        public FolderElement SelectedFolder
+        {
+            get { return selectedFolder; }
+            set { SetProperty(ref selectedFolder, value); }
+        }
+
+        private FolderCreationRequest folderCreationRequest;
+        public FolderCreationRequest FolderCreationRequest
+        {
+            get
+            {
+                return folderCreationRequest;
+            }
+            set { SetProperty(ref folderCreationRequest, value); }
+        }
         public FolderViewModel()
         {
             
@@ -54,12 +74,16 @@ namespace IGMICloudApplication.ViewModels
 
             Folder folder = JsonConvert.DeserializeObject<Folder>(response);           
             FolderList = new ObservableCollection<FolderElement>();
+            FolderElement defaultSelected = new FolderElement();
+            defaultSelected.FolderName = "-None-";
+            defaultSelected.Id = 0;
+            FolderList.Add(defaultSelected);
             foreach (FolderElement folderElement in folder.Data.Folders)
             {
-
                 FolderList.Add(folderElement);
             }
-           
+            SelectedFolderId = 0;
+            SelectedFolder = FolderList[0];
             return FolderList;
         }
 

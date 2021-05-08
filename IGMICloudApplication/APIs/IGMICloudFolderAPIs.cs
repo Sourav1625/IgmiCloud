@@ -18,11 +18,11 @@ namespace IGMICloudApplication.APIs
             _serializer = new JsonSerializer();
         }
 
-        public Folder CreateFolder(string endpoint, string access_token, int account_id, string folder_name, int parent_id, int is_public, string access_password)
+        public Folder CreateFolder(string endpoint, string access_token, int account_id, string folder_name, int parent_id, int is_public, int enablePassword, string password, int watermarkPreviews, int showDownloadLinks)
         {            
             var request = new RestRequest($"{endpoint}");
             AddRequestBoilerplate(ref request);
-            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&account_id={account_id}&folder_name={folder_name}&parent_id={parent_id}&is_public={is_public}&access_password={access_password}", ParameterType.RequestBody);
+            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&account_id={account_id}&folder_name={folder_name}&parent_id={parent_id}&is_public={is_public}&enablePassword={enablePassword}&password={password}&watermarkPreviews={watermarkPreviews}&showDownloadLinks={showDownloadLinks}", ParameterType.RequestBody);
             var response = _restClient.Post(request);
             if (!response.IsSuccessful)
             {
@@ -95,10 +95,6 @@ namespace IGMICloudApplication.APIs
         private void NotifyRequestFailure(RestRequest theRequest, IRestResponse theResponse)
         {
             string message = theResponse.Content != String.Empty ? theResponse.Content : "missing";
-            /*Logger.Error("Failed with request to resource {resource}. Code: {code}. Full Response {message}.",
-                theRequest.Resource, theResponse.StatusCode, message);
-            Logger.Error("More details: Error Message: {error}, Error Exception {except}. Raw: {raw}",
-                theResponse.ErrorMessage, theResponse.ErrorException, theResponse.RawBytes != null ? theResponse.RawBytes.ToString() : "");*/
         }
     }
 }
