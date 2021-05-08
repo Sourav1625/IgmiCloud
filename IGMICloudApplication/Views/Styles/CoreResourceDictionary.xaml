@@ -99,7 +99,6 @@
                             <Setter TargetName="Expander" Property="Visibility" 
                     Value="Hidden"/>
                         </Trigger>
-                        
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="HasHeader" Value="false"/>
@@ -114,6 +113,7 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Header" Property="MinHeight" Value="19"/>
                         </MultiTrigger>
+                        
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -295,7 +295,7 @@
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Opacity" TargetName="Bd" Value="0.7"/>
-                        </MultiTrigger>                        
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

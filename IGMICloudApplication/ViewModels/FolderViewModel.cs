@@ -70,6 +70,12 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref folderCreationRequest, value); }
         }
+        private string folderCountMsg;
+        public string FolderCountMsg
+        {
+            get { return folderCountMsg; }
+            set { SetProperty(ref folderCountMsg, value); }
+        }
         public FolderViewModel()
         {
             
@@ -90,11 +96,14 @@ namespace IGMICloudApplication.ViewModels
             FolderListForComboBox.Add(defaultSelected);
             foreach (FolderElement folderElement in folder.Data.Folders)
             {
-                FolderList.Add(folderElement);
+                if (folderElement.ParentId==null){
+                    FolderList.Add(folderElement);
+                }                
                 FolderListForComboBox.Add(folderElement);
             }
             SelectedFolderId = 0;
             SelectedFolder = FolderList[0];
+            FolderCountMsg = "Root Folder - "+ FolderList.Count+ " Folders";
             return FolderList;
         }
 

@@ -41,7 +41,10 @@
                                 <iconPacks:PackIconMaterial Kind="Home" Margin="-34 4 0 4" Width="14"/>
                             </DockPanel>
                             <DockPanel LastChildFill="True" Name="FolderAndFiles">
-                                <TextBlock Text="Root Folder - 0 Folder" Margin="0 4" Foreground="#303641"/>                                
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FolderViewModel.FolderCountMsg}" Margin="0 4" Foreground="#303641"/>
+                                    <iconPacks:PackIconMaterial Kind="Triangle" RotationAngle="180" Margin="0 4" Width="6"/>
+                                </StackPanel>
                             </DockPanel>                            
                         </StackPanel>
                         <Border.Style>
@@ -112,6 +115,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
                                 <StackPanel Name="EachFolder" Height="165" Cursor="Hand">
+                                    <iconPacks:PackIconMaterial Name="ActionButton" Visibility="Collapsed" Kind="Triangle" RotationAngle="180" Width="6" HorizontalAlignment="Right"/>
                                     <Image Name="FolderIcon" Source="Icons/PublicFolder.png" Width="65" Height="50" Margin="40" />
                                     <TextBlock Text="{Binding FolderName}" HorizontalAlignment="Center" FontSize="13" Foreground="#646464"></TextBlock>
                                 </StackPanel>
