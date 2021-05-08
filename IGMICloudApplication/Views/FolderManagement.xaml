@@ -5,6 +5,12 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="A_DataTemplate_FolderView">
+          
+        </DataTemplate>
+    </UserControl.Resources>
+   
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -95,7 +101,24 @@
                 </DockPanel>
             </Grid>
             <Grid Grid.Row="1">
-                <TextBlock Text="Test"/>
+                <!--<TextBlock Text="Test"/>-->
+                <Grid>
+                    <ListView Margin="10" Name="lvUsers" ItemsSource="{Binding FolderViewModel.FolderList}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"></StackPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
+                                <StackPanel Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Kind="Folder" Width="80" Height="50" Foreground="#f8b84e"/>
+                                    <TextBlock Text="{Binding FolderName}" Margin="0,20"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

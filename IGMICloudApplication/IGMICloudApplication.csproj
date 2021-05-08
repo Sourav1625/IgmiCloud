@@ -117,6 +117,7 @@
     </ApplicationDefinition>
     <Compile Include="APIs\IGMICloudFolderAPIs.cs" />
     <Compile Include="Models\Folders.cs" />
+    <Compile Include="Models\LoggedinProfile.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserAuth.cs" />
     <Compile Include="Models\UserProfile.cs" />

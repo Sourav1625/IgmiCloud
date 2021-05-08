@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 
 namespace IGMICloudApplication.APIs
 {
@@ -50,22 +51,27 @@ namespace IGMICloudApplication.APIs
             return folder;
         }
 
-        public Folder GetFolderList(string endpoint, string access_token, int parent_folder_id)
+        public string GetFolderList(string endpoint, string access_token, int parent_folder_id)
         {           
             var request = new RestRequest($"{endpoint}");
             AddRequestBoilerplate(ref request);
-            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&parent_folder_id={parent_folder_id}", ParameterType.RequestBody);
+            if (parent_folder_id > 0)
+            {
+                request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&parent_folder_id={parent_folder_id}&account_id={LoggedinProfile.accountId}", ParameterType.RequestBody);
+            }
+            else
+            {
+                request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&account_id={LoggedinProfile.accountId}", ParameterType.RequestBody);
+            }
             var response = _restClient.Post(request);
             if (!response.IsSuccessful)
             {
                 NotifyRequestFailure(request, response);
                 return null;
             }
-          
-            var folder = JsonConvert.DeserializeObject<Folder>(response.Content);
-           
 
-            return folder;
+                     
+           return response.Content;
         }
         public string DeleteFolder(string endpoint, string access_token, int folder_id)
         {

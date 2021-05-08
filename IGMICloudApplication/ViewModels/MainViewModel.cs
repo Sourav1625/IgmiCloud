@@ -27,9 +27,12 @@ namespace IGMICloudApplication.ViewModels
 
         public LoginViewModel LoginViewModel { get; private set; }
 
+        public FolderViewModel FolderViewModel { get; private set; }
+
         public MainViewModel()
         {
             LoginViewModel = new LoginViewModel();
+            FolderViewModel = new FolderViewModel();
         }
 
         #endregion
