@@ -4,9 +4,174 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IGMICloudApplication.Views"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="My Shared resources"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition />
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top">
+                <DockPanel>
+                    <Border BorderBrush="#e0e0e0" BorderThickness="1" Margin="14 12" CornerRadius="3">
+                        <StackPanel Orientation="Horizontal" Width="180" Height="45">
+                            <DockPanel HorizontalAlignment="Left">
+                                <iconPacks:PackIconMaterial Kind="ArrowRightThick"  Name="HomeLink" Height="60" Width="80" Margin="-42 -18 0 2"  VerticalAlignment="Top">
+                                    <iconPacks:PackIconMaterial.Style>
+                                        <Style TargetType="iconPacks:PackIconMaterial">
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="#ebebeb"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </iconPacks:PackIconMaterial.Style>
+                                </iconPacks:PackIconMaterial>
+                                <iconPacks:PackIconMaterial Kind="Home" Margin="-34 4 0 4" Width="14"/>
+                            </DockPanel>
+                            <DockPanel LastChildFill="True" Name="FolderAndFiles">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Shared With Me" Margin="0 4" Foreground="#303641"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </StackPanel>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#ebebeb"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                    <DockPanel LastChildFill="True">
+                        <StackPanel Height="32"  HorizontalAlignment="Right" Orientation="Horizontal" >
+                            <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False" >
+                                <Button.Content>
+                                    <iconPacks:Entypo Kind="Share" Width="10"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False">
+                                <Button.Content>
+                                    <iconPacks:Entypo Kind="Link" Width="10"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False">
+                                <Button.Content>
+                                    <iconPacks:Entypo Kind="Cross" Width="6"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" Cursor="Hand">
+                                <Button.Content>
+                                    <iconPacks:Entypo Kind="List" Width="10"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" Cursor="Hand">
+                                <Button.Content>
+                                    <iconPacks:Entypo Kind="ResizeFullScreen" Width="10"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" Margin="4 0 0 0" Width="125" Opacity=".8"  Cursor="Hand">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="Filename ASC" Margin="0 0 8 0" />
+                                        <iconPacks:Entypo Kind="SelectArrows" Width="6"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Style_RightActionButton}" Margin="0 0 15 0" Width="60" Opacity=".8"  Cursor="Hand">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Text="30" Margin="0 0 8 0" />
+                                        <iconPacks:Entypo Kind="SelectArrows" Width="6"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </DockPanel>
+                </DockPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid>
+                    <ListView Margin="10" Name="lvUsers" ItemContainerStyle="{DynamicResource ListViewContainerStyle}" ItemsSource="{Binding FolderViewModel.FolderList}" BorderThickness="0">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" ></StackPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
+                                <StackPanel Name="EachFolder" Height="165" Cursor="Hand">
+                                    <iconPacks:PackIconMaterial Name="ActionButton" Visibility="Collapsed" Kind="Triangle" RotationAngle="180" Width="6" HorizontalAlignment="Right"/>
+                                    <Image Name="FolderIcon" Source="Icons/PublicFolder.png" Width="65" Height="50" Margin="40" />
+                                    <TextBlock Text="{Binding FolderName}" HorizontalAlignment="Center" FontSize="13" Foreground="#646464"></TextBlock>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Id}" Value="0">
+                                        <Setter TargetName="EachFolder" Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsPublic}" Value="0">
+                                        <Setter TargetName="FolderIcon" Property="Image.Source" Value="Icons/ProtectedFolder.png" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                <Border BorderBrush="#dddddd" BorderThickness="1" CornerRadius="3" Height="32" Width="320"  >
+                    <StackPanel Orientation="Horizontal" Background="#ffffff">
+                        <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False" Foreground="#646464" Width="60" >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" >
+                                    <iconPacks:PackIconMaterial Kind="SkipPrevious" Width="8" Margin="10 5 5 5"/>
+                                    <TextBlock Text="First" Margin="0 5 5 5"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False" Foreground="#646464" Width="90" >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" >
+                                    <iconPacks:PackIconMaterial Kind="Triangle" RotationAngle="270" Width="8" Margin="5"/>
+                                    <TextBlock Text="Previous" Margin="0 5 5 5"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button IsEnabled="False" Foreground="#ffffff" Background="Black" BorderThickness="0" Width="30" >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" Background="Black">
+                                    <TextBlock Text="1" Margin="8"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False" Foreground="#646464" Width="80" >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Next" Margin="0 5 5 5"/>
+                                    <iconPacks:PackIconMaterial Kind="Triangle" RotationAngle="90" Width="8" Margin="0 5 5 5"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button Style="{StaticResource Style_RightActionButton}" IsEnabled="False" Foreground="#646464" Width="60" >
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Last" Margin="0 5 5 5"/>
+                                    <iconPacks:PackIconMaterial Kind="SkipNext" Width="8" Margin="5"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
