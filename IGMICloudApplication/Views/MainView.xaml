@@ -236,10 +236,7 @@
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
                                             </interactivity:EventTrigger>
                                         </interactivity:Interaction.Triggers>
-                                        <TreeView ContextMenuService.Placement="Left" ContextMenuService.PlacementRectangle="4 5 0 0"                 
-                                            ContextMenuService.HorizontalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" 
-                                            ContextMenuService.VerticalOffset="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
-                                             ItemContainerStyle="{StaticResource styleTreeView}" >
+                                        <TreeView ItemContainerStyle="{StaticResource styleTreeView}">
                                             <TreeViewItem ItemsSource="{Binding FolderViewModel.FolderList}">
                                                 <TreeViewItem.Header>
                                                     <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
@@ -251,6 +248,26 @@
                                                         <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
                                                 HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
                                                         <Label FontSize="14" FontWeight="SemiBold" Content="My Files"></Label>
+                                                        <StackPanel.Style>
+                                                            <Style TargetType="{x:Type StackPanel}">
+                                                                <Setter Property="ContextMenu">
+                                                                    <Setter.Value>
+                                                                        <ContextMenu>
+                                                                            <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
+                                                                            <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
+                                                                            <Separator Template="{StaticResource VsMenuSep}" />
+                                                                            <MenuItem Header="_Add Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus">
+                                                                                <MenuItem.Resources>
+                                                                                    <Style TargetType="MenuItem">
+                                                                                        <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                                    </Style>
+                                                                                </MenuItem.Resources>
+                                                                            </MenuItem>
+                                                                        </ContextMenu>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Style>
+                                                        </StackPanel.Style>
                                                     </StackPanel>
                                                 </TreeViewItem.Header>
                                                 <TreeViewItem.ItemTemplate>
@@ -264,18 +281,59 @@
                                                             <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
                                                 HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
                                                             <Label FontSize="14" FontWeight="SemiBold" Content="{Binding FolderName}"></Label>
+                                                            <StackPanel.Style>
+                                                                <Style TargetType="{x:Type StackPanel}">
+                                                                    <Setter Property="ContextMenu">
+                                                                        <Setter.Value>
+                                                                            <ContextMenu>
+                                                                                <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
+                                                                                <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
+                                                                                <Separator Template="{StaticResource VsMenuSep}" />
+                                                                                <MenuItem Header="_Add Sub Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus">
+                                                                                    <MenuItem.Resources>
+                                                                                        <Style TargetType="MenuItem">
+                                                                                            <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                                        </Style>
+                                                                                    </MenuItem.Resources>
+                                                                                </MenuItem>
+                                                                                <MenuItem Header="_Edit"  Template="{StaticResource VsMenuSub}" Icon="FolderEdit">
+                                                                                    <MenuItem.Resources>
+                                                                                        <Style TargetType="MenuItem">
+                                                                                            <EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />
+                                                                                        </Style>
+                                                                                    </MenuItem.Resources>
+                                                                                </MenuItem>
+                                                                                <MenuItem Header="_Delete"  Template="{StaticResource VsMenuSub}" Icon="Delete">
+                                                                                    <MenuItem.Resources>
+                                                                                        <Style TargetType="MenuItem">
+                                                                                            <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                                        </Style>
+                                                                                    </MenuItem.Resources>
+                                                                                </MenuItem>
+                                                                                <Separator Template="{StaticResource VsMenuSep}" />
+                                                                                <MenuItem Header="_Download All Files(Zip)"  Template="{StaticResource VsMenuSub}" Icon="FolderDownload">
+                                                                                    <MenuItem.Resources>
+                                                                                        <Style TargetType="MenuItem">
+                                                                                            <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                                        </Style>
+                                                                                    </MenuItem.Resources>
+                                                                                </MenuItem>
+                                                                                <MenuItem Header="_Share Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderMove">
+                                                                                    <MenuItem.Resources>
+                                                                                        <Style TargetType="MenuItem">
+                                                                                            <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                                        </Style>
+                                                                                    </MenuItem.Resources>
+                                                                                </MenuItem>
+                                                                            </ContextMenu>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </StackPanel.Style>
                                                         </StackPanel>
                                                     </DataTemplate>
-                                                </TreeViewItem.ItemTemplate>                                                
-                                            </TreeViewItem>                                            
-                                            <TreeView.ContextMenu>
-                                                <ContextMenu Placement="Relative" >
-                                                    <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
-                                                    <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
-                                                    <Separator Template="{StaticResource VsMenuSep}" />
-                                                    <MenuItem Header="_Add Folder" Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Click="Open_Folder_Creation_Popup"/>
-                                                </ContextMenu>
-                                            </TreeView.ContextMenu>
+                                                </TreeViewItem.ItemTemplate>                                             
+                                            </TreeViewItem>
                                         </TreeView>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Style="{StaticResource MenuItem}" >
@@ -377,14 +435,14 @@
                                                 </DockPanel>
                                             </DockPanel>
                                         </Border>
-                                        <Popup Name="AddFolderPopup" PlacementTarget="{Binding ElementName=DashboardPanel}" Placement="Center" VerticalAlignment="Top" HorizontalOffset="-30" VerticalOffset="-240" AllowsTransparency="True">
+                                        <Popup Name="AddAndEditFolderPopup" PlacementTarget="{Binding ElementName=DashboardPanel}" Placement="Center" VerticalAlignment="Top" HorizontalOffset="-30" VerticalOffset="-240" AllowsTransparency="True">
                                             <DockPanel>
                                                 <Border BorderBrush="#e5e5e5" BorderThickness="1" CornerRadius="4" Margin="40" Width="880" Height="470">
                                                     <StackPanel Background="White" >
                                                         <Border Name="PopupHeader" Padding="15" BorderBrush="#e5e5e5" BorderThickness="0 0 0 1">
                                                             <StackPanel Orientation="Horizontal" Width="880" >
                                                                 <DockPanel Width="800">
-                                                                    <TextBlock FontSize="15" Foreground="#373e4a" Text="Add Folder" HorizontalAlignment="Left"/>
+                                                                    <TextBlock Name="AddEditFolderHeader" FontSize="15" Foreground="#373e4a" Text="Add Folder" HorizontalAlignment="Left"/>
                                                                 </DockPanel>
                                                                 <DockPanel LastChildFill="true" >
                                                                     <Button Style="{StaticResource Style_RightActionButton}" HorizontalAlignment="Right" Click="Close_Folder_Creation_Popup" Cursor="Hand" >
@@ -397,7 +455,7 @@
                                                         </Border>
                                                         <Border Name="PopupBody" Padding="20" Height="350" VerticalAlignment="Top">
                                                             <StackPanel Orientation="Horizontal" >
-                                                                <Image Source="Icons/FolderAddIcon.png" Width="180" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="12 0"/>
+                                                                <Image Name="AddEditFolderIcon" Source="Icons/FolderAddIcon.png" Width="180" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="12 0"/>
                                                                 <Border Padding="20 0" Width="650">
                                                                     <DockPanel>
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15">
@@ -418,10 +476,7 @@
                                                                             </StackPanel>
                                                                             <StackPanel Width="305">
                                                                                 <TextBlock Text="Folder Privacy:" FontSize="13" Margin="5 0 0 8" Foreground="#555555"/>
-                                                                                <ComboBox Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding FolderViewModel.ValuesFolderPrivacy}" SelectionChanged="FolderPrivacy_SelectionChanged">
-                                                                                    <!--<ComboBoxItem Content="Public Limited - access only if users know the sharing link." IsSelected="True"/>
-                                                                                    <ComboBoxItem Content="Private, no access outside of your account."/>-->
-                                                                                </ComboBox>
+                                                                                <ComboBox Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding FolderViewModel.ValuesFolderPrivacy}" SelectionChanged="FolderPrivacy_SelectionChanged"/>
                                                                             </StackPanel>
                                                                         </StackPanel>
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Orientation="Horizontal" >
@@ -479,7 +534,7 @@
                                                                 <Button Padding="10 5" Margin="8 0" Cursor="Hand" Style="{StaticResource Style_UploadButton}" Command="{Binding FolderViewModel.AddFolderCommand}">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" >
-                                                                            <TextBlock Text="Add Folder" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
+                                                                            <TextBlock Name="AddEditFolderButton"  Text="Add Folder" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
                                                                             <iconPacks:PackIconMaterial Kind="FolderPlus" Margin="0 8 8 8"/>
                                                                         </StackPanel>
                                                                     </Button.Content>

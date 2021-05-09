@@ -238,19 +238,15 @@ namespace IGMICloudApplication.ViewModels
             defaultSelected.FolderName = "-None-";
             defaultSelected.Id = 0;
             FolderListForComboBox.Add(defaultSelected);
-            foreach (FolderElement folderElement in folder.Data.Folders)
-            {
-                if (folderElement.ParentId==null){
-                    FolderList.Add(folderElement);
-                }                
-                FolderListForComboBox.Add(folderElement);
-            }
-            FolderList.Add(defaultSelected);
             if (folder != null && folder.Data != null)
             {
                 foreach (FolderElement folderElement in folder.Data.Folders)
                 {
-                    FolderList.Add(folderElement);
+                    if (folderElement.ParentId == null)
+                    {
+                        FolderList.Add(folderElement);
+                    }
+                    FolderListForComboBox.Add(folderElement);
                 }
             }
             SelectedFolderId = 0;

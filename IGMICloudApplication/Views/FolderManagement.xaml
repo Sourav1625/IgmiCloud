@@ -5,12 +5,6 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d">
-    <UserControl.Resources>
-        <DataTemplate x:Key="A_DataTemplate_FolderView">
-          
-        </DataTemplate>
-    </UserControl.Resources>
-   
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -24,7 +18,7 @@
             <Grid Grid.Row="0" VerticalAlignment="Top">
                 <DockPanel>
                     <Border BorderBrush="#e0e0e0" BorderThickness="1" Margin="14 12" CornerRadius="3">
-                        <StackPanel Orientation="Horizontal" Width="240" Height="45">
+                        <StackPanel Orientation="Horizontal" Width="180" Height="45">
                             <DockPanel HorizontalAlignment="Left">
                                 <iconPacks:PackIconMaterial Kind="ArrowRightThick"  Name="HomeLink" Height="60" Width="80" Margin="-42 -18 0 2"  VerticalAlignment="Top">
                                     <iconPacks:PackIconMaterial.Style>
@@ -43,7 +37,7 @@
                             <DockPanel LastChildFill="True" Name="FolderAndFiles">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding FolderViewModel.FolderCountMsg}" Margin="0 4" Foreground="#303641"/>
-                                    <iconPacks:PackIconMaterial Kind="Triangle" RotationAngle="180" Margin="0 4" Width="6"/>
+                                    <iconPacks:PackIconMaterial Kind="Triangle" RotationAngle="180" Margin="6" Width="6"/>
                                 </StackPanel>
                             </DockPanel>                            
                         </StackPanel>
@@ -151,7 +145,7 @@
                                 </StackPanel>
                             </Button.Content>
                         </Button>
-                        <Button IsEnabled="False" Foreground="#ffffff" Background="Black" BorderThickness="0" Width="30">
+                        <Button IsEnabled="False" Foreground="#ffffff" Background="Black" BorderThickness="0" Width="30" >
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal" Background="Black">
                                     <TextBlock Text="1" Margin="8"/>
