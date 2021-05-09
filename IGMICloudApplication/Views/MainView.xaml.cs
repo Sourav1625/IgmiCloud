@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using IGMICloudApplication.Models;
+using IGMICloudApplication.Models.ApiResponse.ListFolder;
 using IGMICloudApplication.ViewModels;
 using NLog;
 
@@ -151,6 +152,7 @@ namespace IGMICloudApplication.Views
             dashboardPanel.Opacity = 0.8;
             dashboardPanel.IsHitTestVisible = false;
             addFolderPopup.IsOpen = true;
+
         }
 
         private void Close_Folder_Creation_Popup(object sender, RoutedEventArgs e)
@@ -194,9 +196,9 @@ namespace IGMICloudApplication.Views
             dashboardPanel.Opacity = 0.8;
             dashboardPanel.IsHitTestVisible = false;
             updateFolderPopup.IsOpen = true;
-
-            MainViewModel.Instance.FolderViewModel.FolderCreationRequest=MainViewModel.Instance.FolderViewModel.GetSpecificFolder(folderElement.Id);
-            Console.WriteLine(MainViewModel.Instance.FolderViewModel.FolderList);
+            MainViewModel.Instance.FolderViewModel.GetSpecificFolder(editedFolderId);
+            // MainViewModel.Instance.FolderViewModel.FolderCreationRequest=MainViewModel.Instance.FolderViewModel.GetSpecificFolder(folderElement.Id);
+             Console.WriteLine(MainViewModel.Instance.FolderViewModel.FolderCreationRequest);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

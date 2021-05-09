@@ -1,6 +1,8 @@
 ﻿using IGMICloudApplication.APIs;
 using IGMICloudApplication.Commands;
 using IGMICloudApplication.Models;
+using IGMICloudApplication.Models.ApiResponse.EditFolder;
+using IGMICloudApplication.Models.ApiResponse.ListFolder;
 using Newtonsoft.Json;
 using NLog;
 using System;
@@ -255,24 +257,24 @@ namespace IGMICloudApplication.ViewModels
             return FolderList;
         }
 
-        public FolderCreationRequest GetSpecificFolder(int folder_id)
+        public void GetSpecificFolder(int folder_id)
         {
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.GetSpecificFolder(editFolderEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id);
             //FolderCreationRequest folderCreationRequest = new FolderCreationRequest();
             if (response != null)
             {
-                Folder folder = JsonConvert.DeserializeObject<Folder>(response);
-                FolderCreationRequest.folder_name= folder.Data.FolderName;
-                FolderCreationRequest.isPublic = folder.Data.IsPublic==0?"False":"True";
-                FolderCreationRequest.parent_id = (string)folder.Data.ParentId;
-                FolderCreationRequest.password = (string)folder.Data.AccessPassword;
+                EditFolderResponse editFolderResponse = JsonConvert.DeserializeObject<EditFolderResponse>(response);
+                FolderCreationRequest.folder_name = editFolderResponse.Data.FolderName;
+                FolderCreationRequest.isPublic = editFolderResponse.Data.IsPublic == 0 ? "Private, no access outside of your account." : "Public Limited -access only if users know the sharing link.";
+                FolderCreationRequest.parent_id = (string)editFolderResponse.Data.ParentId;
+                FolderCreationRequest.password = (string)editFolderResponse.Data.AccessPassword;
                 FolderCreationRequest.watermarkPreviews = null;
                 FolderCreationRequest.showDownloadLinks = null;
                
             }
          
-            return FolderCreationRequest;
+           // return FolderCreationRequest;
         }
 
         public void AddFolder(string endpoint, string folder_name, int parent_id, int is_public, int enablePassword, string password, int watermarkPreviews, int showDownloadLinks)
