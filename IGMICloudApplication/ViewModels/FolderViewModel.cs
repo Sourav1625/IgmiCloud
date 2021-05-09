@@ -37,6 +37,15 @@ namespace IGMICloudApplication.ViewModels
         public DelegateCommand EditFolderCommand { get; private set; }
         public DelegateCommand DeleteFolderCommand { get; private set; }
 
+        private bool m_isFolderNameEmpty = false;
+        public bool isFolderNameEmpty
+        {
+            get
+            {
+                return m_isFolderNameEmpty;
+            }
+            set { SetProperty(ref m_isFolderNameEmpty, value); }
+        }
         private Folder folderDetails;   
         public Folder FolderDetails
         {
@@ -279,12 +288,25 @@ namespace IGMICloudApplication.ViewModels
 
         public void AddFolder(string endpoint, string folder_name, int parent_id, int is_public, int enablePassword, string password, int watermarkPreviews, int showDownloadLinks)
         {
-            var cloudAPIFolderObj = new IGMICloudFolderAPIs();            
-            string response = cloudAPIFolderObj.CreateFolder(createFolderEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_name, parent_id, is_public, enablePassword, password, watermarkPreviews, showDownloadLinks);
+            bool callCreateAPI = true;
 
-            if (response != null)
+            if (string.IsNullOrEmpty(folder_name))
             {
-                GetFolderList(LoggedinProfile.accessToken, LoggedinProfile.accountId);
+                isFolderNameEmpty = true;
+                callCreateAPI = false;
+            }
+            else
+                isFolderNameEmpty = false;
+
+            if (callCreateAPI)
+            {
+                var cloudAPIFolderObj = new IGMICloudFolderAPIs();
+                string response = cloudAPIFolderObj.CreateFolder(createFolderEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_name, parent_id, is_public, enablePassword, password, watermarkPreviews, showDownloadLinks);
+
+                if (response != null)
+                {
+                    GetFolderList(LoggedinProfile.accessToken, LoggedinProfile.accountId);
+                }
             }
             //Folder folder = JsonConvert.DeserializeObject<Folder>(response);
             ////FolderList = new ObservableCollection<FolderElement>();

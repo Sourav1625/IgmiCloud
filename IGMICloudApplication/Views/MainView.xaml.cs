@@ -128,11 +128,15 @@ namespace IGMICloudApplication.Views
             MenuItem mnu = sender as MenuItem;
             FolderElement folderElement = null;
             int editedFolderId = 0;
+            var folderLists = (ComboBox)mainLayout.ContentTemplate.FindName("folderLists", mainLayout);
             if (mnu != null)
             {
                 if ((((ContextMenu)mnu.Parent).PlacementTarget as StackPanel).DataContext is FolderElement) {
                     folderElement = (FolderElement)((((ContextMenu)mnu.Parent).PlacementTarget as StackPanel).DataContext);
                     editedFolderId = folderElement.Id;
+                    MainViewModel.Instance.FolderViewModel.SelectedFolderId = editedFolderId;
+                    MainViewModel.Instance.FolderViewModel.SelectedFolder = folderElement;
+                    folderLists.SelectedIndex = folderLists.Items.IndexOf(folderElement);
                 }
             }
             var addFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
