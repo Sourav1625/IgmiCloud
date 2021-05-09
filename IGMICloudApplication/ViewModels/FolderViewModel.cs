@@ -255,38 +255,24 @@ namespace IGMICloudApplication.ViewModels
             return FolderList;
         }
 
-        public ObservableCollection<FolderElement> GetSpecificFolder(string access_token, int parent_folder_id, int folder_id)
+        public FolderCreationRequest GetSpecificFolder(int folder_id)
         {
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
-            string response = cloudAPIFolderObj.GetSpecificFolder(getFolderDetailsEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id);
-
-            Folder folder = JsonConvert.DeserializeObject<Folder>(response);
-            FolderList = new ObservableCollection<FolderElement>();
-            //FolderListForComboBox = new ObservableCollection<FolderElement>();
-            //FolderElement defaultSelected = new FolderElement();
-            //defaultSelected.FolderName = "-None-";
-            //defaultSelected.Id = 0;
-            //FolderListForComboBox.Add(defaultSelected);
-            foreach (FolderElement folderElement in folder.Data.Folders)
+            string response = cloudAPIFolderObj.GetSpecificFolder(editFolderEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id);
+            //FolderCreationRequest folderCreationRequest = new FolderCreationRequest();
+            if (response != null)
             {
-                //if (folderElement.ParentId == null)
-                //{
-                    FolderList.Add(folderElement);
-                //}
-                //FolderListForComboBox.Add(folderElement);
+                Folder folder = JsonConvert.DeserializeObject<Folder>(response);
+                FolderCreationRequest.folder_name= folder.Data.FolderName;
+                FolderCreationRequest.isPublic = folder.Data.IsPublic==0?"False":"True";
+                FolderCreationRequest.parent_id = (string)folder.Data.ParentId;
+                FolderCreationRequest.password = (string)folder.Data.AccessPassword;
+                FolderCreationRequest.watermarkPreviews = null;
+                FolderCreationRequest.showDownloadLinks = null;
+               
             }
-            //FolderList.Add(defaultSelected);
-            //if (folder != null && folder.Data != null)
-            //{
-            //    foreach (FolderElement folderElement in folder.Data.Folders)
-            //    {
-            //        FolderList.Add(folderElement);
-            //    }
-            //}
-            //SelectedFolderId = 0;
-            //SelectedFolder = FolderList[0];
-            //FolderCountMsg = "Root Folder - " + FolderList.Count + " Folders";
-            return FolderList;
+         
+            return FolderCreationRequest;
         }
 
         public void AddFolder(string endpoint, string folder_name, int parent_id, int is_public, int enablePassword, string password, int watermarkPreviews, int showDownloadLinks)

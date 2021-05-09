@@ -194,6 +194,9 @@ namespace IGMICloudApplication.Views
             dashboardPanel.Opacity = 0.8;
             dashboardPanel.IsHitTestVisible = false;
             updateFolderPopup.IsOpen = true;
+
+            MainViewModel.Instance.FolderViewModel.FolderCreationRequest=MainViewModel.Instance.FolderViewModel.GetSpecificFolder(folderElement.Id);
+            Console.WriteLine(MainViewModel.Instance.FolderViewModel.FolderList);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
