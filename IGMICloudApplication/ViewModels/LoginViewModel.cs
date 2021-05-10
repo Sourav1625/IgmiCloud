@@ -202,7 +202,7 @@ namespace IGMICloudApplication.ViewModels
                                         await Task.Delay(400);
                                         LoginState = LoginState.LoggedIn;
                                         SwitchView = SwitchViewEnum.FolderManagement;
-                                        MainViewModel.Instance.FolderViewModel.GetFolderList(access_token, 0);                                        
+                                        MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0);                                        
                                     }
                                 }
                             }

@@ -16,12 +16,12 @@ namespace IGMICloudApplication.Models.ApiResponse.EditFolder
 
     public partial class Data
     {
-        public long Id { get; set; }
-        public object ParentId { get; set; }
+        public int  Id { get; set; }
+        public int ParentId { get; set; }
         public string FolderName { get; set; }
         public long TotalSize { get; set; }
-        public long IsPublic { get; set; }
-        public object AccessPassword { get; set; }
+        public int IsPublic { get; set; }
+        public string AccessPassword { get; set; }
         public string Status { get; set; }
         public DateTimeOffset DateAdded { get; set; }
         public object DateUpdated { get; set; }

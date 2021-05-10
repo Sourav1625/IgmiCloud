@@ -66,16 +66,15 @@ namespace IGMICloudApplication.Models.ApiResponse.ListFolder
         [JsonProperty("file_count")]
         public long FileCount { get; set; }
     }
-    public class FolderCreationRequest : ViewModelBase
+    public class FolderCreationRequest
     {
         public string access_token { get; set; }
-        public string account_id { get; set; }
+        public int account_id { get; set; }
         public string folder_name { get; set; }
-        public string parent_id { get; set; }
-        public string isPublic { get; set; }
-        public int enablePassword { get; set; }
+        public int parent_id { get; set; }
+        public int isPublic { get; set; }
         public string password { get; set; }
-        public string watermarkPreviews { get; set; }
-        public string showDownloadLinks { get; set; }
+        public int watermarkPreviews { get; set; }
+        public int showDownloadLinks { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace IGMICloudApplication.APIs
             _serializer = new JsonSerializer();
         }
 
-        public string CreateFolder(string endpoint, string access_token, int account_id, string folder_name, int parent_id, int is_public, int enablePassword, string password, int watermarkPreviews, int showDownloadLinks)
+        public string CreateFolder(string endpoint, string access_token, int account_id, string folder_name, int parent_id, int is_public, string password, int watermarkPreviews, int showDownloadLinks)
         {            
             var request = new RestRequest($"{endpoint}");
             AddRequestBoilerplate(ref request);

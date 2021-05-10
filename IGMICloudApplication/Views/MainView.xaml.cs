@@ -126,17 +126,12 @@ namespace IGMICloudApplication.Views
         private void Open_Folder_Creation_Popup(object sender, RoutedEventArgs e)
         {
             MenuItem mnu = sender as MenuItem;
-            FolderElement folderElement = null;
-            int editedFolderId = 0;
-            var folderLists = (ComboBox)mainLayout.ContentTemplate.FindName("folderLists", mainLayout);
             if (mnu != null)
             {
-                if ((((ContextMenu)mnu.Parent).PlacementTarget as StackPanel).DataContext is FolderElement) {
-                    folderElement = (FolderElement)((((ContextMenu)mnu.Parent).PlacementTarget as StackPanel).DataContext);
-                    editedFolderId = folderElement.Id;
-                    MainViewModel.Instance.FolderViewModel.SelectedFolderId = editedFolderId;
-                    MainViewModel.Instance.FolderViewModel.SelectedFolder = folderElement;
-                    folderLists.SelectedIndex = folderLists.Items.IndexOf(folderElement);
+                if (mnu.DataContext is FolderElement) {
+
+                    MainViewModel.Instance.FolderViewModel.EditedFolderId = ((FolderElement)mnu.DataContext).Id;
+                    MainViewModel.Instance.FolderViewModel.SelectedFolderId = ((FolderElement)mnu.DataContext).ParentId==null?0:Int32.Parse(((FolderElement)mnu.DataContext).ParentId.ToString());
                 }
             }
             var addFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
@@ -171,16 +166,14 @@ namespace IGMICloudApplication.Views
         private void Open_Folder_Update_Popup(object sender, RoutedEventArgs e)
         {
             MenuItem mnu = sender as MenuItem;
-            FolderElement folderElement = null;
-            int editedFolderId = 0;
-            string folderName = "";
+            string folderName = null;
             if (mnu != null)
             {
-                if ((((ContextMenu)mnu.Parent).PlacementTarget as StackPanel).DataContext is FolderElement)
+                if (mnu.DataContext is FolderElement)
                 {
-                    folderElement = (FolderElement)((((ContextMenu)mnu.Parent).PlacementTarget as StackPanel).DataContext);
-                    editedFolderId = folderElement.Id;
-                    folderName = folderElement.FolderName;
+                    MainViewModel.Instance.FolderViewModel.EditedFolderId = ((FolderElement)mnu.DataContext).Id;
+                    MainViewModel.Instance.FolderViewModel.SelectedFolderId = ((FolderElement)mnu.DataContext).ParentId == null ? 0 : Int32.Parse(((FolderElement)mnu.DataContext).ParentId.ToString());
+                    folderName = ((FolderElement)mnu.DataContext).FolderName;
                 }
             }
             var updateFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
@@ -200,59 +193,17 @@ namespace IGMICloudApplication.Views
             dashboardPanel.Opacity = 0.8;
             dashboardPanel.IsHitTestVisible = false;
             updateFolderPopup.IsOpen = true;
-            MainViewModel.Instance.FolderViewModel.GetSpecificFolder(editedFolderId);
-            // MainViewModel.Instance.FolderViewModel.FolderCreationRequest=MainViewModel.Instance.FolderViewModel.GetSpecificFolder(folderElement.Id);
-             Console.WriteLine(MainViewModel.Instance.FolderViewModel.FolderCreationRequest);
+            MainViewModel.Instance.FolderViewModel.GetSpecificFolder(MainViewModel.Instance.FolderViewModel.EditedFolderId);            
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {          
+        {
             var comboBox = sender as ComboBox;
             if (comboBox.SelectedItem != null)
             {
                 MainViewModel.Instance.FolderViewModel.SelectedFolderId = ((FolderElement)comboBox.SelectedItem).Id;
             }
-           
-        }
-
-        private void ComboBox_WaterMarks_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null && (comboBox.SelectedItem).Equals(WaterMarkPreview.Yes))
-            {
-                MainViewModel.Instance.FolderViewModel.IsWatermarkPreviews = 1;
-            }
-            else
-            {
-                MainViewModel.Instance.FolderViewModel.IsWatermarkPreviews = 0;
-            }
 
         }
-
-        private void ComboBox_Allow_Downloading_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null && comboBox.SelectedItem.Equals(AllowDownloading.Yes))
-            {
-                MainViewModel.Instance.FolderViewModel.IsShowDownloadLinks = 1;
-            }
-            else
-            {
-                MainViewModel.Instance.FolderViewModel.IsShowDownloadLinks = 0;
-            }
-        }
-        private void FolderPrivacy_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var comboBox = sender as ComboBox;
-            if (comboBox.SelectedItem != null && comboBox.SelectedItem.Equals(MainViewModel.Instance.FolderViewModel.FirstValueFolderPrivacy))
-            {
-                MainViewModel.Instance.FolderViewModel.SelectedValueFolderPrivacy = 1;
-            }
-            else
-            {
-                MainViewModel.Instance.FolderViewModel.SelectedValueFolderPrivacy = 0;
-            }
-        }       
-
     }
 }

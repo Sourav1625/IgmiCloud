@@ -476,7 +476,7 @@
                                                                 <Border Padding="20 0" Width="650">
                                                                     <DockPanel>
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15">
-                                                                            <TextBox x:Name="FolderName"  Height="35" Foreground="#555555" Background="#ffffff" Text="{Binding FolderViewModel.FolderCreationRequest.folder_name}"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
+                                                                            <TextBox x:Name="FolderName"  Height="35" Foreground="#555555" Background="#ffffff" Text="{Binding FolderViewModel.FolderName}"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
                                                                                 <TextBox.Resources>
                                                                                     <Style TargetType="Border">
                                                                                         <Setter Property="CornerRadius" Value="3"/>
@@ -506,11 +506,11 @@
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Orientation="Horizontal" >
                                                                             <StackPanel Width="305">
                                                                                 <TextBlock Text="Parent Folder:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
-                                                                                <ComboBox Name="folderLists" ItemsSource="{Binding FolderViewModel.FolderListForComboBox}" DisplayMemberPath="FolderName" SelectedValuePath="Id" SelectedValue="{Binding SelectedFolderId}" SelectedItem="{Binding SelectedFolder}" Height="35" Margin="0 0 30 0" IsEditable="True" Foreground="#555555"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" IsSynchronizedWithCurrentItem="True" SelectedIndex="0"/>
+                                                                                <ComboBox Name="folderLists" ItemsSource="{Binding FolderViewModel.FolderListForComboBox}" DisplayMemberPath="FolderName" SelectedValuePath="Id" SelectedValue="{Binding SelectedFolderId}"  Height="35" Margin="0 0 30 0" IsEditable="True" Foreground="#555555"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" IsSynchronizedWithCurrentItem="True" SelectedIndex="0"/>
                                                                             </StackPanel>
                                                                             <StackPanel Width="305">
                                                                                 <TextBlock Text="Folder Privacy:" FontSize="13" Margin="5 0 0 8" Foreground="#555555"/>
-                                                                                <ComboBox Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding FolderViewModel.ValuesFolderPrivacy}" SelectionChanged="FolderPrivacy_SelectionChanged"/>
+                                                                                <ComboBox Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding FolderViewModel.ValuesFolderPrivacy}" DisplayMemberPath="_Key" SelectedValuePath="_Value"  SelectedValue="{Binding FolderViewModel.SelectedValueFolderPrivacy}"/>
                                                                             </StackPanel>
                                                                         </StackPanel>
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Orientation="Horizontal" >
@@ -518,7 +518,7 @@
                                                                                 <TextBlock Text="Optional Password:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
                                                                                 <StackPanel Orientation="Horizontal">
                                                                                     <CheckBox Margin="20 10 20 0" />
-                                                                                    <TextBox Height="35" Foreground="#555555" Width="120" Background="#eeeeee"  BorderThickness="1"  BorderBrush="#dedcdc" Padding="6 8" Text="{Binding FolderViewModel.FolderCreationRequest.password}" >
+                                                                                    <TextBox Height="35" Foreground="#555555" Width="120" Background="#eeeeee"  BorderThickness="1"  BorderBrush="#dedcdc" Padding="6 8" Text="{Binding FolderViewModel.FolderPassword}" >
                                                                                         <TextBox.Resources>
                                                                                             <Style TargetType="Border">
                                                                                                 <Setter Property="CornerRadius" Value="3"/>
@@ -530,12 +530,12 @@
                                                                             </StackPanel>
                                                                             <StackPanel Width="200">
                                                                                 <TextBlock Text="Watermark Image Previews: *" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
-                                                                                <ComboBox Height="35" Margin="0 0 30 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc" ItemsSource="{Binding FolderViewModel.WaterMarkPreviews}"  Padding="6 8" SelectionChanged="ComboBox_WaterMarks_SelectionChanged">                                                                                   
+                                                                                <ComboBox Height="35" Margin="0 0 30 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc" ItemsSource="{Binding FolderViewModel.WaterMarkPreviews}" DisplayMemberPath="_Key" SelectedValuePath="_Value"  SelectedValue="{Binding FolderViewModel.IsWatermarkPreviews}"  Padding="6 8" >                                                                                   
                                                                                 </ComboBox>
                                                                             </StackPanel>
                                                                             <StackPanel Width="190">
                                                                                 <TextBlock Text="Allow Downloading When Shared:" FontSize="13" Margin="5 0 0 8" Foreground="#555555"/>
-                                                                                <ComboBox Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding FolderViewModel.AllowDownloadings}" SelectionChanged="ComboBox_Allow_Downloading_SelectionChanged">                                                                                   
+                                                                                <ComboBox Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding FolderViewModel.AllowDownloadings}" DisplayMemberPath="_Key" SelectedValuePath="_Value"  SelectedValue="{Binding FolderViewModel.IsShowDownloadLinks}">                                                                                   
                                                                                 </ComboBox>
                                                                             </StackPanel>
                                                                         </StackPanel>
