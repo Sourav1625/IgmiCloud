@@ -71,14 +71,14 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref m_isFolderNameEmpty, value); }
         }
-        private Folder folderDetails;   
+        private Folder folderDetails;
         public Folder FolderDetails
         {
             get
             {
                 return folderDetails;
             }
-            set { SetProperty(ref folderDetails, value); }          
+            set { SetProperty(ref folderDetails, value); }
         }
 
         private ObservableCollection<FolderElement> folderList;
@@ -100,7 +100,7 @@ namespace IGMICloudApplication.ViewModels
                 SetProperty(ref editedFolderId, value);
             }
         }
-        
+
         private string folderName;
         public string FolderName
         {
@@ -136,12 +136,27 @@ namespace IGMICloudApplication.ViewModels
             get { return parentFolderId; }
             set { SetProperty(ref parentFolderId, value); }
         }
-
-        private int isWatermarkPreviews;
-        public int IsWatermarkPreviews
+        public List<FolderPrivacyCombo> ValuesFolderPrivacy { get; }
+        private int _selectedValueFolderPrivacy;
+        public int SelectedValueFolderPrivacy
         {
-            get { return isWatermarkPreviews; }
-            set { SetProperty(ref isWatermarkPreviews, value); }
+            get { return _selectedValueFolderPrivacy; }
+            set
+            {
+                _selectedValueFolderPrivacy = value;
+                SetProperty(ref _selectedValueFolderPrivacy, value);
+            }
+        }
+
+        private string _publicUrl;
+        public string PublicUrl
+        {
+            get { return _publicUrl; }
+            set
+            {
+                _publicUrl = value;
+                this.NotifyPropertyChanged("PublicUrl");
+            }
         }
 
         private List<WaterMarkPreview> waterMarkPreviews;
@@ -150,33 +165,31 @@ namespace IGMICloudApplication.ViewModels
             get { return waterMarkPreviews; }
             set { SetProperty(ref waterMarkPreviews, value); }
         }
-
-        private int isShowDownloadLinks;
-        public int IsShowDownloadLinks
+        private int isWatermarkPreviews;
+        public int IsWatermarkPreviews
         {
-            get { return isShowDownloadLinks; }
-            set { SetProperty(ref isShowDownloadLinks, value); }
-        }     
-
-        private int isPublic;
-        public int IsPublic
-        {
-            get { return isPublic; }
-            set { SetProperty(ref isPublic, value); }
+            get { return isWatermarkPreviews; }
+            set { SetProperty(ref isWatermarkPreviews, value); }
         }
-
-        /*private FolderElement selectedFolder;
-        public FolderElement SelectedFolder
-        {
-            get { return selectedFolder; }
-            set { SetProperty(ref selectedFolder, value); }
-        }*/
 
         private List<AllowDownloading> allowDownloadings;
         public List<AllowDownloading> AllowDownloadings
         {
             get { return allowDownloadings; }
             set { SetProperty(ref allowDownloadings, value); }
+        }
+        private int isShowDownloadLinks;
+        public int IsShowDownloadLinks
+        {
+            get { return isShowDownloadLinks; }
+            set { SetProperty(ref isShowDownloadLinks, value); }
+        }
+
+        private int isPublic;
+        public int IsPublic
+        {
+            get { return isPublic; }
+            set { SetProperty(ref isPublic, value); }
         }
 
         private FolderCreationRequest folderCreationRequest;
@@ -194,39 +207,6 @@ namespace IGMICloudApplication.ViewModels
             get { return folderCountMsg; }
             set { SetProperty(ref folderCountMsg, value); }
         }
-        private Tuple<string> firstValueFolderPrivacy;
-        public Tuple<string> FirstValueFolderPrivacy
-        {
-            get { return firstValueFolderPrivacy; }
-            set
-            {
-                firstValueFolderPrivacy = value;
-                SetProperty(ref firstValueFolderPrivacy, value);
-            }
-        }
-
-        private Tuple<string> secondValueFolderPrivacy;
-        public Tuple<string> SecondValueFolderPrivacy
-        {
-            get { return secondValueFolderPrivacy; }
-            set
-            {
-                secondValueFolderPrivacy = value;
-                SetProperty(ref secondValueFolderPrivacy, value);
-            }
-        }
-
-        private int _selectedValueFolderPrivacy;
-        public int SelectedValueFolderPrivacy
-        {
-            get { return _selectedValueFolderPrivacy; }
-            set
-            {
-                _selectedValueFolderPrivacy = value;
-                SetProperty(ref _selectedValueFolderPrivacy, value);
-            }
-        }
-        public List<FolderPrivacyCombo> ValuesFolderPrivacy { get; }
         public FolderViewModel()
         {
             FolderCreationRequest = new FolderCreationRequest();
@@ -376,6 +356,7 @@ namespace IGMICloudApplication.ViewModels
                 ParentFolderId = editFolderResponse.Data.ParentId == null ? 0 : Int32.Parse(editFolderResponse.Data.ParentId.ToString());
                 SelectedValueFolderPrivacy = editFolderResponse.Data.IsPublic;                
                 FolderPassword = editFolderResponse.Data.AccessPassword;
+                PublicUrl = editFolderResponse.Data.url_folder;
                 IsWatermarkPreviews = 0;//TODO this field is not available in details api
                 IsShowDownloadLinks = 0;//TODO this field is not available in details api
             }

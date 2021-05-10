@@ -476,6 +476,7 @@
                                                                 <Border Padding="20 0" Width="650">
                                                                     <DockPanel>
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15">
+                                                                            <TextBlock Text="Folder Name:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
                                                                             <TextBox x:Name="FolderName"  Height="35" Foreground="#555555" Background="#ffffff" Text="{Binding FolderViewModel.FolderName}"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
                                                                                 <TextBox.Resources>
                                                                                     <Style TargetType="Border">
@@ -512,6 +513,19 @@
                                                                                 <TextBlock Text="Folder Privacy:" FontSize="13" Margin="5 0 0 8" Foreground="#555555"/>
                                                                                 <ComboBox Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding FolderViewModel.ValuesFolderPrivacy}" DisplayMemberPath="_Key" SelectedValuePath="_Value"  SelectedValue="{Binding FolderViewModel.SelectedValueFolderPrivacy}"/>
                                                                             </StackPanel>
+                                                                        </StackPanel>
+                                                                        <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Name="PublicUrlPanel">
+                                                                            <TextBlock Name="PublicUrlLabel" Text="Public Access Url:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
+                                                                            <TextBox x:Name="PublicUrl" Background="#eeeeee" Height="35" Foreground="#555555" IsReadOnly="True" Text="{Binding Path=FolderViewModel.PublicUrl, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8"/>
+                                                                            <StackPanel.Resources>
+                                                                                <Style TargetType="StackPanel">
+                                                                                    <Style.Triggers>
+                                                                                        <DataTrigger Binding="{Binding FolderViewModel.PublicUrl}" Value="{x:Null}">
+                                                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                                                        </DataTrigger>
+                                                                                    </Style.Triggers>
+                                                                                </Style>
+                                                                            </StackPanel.Resources>
                                                                         </StackPanel>
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Orientation="Horizontal" >
                                                                             <StackPanel Width="200" Margin="0 0 20 0">

@@ -25,7 +25,7 @@ namespace IGMICloudApplication.Models.ApiResponse.EditFolder
         public string Status { get; set; }
         public DateTimeOffset DateAdded { get; set; }
         public object DateUpdated { get; set; }
-        public Uri UrlFolder { get; set; }
+        public string url_folder { get; set; }
         public long TotalDownloads { get; set; }
         public long ChildFolderCount { get; set; }
         public long FileCount { get; set; }
