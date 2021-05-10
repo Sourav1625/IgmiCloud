@@ -131,7 +131,7 @@ namespace IGMICloudApplication.Views
                 if (mnu.DataContext is FolderElement) {
 
                     MainViewModel.Instance.FolderViewModel.EditedFolderId = ((FolderElement)mnu.DataContext).Id;
-                    MainViewModel.Instance.FolderViewModel.SelectedFolderId = ((FolderElement)mnu.DataContext).ParentId==null?0:Int32.Parse(((FolderElement)mnu.DataContext).ParentId.ToString());
+                    MainViewModel.Instance.FolderViewModel.ParentFolderId = ((FolderElement)mnu.DataContext).ParentId==null?0:Int32.Parse(((FolderElement)mnu.DataContext).ParentId.ToString());
                 }
             }
             var addFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
@@ -172,7 +172,7 @@ namespace IGMICloudApplication.Views
                 if (mnu.DataContext is FolderElement)
                 {
                     MainViewModel.Instance.FolderViewModel.EditedFolderId = ((FolderElement)mnu.DataContext).Id;
-                    MainViewModel.Instance.FolderViewModel.SelectedFolderId = ((FolderElement)mnu.DataContext).ParentId == null ? 0 : Int32.Parse(((FolderElement)mnu.DataContext).ParentId.ToString());
+                    MainViewModel.Instance.FolderViewModel.ParentFolderId = ((FolderElement)mnu.DataContext).ParentId == null ? 0 : Int32.Parse(((FolderElement)mnu.DataContext).ParentId.ToString());
                     folderName = ((FolderElement)mnu.DataContext).FolderName;
                 }
             }
@@ -201,7 +201,7 @@ namespace IGMICloudApplication.Views
             var comboBox = sender as ComboBox;
             if (comboBox.SelectedItem != null)
             {
-                MainViewModel.Instance.FolderViewModel.SelectedFolderId = ((FolderElement)comboBox.SelectedItem).Id;
+                MainViewModel.Instance.FolderViewModel.ParentFolderId = ((FolderElement)comboBox.SelectedItem).Id;
             }
 
         }

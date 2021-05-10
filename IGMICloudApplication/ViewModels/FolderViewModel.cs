@@ -128,11 +128,11 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref folderListForComboBox, value); }
         }
-        private int selectedFolderId;
-        public int SelectedFolderId
+        private int parentFolderId;
+        public int ParentFolderId
         {
-            get { return selectedFolderId; }
-            set { SetProperty(ref selectedFolderId, value); }
+            get { return parentFolderId; }
+            set { SetProperty(ref parentFolderId, value); }
         }
 
         private int isWatermarkPreviews;
@@ -249,7 +249,7 @@ namespace IGMICloudApplication.ViewModels
                 Logger.Info("Creating folder with name " + FolderName);
                 try
                 {
-                    AddFolder(createFolderEndPoint, FolderName, SelectedFolderId, SelectedValueFolderPrivacy,  FolderPassword, IsWatermarkPreviews, IsShowDownloadLinks);
+                    AddFolder(createFolderEndPoint, FolderName, ParentFolderId, SelectedValueFolderPrivacy,  FolderPassword, IsWatermarkPreviews, IsShowDownloadLinks);
                     Logger.Info("Folder created successfully with name " + FolderName);
                 }
                 catch(Exception e)
@@ -263,7 +263,7 @@ namespace IGMICloudApplication.ViewModels
                 Logger.Info("Editing folder with name " + FolderName);
                 try
                 {
-                    EditFolder(editFolderEndPoint, EditedFolderId, FolderName, SelectedFolderId, SelectedValueFolderPrivacy, FolderPassword, IsWatermarkPreviews, IsShowDownloadLinks);
+                    EditFolder(editFolderEndPoint, EditedFolderId, FolderName, ParentFolderId, SelectedValueFolderPrivacy, FolderPassword, IsWatermarkPreviews, IsShowDownloadLinks);
                     Logger.Info("Folder edited successfully with name " + FolderName);
                 }
                 catch (Exception e)
@@ -277,7 +277,7 @@ namespace IGMICloudApplication.ViewModels
                 Logger.Info("Deleting folder with name " + FolderName);
                 try
                 {
-                    DeleteFolder(deleteFolderEndPoint, SelectedFolderId);
+                    DeleteFolder(deleteFolderEndPoint, EditedFolderId);
                     Logger.Info("Folder deleted successfully with name " + FolderName);
                 }
                 catch (Exception e)
@@ -311,10 +311,10 @@ namespace IGMICloudApplication.ViewModels
                     FolderListForComboBox.Add(folderElement);
                 }
             }
-            SelectedFolderId = 0;
+            ParentFolderId = 0;
             if (folder_id > 0)
             {
-                SelectedFolderId = folder_id;
+                ParentFolderId = folder_id;
             }
             FolderCountMsg = "Root Folder - "+ FolderList.Count+ " Folders";
             return FolderList;
@@ -329,7 +329,7 @@ namespace IGMICloudApplication.ViewModels
                 EditFolderResponse editFolderResponse = JsonConvert.DeserializeObject<EditFolderResponse>(response);
                 EditedFolderId = editFolderResponse.Data.Id;
                 FolderName = editFolderResponse.Data.FolderName;
-                SelectedFolderId = editFolderResponse.Data.ParentId == null ? 0 : Int32.Parse(editFolderResponse.Data.ParentId.ToString());
+                ParentFolderId = editFolderResponse.Data.ParentId == null ? 0 : Int32.Parse(editFolderResponse.Data.ParentId.ToString());
                 SelectedValueFolderPrivacy = editFolderResponse.Data.IsPublic;                
                 FolderPassword = editFolderResponse.Data.AccessPassword;
                 IsWatermarkPreviews = 0;//TODO this field is not available in details api
@@ -359,19 +359,6 @@ namespace IGMICloudApplication.ViewModels
                     GetFolderList( 0, 0);
                 }
             }
-            //Folder folder = JsonConvert.DeserializeObject<Folder>(response);
-            ////FolderList = new ObservableCollection<FolderElement>();
-            //FolderElement defaultSelected = new FolderElement();
-            //defaultSelected.FolderName = "-None-";
-            //defaultSelected.Id = 0;
-            //FolderList.Add(defaultSelected);
-            //foreach (FolderElement folderElement in folder.Data.Folders)
-            //{
-            //    FolderList.Add(folderElement);
-            //}
-            //SelectedFolderId = 0;
-            //SelectedFolder = FolderList[0];
-            //return FolderList;
         }
 
         public void EditFolder(string endpoint, int folder_id, string folder_name,int parent_id, int is_public, string password, int watermarkPreviews, int showDownloadLinks)
@@ -383,11 +370,6 @@ namespace IGMICloudApplication.ViewModels
             {
                 GetFolderList(folder_id, 0);
             }
-
-            //var folder = JsonConvert.DeserializeObject<Folder>(response.Content);
-
-            //return folder;
-
         }
 
         public void DeleteFolder(string endpoint, int folder_id)
