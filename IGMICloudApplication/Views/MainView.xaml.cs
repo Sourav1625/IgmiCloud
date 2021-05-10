@@ -159,6 +159,7 @@ namespace IGMICloudApplication.Views
             var addFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
             if (addFolderPopup.IsOpen)
             {
+               MainViewModel.Instance.FolderViewModel.isFolderNameEmpty = false;
                 Window_MouseDown(null, null);
             }
         }
