@@ -240,10 +240,12 @@ namespace IGMICloudApplication.Views
                 {
                     MainViewModel.Instance.FolderViewModel.EditedFolderId = ((FolderElement)mnu.DataContext).Id;
                     MainViewModel.Instance.FolderViewModel.ParentFolderId = ((FolderElement)mnu.DataContext).ParentId == null ? 0 : Int32.Parse(((FolderElement)mnu.DataContext).ParentId.ToString());
+                    MainViewModel.Instance.FolderViewModel.FolderName = ((FolderElement)mnu.DataContext).FolderName;
                     folderName = ((FolderElement)mnu.DataContext).FolderName;
                 }
             }
-            MainViewModel.Instance.FolderViewModel.FolderName = folderName;
+            
+            
             MainViewModel.Instance.FolderViewModel.FolderActionType = "Update";
              var updateFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
             var dashboardPanel = (DockPanel)mainLayout.ContentTemplate.FindName("DashboardPanel", mainLayout);

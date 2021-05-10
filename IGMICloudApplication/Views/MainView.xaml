@@ -477,7 +477,7 @@
                                                                     <DockPanel>
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15">
                                                                             <TextBlock Text="Folder Name:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
-                                                                            <TextBox x:Name="FolderName"  Height="35" Foreground="#555555" Background="#ffffff" Text="{Binding FolderViewModel.FolderName}"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
+                                                                            <TextBox Name="FolderName"  Height="35" Foreground="#555555" Background="#ffffff" Text="{Binding FolderViewModel.FolderName}"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
                                                                                 <TextBox.Resources>
                                                                                     <Style TargetType="Border">
                                                                                         <Setter Property="CornerRadius" Value="3"/>

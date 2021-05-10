@@ -117,8 +117,7 @@ namespace IGMICloudApplication.ViewModels
         {
             get { return folderName; }
             set
-            {
-                folderName = value;
+            {                
                 SetProperty(ref folderName, value);
             }
         }
