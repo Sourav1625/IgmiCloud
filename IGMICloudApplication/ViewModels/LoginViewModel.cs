@@ -177,7 +177,8 @@ namespace IGMICloudApplication.ViewModels
                             Console.WriteLine("User Account id: " + account_id);
                             Logger.Info("User Account id: " + account_id);
                             //Calling User details API
-                            LoggedinProfile.accessToken = access_token;
+                            LoggedinProfile.userName = userName;
+                            LoggedinProfile.password = password;
                             LoggedinProfile.accountId = account_id;
                             progress.Report(60);
                             string userDetailsResponse = cloudAPIObj.FetchUserDetails(userDetailsEndpoint, access_token, account_id);

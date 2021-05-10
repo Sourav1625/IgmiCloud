@@ -17,7 +17,7 @@ namespace IGMICloudApplication.Models.ApiResponse.EditFolder
     public partial class Data
     {
         public int  Id { get; set; }
-        public int ParentId { get; set; }
+        public Object ParentId { get; set; }        
         public string FolderName { get; set; }
         public long TotalSize { get; set; }
         public int IsPublic { get; set; }

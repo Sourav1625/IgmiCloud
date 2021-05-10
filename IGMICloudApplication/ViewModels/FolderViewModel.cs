@@ -5,6 +5,7 @@ using IGMICloudApplication.Models.ApiResponse.EditFolder;
 using IGMICloudApplication.Models.ApiResponse.ListFolder;
 using Newtonsoft.Json;
 using NLog;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -55,6 +56,7 @@ namespace IGMICloudApplication.ViewModels
         string createFolderEndPoint = "/folder/create";
         string editFolderEndPoint = "/folder/edit";
         string deleteFolderEndPoint = "/folder/delete";
+        private string loginEndpoint = "/authorize";
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public DelegateCommand AddFolderCommand { get; private set; }
         public DelegateCommand EditFolderCommand { get; private set; }
@@ -288,8 +290,45 @@ namespace IGMICloudApplication.ViewModels
 
         }
 
+        public string getAccessToken()
+        {
+            Logger.Info("Fetching access token ");
+            var cloudAPIObj = new IGMICloudAPIs();
+            string apiResponse = "error";
+            string loginResponse = cloudAPIObj.DoLogin(loginEndpoint, LoggedinProfile.userName, LoggedinProfile.password);
+            if (loginResponse != null)
+            {
+                var responseJson = SimpleJson.DeserializeObject(loginResponse);
+                if (responseJson is JsonObject jObj)
+                {
+                    string responseStatus = (string)jObj["_status"];                  
+                    Logger.Debug("response  status: " + responseStatus);
+                    if (responseStatus == "success")
+                    {
+                        LoggedinProfile.accessToken = (string)((JsonObject)jObj["data"])[0];
+                        LoggedinProfile.accountId = Int16.Parse((string)((JsonObject)jObj["data"])[1]);
+                        apiResponse="success";
+                        Logger.Info("Fetched access token successfully");
+                    }
+                    else
+                    {
+                        apiResponse="error";
+                        Logger.Info("Could not able to fetched access token");
+                    }
+                }
+                
+            }
+            return apiResponse;
+        }
+
         public ObservableCollection<FolderElement> GetFolderList(int folder_id, int parent_folder_id)
-        {           
+        {
+            string apiResponse=getAccessToken();
+            if (apiResponse.Equals("error"))
+            {
+                Logger.Error("Could not validate access_token and account_id during GetFolderList call");
+                return null;
+            }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, parent_folder_id);
 
@@ -322,6 +361,11 @@ namespace IGMICloudApplication.ViewModels
 
         public void GetSpecificFolder(int folder_id)
         {
+            string apiResponse = getAccessToken();
+            if (apiResponse.Equals("error"))
+            {
+                Logger.Error("Could not validate access_token and account_id during GetSpecificFolder call");
+            }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.GetSpecificFolder(editFolderEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id);
             if (response != null)
@@ -339,6 +383,11 @@ namespace IGMICloudApplication.ViewModels
 
         public void AddFolder(string endpoint, string folder_name, int parent_id, int is_public, string password, int watermarkPreviews, int showDownloadLinks)
         {
+            string apiResponse = getAccessToken();
+            if (apiResponse.Equals("error"))
+            {
+                Logger.Error("Could not validate access_token and account_id during AddFolder call");
+            }
             bool callCreateAPI = true;
 
             if (string.IsNullOrEmpty(folder_name))
@@ -362,7 +411,12 @@ namespace IGMICloudApplication.ViewModels
         }
 
         public void EditFolder(string endpoint, int folder_id, string folder_name,int parent_id, int is_public, string password, int watermarkPreviews, int showDownloadLinks)
-        {            
+        {
+            string apiResponse = getAccessToken();
+            if (apiResponse.Equals("error"))
+            {
+                Logger.Error("Could not validate access_token and account_id during EditFolder call");
+            }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.EditFolder(endpoint, LoggedinProfile.accessToken, folder_id, LoggedinProfile.accountId, folder_name, parent_id, is_public, password);
 
@@ -374,6 +428,11 @@ namespace IGMICloudApplication.ViewModels
 
         public void DeleteFolder(string endpoint, int folder_id)
         {
+            string apiResponse = getAccessToken();
+            if (apiResponse.Equals("error"))
+            {
+                Logger.Error("Could not validate access_token and account_id during DeleteFolder call");
+            }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.DeleteFolder(endpoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id);
 
