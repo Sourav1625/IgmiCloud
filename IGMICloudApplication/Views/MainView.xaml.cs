@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using IGMICloudApplication.Models;
+using IGMICloudApplication.Models.ApiResponse.ListFolder;
 using IGMICloudApplication.ViewModels;
 using NLog;
 
@@ -127,11 +128,15 @@ namespace IGMICloudApplication.Views
             MenuItem mnu = sender as MenuItem;
             FolderElement folderElement = null;
             int editedFolderId = 0;
+            var folderLists = (ComboBox)mainLayout.ContentTemplate.FindName("folderLists", mainLayout);
             if (mnu != null)
             {
                 if ((((ContextMenu)mnu.Parent).PlacementTarget as StackPanel).DataContext is FolderElement) {
                     folderElement = (FolderElement)((((ContextMenu)mnu.Parent).PlacementTarget as StackPanel).DataContext);
                     editedFolderId = folderElement.Id;
+                    MainViewModel.Instance.FolderViewModel.SelectedFolderId = editedFolderId;
+                    MainViewModel.Instance.FolderViewModel.SelectedFolder = folderElement;
+                    folderLists.SelectedIndex = folderLists.Items.IndexOf(folderElement);
                 }
             }
             var addFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
@@ -151,6 +156,7 @@ namespace IGMICloudApplication.Views
             dashboardPanel.Opacity = 0.8;
             dashboardPanel.IsHitTestVisible = false;
             addFolderPopup.IsOpen = true;
+
         }
 
         private void Close_Folder_Creation_Popup(object sender, RoutedEventArgs e)
@@ -194,6 +200,9 @@ namespace IGMICloudApplication.Views
             dashboardPanel.Opacity = 0.8;
             dashboardPanel.IsHitTestVisible = false;
             updateFolderPopup.IsOpen = true;
+            MainViewModel.Instance.FolderViewModel.GetSpecificFolder(editedFolderId);
+            // MainViewModel.Instance.FolderViewModel.FolderCreationRequest=MainViewModel.Instance.FolderViewModel.GetSpecificFolder(folderElement.Id);
+             Console.WriteLine(MainViewModel.Instance.FolderViewModel.FolderCreationRequest);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

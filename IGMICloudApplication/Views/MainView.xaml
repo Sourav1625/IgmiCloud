@@ -14,7 +14,24 @@
         Background="Transparent"
         WindowStyle="ThreeDBorderWindow" WindowState="Maximized" >    
     <Window.Resources>
-        <ResourceDictionary>           
+        <ResourceDictionary>
+
+            <Style x:Key="FaderStyle" TargetType="{x:Type TextBlock}">
+                <Style.Resources>
+                    <Storyboard x:Key="FadeStoryboard">
+                        <DoubleAnimation Storyboard.TargetProperty="(TextBlock.Opacity)" 
+                                From="0" To="1" Duration="0:0:0.5"
+                                RepeatBehavior="Forever" AutoReverse="True"/>
+                    </Storyboard>
+                </Style.Resources>
+                <Style.Triggers>
+                    <Trigger Property="Visibility" Value="Visible">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard Storyboard="{StaticResource FadeStoryboard}"/>
+                        </Trigger.EnterActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
             <DataTemplate x:Name="FolderManagement_Template" x:Key="FolderManagement_Template" DataType="x:Type data:MainViewModel"  >
                 <Views:FolderManagement/>
             </DataTemplate>
@@ -459,15 +476,32 @@
                                                                 <Border Padding="20 0" Width="650">
                                                                     <DockPanel>
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15">
-                                                                            <TextBlock Text="Folder Name:" FontSize="13" Margin="0 0 0 8" Foreground="#555555" Padding="0 0 15 0"/>
-                                                                            <TextBox Height="35" Foreground="#555555" Background="#ffffff" Text="{Binding FolderViewModel.FolderCreationRequest.folder_name}"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
+                                                                            <TextBox x:Name="FolderName"  Height="35" Foreground="#555555" Background="#ffffff" Text="{Binding FolderViewModel.FolderCreationRequest.folder_name}"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8">
                                                                                 <TextBox.Resources>
                                                                                     <Style TargetType="Border">
                                                                                         <Setter Property="CornerRadius" Value="3"/>
                                                                                         <Setter Property="Padding" Value="0 0 15 0"/>
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{Binding Path=FolderViewModel.isFolderNameEmpty, Mode=TwoWay}" Value="True">
+                                                                                                <Setter Property="FocusManager.FocusedElement" Value="{Binding ElementName=FolderName}"/>
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
                                                                                     </Style>
+
                                                                                 </TextBox.Resources>
                                                                             </TextBox>
+                                                                            <TextBlock Name="FolderNameValidationText"  Text="Folder name is mandatory!" FontSize="13" Margin="0 0 0 8" Foreground="Red"   >
+                                                                                <TextBlock.Style>
+                                                                                    <Style BasedOn="{StaticResource FaderStyle}" TargetType="TextBlock">
+                                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{Binding Path=FolderViewModel.isFolderNameEmpty, Mode=TwoWay}"  Value="True">
+                                                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </TextBlock.Style>
+                                                                            </TextBlock>
                                                                         </StackPanel>
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Orientation="Horizontal" >
                                                                             <StackPanel Width="305">

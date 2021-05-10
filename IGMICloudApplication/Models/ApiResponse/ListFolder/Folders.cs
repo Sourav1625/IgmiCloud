@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using IGMICloudApplication.ViewModels;
 using Newtonsoft.Json;
-namespace IGMICloudApplication.Models
+namespace IGMICloudApplication.Models.ApiResponse.ListFolder
 {
     public partial class Folder
     {
@@ -66,7 +66,7 @@ namespace IGMICloudApplication.Models
         [JsonProperty("file_count")]
         public long FileCount { get; set; }
     }
-    public class FolderCreationRequest
+    public class FolderCreationRequest : ViewModelBase
     {
         public string access_token { get; set; }
         public string account_id { get; set; }

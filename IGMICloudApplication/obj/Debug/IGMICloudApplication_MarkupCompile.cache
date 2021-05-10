@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\MyTest\IgmiCloud\IGMICloudApplication\obj\Debug\
+D:\File Sharing\IgmiCloud\IGMICloudApplication\obj\Debug\
 IGMICloudApplication
 none
 false
 DEBUG;TRACE
-F:\MyTest\IgmiCloud\IGMICloudApplication\App.xaml
-16-2015568303
+D:\File Sharing\IgmiCloud\IGMICloudApplication\App.xaml
+17-813815601
 
-23-502936621
-15-297485480
-Views\Styles\Blue.xaml;Views\ProfileMenu.xaml;Views\SideMenuPanel.xaml;Views\Account.xaml;Views\Dashboard.xaml;Views\InvitePerson.xaml;Views\MainView.xaml;Views\ModernButtonTheme\ModernButton.xaml;Views\Organization.xaml;Views\Profile.xaml;Views\Styles\CoreResourceDictionary.xaml;Views\Styles\DataWindowResourceDictionary.xaml;Views\Styles\UserControlResourceDictionary.xaml;Views\TeamManagement.xaml;Views\Workspace.xaml;Views\Workspace_Document.xaml;
+30-917814836
+28-348772253
+Views\Account.xaml;Views\MySharedResources.xaml;Views\UserProfile.xaml;Views\Styles\Blue.xaml;Views\ProfileMenu.xaml;Views\SideMenuPanel.xaml;Views\FolderManagement.xaml;Views\InvitePerson.xaml;Views\MainView.xaml;Views\ModernButtonTheme\ModernButton.xaml;Views\Organization.xaml;Views\Styles\CoreResourceDictionary.xaml;Views\Styles\DataWindowResourceDictionary.xaml;Views\Styles\UserControlResourceDictionary.xaml;Views\TeamManagement.xaml;Views\Workspace.xaml;Views\Workspace_Document.xaml;
 
-True
+False
 

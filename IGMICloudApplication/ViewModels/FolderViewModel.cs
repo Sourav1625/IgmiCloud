@@ -1,6 +1,8 @@
 ﻿using IGMICloudApplication.APIs;
 using IGMICloudApplication.Commands;
 using IGMICloudApplication.Models;
+using IGMICloudApplication.Models.ApiResponse.EditFolder;
+using IGMICloudApplication.Models.ApiResponse.ListFolder;
 using Newtonsoft.Json;
 using NLog;
 using System;
@@ -32,7 +34,18 @@ namespace IGMICloudApplication.ViewModels
         string deleteFolderEndPoint = "/folder/delete";
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public DelegateCommand AddFolderCommand { get; private set; }
+        public DelegateCommand EditFolderCommand { get; private set; }
+        public DelegateCommand DeleteFolderCommand { get; private set; }
 
+        private bool m_isFolderNameEmpty = false;
+        public bool isFolderNameEmpty
+        {
+            get
+            {
+                return m_isFolderNameEmpty;
+            }
+            set { SetProperty(ref m_isFolderNameEmpty, value); }
+        }
         private Folder folderDetails;   
         public Folder FolderDetails
         {
@@ -170,25 +183,56 @@ namespace IGMICloudApplication.ViewModels
 
             AddFolderCommand = new DelegateCommand(() =>
             {              
-                Console.WriteLine("Invoking add folder command " + FolderCreationRequest.folder_name + " " + SelectedValueFolderPrivacy + " " + SelectedFolderId + " " + FolderCreationRequest.password + " " + IsWatermarkPreviews + " " + IsShowDownloadLinks);
+                //Console.WriteLine("Invoking add folder command " + FolderCreationRequest.folder_name + " " + SelectedValueFolderPrivacy + " " + SelectedFolderId + " " + FolderCreationRequest.password + " " + IsWatermarkPreviews + " " + IsShowDownloadLinks);
                 
                 Logger.Info("Creating folder with name " + FolderCreationRequest.folder_name);
                 try
                 {
                     AddFolder(createFolderEndPoint, FolderCreationRequest.folder_name, SelectedFolderId, SelectedValueFolderPrivacy, 0, FolderCreationRequest.password, IsWatermarkPreviews, IsShowDownloadLinks);
                     Logger.Info("Folder created successfully with name " + FolderCreationRequest.folder_name);
-                    Console.WriteLine("Folder created successfully with name " + FolderCreationRequest.folder_name);
+                   //Console.WriteLine("Folder created successfully with name " + FolderCreationRequest.folder_name);
                 }
                 catch(Exception e)
                 {
                     Logger.Error("Error while creating folder with name " + FolderCreationRequest.folder_name + ","+e.Message.ToString());
-                    Console.WriteLine("Error while creating folder with name " + FolderCreationRequest.folder_name + ","+e.Message.ToString());
+                    //Console.WriteLine("Error while creating folder with name " + FolderCreationRequest.folder_name + ","+e.Message.ToString());
+                }                          
+            });           
+
+            EditFolderCommand = new DelegateCommand(() =>
+            {
+               // Console.WriteLine("Invoking edit folder command " + FolderCreationRequest.folder_name + " " + SelectedValueFolderPrivacy + " " + SelectedFolderId + " " + FolderCreationRequest.password + " " + IsWatermarkPreviews + " " + IsShowDownloadLinks);
+
+                Logger.Info("Editing folder with name " + FolderCreationRequest.folder_name);
+                try
+                {
+                    EditFolder(editFolderEndPoint, SelectedFolder.Id, SelectedFolder.FolderName, SelectedFolderId, SelectedValueFolderPrivacy, 0, FolderCreationRequest.password, IsWatermarkPreviews, IsShowDownloadLinks);
+                    Logger.Info("Folder edited successfully with name " + FolderCreationRequest.folder_name);
+                   // Console.WriteLine("Folder edited successfully with name " + FolderCreationRequest.folder_name);
                 }
-                //if (string.IsNullOrEmpty(userName))
-                //{
-                //    Console.WriteLine("Username is empty");
-                //    Logger.Info("Can not Login as Username is empty");
-                //}              
+                catch (Exception e)
+                {
+                    Logger.Error("Error while editing folder with name " + FolderCreationRequest.folder_name + "," + e.Message.ToString());
+                    //Console.WriteLine("Error while editing folder with name " + FolderCreationRequest.folder_name + "," + e.Message.ToString());
+                }
+            });
+
+            DeleteFolderCommand = new DelegateCommand(() =>
+            {
+                // Console.WriteLine("Invoking delete folder command " + FolderCreationRequest.folder_name + " " + SelectedValueFolderPrivacy + " " + SelectedFolderId + " " + FolderCreationRequest.password + " " + IsWatermarkPreviews + " " + IsShowDownloadLinks);
+
+                Logger.Info("Deleting folder with name " + FolderCreationRequest.folder_name);
+                try
+                {
+                    DeleteFolder(deleteFolderEndPoint, SelectedFolder.Id);
+                    Logger.Info("Folder deleted successfully with name " + FolderCreationRequest.folder_name);
+                    // Console.WriteLine("Folder edited successfully with name " + FolderCreationRequest.folder_name);
+                }
+                catch (Exception e)
+                {
+                    Logger.Error("Error while deleting folder with name " + FolderCreationRequest.folder_name + "," + e.Message.ToString());
+                    //Console.WriteLine("Error while editing folder with name " + FolderCreationRequest.folder_name + "," + e.Message.ToString());
+                }
             });
 
         }
@@ -222,14 +266,47 @@ namespace IGMICloudApplication.ViewModels
             return FolderList;
         }
 
-        public void AddFolder(string endpoint, string folder_name, int parent_id, int is_public, int enablePassword, string password, int watermarkPreviews, int showDownloadLinks)
+        public void GetSpecificFolder(int folder_id)
         {
-            var cloudAPIFolderObj = new IGMICloudFolderAPIs();            
-            string response = cloudAPIFolderObj.CreateFolder(createFolderEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_name, parent_id, is_public, enablePassword, password, watermarkPreviews, showDownloadLinks);
-
+            var cloudAPIFolderObj = new IGMICloudFolderAPIs();
+            string response = cloudAPIFolderObj.GetSpecificFolder(editFolderEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id);
+            //FolderCreationRequest folderCreationRequest = new FolderCreationRequest();
             if (response != null)
             {
-                GetFolderList(LoggedinProfile.accessToken, LoggedinProfile.accountId);
+                EditFolderResponse editFolderResponse = JsonConvert.DeserializeObject<EditFolderResponse>(response);
+                FolderCreationRequest.folder_name = editFolderResponse.Data.FolderName;
+                FolderCreationRequest.isPublic = editFolderResponse.Data.IsPublic == 0 ? "Private, no access outside of your account." : "Public Limited -access only if users know the sharing link.";
+                FolderCreationRequest.parent_id = (string)editFolderResponse.Data.ParentId;
+                FolderCreationRequest.password = (string)editFolderResponse.Data.AccessPassword;
+                FolderCreationRequest.watermarkPreviews = null;
+                FolderCreationRequest.showDownloadLinks = null;
+               
+            }
+         
+           // return FolderCreationRequest;
+        }
+
+        public void AddFolder(string endpoint, string folder_name, int parent_id, int is_public, int enablePassword, string password, int watermarkPreviews, int showDownloadLinks)
+        {
+            bool callCreateAPI = true;
+
+            if (string.IsNullOrEmpty(folder_name))
+            {
+                isFolderNameEmpty = true;
+                callCreateAPI = false;
+            }
+            else
+                isFolderNameEmpty = false;
+
+            if (callCreateAPI)
+            {
+                var cloudAPIFolderObj = new IGMICloudFolderAPIs();
+                string response = cloudAPIFolderObj.CreateFolder(createFolderEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_name, parent_id, is_public, enablePassword, password, watermarkPreviews, showDownloadLinks);
+
+                if (response != null)
+                {
+                    GetFolderList(LoggedinProfile.accessToken, LoggedinProfile.accountId);
+                }
             }
             //Folder folder = JsonConvert.DeserializeObject<Folder>(response);
             ////FolderList = new ObservableCollection<FolderElement>();
@@ -244,6 +321,38 @@ namespace IGMICloudApplication.ViewModels
             //SelectedFolderId = 0;
             //SelectedFolder = FolderList[0];
             //return FolderList;
+        }
+
+        public void EditFolder(string endpoint,int folder_id, string folder_name,int parent_id, int is_public, int enablePassword, string password, int watermarkPreviews, int showDownloadLinks)
+        {            
+            var cloudAPIFolderObj = new IGMICloudFolderAPIs();
+            string response = cloudAPIFolderObj.EditFolder(endpoint, LoggedinProfile.accessToken, folder_id, LoggedinProfile.accountId, folder_name, parent_id, is_public, password);
+
+            if (response != null)
+            {
+                GetFolderList(LoggedinProfile.accessToken, LoggedinProfile.accountId);
+            }
+
+            //var folder = JsonConvert.DeserializeObject<Folder>(response.Content);
+
+            //return folder;
+
+        }
+
+        public void DeleteFolder(string endpoint, int folder_id)
+        {
+            var cloudAPIFolderObj = new IGMICloudFolderAPIs();
+            string response = cloudAPIFolderObj.DeleteFolder(endpoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id);
+
+            if (response != null)
+            {
+                GetFolderList(LoggedinProfile.accessToken, LoggedinProfile.accountId);
+            }
+
+            //var folder = JsonConvert.DeserializeObject<Folder>(response.Content);
+
+            //return folder;
+
         }
     }
 }

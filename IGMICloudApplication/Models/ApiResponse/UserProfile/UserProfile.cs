@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-namespace IGMICloudApplication.Models
+namespace IGMICloudApplication.Models.ApiResponse.UserProfile
 {    
     public partial class UserProfile
     {

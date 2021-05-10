@@ -1,4 +1,5 @@
 ﻿using IGMICloudApplication.Models;
+using IGMICloudApplication.Models.ApiResponse.ListFolder;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -37,11 +38,11 @@ namespace IGMICloudApplication.APIs
             return response.Content;
         }
 
-        public Folder EditFolder(string endpoint, string access_token, int folder_id, int account_id, string folder_name, int parent_id, int is_public, string access_password, int parent_folder_id)
+        public string EditFolder(string endpoint, string access_token, int folder_id, int account_id, string folder_name, int parent_id, int is_public, string access_password)
         {           
             var request = new RestRequest($"{endpoint}");
             AddRequestBoilerplate(ref request);
-            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&folder_id={folder_id}&account_id={account_id}&folder_name={folder_name}&parent_id={parent_id}&is_public={is_public}&access_password={access_password}&parent_folder_id={parent_folder_id}", ParameterType.RequestBody);
+            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&folder_id={folder_id}&account_id={account_id}&folder_name={folder_name}&parent_id={parent_id}&is_public={is_public}&access_password={access_password}", ParameterType.RequestBody);
             var response = _restClient.Post(request);
             if (!response.IsSuccessful)
             {
@@ -49,9 +50,24 @@ namespace IGMICloudApplication.APIs
                 return null;
             }
 
-            var folder = JsonConvert.DeserializeObject<Folder>(response.Content);         
+            return response.Content;
+          
+        }
 
-            return folder;
+        public string GetSpecificFolder(string endpoint, string access_token, int account_id, int folder_id)
+        {
+            var request = new RestRequest($"{endpoint}");
+            AddRequestBoilerplate(ref request);
+            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&folder_id={folder_id}&account_id={account_id}", ParameterType.RequestBody);
+            var response = _restClient.Post(request);
+            if (!response.IsSuccessful)
+            {
+                NotifyRequestFailure(request, response);
+                return null;
+            }
+
+            return response.Content;
+
         }
 
         public string GetFolderList(string endpoint, string access_token, int parent_folder_id)
@@ -76,12 +92,12 @@ namespace IGMICloudApplication.APIs
                      
            return response.Content;
         }
-        public string DeleteFolder(string endpoint, string access_token, int folder_id)
+        public string DeleteFolder(string endpoint, string access_token, int account_id, int folder_id)
         {
             var folder = new Folder();
             var request = new RestRequest($"{endpoint}");
             AddRequestBoilerplate(ref request);
-            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&folder_id={folder_id}", ParameterType.RequestBody);
+            request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&account_id={account_id}&folder_id={folder_id}", ParameterType.RequestBody);
             var response = _restClient.Post(request);
             if (!response.IsSuccessful)
             {

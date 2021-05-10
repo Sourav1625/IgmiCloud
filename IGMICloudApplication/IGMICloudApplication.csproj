@@ -116,11 +116,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="APIs\IGMICloudFolderAPIs.cs" />
-    <Compile Include="Models\Folders.cs" />
+    <Compile Include="Models\ApiResponse\EditFolder\EditFolderResponse.cs" />
+    <Compile Include="Models\EditUserResponse.cs" />
+    <Compile Include="Models\ApiResponse\ListFolder\Folders.cs" />
     <Compile Include="Models\LoggedinProfile.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserAuth.cs" />
-    <Compile Include="Models\UserProfile.cs" />
+    <Compile Include="Models\ApiResponse\UserProfile\UserProfile.cs" />
     <Compile Include="ViewModels\FolderViewModel.cs" />
     <Compile Include="Views\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
@@ -330,6 +332,7 @@
   <ItemGroup>
     <Resource Include="Views\Icons\FolderEditIcon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
