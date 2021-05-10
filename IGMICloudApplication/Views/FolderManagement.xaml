@@ -100,7 +100,7 @@
             </Grid>
             <Grid Grid.Row="1">
                 <Grid >
-                    <ListView Margin="10" Name="lvUsers" ItemContainerStyle="{DynamicResource ListViewContainerStyle}" ItemsSource="{Binding FolderViewModel.FolderList}" BorderThickness="0">
+                    <ListView Margin="10" Name="lvUsers" Background="Transparent" ItemContainerStyle="{DynamicResource ListViewContainerStyle}" ItemsSource="{Binding FolderViewModel.FolderList}" BorderThickness="0">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal" ></StackPanel>
@@ -108,10 +108,12 @@
                         </ListView.ItemsPanel>
                         <ListView.ItemTemplate>
                             <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
-                                <StackPanel Name="EachFolder" Height="165" Cursor="Hand">
-                                    <iconPacks:PackIconMaterial Name="ActionButton" Visibility="Collapsed" Kind="Triangle" RotationAngle="180" Width="6" HorizontalAlignment="Right"/>
-                                    <Image Name="FolderIcon" Source="Icons/PublicFolder.png" Width="65" Height="50" Margin="40" />
-                                    <TextBlock Text="{Binding FolderName}" HorizontalAlignment="Center" FontSize="13" Foreground="#646464"></TextBlock>
+                                <StackPanel>
+                                    <StackPanel Name="EachFolder" Height="135" Cursor="Hand" Background="White">
+                                        <iconPacks:PackIconMaterial Name="ActionButton" Visibility="Collapsed" Kind="Triangle" RotationAngle="180" Width="6" HorizontalAlignment="Right"/>
+                                        <Image Name="FolderIcon" Source="Icons/PublicFolder.png" Width="65" Height="50" Margin="40" />
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding FolderName}" HorizontalAlignment="Center" FontSize="13" Padding="8" Foreground="#646464"></TextBlock>
                                 </StackPanel>
                                 <DataTemplate.Triggers>
                                     <DataTrigger Binding="{Binding Id}" Value="0">

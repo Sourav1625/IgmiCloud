@@ -241,7 +241,7 @@
                         <DockPanel x:Name="LoginPanel" >
                             <ContentControl Name="LoginControl" Content="{Binding}" ContentTemplate="{StaticResource A_DataTemplate_LoginForm}" />
                         </DockPanel>
-                        <DockPanel x:Name="DashboardPanel" LastChildFill="True" Visibility="Collapsed" Tag="DashbaordPanel">
+                        <DockPanel x:Name="DashboardPanel" Background="#F9F9F9" LastChildFill="True" Visibility="Collapsed" Tag="DashbaordPanel">
                             <DockPanel Width="240" Background="#313131" >
                                 <StackPanel Cursor="Hand" >
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
@@ -393,7 +393,7 @@
                                     </StackPanel>
                                 </StackPanel>
                             </DockPanel>
-                            <Border Background="White">
+                            <Border Background="#F9F9F9">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="50"/>
