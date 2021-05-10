@@ -253,10 +253,10 @@
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
                                             </interactivity:EventTrigger>
                                         </interactivity:Interaction.Triggers>
-                                        <TreeView ItemContainerStyle="{StaticResource styleTreeView}">
+                                        <TreeView ItemContainerStyle="{StaticResource styleTreeView}" Height="750" >
                                             <TreeViewItem ItemsSource="{Binding FolderViewModel.FolderList}">
                                                 <TreeViewItem.Header>
-                                                    <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
+                                                    <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" >
                                                         <interactivity:Interaction.Triggers>
                                                             <interactivity:EventTrigger EventName="MouseDown">
                                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
