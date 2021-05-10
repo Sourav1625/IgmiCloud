@@ -101,6 +101,17 @@ namespace IGMICloudApplication.ViewModels
             }
         }
 
+        private string folderActionType;
+        public string FolderActionType
+        {
+            get { return folderActionType; }
+            set
+            {
+                folderActionType = value;
+                SetProperty(ref folderActionType, value);
+            }
+        }
+
         private string folderName;
         public string FolderName
         {

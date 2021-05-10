@@ -309,7 +309,7 @@
                                                                                 <MenuItem Header="_Add Sub Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus">
                                                                                     <MenuItem.Resources>
                                                                                         <Style TargetType="MenuItem">
-                                                                                            <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                                            <EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />
                                                                                         </Style>
                                                                                     </MenuItem.Resources>
                                                                                 </MenuItem>
@@ -323,7 +323,7 @@
                                                                                 <MenuItem Header="_Delete"  Template="{StaticResource VsMenuSub}" Icon="Delete">
                                                                                     <MenuItem.Resources>
                                                                                         <Style TargetType="MenuItem">
-                                                                                            <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                                            <EventSetter Event="Click" Handler="Delete_Folder" />
                                                                                         </Style>
                                                                                     </MenuItem.Resources>
                                                                                 </MenuItem>
@@ -507,7 +507,7 @@
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Orientation="Horizontal" >
                                                                             <StackPanel Width="305">
                                                                                 <TextBlock Text="Parent Folder:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
-                                                                                <ComboBox Name="folderLists" ItemsSource="{Binding FolderViewModel.FolderListForComboBox}" DisplayMemberPath="FolderName" SelectedValuePath="Id" SelectedValue="{Binding ParentFolderId}"  Height="35" Margin="0 0 30 0" IsEditable="True" Foreground="#555555"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" IsSynchronizedWithCurrentItem="True" SelectedIndex="0"/>
+                                                                                <ComboBox Name="folderLists" ItemsSource="{Binding FolderViewModel.FolderListForComboBox}" DisplayMemberPath="FolderName" SelectedValuePath="Id" SelectedValue="{Binding FolderViewModel.ParentFolderId}"  Height="35" Margin="0 0 30 0" IsEditable="True" Foreground="#555555"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" IsSynchronizedWithCurrentItem="True" SelectedIndex="0"/>
                                                                             </StackPanel>
                                                                             <StackPanel Width="305">
                                                                                 <TextBlock Text="Folder Privacy:" FontSize="13" Margin="5 0 0 8" Foreground="#555555"/>
@@ -579,7 +579,7 @@
                                                                         </StackPanel>
                                                                     </Button.Content>
                                                                 </Button>
-                                                                <Button Padding="10 5" Margin="8 0" Cursor="Hand" Style="{StaticResource Style_UploadButton}" Command="{Binding FolderViewModel.AddFolderCommand}">
+                                                                <Button Padding="10 5" Margin="8 0" Cursor="Hand" Style="{StaticResource Style_UploadButton}" Click="Folder_Create_Update"><!--Command="{Binding FolderViewModel.AddFolderCommand}">-->
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" >
                                                                             <TextBlock Name="AddEditFolderButton"  Text="Add Folder" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
