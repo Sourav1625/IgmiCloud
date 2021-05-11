@@ -333,7 +333,7 @@ namespace IGMICloudApplication.ViewModels
             {
                 foreach (FolderElement folderElement in folder.Data.Folders)
                 {
-                    if (folderElement.ParentId == null)
+                    if (folderElement.ParentId == null && folderElement.Status== "active")
                     {
                         FolderList.Add(folderElement);
                     }
