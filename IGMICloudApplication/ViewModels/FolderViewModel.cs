@@ -9,10 +9,6 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
 
 namespace IGMICloudApplication.ViewModels
 {
@@ -79,6 +75,16 @@ namespace IGMICloudApplication.ViewModels
                 return folderDetails;
             }
             set { SetProperty(ref folderDetails, value); }
+        }
+
+        private bool isExpanded;
+        public bool IsExpanded
+        {
+            get
+            {
+                return isExpanded;
+            }
+            set { SetProperty(ref isExpanded, value); }
         }
 
         private ObservableCollection<FolderElement> folderList;
@@ -354,6 +360,10 @@ namespace IGMICloudApplication.ViewModels
             if (folder_id > 0)
             {
                 ParentFolderId = folder_id;
+            }
+            if (FolderList.Count > 0)
+            {
+                IsExpanded = true;
             }
             FolderCountMsg = "Root Folder - "+ FolderList.Count+ " Folders";
             return FolderList;

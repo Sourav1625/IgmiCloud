@@ -40,6 +40,7 @@
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}"/>-->
+        <Setter Property="IsExpanded" Value="{Binding FolderViewModel.IsExpanded}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
@@ -69,27 +70,20 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="false">
                             <Setter TargetName="ItemsHost" Property="Visibility"
-                    Value="Collapsed"/>
-                        </Trigger>
+                    Value="Collapsed"/>                            
+                        </Trigger>                        
                         <Trigger Property="HasItems" Value="false">
                             <Setter TargetName="Expander" Property="Visibility" 
                     Value="Hidden"/>
                         </Trigger>
-                        <MultiTrigger>
+                        <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="HasHeader" Value="false"/>
                                 <Condition Property="Width" Value="Auto"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_Header" Property="MinWidth" Value="75"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="HasHeader" Value="false"/>
-                                <Condition Property="Height" Value="Auto"/>
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="PART_Header" Property="MinHeight" Value="19"/>
-                        </MultiTrigger>
-                        
+                            <Setter TargetName="PART_Header" Property="MinHeight" Value="50"/>
+                        </MultiTrigger>-->                      
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -142,7 +136,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#363636"/>
                 <Setter Property="Opacity" Value="0.7"/>
-            </Trigger>
+            </Trigger>            
         </Style.Triggers>
     </Style>
     <Style x:Key="MenuItemBaseStyle" TargetType="MenuItem">

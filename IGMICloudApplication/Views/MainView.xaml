@@ -215,13 +215,13 @@
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
                                         <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 12 10 8" />
                                     </StackPanel>
-                                    <StackPanel >
+                                    <StackPanel>
                                         <interactivity:Interaction.Triggers>
                                             <interactivity:EventTrigger EventName="MouseDown">
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
                                             </interactivity:EventTrigger>
                                         </interactivity:Interaction.Triggers>
-                                        <TreeView ItemContainerStyle="{StaticResource styleTreeView}" Height="750" >
+                                        <TreeView ItemContainerStyle="{StaticResource styleTreeView}" Height="Auto" MaxHeight="750" >
                                             <TreeViewItem ItemsSource="{Binding FolderViewModel.FolderList}">
                                                 <TreeViewItem.Header>
                                                     <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" >
@@ -335,7 +335,7 @@
                                             </interactivity:Interaction.Triggers>
                                             <iconPacks:PackIconMaterial Kind="AccountMultiple" 
                                                         HorizontalAlignment="Left" Style="{StaticResource OtherMenuItem}" Margin="0 5 4 0" />
-                                            <Label FontSize="14" FontWeight="Normal" Content="Shared With Me" Foreground="#ffffff"></Label>
+                                            <Label FontSize="14" FontWeight="Normal" Content="Shared With Me" Foreground="#ffffff"></Label>                                            
                                         </StackPanel>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Style="{StaticResource MenuItem}">
