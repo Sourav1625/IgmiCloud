@@ -29,10 +29,13 @@ namespace IGMICloudApplication.ViewModels
 
         public FolderViewModel FolderViewModel { get; private set; }
 
+        public ToastViewModel ToastViewModel { get; private set; }
+
         public MainViewModel()
         {
             LoginViewModel = new LoginViewModel();
             FolderViewModel = new FolderViewModel();
+            ToastViewModel = new ToastViewModel();
         }
 
         #endregion

@@ -6,6 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
+                <ResourceDictionary Source="Views/Styles/CoreResourceDictionary.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Views/ModernButtonTheme/ModernButton.xaml"/>
                 <ResourceDictionary Source="Views/Styles/Blue.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Views/Styles/CoreResourceDictionary.xaml"></ResourceDictionary>

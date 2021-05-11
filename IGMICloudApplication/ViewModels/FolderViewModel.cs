@@ -259,6 +259,7 @@ namespace IGMICloudApplication.ViewModels
                     AddFolder(createFolderEndPoint, FolderName, ParentFolderId, SelectedValueFolderPrivacy,  FolderPassword, IsWatermarkPreviews, IsShowDownloadLinks);
                     PublicUrl = null;
                     Logger.Info("Folder created successfully with name " + FolderName);
+                    MainViewModel.Instance.ToastViewModel.ShowSuccess("Folder: "+ FolderName+" is created successfully");
                 }
                 catch(Exception e)
                 {
@@ -273,6 +274,7 @@ namespace IGMICloudApplication.ViewModels
                 {
                     EditFolder(editFolderEndPoint, EditedFolderId, FolderName, ParentFolderId, SelectedValueFolderPrivacy, FolderPassword, IsWatermarkPreviews, IsShowDownloadLinks);
                     Logger.Info("Folder edited successfully with name " + FolderName);
+                    MainViewModel.Instance.ToastViewModel.ShowSuccess("Folder: " + FolderName + " is update successfully");
                 }
                 catch (Exception e)
                 {

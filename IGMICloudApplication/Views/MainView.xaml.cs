@@ -196,12 +196,10 @@ namespace IGMICloudApplication.Views
             if (MainViewModel.Instance.FolderViewModel.FolderActionType.Equals("Create"))
             {
                 MainViewModel.Instance.FolderViewModel.AddFolderCommand.Execute();
-                MessageBox.Show("Folder created successfully");
             }
             else
             {
                 MainViewModel.Instance.FolderViewModel.EditFolderCommand.Execute();
-                MessageBox.Show("Folder updated successfully");
             }
             close_Folder_Creation_Popup();
         }
