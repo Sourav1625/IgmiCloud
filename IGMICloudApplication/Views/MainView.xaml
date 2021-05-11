@@ -626,12 +626,20 @@
                                                                             <StackPanel Width="200" Margin="0 0 20 0">
                                                                                 <TextBlock Text="Optional Password:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
                                                                                 <StackPanel Orientation="Horizontal">
-                                                                                    <CheckBox Margin="20 10 20 0" />
-                                                                                    <TextBox Height="35" Foreground="#555555" Width="120" Background="#eeeeee"  BorderThickness="1"  BorderBrush="#dedcdc" Padding="6 8" Text="{Binding FolderViewModel.FolderPassword}" >
+                                                                                    <CheckBox x:Name="chkPwd" Margin="20 10 20 0" IsChecked="{Binding FolderViewModel.EnablePassword}" Click="chkPwd_Click"/>
+                                                                                    <TextBox Name="txtPwd" IsEnabled="{Binding ElementName=chkPwd, Path=IsChecked}" Height="35" Foreground="#555555" Width="120" BorderThickness="1"  BorderBrush="#dedcdc" Padding="6 8" Text="{Binding FolderViewModel.FolderPassword}" >
                                                                                         <TextBox.Resources>
                                                                                             <Style TargetType="Border">
                                                                                                 <Setter Property="CornerRadius" Value="3"/>
                                                                                                 <Setter Property="Padding" Value="0 0 15 0"/>
+                                                                                            </Style>
+                                                                                            <Style TargetType="{x:Type TextBox}">
+                                                                                                <Setter Property="Background" Value="#eeeeee" />
+                                                                                                <Style.Triggers>
+                                                                                                    <Trigger Property="IsEnabled" Value="True">
+                                                                                                        <Setter Property="Background" Value="White" />
+                                                                                                    </Trigger>
+                                                                                                </Style.Triggers>
                                                                                             </Style>
                                                                                         </TextBox.Resources>
                                                                                     </TextBox>
