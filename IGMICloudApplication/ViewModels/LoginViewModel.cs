@@ -21,7 +21,9 @@ namespace IGMICloudApplication.ViewModels
     {
         FolderManagement,
         MySharedResources,
-        UserProfile
+        RecentFiles,
+        AllFiles,
+        TrashCan
     }
     public class LoginViewModel : ViewModelBase
     {
@@ -80,9 +82,12 @@ namespace IGMICloudApplication.ViewModels
         }
         public DelegateCommand LoginCommand { get; private set; }
         public DelegateCommand FolderManagementCommand { get; private set; }
-        public DelegateCommand MySharedResourcesCommand { get; private set; }
+        public DelegateCommand MySharedResourcesManagementCommand { get; private set; }
+        public DelegateCommand RecentFilesManagementCommand { get; private set; }
+        public DelegateCommand AllFilesManagementCommand { get; private set; }
+        public DelegateCommand TrashCanManagementCommand { get; private set; }
         public DelegateCommand LogoutCommand { get; private set; }
-        public DelegateCommand SettingsCommand { get; private set; }
+        
         
         public DelegateCommand ShowAndHideForgotPasswordForm { get; private set; }        
         private string loginEndpoint = "/authorize";
@@ -129,13 +134,22 @@ namespace IGMICloudApplication.ViewModels
             {
                 SwitchView = SwitchViewEnum.FolderManagement;
             });
-            MySharedResourcesCommand = new DelegateCommand(() =>
+            MySharedResourcesManagementCommand = new DelegateCommand(() =>
             {
                 SwitchView = SwitchViewEnum.MySharedResources;
             });
-            SettingsCommand = new DelegateCommand(() =>
+            RecentFilesManagementCommand = new DelegateCommand(() =>
             {
-                SwitchView = SwitchViewEnum.UserProfile;
+                SwitchView = SwitchViewEnum.RecentFiles;
+            });
+            AllFilesManagementCommand = new DelegateCommand(() =>
+            {
+                SwitchView = SwitchViewEnum.AllFiles;
+            });
+            TrashCanManagementCommand = new DelegateCommand(() =>
+            {
+                MainViewModel.Instance.FolderViewModel.GetTrashFolders();
+                SwitchView = SwitchViewEnum.TrashCan;
             });
             LogoutCommand = new DelegateCommand(() =>
             {

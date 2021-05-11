@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="IGMICloudApplication.Views.MySharedResources"
+﻿<UserControl x:Class="IGMICloudApplication.Views.RecentFiles"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -40,7 +40,7 @@
                     </DockPanel>
                     <DockPanel LastChildFill="True" Name="FolderAndFiles" Cursor="Hand">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Shared With Me" Margin="0 4" Foreground="#303641"/>
+                            <TextBlock Text="Recent Files" Margin="0 4" Foreground="#303641"/>
                         </StackPanel>
                     </DockPanel>
                 </StackPanel>
@@ -60,7 +60,7 @@
                 <Border Padding="17" Background="#ffefa4" BorderBrush="Transparent" Margin="0 0 0 17" BorderThickness="1" CornerRadius="4" >
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconMaterial Kind="Alert" Foreground="#574802" Width="13"/>
-                        <TextBlock Margin="5 0" FontSize="12" Text="No files or folders have been shared with your account." Foreground="#574802"/>
+                        <TextBlock Margin="5 0" FontSize="12" Text="No recent files found within your account." Foreground="#574802"/>
                     </StackPanel>
                 </Border>
             </StackPanel>

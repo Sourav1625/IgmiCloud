@@ -124,10 +124,27 @@
     <Compile Include="Models\UserAuth.cs" />
     <Compile Include="Models\ApiResponse\UserProfile\UserProfile.cs" />
     <Compile Include="ViewModels\FolderViewModel.cs" />
+    <Compile Include="Views\AllFiles.xaml.cs">
+      <DependentUpon>AllFiles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MySharedResources.xaml.cs">
       <DependentUpon>MySharedResources.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RecentFiles.xaml.cs">
+      <DependentUpon>RecentFiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrashCan.xaml.cs">
+      <DependentUpon>TrashCan.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AllFiles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MySharedResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecentFiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Styles\UserControlResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrashCan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -90,6 +90,15 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref folderList, value); }
         }
+        private ObservableCollection<FolderElement> trashFolderList;
+        public ObservableCollection<FolderElement> TrashFolderList
+        {
+            get
+            {
+                return trashFolderList;
+            }
+            set { SetProperty(ref trashFolderList, value); }
+        }
         private int editedFolderId;
         public int EditedFolderId
         {
@@ -432,11 +441,30 @@ namespace IGMICloudApplication.ViewModels
             {
                 GetFolderList(folder_id, 0);
             }
+        }
+        public void GetTrashFolders()
+        {
+            string apiResponse = getAccessToken();
+            if (apiResponse.Equals("error"))
+            {
+                Logger.Error("Could not validate access_token and account_id during GetFolderList call");
+            }
+            var cloudAPIFolderObj = new IGMICloudFolderAPIs();
+            string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, 0);//TODO need to filter data with status trash
 
-            //var folder = JsonConvert.DeserializeObject<Folder>(response.Content);
-
-            //return folder;
-
+            Folder folder = JsonConvert.DeserializeObject<Folder>(response);
+            TrashFolderList = new ObservableCollection<FolderElement>();
+            if (folder != null && folder.Data != null)
+            {
+                foreach (FolderElement folderElement in folder.Data.Folders)
+                {
+                    if (folderElement.Status == "trash")
+                    {
+                        TrashFolderList.Add(folderElement);
+                    }
+                }
+            }
+            FolderCountMsg = "Trash Can - " + TrashFolderList.Count + " Folders";
         }
     }
 }
