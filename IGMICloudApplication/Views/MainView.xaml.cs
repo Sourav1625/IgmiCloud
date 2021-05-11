@@ -162,7 +162,7 @@ namespace IGMICloudApplication.Views
                 if (mnu.DataContext is FolderElement)
                 {
 
-                    MainViewModel.Instance.FolderViewModel.EditedFolderId = ((FolderElement)mnu.DataContext).Id;
+                    MainViewModel.Instance.FolderViewModel.EditedFolderId = 0;
                     MainViewModel.Instance.FolderViewModel.ParentFolderId = ((FolderElement)mnu.DataContext).Id;
                 }
             }
@@ -273,6 +273,19 @@ namespace IGMICloudApplication.Views
                 MainViewModel.Instance.FolderViewModel.ParentFolderId = ((FolderElement)comboBox.SelectedItem).Id;
             }
 
+        }
+
+        private void chkPwd_Click(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            if (checkBox.IsChecked==true)
+            {
+                MainViewModel.Instance.FolderViewModel.EnablePassword = 1;
+            }
+            else
+            {
+                MainViewModel.Instance.FolderViewModel.EnablePassword = 0;
+            }
         }
     }
 }

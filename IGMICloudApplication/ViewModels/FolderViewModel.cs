@@ -141,11 +141,21 @@ namespace IGMICloudApplication.ViewModels
         {
             get { return folderPassword; }
             set
-            {
-                folderPassword = value;
+            {                
                 SetProperty(ref folderPassword, value);
             }
         }
+
+        private int enablePassword;
+        public int EnablePassword
+        {
+            get { return enablePassword; }
+            set
+            {
+                SetProperty(ref enablePassword, value);
+            }
+        }
+
         private ObservableCollection<FolderElement> folderListForComboBox;
         public ObservableCollection<FolderElement> FolderListForComboBox
         {
@@ -168,7 +178,7 @@ namespace IGMICloudApplication.ViewModels
             get { return _selectedValueFolderPrivacy; }
             set
             {
-                _selectedValueFolderPrivacy = value;
+                //_selectedValueFolderPrivacy = value;
                 SetProperty(ref _selectedValueFolderPrivacy, value);
             }
         }
@@ -251,6 +261,7 @@ namespace IGMICloudApplication.ViewModels
             AllowDownloadings.Add(new AllowDownloading("No", 0));
             IsShowDownloadLinks = 1;
             EditedFolderId = 0;
+            EnablePassword = 1;
             AddFolderCommand = new DelegateCommand(() =>
             {              
                 Logger.Info("Creating folder with name " + FolderName);
@@ -383,11 +394,22 @@ namespace IGMICloudApplication.ViewModels
             if (response != null)
             {
                 EditFolderResponse editFolderResponse = JsonConvert.DeserializeObject<EditFolderResponse>(response);
-                EditedFolderId = editFolderResponse.Data.Id;
-                FolderName = editFolderResponse.Data.FolderName;
-                ParentFolderId = editFolderResponse.Data.ParentId == null ? 0 : Int32.Parse(editFolderResponse.Data.ParentId.ToString());
-                SelectedValueFolderPrivacy = editFolderResponse.Data.IsPublic;                
-                FolderPassword = editFolderResponse.Data.AccessPassword;
+                if (editFolderResponse.Data != null)
+                {
+                    EditedFolderId = editFolderResponse.Data.Id;
+                    FolderName = editFolderResponse.Data.FolderName;
+                    ParentFolderId = editFolderResponse.Data.ParentId == null ? 0 : Int32.Parse(editFolderResponse.Data.ParentId.ToString());
+                    SelectedValueFolderPrivacy = editFolderResponse.Data.IsPublic;
+                    FolderPassword = editFolderResponse.Data.AccessPassword;
+                }
+                if (FolderPassword!=null && FolderPassword.ToString().Trim() != "")
+                {
+                    EnablePassword = 1;
+                }
+                else
+                {
+                    EnablePassword = 0;
+                }
                 PublicUrl = editFolderResponse.Data.url_folder;
                 IsWatermarkPreviews = 0;//TODO this field is not available in details api
                 IsShowDownloadLinks = 0;//TODO this field is not available in details api
@@ -396,6 +418,10 @@ namespace IGMICloudApplication.ViewModels
 
         public void AddFolder(string endpoint, string folder_name, int parent_id, int is_public, string password, int watermarkPreviews, int showDownloadLinks)
         {
+            if (EnablePassword == 0)
+            {
+                password = null;
+            }
             string apiResponse = getAccessToken();
             if (apiResponse.Equals("error"))
             {
@@ -425,6 +451,10 @@ namespace IGMICloudApplication.ViewModels
 
         public void EditFolder(string endpoint, int folder_id, string folder_name,int parent_id, int is_public, string password, int watermarkPreviews, int showDownloadLinks)
         {
+            if (EnablePassword == 0)
+            {
+                password = null;
+            }
             string apiResponse = getAccessToken();
             if (apiResponse.Equals("error"))
             {
