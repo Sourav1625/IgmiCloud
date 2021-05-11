@@ -124,36 +124,10 @@
     <Compile Include="Models\UserAuth.cs" />
     <Compile Include="Models\ApiResponse\UserProfile\UserProfile.cs" />
     <Compile Include="ViewModels\FolderViewModel.cs" />
-    <Compile Include="Views\Account.xaml.cs">
-      <DependentUpon>Account.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MySharedResources.xaml.cs">
       <DependentUpon>MySharedResources.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Organization.xaml.cs">
-      <DependentUpon>Organization.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserProfile.xaml.cs">
-      <DependentUpon>UserProfile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TeamManagement.xaml.cs">
-      <DependentUpon>TeamManagement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Workspace.xaml.cs">
-      <DependentUpon>Workspace.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Workspace_Document.xaml.cs">
-      <DependentUpon>Workspace_Document.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Views\Account.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\MySharedResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,19 +135,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProfileMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SideMenuPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\FolderManagement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\InvitePerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,20 +149,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="Views\ProfileMenu.xaml.cs">
-      <DependentUpon>ProfileMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SideMenuPanel.xaml.cs">
-      <DependentUpon>SideMenuPanel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\FolderManagement.xaml.cs">
       <DependentUpon>FolderManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Extensions\PasswordBoxAssistant.cs" />
-    <Compile Include="Views\InvitePerson.xaml.cs">
-      <DependentUpon>InvitePerson.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -235,10 +188,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Organization.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Styles\CoreResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,18 +197,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Styles\UserControlResourceDictionary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TeamManagement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Workspace.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Workspace_Document.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
