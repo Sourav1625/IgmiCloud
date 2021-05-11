@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" VerticalAlignment="Top">
             <Border BorderBrush="#e0e0e0" BorderThickness="1" Margin="14 12" CornerRadius="3" HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal" Width="180" Height="45">
+                <StackPanel Orientation="Horizontal" Width="120" Height="45">
                     <DockPanel HorizontalAlignment="Left" Cursor="Hand">
                         <iconPacks:PackIconMaterial Kind="ArrowRightThick"  Name="HomeLink" Height="60" Width="80" Margin="-42 -18 0 2"  VerticalAlignment="Top">
                             <iconPacks:PackIconMaterial.Style>

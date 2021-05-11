@@ -215,7 +215,7 @@
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
                                         <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 12 10 8" />
                                     </StackPanel>
-                                    <StackPanel>
+                                    <StackPanel Name="MyFilesMenu">
                                         <interactivity:Interaction.Triggers>
                                             <interactivity:EventTrigger EventName="MouseDown">
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
@@ -321,24 +321,52 @@
                                             </TreeViewItem>
                                         </TreeView>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Style="{StaticResource MenuItem}" >
+                                    <StackPanel Orientation="Horizontal" >
                                         <interactivity:Interaction.Triggers>
                                             <interactivity:EventTrigger EventName="MouseDown">
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.MySharedResourcesManagementCommand}"/>
                                             </interactivity:EventTrigger>
                                         </interactivity:Interaction.Triggers>
-                                        <StackPanel Margin="27 5" Orientation="Horizontal" Cursor="Hand">
+                                        <StackPanel Margin="27 5" Orientation="Horizontal" Cursor="Hand" >
                                             <interactivity:Interaction.Triggers>
                                                 <interactivity:EventTrigger EventName="MouseDown">
                                                     <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.MySharedResourcesManagementCommand}"/>
                                                 </interactivity:EventTrigger>
                                             </interactivity:Interaction.Triggers>
                                             <iconPacks:PackIconMaterial Kind="AccountMultiple" 
-                                                        HorizontalAlignment="Left" Style="{StaticResource OtherMenuItem}" Margin="0 5 4 0" />
-                                            <Label FontSize="14" FontWeight="Normal" Content="Shared With Me" Foreground="#ffffff"></Label>                                            
+                                                        HorizontalAlignment="Left" Name="SharedResourcesIcon" Foreground="#F8B84E" Margin="0 5 4 0"/>
+                                            <Label Name="SharedResourcesLabel"  Content="Shared With Me">
+                                                <Label.Resources>
+                                                    <Style TargetType="Label">
+                                                        <Setter Property="Foreground" Value="#ffffff" />
+                                                        <Setter Property="FontSize" Value="14" />
+                                                        <Setter Property="FontWeight" Value="Normal" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.MySharedResources}">
+                                                                <Setter Property="Foreground" Value="#313131" />
+                                                                <Setter Property="FontWeight" Value="SemiBold" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Label.Resources>
+                                            </Label>
                                         </StackPanel>
+                                        <StackPanel.Resources>
+                                            <Style TargetType="StackPanel">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#363636"/>
+                                                        <Setter Property="Opacity" Value="0.7"/>
+                                                    </Trigger>
+                                                    <DataTrigger Binding="{Binding LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.MySharedResources}">
+                                                        <Setter Property="Background" Value="#ffffff" />
+                                                        <Setter Property="Opacity" Value="1"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>                                            
+                                        </StackPanel.Resources>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Style="{StaticResource MenuItem}">
+                                    <StackPanel Orientation="Horizontal">
                                         <interactivity:Interaction.Triggers>
                                             <interactivity:EventTrigger EventName="MouseDown">
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.RecentFilesManagementCommand}"/>
@@ -346,11 +374,39 @@
                                         </interactivity:Interaction.Triggers>
                                         <StackPanel Margin="27 5" Orientation="Horizontal" >
                                             <iconPacks:PackIconMaterial Kind="ClockOutline" 
-                                                        HorizontalAlignment="Left" Style="{StaticResource OtherMenuItem}" Margin="0 5 4 0"/>
-                                            <Label FontSize="14" FontWeight="Normal" Content="Recent Files" Foreground="#ffffff"></Label>
+                                                        HorizontalAlignment="Left" Foreground="#F8B84E" Margin="0 5 4 0"/>
+                                            <Label Content="Recent Files" >
+                                                <Label.Resources>
+                                                    <Style TargetType="Label">
+                                                        <Setter Property="Foreground" Value="#ffffff" />
+                                                        <Setter Property="FontSize" Value="14" />
+                                                        <Setter Property="FontWeight" Value="Normal" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.RecentFiles}">
+                                                                <Setter Property="Foreground" Value="#313131" />
+                                                                <Setter Property="FontWeight" Value="SemiBold" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Label.Resources>
+                                            </Label>
                                         </StackPanel>
+                                        <StackPanel.Resources>
+                                            <Style TargetType="StackPanel">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#363636"/>
+                                                        <Setter Property="Opacity" Value="0.7"/>
+                                                    </Trigger>
+                                                    <DataTrigger Binding="{Binding LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.RecentFiles}">
+                                                        <Setter Property="Background" Value="#ffffff" />
+                                                        <Setter Property="Opacity" Value="1"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Resources>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Style="{StaticResource MenuItem}">
+                                    <StackPanel Orientation="Horizontal">
                                         <interactivity:Interaction.Triggers>
                                             <interactivity:EventTrigger EventName="MouseDown">
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.AllFilesManagementCommand}"/>
@@ -358,11 +414,39 @@
                                         </interactivity:Interaction.Triggers>
                                         <StackPanel Margin="27 5" Orientation="Horizontal" >
                                             <iconPacks:PackIconMaterial Kind="FileMultiple" 
-                                                    HorizontalAlignment="Left" Style="{StaticResource OtherMenuItem}" Margin="0 5 4 0"/>
-                                            <Label FontSize="14" FontWeight="Normal" Content="All Files" Foreground="#ffffff"></Label>
+                                                    HorizontalAlignment="Left" Foreground="#F8B84E" Margin="0 5 4 0"/>
+                                            <Label Content="All Files" >
+                                                <Label.Resources>
+                                                    <Style TargetType="Label">
+                                                        <Setter Property="Foreground" Value="#ffffff" />
+                                                        <Setter Property="FontSize" Value="14" />
+                                                        <Setter Property="FontWeight" Value="Normal" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.AllFiles}">
+                                                                <Setter Property="Foreground" Value="#313131" />
+                                                                <Setter Property="FontWeight" Value="SemiBold" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Label.Resources>
+                                            </Label>
                                         </StackPanel>
+                                        <StackPanel.Resources>
+                                            <Style TargetType="StackPanel">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#363636"/>
+                                                        <Setter Property="Opacity" Value="0.7"/>
+                                                    </Trigger>
+                                                    <DataTrigger Binding="{Binding LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.AllFiles}">
+                                                        <Setter Property="Background" Value="#ffffff" />
+                                                        <Setter Property="Opacity" Value="1"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Resources>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Style="{StaticResource MenuItem}">
+                                    <StackPanel Orientation="Horizontal">
                                         <interactivity:Interaction.Triggers>
                                             <interactivity:EventTrigger EventName="MouseDown">
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.TrashCanManagementCommand}"/>
@@ -370,10 +454,38 @@
                                         </interactivity:Interaction.Triggers>
                                         <StackPanel Margin="27 5" Orientation="Horizontal" >
                                             <iconPacks:PackIconMaterial Kind="Delete" 
-                                                    HorizontalAlignment="Left" Style="{StaticResource OtherMenuItem}" Margin="0 5 4 0"/>
-                                            <Label FontSize="14" FontWeight="Normal" Content="Trash Can" Foreground="#ffffff"></Label>
+                                                    HorizontalAlignment="Left" Foreground="#F8B84E" Margin="0 5 4 0"/>
+                                            <Label Content="Trash Can">
+                                                <Label.Resources>
+                                                    <Style TargetType="Label">
+                                                        <Setter Property="Foreground" Value="#ffffff" />
+                                                        <Setter Property="FontSize" Value="14" />
+                                                        <Setter Property="FontWeight" Value="Normal" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.TrashCan}">
+                                                                <Setter Property="Foreground" Value="#313131" />
+                                                                <Setter Property="FontWeight" Value="SemiBold" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Label.Resources>
+                                            </Label>
                                         </StackPanel>
-                                    </StackPanel>
+                                        <StackPanel.Resources>
+                                            <Style TargetType="StackPanel">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#363636"/>
+                                                        <Setter Property="Opacity" Value="0.7"/>
+                                                    </Trigger>
+                                                    <DataTrigger Binding="{Binding LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.TrashCan}">
+                                                        <Setter Property="Background" Value="#ffffff" />
+                                                        <Setter Property="Opacity" Value="1"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Resources>
+                                    </StackPanel>                                    
                                 </StackPanel>
                             </DockPanel>
                             <Border Background="#F9F9F9">
