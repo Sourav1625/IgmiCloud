@@ -285,7 +285,7 @@ namespace IGMICloudApplication.ViewModels
                 {
                     EditFolder(editFolderEndPoint, EditedFolderId, FolderName, ParentFolderId, SelectedValueFolderPrivacy, FolderPassword, IsWatermarkPreviews, IsShowDownloadLinks);
                     Logger.Info("Folder edited successfully with name " + FolderName);
-                    MainViewModel.Instance.ToastViewModel.ShowSuccess("Folder: " + FolderName + " is update successfully");
+                    MainViewModel.Instance.ToastViewModel.ShowSuccess("Folder: " + FolderName + " is updated successfully");
                 }
                 catch (Exception e)
                 {
@@ -346,6 +346,7 @@ namespace IGMICloudApplication.ViewModels
             if (apiResponse.Equals("error"))
             {
                 Logger.Error("Could not validate access_token and account_id during GetFolderList call");
+                MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
                 return null;
             }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
@@ -388,6 +389,7 @@ namespace IGMICloudApplication.ViewModels
             if (apiResponse.Equals("error"))
             {
                 Logger.Error("Could not validate access_token and account_id during GetSpecificFolder call");
+                MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
             }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.GetSpecificFolder(editFolderEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id);
@@ -426,6 +428,7 @@ namespace IGMICloudApplication.ViewModels
             if (apiResponse.Equals("error"))
             {
                 Logger.Error("Could not validate access_token and account_id during AddFolder call");
+                MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
             }
             bool callCreateAPI = true;
 
@@ -459,6 +462,7 @@ namespace IGMICloudApplication.ViewModels
             if (apiResponse.Equals("error"))
             {
                 Logger.Error("Could not validate access_token and account_id during EditFolder call");
+                MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
             }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.EditFolder(endpoint, LoggedinProfile.accessToken, folder_id, LoggedinProfile.accountId, folder_name, parent_id, is_public, password);
@@ -475,12 +479,14 @@ namespace IGMICloudApplication.ViewModels
             if (apiResponse.Equals("error"))
             {
                 Logger.Error("Could not validate access_token and account_id during DeleteFolder call");
+                MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
             }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.DeleteFolder(endpoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id);
 
             if (response != null)
             {
+                MainViewModel.Instance.ToastViewModel.ShowSuccess("Removed 1 file.");
                 GetFolderList(folder_id, 0);
             }
         }
@@ -490,6 +496,7 @@ namespace IGMICloudApplication.ViewModels
             if (apiResponse.Equals("error"))
             {
                 Logger.Error("Could not validate access_token and account_id during GetFolderList call");
+                MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
             }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, 0);//TODO need to filter data with status trash
