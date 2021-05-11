@@ -516,12 +516,12 @@
                                                                         </StackPanel>
                                                                         <StackPanel DockPanel.Dock="Top" Margin="0 0 0 15" Name="PublicUrlPanel">
                                                                             <TextBlock Name="PublicUrlLabel" Text="Public Access Url:" FontSize="13" Margin="0 0 0 8" Foreground="#555555"/>
-                                                                            <TextBox x:Name="PublicUrl" Background="#eeeeee" Height="35" Foreground="#555555" IsReadOnly="True" Text="{Binding Path=FolderViewModel.PublicUrl, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8"/>
+                                                                            <TextBox x:Name="PublicUrl" Background="#eeeeee" Height="35" Foreground="#555555" IsReadOnly="True" Text="{Binding FolderViewModel.PublicUrl}"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8"/>
                                                                             <StackPanel.Resources>
                                                                                 <Style TargetType="StackPanel">
                                                                                     <Style.Triggers>
                                                                                         <DataTrigger Binding="{Binding FolderViewModel.PublicUrl}" Value="{x:Null}">
-                                                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                                                            <Setter Property="Visibility" Value="Collapsed"/>
                                                                                         </DataTrigger>
                                                                                     </Style.Triggers>
                                                                                 </Style>

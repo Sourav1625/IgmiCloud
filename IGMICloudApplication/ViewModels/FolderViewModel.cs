@@ -242,6 +242,7 @@ namespace IGMICloudApplication.ViewModels
                 try
                 {
                     AddFolder(createFolderEndPoint, FolderName, ParentFolderId, SelectedValueFolderPrivacy,  FolderPassword, IsWatermarkPreviews, IsShowDownloadLinks);
+                    PublicUrl = null;
                     Logger.Info("Folder created successfully with name " + FolderName);
                 }
                 catch(Exception e)
