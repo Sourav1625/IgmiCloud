@@ -121,21 +121,21 @@
                                                             <MenuItem Header="_Add Sub Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Margin="0 8 0 0">
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />
+                                                                        <!--<EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />-->
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>
                                                             <MenuItem Header="_Edit"  Template="{StaticResource VsMenuSub}" Icon="FolderEdit">
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />
+                                                                        <!--<EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />-->
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>
                                                             <MenuItem Header="_Delete"  Template="{StaticResource VsMenuSub}" Icon="Delete" Margin="0 0 0 5">
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <EventSetter Event="Click" Handler="Delete_Folder" />
+                                                                        <!--<EventSetter Event="Click" Handler="Delete_Folder" />-->
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>
@@ -143,7 +143,7 @@
                                                             <MenuItem Header="_Download All Files(Zip)"  Template="{StaticResource VsMenuSub}" Icon="FolderDownload" Margin="0 8 0 0">
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                        <!--<EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />-->
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>
@@ -151,14 +151,14 @@
                                                             <MenuItem Header="_Copy Url to Clipboard" Template="{StaticResource VsMenuSub}"  Margin="0 8 0 0" Icon="NoteMultiple">
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                        <!--<EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />-->
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>
                                                             <MenuItem Header="_Share Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderMove">
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                        <!--<EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />-->
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>
@@ -198,21 +198,21 @@
                                                     <MenuItem Header="_Add Sub Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Margin="0 8 0 0">
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />
+                                                                <!--<EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />-->
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>
                                                     <MenuItem Header="_Edit"  Template="{StaticResource VsMenuSub}" Icon="FolderEdit">
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />
+                                                                <!--<EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />-->
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>
                                                     <MenuItem Header="_Delete"  Template="{StaticResource VsMenuSub}" Icon="Delete" Margin="0 0 0 5">
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <EventSetter Event="Click" Handler="Delete_Folder" />
+                                                                <!--<EventSetter Event="Click" Handler="Delete_Folder" />-->
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>
@@ -220,7 +220,7 @@
                                                     <MenuItem Header="_Download All Files(Zip)"  Template="{StaticResource VsMenuSub}" Icon="FolderDownload" Margin="0 8 0 0">
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                <!--<EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />-->
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>
@@ -228,14 +228,14 @@
                                                     <MenuItem Header="_Copy Url to Clipboard" Template="{StaticResource VsMenuSub}"  Margin="0 8 0 0" Icon="NoteMultiple">
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                <!--<EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />-->
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>
                                                     <MenuItem Header="_Share Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderMove">
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                <!--<EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />-->
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>

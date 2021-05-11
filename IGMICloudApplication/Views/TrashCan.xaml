@@ -121,14 +121,14 @@
                                                             <MenuItem Header="_Restore"  Template="{StaticResource VsMenuSub}" Icon="FileExport" >
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />
+                                                                        <!--<EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />-->
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>
                                                             <MenuItem Header="_Permanently Delete"  Template="{StaticResource VsMenuSub}" Icon="Close">
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />
+                                                                        <!--<EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />-->
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>                                                            
@@ -167,14 +167,14 @@
                                                     <MenuItem Header="_Restore"  Template="{StaticResource VsMenuSub}" Icon="FileExport" >
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />
+                                                                <!--<EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />-->
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>
                                                     <MenuItem Header="_Permanently Delete"  Template="{StaticResource VsMenuSub}" Icon="Close">
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />
+                                                                <!--<EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />-->
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>
