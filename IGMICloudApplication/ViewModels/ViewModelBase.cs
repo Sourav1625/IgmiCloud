@@ -25,13 +25,13 @@ namespace IGMICloudApplication.ViewModels
 		}
 		protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
 		{
-			if (object.Equals(storage, value))
-			{
-				return false;
-			}
+            if (object.Equals(storage, value))
+            {
+                return false;
+            }
 
-			storage = value;
-			NotifyPropertyChanged(propertyName);
+            storage = value;
+            NotifyPropertyChanged(propertyName);
 
 			return true;
 		}

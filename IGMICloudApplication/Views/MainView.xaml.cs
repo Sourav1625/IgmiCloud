@@ -125,15 +125,10 @@ namespace IGMICloudApplication.Views
         }
         private void Open_Folder_Creation_Popup(object sender, RoutedEventArgs e)
         {
-            MenuItem mnu = sender as MenuItem;
-            if (mnu != null)
-            {
-                if (mnu.DataContext is FolderElement) {
-
-                    MainViewModel.Instance.FolderViewModel.EditedFolderId = ((FolderElement)mnu.DataContext).Id;
-                    MainViewModel.Instance.FolderViewModel.ParentFolderId = ((FolderElement)mnu.DataContext).ParentId==null?0:Int32.Parse(((FolderElement)mnu.DataContext).ParentId.ToString());
-                }
-            }
+            MainViewModel.Instance.FolderViewModel.FolderName = null;
+            MainViewModel.Instance.FolderViewModel.PublicUrl = null;
+            MainViewModel.Instance.FolderViewModel.ParentFolderId = 0;
+            MainViewModel.Instance.FolderViewModel.EditedFolderId = 0;
             MainViewModel.Instance.FolderViewModel.FolderActionType = "Create";
             var addFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
             var dashboardPanel = (DockPanel)mainLayout.ContentTemplate.FindName("DashboardPanel", mainLayout);
@@ -166,6 +161,8 @@ namespace IGMICloudApplication.Views
                     MainViewModel.Instance.FolderViewModel.ParentFolderId = ((FolderElement)mnu.DataContext).Id;
                 }
             }
+            MainViewModel.Instance.FolderViewModel.FolderName = null;
+            MainViewModel.Instance.FolderViewModel.PublicUrl = null;
             MainViewModel.Instance.FolderViewModel.FolderActionType = "Create";
             var addFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
             var dashboardPanel = (DockPanel)mainLayout.ContentTemplate.FindName("DashboardPanel", mainLayout);

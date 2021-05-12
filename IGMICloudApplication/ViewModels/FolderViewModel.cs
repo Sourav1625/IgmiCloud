@@ -57,6 +57,7 @@ namespace IGMICloudApplication.ViewModels
         public DelegateCommand AddFolderCommand { get; private set; }
         public DelegateCommand EditFolderCommand { get; private set; }
         public DelegateCommand DeleteFolderCommand { get; private set; }
+        public DelegateCommand NavigateFolderCommand { get; private set; }
 
         private bool m_isFolderNameEmpty = false;
         public bool isFolderNameEmpty
@@ -132,8 +133,9 @@ namespace IGMICloudApplication.ViewModels
         {
             get { return folderName; }
             set
-            {                
-                SetProperty(ref folderName, value);
+            {
+                folderName = value;
+                this.NotifyPropertyChanged("FolderName");
             }
         }
         private string folderPassword;
@@ -169,7 +171,11 @@ namespace IGMICloudApplication.ViewModels
         public int ParentFolderId
         {
             get { return parentFolderId; }
-            set { SetProperty(ref parentFolderId, value); }
+            set 
+            {
+                parentFolderId = value;
+                this.NotifyPropertyChanged("ParentFolderId");
+            }
         }
         public List<FolderPrivacyCombo> ValuesFolderPrivacy { get; }
         private int _selectedValueFolderPrivacy;
@@ -178,7 +184,6 @@ namespace IGMICloudApplication.ViewModels
             get { return _selectedValueFolderPrivacy; }
             set
             {
-                //_selectedValueFolderPrivacy = value;
                 SetProperty(ref _selectedValueFolderPrivacy, value);
             }
         }
@@ -240,7 +245,17 @@ namespace IGMICloudApplication.ViewModels
         public string FolderCountMsg
         {
             get { return folderCountMsg; }
-            set { SetProperty(ref folderCountMsg, value); }
+            set
+            {
+                folderCountMsg = value;
+                this.NotifyPropertyChanged("FolderCountMsg");
+            }
+        }
+        private string trashFolderCountMsg;
+        public string TrashFolderCountMsg
+        {
+            get { return trashFolderCountMsg; }
+            set { SetProperty(ref trashFolderCountMsg, value); }
         }
         public FolderViewModel()
         {
@@ -306,7 +321,9 @@ namespace IGMICloudApplication.ViewModels
                     Logger.Error("Error while deleting folder with name " + FolderName + "," + e.Message.ToString());                    
                 }
             });
-
+            NavigateFolderCommand = new DelegateCommand(() => {
+                Logger.Error("sdsd");
+            });
         }
 
         public string getAccessToken()
@@ -506,7 +523,7 @@ namespace IGMICloudApplication.ViewModels
                     }
                 }
             }
-            FolderCountMsg = "Trash Can - " + TrashFolderList.Count + " Folders";
+            TrashFolderCountMsg = "Trash Can - " + TrashFolderList.Count + " Folders";
         }
     }
 }
