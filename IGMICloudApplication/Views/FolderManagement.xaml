@@ -49,21 +49,21 @@
                                                 </Style>
                                             </MenuItem.Resources>
                                         </MenuItem>
-                                        <MenuItem Header="_Add Sub Folder" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Margin="0 4 0 0">
+                                        <MenuItem Header="_Add Sub Folder" Tag="{Binding FolderViewModel.SelectedItem.Id}" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Margin="0 4 0 0">
                                             <MenuItem.Resources>
                                                 <Style TargetType="MenuItem">
                                                     <EventSetter Event="MenuItem.Click" Handler="Open_Sub_Folder_Creation_Popup" />
                                                 </Style>
                                             </MenuItem.Resources>
                                         </MenuItem>
-                                        <MenuItem Header="_Edit" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}" Template="{StaticResource VsMenuSub}" Icon="FolderEdit">
+                                        <MenuItem Header="_Edit" Tag="{Binding FolderViewModel.SelectedItem.Id}" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}" Template="{StaticResource VsMenuSub}" Icon="FolderEdit">
                                             <MenuItem.Resources>
                                                 <Style TargetType="MenuItem">
                                                     <EventSetter Event="MenuItem.Click" Handler="Open_Folder_Update_Popup" />
                                                 </Style>
                                             </MenuItem.Resources>
                                         </MenuItem>
-                                        <MenuItem Header="_Delete" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}" Template="{StaticResource VsMenuSub}" Icon="Delete" Margin="0 0 0 5">
+                                        <MenuItem Header="_Delete" Tag="{Binding FolderViewModel.SelectedItem.Id}" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}" Template="{StaticResource VsMenuSub}" Icon="Delete" Margin="0 0 0 5">
                                             <MenuItem.Resources>
                                                 <Style TargetType="MenuItem">
                                                     <EventSetter Event="MenuItem.Click" Handler="Delete_Folder" />
@@ -164,7 +164,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid >
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.IsSharedSizeScope="True" VerticalContentAlignment="Stretch"  Margin="10" Name="lvUsers" Background="Transparent" ItemContainerStyle="{DynamicResource ListViewContainerStyle}" BorderThickness="0">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.IsSharedSizeScope="True" VerticalContentAlignment="Stretch"  Margin="10" Name="lvUsers" Background="Transparent" ItemContainerStyle="{DynamicResource ListViewContainerStyle}" BorderThickness="0" SelectedValuePath="FolderElement.Id" SelectionChanged="SelectedItemChanged">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel></WrapPanel>
