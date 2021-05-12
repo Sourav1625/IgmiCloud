@@ -160,6 +160,10 @@ namespace IGMICloudApplication.Views
 
                     MainViewModel.Instance.FolderViewModel.EditedFolderId = 0;
                     MainViewModel.Instance.FolderViewModel.ParentFolderId = ((FolderElement)mnu.DataContext).Id;
+                }else if (mnu.Tag != null)
+                {
+                    MainViewModel.Instance.FolderViewModel.EditedFolderId = 0;
+                    MainViewModel.Instance.FolderViewModel.ParentFolderId = Int32.Parse(mnu.Tag.ToString());
                 }
             }
             MainViewModel.Instance.FolderViewModel.FolderName = null;
@@ -239,6 +243,10 @@ namespace IGMICloudApplication.Views
                     MainViewModel.Instance.FolderViewModel.FolderName = ((FolderElement)mnu.DataContext).FolderName;
                     folderName = ((FolderElement)mnu.DataContext).FolderName;
                 }
+                else if (mnu.Tag != null)
+                {
+                    MainViewModel.Instance.FolderViewModel.EditedFolderId = Int32.Parse(mnu.Tag.ToString());
+                }
             }
 
 
@@ -286,23 +294,39 @@ namespace IGMICloudApplication.Views
             }
         }
 
-        private void SelectedItemChanged(object sender, RoutedEventArgs e)
+        public void SelectedItemChanged(object sender, RoutedEventArgs e)
         {
-            TreeView folderTreeView = sender as TreeView;
-            if (folderTreeView.SelectedItem is FolderElement) {
-                FolderElement folderElement = (FolderElement)folderTreeView.SelectedItem;
-                MainViewModel.Instance.FolderViewModel.SelectedItem = folderElement;
-                MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = false;
-                MainViewModel.Instance.FolderViewModel.IsChildFolderSelected = true; 
-                MainViewModel.Instance.FolderViewModel.FolderNavigationCommand.Execute();
+            if (sender is TreeView)
+            {
+                TreeView folderTreeView = sender as TreeView;
+                if (folderTreeView.SelectedItem is FolderElement)
+                {
+                    FolderElement folderElement = (FolderElement)folderTreeView.SelectedItem;
+                    MainViewModel.Instance.FolderViewModel.SelectedItem = folderElement;
+                    MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = false;
+                    MainViewModel.Instance.FolderViewModel.IsChildFolderSelected = true;
+                    MainViewModel.Instance.FolderViewModel.FolderNavigationCommand.Execute();
+                }
+                else
+                {
+                    MainViewModel.Instance.FolderViewModel.FolderCountMsg = "Root Folder - " + MainViewModel.Instance.FolderViewModel.FolderList.Count + " Folders";
+                    MainViewModel.Instance.FolderViewModel.SelectedItem = null;
+                    MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = true;
+                    MainViewModel.Instance.FolderViewModel.IsChildFolderSelected = false;
+                    MainViewModel.Instance.LoginViewModel.SwitchView = SwitchViewEnum.FolderManagement;
+                }
             }
             else
             {
-                MainViewModel.Instance.FolderViewModel.FolderCountMsg = "Root Folder - " + MainViewModel.Instance.FolderViewModel.FolderList.Count + " Folders";
-                MainViewModel.Instance.FolderViewModel.SelectedItem = null;
-                MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = true;
-                MainViewModel.Instance.FolderViewModel.IsChildFolderSelected = false;
-                MainViewModel.Instance.LoginViewModel.SwitchView = SwitchViewEnum.FolderManagement;                
+                ListView listView = sender as ListView;
+                if (listView.SelectedItem is FolderElement)
+                {
+                    FolderElement folderElement = (FolderElement)listView.SelectedItem;
+                    MainViewModel.Instance.FolderViewModel.SelectedItem = folderElement;
+                    MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = false;
+                    MainViewModel.Instance.FolderViewModel.IsChildFolderSelected = true;
+                    MainViewModel.Instance.FolderViewModel.FolderNavigationCommand.Execute();
+                }
             }
         }
     }
