@@ -31,11 +31,14 @@ namespace IGMICloudApplication.ViewModels
 
         public ToastViewModel ToastViewModel { get; private set; }
 
+        public AccountViewModel AccountViewModel { get; private set; }
+
         public MainViewModel()
         {
             LoginViewModel = new LoginViewModel();
             FolderViewModel = new FolderViewModel();
             ToastViewModel = new ToastViewModel();
+            AccountViewModel = new AccountViewModel();
         }
 
         #endregion

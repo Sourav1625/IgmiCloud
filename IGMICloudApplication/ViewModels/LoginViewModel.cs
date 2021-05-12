@@ -23,7 +23,8 @@ namespace IGMICloudApplication.ViewModels
         MySharedResources,
         RecentFiles,
         AllFiles,
-        TrashCan
+        TrashCan,
+        Account
     }
     public class LoginViewModel : ViewModelBase
     {
@@ -218,7 +219,8 @@ namespace IGMICloudApplication.ViewModels
                                         LoginState = LoginState.LoggedIn;
                                         SwitchView = SwitchViewEnum.FolderManagement;
                                         MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = true;
-                                        MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0);                                        
+                                        MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0);
+                                        MainViewModel.Instance.AccountViewModel.GetUserDetails();
                                     }
                                 }
                             }

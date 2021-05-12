@@ -263,6 +263,12 @@ namespace IGMICloudApplication.Views
             MainViewModel.Instance.FolderViewModel.GetSpecificFolder(MainViewModel.Instance.FolderViewModel.EditedFolderId);
         }
 
+        public void Open_Account(object sender, RoutedEventArgs e)
+        {
+            MainViewModel.Instance.LoginViewModel.SwitchView = SwitchViewEnum.Account;
+
+        }
+
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBox = sender as ComboBox;

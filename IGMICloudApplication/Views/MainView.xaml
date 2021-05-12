@@ -29,6 +29,9 @@
             </DataTemplate>
             <DataTemplate x:Name="TrashCan_Template" x:Key="TrashCan_Template" DataType="x:Type data:MainViewModel"  >
                 <Views:TrashCan/>
+            </DataTemplate>
+            <DataTemplate x:Name="Account_Template" x:Key="Account_Template" DataType="x:Type data:MainViewModel"  >
+                <Views:Account/>
             </DataTemplate>            
             <DataTemplate x:Key="A_DataTemplate_LoginForm" >
                 <Grid>
@@ -528,6 +531,34 @@
                                                                 </Style.Triggers>
                                                             </Style>
                                                         </StackPanel.Resources>
+                                                        <StackPanel.Style>
+                                                            <Style TargetType="{x:Type StackPanel}">
+                                                                <Setter Property="ContextMenu">
+                                                                    <Setter.Value>
+                                                                        <ContextMenu>
+                                                                            <MenuItem Header="_Account Settings"  Template="{StaticResource VsMenuSub}" Icon="Asterisk">
+                                                                                <MenuItem.Resources>
+                                                                                    <Style TargetType="MenuItem">
+                                                                                        <EventSetter Event="Click" Handler="Open_Account" />
+                                                                                    </Style>
+                                                                                    <!--<Style TargetType="MenuItem">
+                                                                                        <Setter Property="Foreground" Value="#ffffff" />
+                                                                                        <Setter Property="FontSize" Value="14" />
+                                                                                        <Setter Property="FontWeight" Value="Normal" />
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{Binding LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.Account}">
+                                                                                                <Setter Property="Foreground" Value="#313131" />
+                                                                                                <Setter Property="FontWeight" Value="SemiBold" />
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>-->
+                                                                                </MenuItem.Resources>
+                                                                            </MenuItem>
+                                                                        </ContextMenu>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Style>
+                                                        </StackPanel.Style>
                                                     </StackPanel>
                                                 </DockPanel>
                                             </DockPanel>
@@ -667,7 +698,7 @@
                                                                         </StackPanel>
                                                                     </Button.Content>
                                                                 </Button>
-                                                                <Button Padding="10 5" Margin="8 0" Cursor="Hand" Style="{StaticResource Style_UploadButton}" Click="Folder_Create_Update"><!--Command="{Binding FolderViewModel.AddFolderCommand}">-->
+                                                                <Button Padding="10 5" Margin="8 0" Cursor="Hand" Style="{StaticResource Style_UploadButton}" Click="Folder_Create_Update">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" >
                                                                             <TextBlock Name="AddEditFolderButton"  Text="Add Folder" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
@@ -701,6 +732,9 @@
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.TrashCan}">
                                                             <Setter Property="ContentTemplate" Value="{StaticResource TrashCan_Template}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.Account}">
+                                                            <Setter Property="ContentTemplate" Value="{StaticResource Account_Template}" />
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
