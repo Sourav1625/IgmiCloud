@@ -292,13 +292,17 @@ namespace IGMICloudApplication.Views
             if (folderTreeView.SelectedItem is FolderElement) {
                 FolderElement folderElement = (FolderElement)folderTreeView.SelectedItem;
                 MainViewModel.Instance.FolderViewModel.SelectedItem = folderElement;
+                MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = false;
+                MainViewModel.Instance.FolderViewModel.IsChildFolderSelected = true; 
                 MainViewModel.Instance.FolderViewModel.FolderNavigationCommand.Execute();
             }
             else
             {
                 MainViewModel.Instance.FolderViewModel.FolderCountMsg = "Root Folder - " + MainViewModel.Instance.FolderViewModel.FolderList.Count + " Folders";
                 MainViewModel.Instance.FolderViewModel.SelectedItem = null;
-                MainViewModel.Instance.LoginViewModel.SwitchView = SwitchViewEnum.FolderManagement;
+                MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = true;
+                MainViewModel.Instance.FolderViewModel.IsChildFolderSelected = false;
+                MainViewModel.Instance.LoginViewModel.SwitchView = SwitchViewEnum.FolderManagement;                
             }
         }
     }

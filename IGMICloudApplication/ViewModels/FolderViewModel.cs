@@ -270,6 +270,26 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref folderCreationRequest, value); }
         }
+        private bool isRootFolderSelected;
+        public bool IsRootFolderSelected
+        {
+            get { return isRootFolderSelected; }
+            set
+            {
+                isRootFolderSelected = value;
+                this.NotifyPropertyChanged("IsRootFolderSelected");
+            }
+        }
+        private bool isChildFolderSelected;
+        public bool IsChildFolderSelected
+        {
+            get { return isChildFolderSelected; }
+            set
+            {
+                isChildFolderSelected = value;
+                this.NotifyPropertyChanged("IsChildFolderSelected");
+            }
+        }
         private string folderCountMsg;
         public string FolderCountMsg
         {

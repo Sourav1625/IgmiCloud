@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:interactivity="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d">
     <Grid>
@@ -37,6 +38,70 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Path=FolderViewModel.FolderCountMsg, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0 4" Foreground="#303641"/>
                                 <iconPacks:PackIconMaterial Kind="Triangle" RotationAngle="180" Margin="6" Width="6"/>
+                                <StackPanel.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="_Upload Files"  Template="{StaticResource VsMenuSub}" Icon="CloudUpload" Margin="0 2" />
+                                        <Separator Template="{StaticResource VsMenuSep}"/>
+                                        <MenuItem Header="_Add Folder" Visibility="{Binding FolderViewModel.IsRootFolderSelected, Converter={StaticResource BoolToVis}}" Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Margin="0 4 0 0">
+                                            <MenuItem.Resources>
+                                                <Style TargetType="MenuItem">
+                                                    <EventSetter Event="MenuItem.Click" Handler="Open_Folder_Creation_Popup" />
+                                                </Style>
+                                            </MenuItem.Resources>
+                                        </MenuItem>
+                                        <MenuItem Header="_Add Sub Folder" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Margin="0 4 0 0">
+                                            <MenuItem.Resources>
+                                                <Style TargetType="MenuItem">
+                                                    <EventSetter Event="MenuItem.Click" Handler="Open_Sub_Folder_Creation_Popup" />
+                                                </Style>
+                                            </MenuItem.Resources>
+                                        </MenuItem>
+                                        <MenuItem Header="_Edit" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}" Template="{StaticResource VsMenuSub}" Icon="FolderEdit">
+                                            <MenuItem.Resources>
+                                                <Style TargetType="MenuItem">
+                                                    <EventSetter Event="MenuItem.Click" Handler="Open_Folder_Update_Popup" />
+                                                </Style>
+                                            </MenuItem.Resources>
+                                        </MenuItem>
+                                        <MenuItem Header="_Delete" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}" Template="{StaticResource VsMenuSub}" Icon="Delete" Margin="0 0 0 5">
+                                            <MenuItem.Resources>
+                                                <Style TargetType="MenuItem">
+                                                    <EventSetter Event="MenuItem.Click" Handler="Delete_Folder" />
+                                                </Style>
+                                            </MenuItem.Resources>
+                                        </MenuItem>
+                                        <Separator Template="{StaticResource VsMenuSep}" Height="2" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}"/>
+                                        <MenuItem Header="_Download All Files(Zip)" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}" Template="{StaticResource VsMenuSub}" Icon="FolderDownload" Margin="0 8 0 0">
+                                            <MenuItem.Resources>
+                                                <Style TargetType="MenuItem">
+                                                    <!--<EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />-->
+                                                </Style>
+                                            </MenuItem.Resources>
+                                        </MenuItem>
+                                        <Separator Template="{StaticResource VsMenuSep}" />
+                                        <MenuItem Header="_Select All Items"  Template="{StaticResource VsMenuSub}" Icon="CheckBoxOutline" Margin="0 4 0 0">
+                                            <MenuItem.Resources>
+                                                <Style TargetType="MenuItem">
+                                                    <EventSetter Event="MenuItem.Click" Handler="Open_Sub_Folder_Creation_Popup" />
+                                                </Style>
+                                            </MenuItem.Resources>
+                                        </MenuItem>
+                                        <MenuItem Header="_Clear Selected"  Template="{StaticResource VsMenuSub}" Icon="RectangleOutline" Margin="0 4 0 0">
+                                            <MenuItem.Resources>
+                                                <Style TargetType="MenuItem">
+                                                    <EventSetter Event="MenuItem.Click" Handler="Open_Sub_Folder_Creation_Popup" />
+                                                </Style>
+                                            </MenuItem.Resources>
+                                        </MenuItem>
+                                        <MenuItem Header="_Share Folder" Visibility="{Binding FolderViewModel.IsChildFolderSelected, Converter={StaticResource BoolToVis}}"  Template="{StaticResource VsMenuSub}" Icon="FolderMove">
+                                            <MenuItem.Resources>
+                                                <Style TargetType="MenuItem">
+                                                    <!--<EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />-->
+                                                </Style>
+                                            </MenuItem.Resources>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </StackPanel.ContextMenu>
                             </StackPanel>
                         </DockPanel>
                     </StackPanel>
@@ -107,7 +172,7 @@
                     </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
-                            <StackPanel Name="EachFolderContainer">                                
+                            <StackPanel Name="EachFolderContainer">
                                 <StackPanel Name="EachFolder" Height="135" Cursor="Hand" Background="White" >
                                     <iconPacks:PackIconMaterial x:Name="ActionButton" HorizontalAlignment="Right" Kind="Triangle" RotationAngle="180" Width="6" Margin="5 2">
                                         <iconPacks:PackIconMaterial.Style>

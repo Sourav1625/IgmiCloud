@@ -217,6 +217,7 @@ namespace IGMICloudApplication.ViewModels
                                         await Task.Delay(400);
                                         LoginState = LoginState.LoggedIn;
                                         SwitchView = SwitchViewEnum.FolderManagement;
+                                        MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = true;
                                         MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0);                                        
                                     }
                                 }

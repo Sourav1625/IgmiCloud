@@ -14,7 +14,7 @@
         Background="Transparent"
         WindowStyle="ThreeDBorderWindow" WindowState="Maximized" >    
     <Window.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary>            
             <DataTemplate x:Name="FolderManagement_Template" x:Key="FolderManagement_Template" DataType="x:Type data:MainViewModel"  >
                 <Views:FolderManagement/>
             </DataTemplate>
