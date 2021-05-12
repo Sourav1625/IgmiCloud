@@ -23,5 +23,20 @@ namespace IGMICloudApplication.Views
         {
             InitializeComponent();
         }
+        private void Open_Sub_Folder_Creation_Popup(object sender, RoutedEventArgs e)
+        {
+            MainView parentWindow = (MainView)Window.GetWindow(this);
+            parentWindow.Open_Sub_Folder_Creation_Popup(sender, e);
+        }
+        private void Open_Folder_Update_Popup(object sender, RoutedEventArgs e)
+        {
+            MainView parentWindow = (MainView)Window.GetWindow(this);
+            parentWindow.Open_Folder_Update_Popup(sender, e);
+        }
+        private void Delete_Folder(object sender, RoutedEventArgs e)
+        {
+            MainView parentWindow = (MainView)Window.GetWindow(this);
+            parentWindow.Delete_Folder(sender, e);
+        }
     }
 }

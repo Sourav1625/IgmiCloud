@@ -57,7 +57,7 @@ namespace IGMICloudApplication.ViewModels
         public DelegateCommand AddFolderCommand { get; private set; }
         public DelegateCommand EditFolderCommand { get; private set; }
         public DelegateCommand DeleteFolderCommand { get; private set; }
-        public DelegateCommand NavigateFolderCommand { get; private set; }
+        public DelegateCommand FolderNavigationCommand { get; private set; }
 
         private bool m_isFolderNameEmpty = false;
         public bool isFolderNameEmpty
@@ -87,6 +87,25 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref isExpanded, value); }
         }
+        private FolderElement selectedItem;
+        public FolderElement SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+            }
+            set { SetProperty(ref selectedItem, value); }
+        }
+        
+        private bool isSelected;
+        public bool IsSelected
+        {
+            get
+            {
+                return isSelected;
+            }
+            set { SetProperty(ref isSelected, value); }
+        }
 
         private ObservableCollection<FolderElement> folderList;
         public ObservableCollection<FolderElement> FolderList
@@ -105,6 +124,15 @@ namespace IGMICloudApplication.ViewModels
                 return trashFolderList;
             }
             set { SetProperty(ref trashFolderList, value); }
+        }
+        private ObservableCollection<FolderElement> subFolderList;
+        public ObservableCollection<FolderElement> SubFolderList
+        {
+            get
+            {
+                return subFolderList;
+            }
+            set { SetProperty(ref subFolderList, value); }
         }
         private int editedFolderId;
         public int EditedFolderId
@@ -322,8 +350,29 @@ namespace IGMICloudApplication.ViewModels
                     Logger.Error("Error while deleting folder with name " + FolderName + "," + e.Message.ToString());                    
                 }
             });
-            NavigateFolderCommand = new DelegateCommand(() => {
-                Logger.Error("sdsd");
+            FolderNavigationCommand = new DelegateCommand(() => {
+                string apiResponse = getAccessToken();
+                if (apiResponse.Equals("error"))
+                {
+                    Logger.Error("Could not validate access_token and account_id during GetFolderList call");
+                    MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
+                }
+                var cloudAPIFolderObj = new IGMICloudFolderAPIs();
+                string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, SelectedItem.Id);
+                Folder folder = JsonConvert.DeserializeObject<Folder>(response);
+                SubFolderList = new ObservableCollection<FolderElement>();
+                if (folder != null && folder.Data != null)
+                {
+                    foreach (FolderElement folderElement in folder.Data.Folders)
+                    {
+                        if (folderElement.Status == "active")
+                        {
+                            SubFolderList.Add(folderElement);
+                        }
+                    }
+                }
+                FolderCountMsg = SelectedItem.FolderName;
+                MainViewModel.Instance.LoginViewModel.SwitchView = SwitchViewEnum.FolderManagement;
             });
         }
 

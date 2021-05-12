@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        xmlns:interactivity="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d">
     <Grid>
@@ -18,7 +17,7 @@
         <Grid Grid.Row="0" VerticalAlignment="Top">
             <DockPanel>
                 <Border BorderBrush="#e0e0e0" BorderThickness="1" Margin="14 12" CornerRadius="3">
-                    <StackPanel Orientation="Horizontal" Width="180" Height="45">
+                    <StackPanel Orientation="Horizontal" Width="Auto" Height="45">
                         <DockPanel HorizontalAlignment="Left">
                             <iconPacks:PackIconMaterial Kind="ArrowRightThick"  Name="HomeLink" Height="60" Width="80" Margin="-42 -18 0 2"  VerticalAlignment="Top">
                                 <iconPacks:PackIconMaterial.Style>
@@ -34,7 +33,7 @@
                             </iconPacks:PackIconMaterial>
                             <iconPacks:PackIconMaterial Kind="Home" Margin="-34 4 0 4" Width="14"/>
                         </DockPanel>
-                        <DockPanel LastChildFill="True" Name="FolderAndFiles">
+                        <DockPanel LastChildFill="True" Name="FolderAndFiles" >
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Path=FolderViewModel.FolderCountMsg, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0 4" Foreground="#303641"/>
                                 <iconPacks:PackIconMaterial Kind="Triangle" RotationAngle="180" Margin="6" Width="6"/>
@@ -100,7 +99,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid >
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.IsSharedSizeScope="True" VerticalContentAlignment="Stretch"  Margin="10" Name="lvUsers" Background="Transparent" ItemContainerStyle="{DynamicResource ListViewContainerStyle}" ItemsSource="{Binding FolderViewModel.FolderList}" BorderThickness="0">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.IsSharedSizeScope="True" VerticalContentAlignment="Stretch"  Margin="10" Name="lvUsers" Background="Transparent" ItemContainerStyle="{DynamicResource ListViewContainerStyle}" BorderThickness="0">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel></WrapPanel>
@@ -121,21 +120,21 @@
                                                             <MenuItem Header="_Add Sub Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Margin="0 8 0 0">
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <!--<EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />-->
+                                                                        <EventSetter Event="MenuItem.Click" Handler="Open_Sub_Folder_Creation_Popup" />
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>
                                                             <MenuItem Header="_Edit"  Template="{StaticResource VsMenuSub}" Icon="FolderEdit">
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <!--<EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />-->
+                                                                        <EventSetter Event="MenuItem.Click" Handler="Open_Folder_Update_Popup" />
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>
                                                             <MenuItem Header="_Delete"  Template="{StaticResource VsMenuSub}" Icon="Delete" Margin="0 0 0 5">
                                                                 <MenuItem.Resources>
                                                                     <Style TargetType="MenuItem">
-                                                                        <!--<EventSetter Event="Click" Handler="Delete_Folder" />-->
+                                                                        <EventSetter Event="MenuItem.Click" Handler="Delete_Folder" />
                                                                     </Style>
                                                                 </MenuItem.Resources>
                                                             </MenuItem>
@@ -195,24 +194,24 @@
                                                 <ContextMenu>
                                                     <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" Margin="0 6" />
                                                     <Separator Template="{StaticResource VsMenuSep}" />
-                                                    <MenuItem Header="_Add Sub Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Margin="0 8 0 0">
+                                                    <MenuItem Header="_Add Sub Folder" Template="{StaticResource VsMenuSub}" Icon="FolderPlus" Margin="0 8 0 0">
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <!--<EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />-->
+                                                                <EventSetter Event="MenuItem.Click" Handler="Open_Sub_Folder_Creation_Popup" />
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>
                                                     <MenuItem Header="_Edit"  Template="{StaticResource VsMenuSub}" Icon="FolderEdit">
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <!--<EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />-->
+                                                                <EventSetter Event="MenuItem.Click" Handler="Open_Folder_Update_Popup" />
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>
                                                     <MenuItem Header="_Delete"  Template="{StaticResource VsMenuSub}" Icon="Delete" Margin="0 0 0 5">
                                                         <MenuItem.Resources>
                                                             <Style TargetType="MenuItem">
-                                                                <!--<EventSetter Event="Click" Handler="Delete_Folder" />-->
+                                                                <EventSetter Event="MenuItem.Click" Handler="Delete_Folder" />
                                                             </Style>
                                                         </MenuItem.Resources>
                                                     </MenuItem>
@@ -255,6 +254,16 @@
                             </DataTemplate.Triggers>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.Style>
+                        <Style TargetType="ListView">
+                            <Setter Property="ItemsSource" Value="{Binding FolderViewModel.SubFolderList}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding FolderViewModel.SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="ItemsSource" Value="{Binding FolderViewModel.FolderList}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Style>
                 </ListView>
             </Grid>
         </Grid>

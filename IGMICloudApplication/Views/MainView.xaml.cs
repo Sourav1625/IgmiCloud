@@ -123,7 +123,7 @@ namespace IGMICloudApplication.Views
                 }
             }
         }
-        private void Open_Folder_Creation_Popup(object sender, RoutedEventArgs e)
+        public void Open_Folder_Creation_Popup(object sender, RoutedEventArgs e)
         {
             MainViewModel.Instance.FolderViewModel.FolderName = null;
             MainViewModel.Instance.FolderViewModel.FolderPassword = null;
@@ -135,7 +135,7 @@ namespace IGMICloudApplication.Views
             var dashboardPanel = (DockPanel)mainLayout.ContentTemplate.FindName("DashboardPanel", mainLayout);
             var addEditFolderIcon = (Image)mainLayout.ContentTemplate.FindName("AddEditFolderIcon", mainLayout);
             var addEditFolderButton = (TextBlock)mainLayout.ContentTemplate.FindName("AddEditFolderButton", mainLayout);
-            var addEditFolderHeader = (TextBlock)mainLayout.ContentTemplate.FindName("AddEditFolderHeader", mainLayout);            
+            var addEditFolderHeader = (TextBlock)mainLayout.ContentTemplate.FindName("AddEditFolderHeader", mainLayout);
 
             BitmapImage logo = new BitmapImage();
             logo.BeginInit();
@@ -149,8 +149,8 @@ namespace IGMICloudApplication.Views
             dashboardPanel.IsHitTestVisible = false;
             addFolderPopup.IsOpen = true;
 
-        }        
-        private void Open_Sub_Folder_Creation_Popup(object sender, RoutedEventArgs e)
+        }
+        public void Open_Sub_Folder_Creation_Popup(object sender, RoutedEventArgs e)
         {
             MenuItem mnu = sender as MenuItem;
             if (mnu != null)
@@ -183,14 +183,13 @@ namespace IGMICloudApplication.Views
             dashboardPanel.Opacity = 0.8;
             dashboardPanel.IsHitTestVisible = false;
             addFolderPopup.IsOpen = true;
-
         }
         private void Close_Folder_Creation_Popup(object sender, RoutedEventArgs e)
         {
             close_Folder_Creation_Popup();
         }
 
-        private void Folder_Create_Update(object sender, RoutedEventArgs e)
+        public void Folder_Create_Update(object sender, RoutedEventArgs e)
         {
             if (MainViewModel.Instance.FolderViewModel.FolderActionType.Equals("Create"))
             {
@@ -203,7 +202,7 @@ namespace IGMICloudApplication.Views
             close_Folder_Creation_Popup();
         }
 
-        private void Delete_Folder(object sender, RoutedEventArgs e)
+        public void Delete_Folder(object sender, RoutedEventArgs e)
         {
             MenuItem mnu = sender as MenuItem;
             if (mnu != null)
@@ -211,7 +210,7 @@ namespace IGMICloudApplication.Views
                 if (mnu.DataContext is FolderElement)
                 {
 
-                    MainViewModel.Instance.FolderViewModel.EditedFolderId = ((FolderElement)mnu.DataContext).Id;                    
+                    MainViewModel.Instance.FolderViewModel.EditedFolderId = ((FolderElement)mnu.DataContext).Id;
                 }
             }
             MainViewModel.Instance.FolderViewModel.DeleteFolderCommand.Execute();
@@ -227,7 +226,7 @@ namespace IGMICloudApplication.Views
             }
         }
 
-        private void Open_Folder_Update_Popup(object sender, RoutedEventArgs e)
+        public void Open_Folder_Update_Popup(object sender, RoutedEventArgs e)
         {
             MenuItem mnu = sender as MenuItem;
             string folderName = null;
@@ -241,10 +240,10 @@ namespace IGMICloudApplication.Views
                     folderName = ((FolderElement)mnu.DataContext).FolderName;
                 }
             }
-            
-            
+
+
             MainViewModel.Instance.FolderViewModel.FolderActionType = "Update";
-             var updateFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
+            var updateFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);
             var dashboardPanel = (DockPanel)mainLayout.ContentTemplate.FindName("DashboardPanel", mainLayout);
             var addEditFolderIcon = (Image)mainLayout.ContentTemplate.FindName("AddEditFolderIcon", mainLayout);
             var addEditFolderButton = (TextBlock)mainLayout.ContentTemplate.FindName("AddEditFolderButton", mainLayout);
@@ -257,11 +256,11 @@ namespace IGMICloudApplication.Views
             addEditFolderIcon.Source = logo;
 
             addEditFolderButton.Text = "Update Folder";
-            addEditFolderHeader.Text = "Edit Existing Folder ("+ folderName+")";
+            addEditFolderHeader.Text = "Edit Existing Folder (" + folderName + ")";
             dashboardPanel.Opacity = 0.8;
             dashboardPanel.IsHitTestVisible = false;
             updateFolderPopup.IsOpen = true;
-            MainViewModel.Instance.FolderViewModel.GetSpecificFolder(MainViewModel.Instance.FolderViewModel.EditedFolderId);            
+            MainViewModel.Instance.FolderViewModel.GetSpecificFolder(MainViewModel.Instance.FolderViewModel.EditedFolderId);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -277,13 +276,29 @@ namespace IGMICloudApplication.Views
         private void chkPwd_Click(object sender, RoutedEventArgs e)
         {
             var checkBox = sender as CheckBox;
-            if (checkBox.IsChecked==true)
+            if (checkBox.IsChecked == true)
             {
                 MainViewModel.Instance.FolderViewModel.EnablePassword = 1;
             }
             else
             {
                 MainViewModel.Instance.FolderViewModel.EnablePassword = 0;
+            }
+        }
+
+        private void SelectedItemChanged(object sender, RoutedEventArgs e)
+        {
+            TreeView folderTreeView = sender as TreeView;
+            if (folderTreeView.SelectedItem is FolderElement) {
+                FolderElement folderElement = (FolderElement)folderTreeView.SelectedItem;
+                MainViewModel.Instance.FolderViewModel.SelectedItem = folderElement;
+                MainViewModel.Instance.FolderViewModel.FolderNavigationCommand.Execute();
+            }
+            else
+            {
+                MainViewModel.Instance.FolderViewModel.FolderCountMsg = "Root Folder - " + MainViewModel.Instance.FolderViewModel.FolderList.Count + " Folders";
+                MainViewModel.Instance.FolderViewModel.SelectedItem = null;
+                MainViewModel.Instance.LoginViewModel.SwitchView = SwitchViewEnum.FolderManagement;
             }
         }
     }

@@ -14,7 +14,7 @@
         Background="Transparent"
         WindowStyle="ThreeDBorderWindow" WindowState="Maximized" >    
     <Window.Resources>
-        <ResourceDictionary>            
+        <ResourceDictionary>
             <DataTemplate x:Name="FolderManagement_Template" x:Key="FolderManagement_Template" DataType="x:Type data:MainViewModel"  >
                 <Views:FolderManagement/>
             </DataTemplate>
@@ -215,16 +215,11 @@
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
                                         <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 12 10 8" />
                                     </StackPanel>
-                                    <StackPanel Name="MyFilesMenu">                                        
-                                        <TreeView ItemContainerStyle="{StaticResource styleTreeView}" Height="Auto" MaxHeight="750" >
-                                            <TreeViewItem ItemsSource="{Binding FolderViewModel.FolderList}">
+                                    <StackPanel>
+                                        <TreeView Height="Auto" MaxHeight="750" SelectedValuePath="FolderElement.Id" SelectedItemChanged="SelectedItemChanged">
+                                            <TreeViewItem Name="MyFilesMenu" ItemsSource="{Binding FolderViewModel.FolderList}" IsSelected="{Binding FolderViewModel.IsSelected}" >
                                                 <TreeViewItem.Header>
                                                     <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" >
-                                                        <interactivity:Interaction.Triggers>
-                                                            <interactivity:EventTrigger EventName="MouseDown">
-                                                                <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.FolderManagementCommand}"/>
-                                                            </interactivity:EventTrigger>
-                                                        </interactivity:Interaction.Triggers>
                                                         <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
                                                 HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
                                                         <Label FontSize="14" FontWeight="SemiBold" Content="My Files"></Label>
@@ -252,12 +247,7 @@
                                                 </TreeViewItem.Header>
                                                 <TreeViewItem.ItemTemplate>
                                                     <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
-                                                        <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
-                                                            <interactivity:Interaction.Triggers>
-                                                                <interactivity:EventTrigger EventName="MouseDown">
-                                                                    <interactivity:InvokeCommandAction  Command="{Binding FolderViewModel.NavigateFolderCommand}" CommandParameter="1"/>
-                                                                </interactivity:EventTrigger>
-                                                            </interactivity:Interaction.Triggers>
+                                                        <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" Tag="{Binding Id}">                                                            
                                                             <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
                                                 HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
                                                             <Label FontSize="14" FontWeight="SemiBold" Content="{Binding FolderName}"></Label>
@@ -312,8 +302,8 @@
                                                             </StackPanel.Style>
                                                         </StackPanel>
                                                     </DataTemplate>
-                                                </TreeViewItem.ItemTemplate>                                             
-                                            </TreeViewItem>
+                                                </TreeViewItem.ItemTemplate>
+                                            </TreeViewItem>                                            
                                         </TreeView>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" >
@@ -542,7 +532,7 @@
                                                 </DockPanel>
                                             </DockPanel>
                                         </Border>
-                                        <Popup Name="AddAndEditFolderPopup" PlacementTarget="{Binding ElementName=DashboardPanel}" Placement="Center" VerticalAlignment="Top" HorizontalOffset="-30" VerticalOffset="-240" AllowsTransparency="True">
+                                        <Popup Name="AddAndEditFolderPopup" Placement="Center" VerticalAlignment="Top" HorizontalOffset="-30" VerticalOffset="-240" AllowsTransparency="True">
                                             <DockPanel>
                                                 <Border BorderBrush="#e5e5e5" BorderThickness="1" CornerRadius="4" Margin="40" Width="880" Height="470">
                                                     <StackPanel Background="White" >
