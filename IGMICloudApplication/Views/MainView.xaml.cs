@@ -126,6 +126,7 @@ namespace IGMICloudApplication.Views
         private void Open_Folder_Creation_Popup(object sender, RoutedEventArgs e)
         {
             MainViewModel.Instance.FolderViewModel.FolderName = null;
+            MainViewModel.Instance.FolderViewModel.FolderPassword = null;
             MainViewModel.Instance.FolderViewModel.PublicUrl = null;
             MainViewModel.Instance.FolderViewModel.ParentFolderId = 0;
             MainViewModel.Instance.FolderViewModel.EditedFolderId = 0;
@@ -162,6 +163,7 @@ namespace IGMICloudApplication.Views
                 }
             }
             MainViewModel.Instance.FolderViewModel.FolderName = null;
+            MainViewModel.Instance.FolderViewModel.FolderPassword = null;
             MainViewModel.Instance.FolderViewModel.PublicUrl = null;
             MainViewModel.Instance.FolderViewModel.FolderActionType = "Create";
             var addFolderPopup = (Popup)mainLayout.ContentTemplate.FindName("AddAndEditFolderPopup", mainLayout);

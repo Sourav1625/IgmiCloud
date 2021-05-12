@@ -143,8 +143,9 @@ namespace IGMICloudApplication.ViewModels
         {
             get { return folderPassword; }
             set
-            {                
-                SetProperty(ref folderPassword, value);
+            {
+                folderPassword = value;
+                this.NotifyPropertyChanged("FolderPassword");
             }
         }
 
