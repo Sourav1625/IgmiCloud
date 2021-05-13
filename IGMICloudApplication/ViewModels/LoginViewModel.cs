@@ -23,7 +23,8 @@ namespace IGMICloudApplication.ViewModels
         MySharedResources,
         RecentFiles,
         AllFiles,
-        TrashCan
+        TrashCan,
+        Account
     }
     public class LoginViewModel : ViewModelBase
     {
@@ -96,13 +97,13 @@ namespace IGMICloudApplication.ViewModels
         {
             if (string.IsNullOrEmpty(userName))
             {
-                //UserName = "Username";
-                UserName = "niloy.bauri";
+                UserName = userName;
+               // UserName = "niloy.bauri";
             }
             if (string.IsNullOrEmpty(password))
             {
-                //Password = "Password";
-                Password = "igmi@123";
+                Password = password;
+                //Password = "igmi@123";
             }
             if (string.IsNullOrEmpty(sendPasswordEmail))
             {
@@ -218,7 +219,8 @@ namespace IGMICloudApplication.ViewModels
                                         LoginState = LoginState.LoggedIn;
                                         SwitchView = SwitchViewEnum.FolderManagement;
                                         MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = true;
-                                        MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0);                                        
+                                        MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0);
+                                        MainViewModel.Instance.AccountViewModel.GetUserDetails();
                                     }
                                 }
                             }

@@ -12,7 +12,42 @@ using System.Threading.Tasks;
 
 namespace IGMICloudApplication.ViewModels
 {
-    class UserProfileViewModel : ViewModelBase
+    public class LanguageyCombo
+    {
+        public string _Key { get; set; }
+        public int _Value { get; set; }
+
+        public LanguageyCombo(string _key, int _value)
+        {
+            _Key = _key;
+            _Value = _value;
+        }
+    }
+
+    public class TitleCombo
+    {
+        public string _Key { get; set; }       
+
+        public TitleCombo(string _key)
+        {
+            _Key = _key;
+           
+        }
+    }
+
+    public class WatermarkPositionCombo
+    {
+        public string _Key { get; set; }
+        public int _Value { get; set; }
+
+        public WatermarkPositionCombo(string _key, int _value)
+        {
+            _Key = _key;
+            _Value = _value;
+        }
+    }
+
+    public class AccountViewModel : ViewModelBase
     {
         string getUserDetailsEndPoint = "/account/info";
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -67,10 +102,57 @@ namespace IGMICloudApplication.ViewModels
             }
         }
 
+        public List<TitleCombo> ValuesForTitle { get; }
+       
+        public List<LanguageyCombo> ValuesForLanguage { get; }
+        private int _selectedValueForLanguage;
+        public int SelectedValueForLanguage
+        {
+            get { return _selectedValueForLanguage; }
+            set
+            {
+                SetProperty(ref _selectedValueForLanguage, value);
+            }
+        }
+      
+        public List<WatermarkPositionCombo> ValuesForWatermark { get; }
+        private int _selectedValueFoWatermark;
+        public int SelectedValueFoWatermark
+        {
+            get { return _selectedValueFoWatermark; }
+            set
+            {
+                SetProperty(ref _selectedValueFoWatermark, value);
+            }
+        }
+
         public DelegateCommand GetUserDetailsCommand { get; private set; }
 
-        public UserProfileViewModel()
+        public AccountViewModel()
         {
+            ValuesForLanguage = new List<LanguageyCombo>();
+            ValuesForLanguage.Add(new LanguageyCombo("English (en)", 1));
+            SelectedValueForLanguage = 1;
+            ValuesForTitle = new List<TitleCombo>();
+            ValuesForTitle.Add(new TitleCombo("Mr"));
+            ValuesForTitle.Add(new TitleCombo("Ms"));
+            ValuesForTitle.Add(new TitleCombo("Mrs"));
+            ValuesForTitle.Add(new TitleCombo("Miss"));
+            ValuesForTitle.Add(new TitleCombo("Dr"));
+            ValuesForTitle.Add(new TitleCombo("Pro"));
+            _selectedValueFoWatermark = 0;
+
+            ValuesForWatermark = new List<WatermarkPositionCombo>();
+            ValuesForWatermark.Add(new WatermarkPositionCombo("Top-Left",0));
+            ValuesForWatermark.Add(new WatermarkPositionCombo("Top-Middle", 1));
+            ValuesForWatermark.Add(new WatermarkPositionCombo("Top-Right", 2));
+            ValuesForWatermark.Add(new WatermarkPositionCombo("Right",3));
+            ValuesForWatermark.Add(new WatermarkPositionCombo("Bottom-Right", 4));
+            ValuesForWatermark.Add(new WatermarkPositionCombo("Bottom-Middle", 5));
+            ValuesForWatermark.Add(new WatermarkPositionCombo("Bottom-Left", 6));
+            ValuesForWatermark.Add(new WatermarkPositionCombo("Left", 7));
+            ValuesForWatermark.Add(new WatermarkPositionCombo("Middle", 8));
+
             GetUserDetailsCommand = new DelegateCommand(() =>
             {
                 Logger.Info("Fetching user details");
