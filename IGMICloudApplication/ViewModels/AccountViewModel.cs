@@ -116,13 +116,13 @@ namespace IGMICloudApplication.ViewModels
         }
       
         public List<WatermarkPositionCombo> ValuesForWatermark { get; }
-        private int _selectedValueFoWatermark;
-        public int SelectedValueFoWatermark
+        private int _selectedValueForWatermark;
+        public int SelectedValueForWatermark
         {
-            get { return _selectedValueFoWatermark; }
+            get { return _selectedValueForWatermark; }
             set
             {
-                SetProperty(ref _selectedValueFoWatermark, value);
+                SetProperty(ref _selectedValueForWatermark, value);
             }
         }
 
@@ -140,7 +140,7 @@ namespace IGMICloudApplication.ViewModels
             ValuesForTitle.Add(new TitleCombo("Miss"));
             ValuesForTitle.Add(new TitleCombo("Dr"));
             ValuesForTitle.Add(new TitleCombo("Pro"));
-            _selectedValueFoWatermark = 0;
+            _selectedValueForWatermark = 0;
 
             ValuesForWatermark = new List<WatermarkPositionCombo>();
             ValuesForWatermark.Add(new WatermarkPositionCombo("Top-Left",0));

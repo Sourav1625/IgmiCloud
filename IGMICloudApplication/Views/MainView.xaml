@@ -520,7 +520,7 @@
                                                     </Button>
                                                 </DockPanel>
                                                 <DockPanel LastChildFill="True">
-                                                    <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Cursor="Hand">
+                                                    <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Cursor="Hand">                                              
                                                         <TextBlock Text="{Binding LoginViewModel.DisplayName}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#58666e" Margin="15 0 0 0"/>
                                                         <iconPacks:PackIconMaterial Kind="Triangle" Flip="Vertical" HorizontalAlignment="Right" Margin="0 18 0 0" Padding="0 6" Foreground="#58666e"/>
                                                         <Image Source="Icons/avatar_default.png" Width="40" Height="40" VerticalAlignment="Top" Margin="0 0 15 10">
@@ -566,8 +566,8 @@
                                                                     </Setter.Value>
                                                                 </Setter>
                                                             </Style>
-                                                        </StackPanel.Style>
-                                                    </StackPanel>
+                                                        </StackPanel.Style>                                                        
+                                                    </StackPanel>                                                  
                                                 </DockPanel>
                                             </DockPanel>
                                         </Border>
