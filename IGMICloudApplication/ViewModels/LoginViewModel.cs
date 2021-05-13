@@ -97,13 +97,13 @@ namespace IGMICloudApplication.ViewModels
         {
             if (string.IsNullOrEmpty(userName))
             {
-                //UserName = "Username";
-                UserName = "niloy.bauri";
+                UserName = userName;
+               // UserName = "niloy.bauri";
             }
             if (string.IsNullOrEmpty(password))
             {
-                //Password = "Password";
-                Password = "igmi@123";
+                Password = password;
+                //Password = "igmi@123";
             }
             if (string.IsNullOrEmpty(sendPasswordEmail))
             {
