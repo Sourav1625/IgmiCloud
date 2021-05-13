@@ -10,11 +10,8 @@
                 <ResourceDictionary Source="Views/Styles/CoreResourceDictionary.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Views/ModernButtonTheme/ModernButton.xaml"/>
                 <ResourceDictionary Source="Views/Styles/Blue.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Views/Styles/CoreResourceDictionary.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Views/Styles/DataWindowResourceDictionary.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Views/Styles/UserControlResourceDictionary.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Views/Styles/CoreResourceDictionary.xaml"></ResourceDictionary>                
             </ResourceDictionary.MergedDictionaries>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

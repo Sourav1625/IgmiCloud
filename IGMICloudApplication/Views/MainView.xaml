@@ -215,14 +215,22 @@
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
                                         <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 12 10 8" />
                                     </StackPanel>
-                                    <StackPanel>
-                                        <TreeView Height="Auto" MaxHeight="750" SelectedValuePath="FolderElement.Id" SelectedItemChanged="SelectedItemChanged">
-                                            <TreeViewItem Name="MyFilesMenu" ItemsSource="{Binding FolderViewModel.FolderList}" IsSelected="{Binding FolderViewModel.IsSelected}" >
+                                    <StackPanel CanVerticallyScroll="True" Height="Auto">
+                                        <TreeView Padding="-5" Height="Auto" Margin="5" MaxHeight="750" SelectedValuePath="FolderElement.Id" SelectedItemChanged="SelectedItemChanged" ItemContainerStyle="{StaticResource styleTreeView}">
+                                            <TreeViewItem Name="MyFilesMenu" ItemsSource="{Binding FolderViewModel.FolderList}"  >
                                                 <TreeViewItem.Header>
-                                                    <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" >
+                                                    <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
                                                         <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
                                                 HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
-                                                        <Label FontSize="14" FontWeight="SemiBold" Content="My Files"></Label>
+                                                        <Label Content="My Files">
+                                                            <Label.Resources>
+                                                                <Style TargetType="Label">
+                                                                    <Setter Property="Foreground" Value="#ffffff" />
+                                                                    <Setter Property="FontSize" Value="14" />
+                                                                    <Setter Property="FontWeight" Value="Normal" />                                                                    
+                                                                </Style>
+                                                            </Label.Resources>
+                                                        </Label>
                                                         <StackPanel.Style>
                                                             <Style TargetType="{x:Type StackPanel}">
                                                                 <Setter Property="ContextMenu">
@@ -247,10 +255,10 @@
                                                 </TreeViewItem.Header>
                                                 <TreeViewItem.ItemTemplate>
                                                     <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
-                                                        <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" Tag="{Binding Id}">                                                            
+                                                        <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" Tag="{Binding Id}" Background="Transparent">                                                            
                                                             <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
                                                 HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
-                                                            <Label FontSize="14" FontWeight="SemiBold" Content="{Binding FolderName}"></Label>
+                                                            <Label FontSize="14" Foreground="#ffffff" FontWeight="Light" Content="{Binding FolderName}"></Label>
                                                             <StackPanel.Style>
                                                                 <Style TargetType="{x:Type StackPanel}">
                                                                     <Setter Property="ContextMenu">
@@ -302,9 +310,14 @@
                                                             </StackPanel.Style>
                                                         </StackPanel>
                                                     </DataTemplate>
-                                                </TreeViewItem.ItemTemplate>
-                                            </TreeViewItem>                                            
-                                        </TreeView>
+                                                </TreeViewItem.ItemTemplate>                                                
+                                            </TreeViewItem>
+                                            <TreeView.Resources>
+                                                <Style TargetType="TreeViewItem">
+                                                    <EventSetter Event="MouseDoubleClick" Handler="SelectedItemChanged"/>
+                                                </Style>
+                                            </TreeView.Resources>
+                                        </TreeView>                                        
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" >
                                         <interactivity:Interaction.Triggers>
@@ -312,12 +325,7 @@
                                                 <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.MySharedResourcesManagementCommand}"/>
                                             </interactivity:EventTrigger>
                                         </interactivity:Interaction.Triggers>
-                                        <StackPanel Margin="27 5" Orientation="Horizontal" Cursor="Hand" >
-                                            <interactivity:Interaction.Triggers>
-                                                <interactivity:EventTrigger EventName="MouseDown">
-                                                    <interactivity:InvokeCommandAction  Command="{Binding LoginViewModel.MySharedResourcesManagementCommand}"/>
-                                                </interactivity:EventTrigger>
-                                            </interactivity:Interaction.Triggers>
+                                        <StackPanel Margin="27 5" Orientation="Horizontal" Cursor="Hand" >                                            
                                             <iconPacks:PackIconMaterial Kind="AccountMultiple" 
                                                         HorizontalAlignment="Left" Name="SharedResourcesIcon" Foreground="#F8B84E" Margin="0 5 4 0"/>
                                             <Label Name="SharedResourcesLabel"  Content="Shared With Me">
