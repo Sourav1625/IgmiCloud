@@ -325,7 +325,7 @@ namespace IGMICloudApplication.Views
             else
             {
                 ListView listView = sender as ListView;
-                if (listView.SelectedItem is FolderElement)
+                if (listView!=null && listView.SelectedItem is FolderElement)
                 {
                     FolderElement folderElement = (FolderElement)listView.SelectedItem;
                     MainViewModel.Instance.FolderViewModel.SelectedItem = folderElement;
@@ -334,6 +334,13 @@ namespace IGMICloudApplication.Views
                     MainViewModel.Instance.FolderViewModel.FolderNavigationCommand.Execute();
                 }
             }
+        }
+
+        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ContextMenu cm = this.FindResource("profileMenu") as ContextMenu;
+            cm.PlacementTarget = sender as Button;
+            cm.IsOpen = true;
         }
     }
 }

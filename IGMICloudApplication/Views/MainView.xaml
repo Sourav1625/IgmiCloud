@@ -13,8 +13,39 @@
         Icon="Icons/Logo.ico"
         Background="Transparent"
         WindowStyle="ThreeDBorderWindow" WindowState="Maximized" >    
-    <Window.Resources>
-        <ResourceDictionary>            
+    <Window.Resources>        
+        <ResourceDictionary>
+            <ContextMenu x:Key="profileMenu" Placement="Mouse" Width="300" PlacementRectangle="30,50,0,0">
+                <MenuItem Header="_Account Settings"  Template="{StaticResource VsMenuSub}" Icon="Star">
+                    <MenuItem.Resources>
+                        <Style TargetType="MenuItem">
+                            <EventSetter Event="Click" Handler="Open_Account" />
+                        </Style>
+                    </MenuItem.Resources>                   
+                </MenuItem>
+                <MenuItem Header="_Shared Files" Template="{StaticResource VsMenuSub}" Icon="AccountMultiple">
+                    <MenuItem.Resources>
+                        <Style TargetType="MenuItem">
+                            <EventSetter Event="Click" Handler="Open_Account" />
+                        </Style>
+                    </MenuItem.Resources>                  
+                </MenuItem>               
+                <MenuItem Header="_Trash Can" Template="{StaticResource VsMenuSub}" Icon="Trashcan">
+                    <MenuItem.Resources>
+                        <Style TargetType="MenuItem">
+                            <EventSetter Event="Click" Handler="Open_Account" />
+                        </Style>
+                    </MenuItem.Resources>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_Logout" Template="{StaticResource VsMenuSub}" Icon="Logout">
+                    <MenuItem.Resources>
+                        <Style TargetType="MenuItem">
+                            <EventSetter Event="Click" Handler="Open_Account" />
+                        </Style>
+                    </MenuItem.Resources>
+                </MenuItem>
+            </ContextMenu>
             <DataTemplate x:Name="FolderManagement_Template" x:Key="FolderManagement_Template" DataType="x:Type data:MainViewModel"  >
                 <Views:FolderManagement/>
             </DataTemplate>
@@ -520,7 +551,7 @@
                                                     </Button>
                                                 </DockPanel>
                                                 <DockPanel LastChildFill="True">
-                                                    <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Cursor="Hand">                                              
+                                                    <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Cursor="Hand" MouseDown="StackPanel_MouseDown">                                              
                                                         <TextBlock Text="{Binding LoginViewModel.DisplayName}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#58666e" Margin="15 0 0 0"/>
                                                         <iconPacks:PackIconMaterial Kind="Triangle" Flip="Vertical" HorizontalAlignment="Right" Margin="0 18 0 0" Padding="0 6" Foreground="#58666e"/>
                                                         <Image Source="Icons/avatar_default.png" Width="40" Height="40" VerticalAlignment="Top" Margin="0 0 15 10">
@@ -539,7 +570,7 @@
                                                                 </Style.Triggers>
                                                             </Style>
                                                         </StackPanel.Resources>
-                                                        <StackPanel.Style>
+                                                        <!--<StackPanel.Style>
                                                             <Style TargetType="{x:Type StackPanel}">
                                                                 <Setter Property="ContextMenu">
                                                                     <Setter.Value>
@@ -548,25 +579,15 @@
                                                                                 <MenuItem.Resources>
                                                                                     <Style TargetType="MenuItem">
                                                                                         <EventSetter Event="Click" Handler="Open_Account" />
-                                                                                    </Style>
-                                                                                    <!--<Style TargetType="MenuItem">
-                                                                                        <Setter Property="Foreground" Value="#ffffff" />
-                                                                                        <Setter Property="FontSize" Value="14" />
-                                                                                        <Setter Property="FontWeight" Value="Normal" />
-                                                                                        <Style.Triggers>
-                                                                                            <DataTrigger Binding="{Binding LoginViewModel.SwitchView}" Value="{x:Static data:SwitchViewEnum.Account}">
-                                                                                                <Setter Property="Foreground" Value="#313131" />
-                                                                                                <Setter Property="FontWeight" Value="SemiBold" />
-                                                                                            </DataTrigger>
-                                                                                        </Style.Triggers>
-                                                                                    </Style>-->
+                                                                                    </Style>                                                                                  
                                                                                 </MenuItem.Resources>
                                                                             </MenuItem>
                                                                         </ContextMenu>
                                                                     </Setter.Value>
                                                                 </Setter>
                                                             </Style>
-                                                        </StackPanel.Style>                                                        
+                                                           
+                                                        </StackPanel.Style>-->                                                        
                                                     </StackPanel>                                                  
                                                 </DockPanel>
                                             </DockPanel>
