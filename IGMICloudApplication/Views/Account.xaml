@@ -125,139 +125,211 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="2">               
-                <Grid Background="White" Margin="10,0,10,10">
+            <Grid Grid.Row="2">              
+                    <Grid Background="White" Margin="10,0,10,10">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Border}">                           
+                            <Setter Property="BorderBrush" Value="#FFEAEBEE" />
+                            <Setter Property="BorderThickness" Value="2" />                           
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />                      
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="220" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>                   
-                     <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="15,10,0,10">
-                            <TextBlock Text="Keep your account details up to date below" FontSize="10pt"/>
-                     </Grid>                                     
-                    <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Title" HorizontalAlignment="Left" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="1" Margin="15,10,0,10">
-                        <ComboBox Width="320" Height="35" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding AccountViewModel.ValuesForTitle}" DisplayMemberPath="_Key" SelectedValuePath="_Key"  SelectedValue="{Binding AccountViewModel.Title}" TabIndex="4" ToolTip="Your title"/>
-                    </Grid>
-                    <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="First Name" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="2" Grid.Column="1" Margin="15,10,0,10">
-                        <TextBox  Name="fname" Width="320" Height="35" Foreground="#555555" Background="#ffffff"  BorderThickness="1" TabIndex="1"  BorderBrush="#dedcdc"  Padding="6 8" Text="{Binding AccountViewModel.Firstname}" ToolTip="Your firstname"/>
-                    </Grid>
-                    <Grid Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Last Name" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="3" Grid.Column="1"  Margin="15,10,0,10">
-                        <TextBox  Name="lname" Width="320" Height="35" Foreground="#555555" Background="#ffffff"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" TabIndex="2" Text="{Binding AccountViewModel.Lastname}" ToolTip="Your lastname"/>
-                    </Grid>
-                    <Grid Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Email Address" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="4" Grid.Column="1" Margin="15,10,0,10">
-                        <TextBox  Name="email" Width="320" Height="35" Foreground="#555555" Background="#ffffff"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" TabIndex="3" Text="{Binding AccountViewModel.Email}" ToolTip="Your new email address"/>
-                    </Grid>
-                    <Grid Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Language" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="5" Grid.Column="1"  Margin="15,10,0,10">
-                        <ComboBox Width="320" Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding AccountViewModel.ValuesForLanguage}" DisplayMemberPath="_Key" SelectedValuePath="_Value"  SelectedValue="{Binding AccountViewModel.SelectedValueForLanguage}" TabIndex="4" ToolTip="The language to use on the site"/>
-                    </Grid>
-                   
-                </Grid>
-               
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>                                                   
+                    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1 1 0 1">
+                        <!--<Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,10,0,10">-->
+                        <TextBlock Text="Keep your account details up to date below" FontSize="10pt" Margin="10,10"/>
+                        <!--</Grid>-->
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Title" HorizontalAlignment="Left" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="1" Grid.Column="1" Margin="15,10,0,10" HorizontalAlignment="Left">
+                            <ComboBox Width="520" Height="32" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding AccountViewModel.ValuesForTitle}" DisplayMemberPath="_Key" SelectedValuePath="_Key"  SelectedValue="{Binding AccountViewModel.Title}" TabIndex="4" ToolTip="Your title"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="First Name" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="2" Grid.Column="1" Margin="15,10,0,10" HorizontalAlignment="Left">
+                            <TextBox  Name="fname" Width="520" Height="32" Foreground="#555555" Background="#ffffff"  BorderThickness="1" TabIndex="1"  BorderBrush="#dedcdc"  Padding="6 8" Text="{Binding AccountViewModel.Firstname}" ToolTip="Your firstname"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Last Name" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="3" Grid.Column="1"  Margin="15,10,0,10" HorizontalAlignment="Left">
+                            <TextBox  Name="lname" Width="520" Height="32" Foreground="#555555" Background="#ffffff"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" TabIndex="2" Text="{Binding AccountViewModel.Lastname}" ToolTip="Your lastname"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Email Address" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="4" Grid.Column="1" Margin="15,10,0,10" HorizontalAlignment="Left">
+                            <TextBox  Name="email" Width="520" Height="32" Foreground="#555555" Background="#ffffff"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" TabIndex="3" Text="{Binding AccountViewModel.Email}" ToolTip="Your new email address"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="5" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="5" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Language" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="5" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="5" Grid.Column="1"  Margin="15,10,0,10" HorizontalAlignment="Left">
+                            <ComboBox Width="520" Height="32" Margin="0 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding AccountViewModel.ValuesForLanguage}" DisplayMemberPath="_Key" SelectedValuePath="_Value"  SelectedValue="{Binding AccountViewModel.SelectedValueForLanguage}" TabIndex="4" ToolTip="The language to use on the site"/>
+                        </Grid>
+                    </Border>
+                </Grid>              
             </Grid>
             <Grid Grid.Row="3">
                 <Grid Background="White" Margin="10,0,10,10">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="BorderBrush" Value="#FFEAEBEE" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="220" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="15,10,0,10">
-                        <TextBlock Text="Privacy" FontSize="10pt"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Default Folder Privacy" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="1" Margin="15,10,0,10">
-                        <ComboBox Width="320" Height="35" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding FolderViewModel.ValuesFolderPrivacy}" DisplayMemberPath="_Key" SelectedValuePath="_Value"  SelectedValue="{Binding FolderViewModel.SelectedValueFolderPrivacy}" ToolTip="Whether to keep all files private or allow sharing. If this is set as public, you can still set albums as private."/>
-                    </Grid>
+                    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1 1 0 1">
+                        <!--<Grid Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="2" Margin="15,10,0,10">-->
+                        <TextBlock Text="Privacy" FontSize="10pt" Margin="10,10"/>
+                        <!--</Grid>-->
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Default Folder Privacy" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="1" Grid.Column="1" Margin="15,10,0,10" HorizontalAlignment="Left">
+                            <ComboBox Width="520" Height="32" Margin="5 0 0 0" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding FolderViewModel.ValuesFolderPrivacy}" DisplayMemberPath="_Key" SelectedValuePath="_Value"  SelectedValue="{Binding FolderViewModel.SelectedValueFolderPrivacy}" ToolTip="Whether to keep all files private or allow sharing. If this is set as public, you can still set albums as private."/>
+                        </Grid>
+                    </Border>
                 </Grid>
             </Grid>
             <Grid Grid.Row="4">
                 <Grid Background="White" Margin="10,0,10,10">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="BorderBrush" Value="#FFEAEBEE" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="220" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="15,10,0,10">
-                        <TextBlock Text="Change Password" FontSize="10pt"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Change Password" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="1" Margin="15,10,0,10">
-                        <PasswordBox FontFamily="Helvetica" FontWeight="Light" Password="Password" FontSize="12" HorizontalAlignment="Center" BorderBrush="#ebebec"
+                    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1 1 0 1">
+                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,10,0,10">
+                            <TextBlock Text="Change Password" FontSize="10pt"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Change Password" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="1" Grid.Column="1" Margin="15,10,0,10" HorizontalAlignment="Left">
+                            <PasswordBox FontFamily="Helvetica" FontWeight="Light" Password="Password" FontSize="12" HorizontalAlignment="Center" BorderBrush="#ebebec"
                      Background="#ffffff" Foreground="#79869a" BorderThickness="2" HorizontalContentAlignment="Left" Padding="8 5"
-                     Height="35"  Width="320" ToolTip="Optional. A new account password, leave this blank to keep your existing."/>
-                    </Grid>
-                    <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Confirm Password" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="2" Grid.Column="1" Margin="15,10,0,10">
-                        <PasswordBox FontFamily="Helvetica" FontWeight="Light" Password="Password" FontSize="12" HorizontalAlignment="Center" BorderBrush="#ebebec"
+                     Height="32"  Width="520" ToolTip="Optional. A new account password, leave this blank to keep your existing."/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Confirm Password" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="2" Grid.Column="1" Margin="15,10,0,10" HorizontalAlignment="Left">
+                            <PasswordBox FontFamily="Helvetica" FontWeight="Light" Password="Password" FontSize="12" HorizontalAlignment="Center" BorderBrush="#ebebec"
                      Background="#ffffff" Foreground="#79869a" BorderThickness="2" HorizontalContentAlignment="Left" Padding="8 5"
-                     Height="35"  Width="320" ToolTip="Optional. Confirm the password entered above, leave this blank to keep your existing."/>
-                    </Grid>
+                     Height="32"  Width="520" ToolTip="Optional. Confirm the password entered above, leave this blank to keep your existing."/>
+                        </Grid>
+                    </Border>
                 </Grid>
             </Grid>
             <Grid Grid.Row="5">
                 <Grid Background="White" Margin="10,0,10,10">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="BorderBrush" Value="#FFEAEBEE" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="220" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="15,10,0,10">
-                        <TextBlock Text="Account Avatar" FontSize="10pt"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Select File(jpg, png or gif)" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="1" Margin="15,10,0,10">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Width="220" Height="35"></TextBox>
-                            <Button Width="100" Content="Choose File"></Button>
-                        </StackPanel>
-                    </Grid>
+                    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1 1 0 1">
+                        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,10,0,10">
+                            <TextBlock Text="Account Avatar" FontSize="10pt"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Select File(jpg, png or gif)" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="1" Grid.Column="1" Margin="15,10,0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Width="420" Height="32"></TextBox>
+                                <Button Width="100" Content="Choose File"></Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                 </Grid>
             </Grid>
             <Grid Grid.Row="6">
                 <Grid Background="White" Margin="10,0,10,10">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="BorderBrush" Value="#FFEAEBEE" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -266,54 +338,78 @@
                         <ColumnDefinition Width="220" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="15,10,0,10" >
-                        <TextBlock Text="Optional image preview watermark. After upload, enable watermarking using each folder settings." FontSize="10pt"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Select File(Transparent png)" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Grid.Column="1" Margin="15,10,0,10">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Width="220" Height="35"></TextBox>
-                            <Button Width="100" Content="Choose File"></Button>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Watermark Position" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="2" Grid.Column="1"  Margin="15,10,0,10" HorizontalAlignment="Left">
-                        <ComboBox Width="320" Height="35" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding AccountViewModel.ValuesForWatermark}" DisplayMemberPath="_Key" SelectedValuePath="_Value"  SelectedValue="{Binding AccountViewModel.SelectedValueForWatermark}" TabIndex="4"/>
-                    </Grid>
-                    <Grid Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Label Content="Watermark Padding" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
-                    </Grid>
-                    <Grid Grid.Row="3" Grid.Column="1"  Margin="15,10,0,10" HorizontalAlignment="Left">
-                        <TextBox Width="320" Height="35"/>
-                    </Grid>
+                    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1 1 0 1">
+                        <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="15,10,0,10" >
+                            <TextBlock Text="Optional image preview watermark. After upload, enable watermarking using each folder settings." FontSize="10pt"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Select File(Transparent png)" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="1" Grid.Column="1" Margin="15,10,0,10">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Width="420" Height="32"></TextBox>
+                                <Button Width="100" Content="Choose File"></Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Watermark Position" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="2" Grid.Column="1"  Margin="15,10,0,10" HorizontalAlignment="Left">
+                            <ComboBox Width="520" Height="32" Foreground="#555555" IsEditable="True"  BorderThickness="1"  BorderBrush="#dedcdc"  Padding="6 8" ItemsSource="{Binding AccountViewModel.ValuesForWatermark}" DisplayMemberPath="_Key" SelectedValuePath="_Value"  SelectedValue="{Binding AccountViewModel.SelectedValueForWatermark}" TabIndex="4"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="0" BorderThickness="1 0 0 1">
+                        <Grid Grid.Row="3" Grid.Column="0"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Label Content="Watermark Padding" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF473838" FontSize="12"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="1" BorderThickness="0 0 1 1">
+                        <Grid Grid.Row="3" Grid.Column="1"  Margin="15,10,0,10" HorizontalAlignment="Left">
+                            <TextBox Width="520" Height="32"/>
+                        </Grid>
+                    </Border>
                 </Grid>
             </Grid>            
             <Grid Grid.Row="7">
                 <Grid Background="White" Margin="10,0,10,10">
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="BorderBrush" Value="#FFEAEBEE" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>                     
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="220" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Row="0" Grid.Column="0" Margin="15,10,0,10">
-                        
-                    </Grid>
-                    <Grid Grid.Row="0" Grid.Column="1" Margin="8,10,0,10">
-                        <Button Padding="10 5" Margin="8 0" Cursor="Hand" Style="{StaticResource Style_UploadButton}" Width="200px">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal" >
-                                    <TextBlock Name="AddEditFolderButton"  Text="Update Account" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
-                                    <iconPacks:PackIconEntypo Kind="Check" Margin="0 8 8 8"/>
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                    </Grid>                   
+                    <Border Grid.Row="0" Grid.Column="0" BorderThickness="1 1 0 1">
+                        <Grid Grid.Row="0" Grid.Column="0" Margin="15,10,0,10">
+
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1" BorderThickness="0 1 1 1">
+                        <Grid Grid.Row="0" Grid.Column="1" Margin="8,10,0,10" HorizontalAlignment="Left">
+                            <Button Padding="10 5" Margin="8 0" Cursor="Hand" Style="{StaticResource Style_UploadButton}" Width="200px">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <TextBlock Name="AddEditFolderButton"  Text="Update Account" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
+                                        <iconPacks:PackIconEntypo Kind="Check" Margin="0 8 8 8"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                    </Border>
                 </Grid>
             </Grid>
         </Grid>
