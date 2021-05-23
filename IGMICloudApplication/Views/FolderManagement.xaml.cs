@@ -43,7 +43,7 @@ namespace IGMICloudApplication.Views
             MainView parentWindow = (MainView)Window.GetWindow(this);
             parentWindow.Delete_Folder(sender, e);
         }
-        private void SelectedItemChanged(object sender, RoutedEventArgs e)
+        private void SelectedItemChanged(object sender, MouseButtonEventArgs e)
         {
             MainView parentWindow = (MainView)Window.GetWindow(this);
             parentWindow.SelectedItemChanged(sender, e);

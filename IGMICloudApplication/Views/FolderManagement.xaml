@@ -164,7 +164,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid >
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.IsSharedSizeScope="True" VerticalContentAlignment="Stretch"  Margin="10" Name="lvUsers" Background="Transparent" ItemContainerStyle="{DynamicResource ListViewContainerStyle}" BorderThickness="0" SelectedValuePath="FolderElement.Id" SelectionChanged="SelectedItemChanged">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.IsSharedSizeScope="True" VerticalContentAlignment="Stretch"  Margin="10" Name="lvUsers" Background="Transparent" ItemContainerStyle="{DynamicResource ListViewContainerStyle}" BorderThickness="0" SelectedValuePath="FolderElement.Id" MouseLeftButtonUp="SelectedItemChanged">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel></WrapPanel>
