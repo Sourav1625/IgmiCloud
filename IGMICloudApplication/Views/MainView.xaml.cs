@@ -300,7 +300,7 @@ namespace IGMICloudApplication.Views
             }
         }
 
-        public void SelectedItemChanged(object sender, RoutedEventArgs e)
+        public void SelectedItemChanged(object sender, MouseButtonEventArgs e)
         {
             if (sender is TreeView)
             {

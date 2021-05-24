@@ -249,8 +249,8 @@
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
                                         <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 12 10 8" />
                                     </StackPanel>
-                                    <StackPanel CanVerticallyScroll="True" Height="Auto">
-                                        <TreeView Padding="-5" Height="Auto" Margin="5" MaxHeight="750" SelectedValuePath="FolderElement.Id" SelectedItemChanged="SelectedItemChanged" ItemContainerStyle="{StaticResource styleTreeView}">
+                                    <StackPanel CanVerticallyScroll="True" Height="Auto" >
+                                        <TreeView Padding="-5 -5 -25 -5" Height="Auto" Margin="5 5 0 5" MaxHeight="750" SelectedValuePath="FolderElement.Id" MouseLeftButtonUp="SelectedItemChanged" ItemContainerStyle="{StaticResource styleTreeView}">
                                             <TreeViewItem Name="MyFilesMenu" ItemsSource="{Binding FolderViewModel.FolderList}"  >
                                                 <TreeViewItem.Header>
                                                     <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
@@ -261,7 +261,14 @@
                                                                 <Style TargetType="Label">
                                                                     <Setter Property="Foreground" Value="#ffffff" />
                                                                     <Setter Property="FontSize" Value="14" />
-                                                                    <Setter Property="FontWeight" Value="Normal" />                                                                    
+                                                                    <Setter Property="FontWeight" Value="Normal" />
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding FolderViewModel.IsRootFolderSelected}" Value="True">
+                                                                            <Setter Property="Foreground" Value="#313131" />
+                                                                            <Setter Property="FontSize" Value="14" />
+                                                                            <Setter Property="FontWeight" Value="SemiBold" />
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
                                                                 </Style>
                                                             </Label.Resources>
                                                         </Label>
@@ -289,7 +296,7 @@
                                                 </TreeViewItem.Header>
                                                 <TreeViewItem.ItemTemplate>
                                                     <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
-                                                        <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" Tag="{Binding Id}" Background="Transparent">                                                            
+                                                        <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" Tag="{Binding Id}" Background="Transparent">
                                                             <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
                                                 HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
                                                             <Label FontSize="14" Foreground="#ffffff" FontWeight="Light" Content="{Binding FolderName}"></Label>
@@ -344,11 +351,15 @@
                                                             </StackPanel.Style>
                                                         </StackPanel>
                                                     </DataTemplate>
-                                                </TreeViewItem.ItemTemplate>                                                
+                                                </TreeViewItem.ItemTemplate>
                                             </TreeViewItem>
                                             <TreeView.Resources>
                                                 <Style TargetType="TreeViewItem">
-                                                    <EventSetter Event="MouseDoubleClick" Handler="SelectedItemChanged"/>
+                                                    <Style.Triggers>
+                                                    <Trigger Property="IsFocused" Value="True">
+                                                            <Setter Property="Background" Value="RED"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
                                                 </Style>
                                             </TreeView.Resources>
                                         </TreeView>                                        

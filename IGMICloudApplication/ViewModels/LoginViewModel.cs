@@ -97,13 +97,13 @@ namespace IGMICloudApplication.ViewModels
         {
             if (string.IsNullOrEmpty(userName))
             {
-                //UserName = "Username";
-                UserName = "niloy.bauri";
+                UserName = "Username";
+                //UserName = "niloy.bauri";
             }
             if (string.IsNullOrEmpty(password))
             {
-                //Password = "Password";
-                Password = "igmi@123";
+                Password = "Password";
+                //Password = "igmi@123";
             }
             if (string.IsNullOrEmpty(sendPasswordEmail))
             {
@@ -133,22 +133,27 @@ namespace IGMICloudApplication.ViewModels
             });
             FolderManagementCommand = new DelegateCommand(() =>
             {
+                MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = true;
                 SwitchView = SwitchViewEnum.FolderManagement;
             });
             MySharedResourcesManagementCommand = new DelegateCommand(() =>
             {
+                MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = false;
                 SwitchView = SwitchViewEnum.MySharedResources;
             });
             RecentFilesManagementCommand = new DelegateCommand(() =>
             {
+                MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = false;
                 SwitchView = SwitchViewEnum.RecentFiles;
             });
             AllFilesManagementCommand = new DelegateCommand(() =>
             {
+                MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = false;
                 SwitchView = SwitchViewEnum.AllFiles;
             });
             TrashCanManagementCommand = new DelegateCommand(() =>
             {
+                MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = false;
                 MainViewModel.Instance.FolderViewModel.GetTrashFolders();
                 SwitchView = SwitchViewEnum.TrashCan;
             });
