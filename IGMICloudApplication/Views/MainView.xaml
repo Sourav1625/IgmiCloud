@@ -299,7 +299,7 @@
                                                         <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" Tag="{Binding Id}" Background="Transparent">
                                                             <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
                                                 HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
-                                                            <Label FontSize="14" Foreground="#ffffff" FontWeight="Light" Content="{Binding FolderName}"></Label>
+                                                            <Label FontSize="14" Foreground="#ffffff" FontWeight="Light" Content="{Binding FolderName}"/>
                                                             <StackPanel.Style>
                                                                 <Style TargetType="{x:Type StackPanel}">
                                                                     <Setter Property="ContextMenu">
@@ -352,16 +352,13 @@
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </TreeViewItem.ItemTemplate>
+                                                <TreeViewItem.Resources>
+                                                    <LinearGradientBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="#ffffff" Offset="0"/>
+                                                        <GradientStop Color="#ffffff" Offset="1"/>
+                                                    </LinearGradientBrush>                                                    
+                                                </TreeViewItem.Resources>
                                             </TreeViewItem>
-                                            <TreeView.Resources>
-                                                <Style TargetType="TreeViewItem">
-                                                    <Style.Triggers>
-                                                    <Trigger Property="IsFocused" Value="True">
-                                                            <Setter Property="Background" Value="RED"/>
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TreeView.Resources>
                                         </TreeView>                                        
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" >

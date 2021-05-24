@@ -23,7 +23,7 @@
                             <Setter TargetName="toggleArrow" Property="Kind" Value="ChevronDown" />
                             <Setter TargetName="toggleArrow" Property="Foreground" Value="#313131" />
                             <Setter TargetName="toggleArrow" Property="Padding" Value="0 5" />
-                            <Setter TargetName="toggleArrow" Property="Margin" Value="0 5 0 0" />
+                            <Setter TargetName="toggleArrow" Property="Margin" Value="12 5 0 0" />
                         </Trigger>
                         <DataTrigger Binding="{Binding FolderViewModel.IsRootFolderSelected}" Value="False">
                             <Setter TargetName="toggleArrow" Property="Foreground" Value="#ffffff" />
@@ -39,7 +39,7 @@
         <Setter Property="BorderBrush" Value="Transparent"/>        
         <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-        <Setter Property="IsExpanded" Value="{Binding FolderViewModel.IsExpanded}"/>        
+        <Setter Property="IsExpanded" Value="{Binding FolderViewModel.IsExpanded}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
@@ -74,7 +74,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="false">
                             <Setter TargetName="ItemsHost" Property="Visibility"
-                    Value="Collapsed"/>                            
+                    Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="HasItems" Value="false">
                             <Setter TargetName="Expander" Property="Visibility" 
@@ -89,29 +89,10 @@
                             <Setter TargetName="Expander_Container" Property="Background" Value="#313131"/>
                             <Setter TargetName="Expander" Property="Background" Value="#ffffff"/>
                         </DataTrigger>
-                        <!--<MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="HasHeader" Value="false"/>
-                                <Condition Property="Width" Value="Auto"/>
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="PART_Header" Property="MinWidth" Value="75"/>
-                            <Setter TargetName="PART_Header" Property="MinHeight" Value="50"/>
-                        </MultiTrigger>-->                      
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <!--<Style.Triggers>            
-            <Trigger Property="IsFocused" Value="true">
-                <Setter  Property="Background" Value="#ffffff" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="true">
-                <Setter  Property="Background" Value="#ffffff" />
-            </Trigger>
-            <Trigger Property="IsExpanded" Value="true">
-                <Setter  Property="Background" Value="#ffffff" />
-            </Trigger>
-        </Style.Triggers>-->
     </Style>
     <BooleanToVisibilityConverter x:Key="btv"/>
     <ControlTemplate x:Key="VsMenuSub" TargetType="MenuItem">
@@ -402,7 +383,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Border CornerRadius="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0"  Width="12" Margin="6,0,2,0"/>
+                    <Border CornerRadius="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" Width="12" Margin="6,0,2,0"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -415,14 +396,14 @@
                 <RowDefinition Height="0.00001*"/>
                 <RowDefinition MaxHeight="0"/>
             </Grid.RowDefinitions>
-            <Border Grid.RowSpan="3" CornerRadius="0" BorderThickness="0"  />
+            <Border Grid.RowSpan="3" CornerRadius="0" BorderThickness="0" Margin="0 28 0 0"  />
             <RepeatButton Grid.Row="0" Style="{StaticResource ScrollBarLineButton}" Height="18" Command="ScrollBar.LineUpCommand" Content="M 0 4 L 8 4 L 4 0 Z" />
             <Track Name="PART_Track" Grid.Row="1" IsDirectionReversed="true">
                 <Track.DecreaseRepeatButton>
                     <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageUpCommand" />
                 </Track.DecreaseRepeatButton>
                 <Track.Thumb>
-                    <Thumb Name="scrollRunner" Style="{StaticResource ScrollBarThumb}" Margin="5,0,1,0" Background="#646464" BorderBrush="{StaticResource HorizontalNormalBorderBrush}" />
+                    <Thumb Name="scrollRunner" Style="{StaticResource ScrollBarThumb}" Margin="5,35,1,0" Background="#646464" BorderBrush="{StaticResource HorizontalNormalBorderBrush}" />
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
                     <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="ScrollBar.PageDownCommand" />

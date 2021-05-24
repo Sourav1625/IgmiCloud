@@ -97,16 +97,6 @@ namespace IGMICloudApplication.ViewModels
             set { SetProperty(ref selectedItem, value); }
         }
         
-        private bool isSelected;
-        public bool IsSelected
-        {
-            get
-            {
-                return isSelected;
-            }
-            set { SetProperty(ref isSelected, value); }
-        }
-
         private ObservableCollection<FolderElement> folderList;
         public ObservableCollection<FolderElement> FolderList
         {
@@ -305,6 +295,12 @@ namespace IGMICloudApplication.ViewModels
         {
             get { return trashFolderCountMsg; }
             set { SetProperty(ref trashFolderCountMsg, value); }
+        }
+        private int selectedFolderId;
+        public int SelectedFolderId
+        {
+            get { return selectedFolderId; }
+            set { SetProperty(ref selectedFolderId, value); }
         }
         public FolderViewModel()
         {
