@@ -249,8 +249,8 @@
                                     <StackPanel Background="#373737" Margin="0 0 0 5" Height="60">
                                         <Image x:Name="img" Source="Icons/Logo.PNG" Margin="25 12 10 8" />
                                     </StackPanel>
-                                    <StackPanel CanVerticallyScroll="True" Height="Auto" >
-                                        <TreeView Padding="-5 -5 -25 -5" Height="Auto" Margin="5 5 0 5" MaxHeight="750" SelectedValuePath="FolderElement.Id" MouseLeftButtonUp="SelectedItemChanged" ItemContainerStyle="{StaticResource styleTreeView}">
+                                    <StackPanel CanVerticallyScroll="True" Height="Auto" Name="TreeviewContainer">
+                                        <TreeView x:Name="MyFolderTree" Padding="-5 -5 -25 -5" Height="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Margin="5 5 0 5" MaxHeight="750" SelectedValuePath="FolderElement.Id" MouseLeftButtonUp="SelectedItemChanged" ItemContainerStyle="{StaticResource styleTreeView}">
                                             <TreeViewItem Name="MyFilesMenu" ItemsSource="{Binding FolderViewModel.FolderList}"  >
                                                 <TreeViewItem.Header>
                                                     <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true">
@@ -296,67 +296,77 @@
                                                 </TreeViewItem.Header>
                                                 <TreeViewItem.ItemTemplate>
                                                     <DataTemplate DataType="local:IGMICloudApplication.Models.FolderElement">
-                                                        <StackPanel Orientation="Horizontal" Margin="0 2" SnapsToDevicePixels="true" Tag="{Binding Id}" Background="Transparent">
-                                                            <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
-                                                HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="2 5 4 0"/>
-                                                            <Label FontSize="14" Foreground="#ffffff" FontWeight="Light" Content="{Binding FolderName}"/>
-                                                            <StackPanel.Style>
-                                                                <Style TargetType="{x:Type StackPanel}">
-                                                                    <Setter Property="ContextMenu">
-                                                                        <Setter.Value>
-                                                                            <ContextMenu>
-                                                                                <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
-                                                                                <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
-                                                                                <Separator Template="{StaticResource VsMenuSep}" />
-                                                                                <MenuItem Header="_Add Sub Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus">
-                                                                                    <MenuItem.Resources>
-                                                                                        <Style TargetType="MenuItem">
-                                                                                            <EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />
-                                                                                        </Style>
-                                                                                    </MenuItem.Resources>
-                                                                                </MenuItem>
-                                                                                <MenuItem Header="_Edit"  Template="{StaticResource VsMenuSub}" Icon="FolderEdit">
-                                                                                    <MenuItem.Resources>
-                                                                                        <Style TargetType="MenuItem">
-                                                                                            <EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />
-                                                                                        </Style>
-                                                                                    </MenuItem.Resources>
-                                                                                </MenuItem>
-                                                                                <MenuItem Header="_Delete"  Template="{StaticResource VsMenuSub}" Icon="Delete">
-                                                                                    <MenuItem.Resources>
-                                                                                        <Style TargetType="MenuItem">
-                                                                                            <EventSetter Event="Click" Handler="Delete_Folder" />
-                                                                                        </Style>
-                                                                                    </MenuItem.Resources>
-                                                                                </MenuItem>
-                                                                                <Separator Template="{StaticResource VsMenuSep}" />
-                                                                                <MenuItem Header="_Download All Files(Zip)"  Template="{StaticResource VsMenuSub}" Icon="FolderDownload">
-                                                                                    <MenuItem.Resources>
-                                                                                        <Style TargetType="MenuItem">
-                                                                                            <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
-                                                                                        </Style>
-                                                                                    </MenuItem.Resources>
-                                                                                </MenuItem>
-                                                                                <MenuItem Header="_Share Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderMove">
-                                                                                    <MenuItem.Resources>
-                                                                                        <Style TargetType="MenuItem">
-                                                                                            <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
-                                                                                        </Style>
-                                                                                    </MenuItem.Resources>
-                                                                                </MenuItem>
-                                                                            </ContextMenu>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </Style>
-                                                            </StackPanel.Style>
-                                                        </StackPanel>
+                                                        <Border Margin="-40 0 0 0" Background="#373737" Width="240" Height="32">
+                                                            <Border Name="ChildFolderContainer" Background="#373737" Margin="0 0" SnapsToDevicePixels="true" Tag="{Binding Id}" >
+                                                                <StackPanel Orientation="Horizontal" Margin="0 0 0 0" x:Name="test">
+                                                                    <iconPacks:PackIconMaterial Kind="FolderOpen" x:Name="RootFolder" 
+                                                HorizontalAlignment="Left" Style="{StaticResource FolderTree}" Margin="40 7 4 0"/>
+                                                                    <Label FontSize="14" Foreground="#ffffff" FontWeight="Light" Content="{Binding FolderName}">
+                                                                        <Label.Style>
+                                                                            <Style TargetType="Label">
+                                                                                <EventSetter Event="MouseDown" Handler="Mouse_LBtnDown"/>
+                                                                            </Style>
+                                                                        </Label.Style>
+                                                                    </Label>
+                                                                    <StackPanel.Style>
+                                                                        <Style TargetType="{x:Type StackPanel}">
+                                                                            <Setter Property="ContextMenu">
+                                                                                <Setter.Value>
+                                                                                    <ContextMenu>
+                                                                                        <MenuItem Header="_Open Folder" Template="{StaticResource VsMenuSub}" Icon="FolderOpen"/>
+                                                                                        <MenuItem Header="_Upload Files" Template="{StaticResource VsMenuSub}" Icon="CloudUpload" />
+                                                                                        <Separator Template="{StaticResource VsMenuSep}" />
+                                                                                        <MenuItem Header="_Add Sub Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderPlus">
+                                                                                            <MenuItem.Resources>
+                                                                                                <Style TargetType="MenuItem">
+                                                                                                    <EventSetter Event="Click" Handler="Open_Sub_Folder_Creation_Popup" />
+                                                                                                </Style>
+                                                                                            </MenuItem.Resources>
+                                                                                        </MenuItem>
+                                                                                        <MenuItem Header="_Edit"  Template="{StaticResource VsMenuSub}" Icon="FolderEdit">
+                                                                                            <MenuItem.Resources>
+                                                                                                <Style TargetType="MenuItem">
+                                                                                                    <EventSetter Event="Click" Handler="Open_Folder_Update_Popup" />
+                                                                                                </Style>
+                                                                                            </MenuItem.Resources>
+                                                                                        </MenuItem>
+                                                                                        <MenuItem Header="_Delete"  Template="{StaticResource VsMenuSub}" Icon="Delete">
+                                                                                            <MenuItem.Resources>
+                                                                                                <Style TargetType="MenuItem">
+                                                                                                    <EventSetter Event="Click" Handler="Delete_Folder" />
+                                                                                                </Style>
+                                                                                            </MenuItem.Resources>
+                                                                                        </MenuItem>
+                                                                                        <Separator Template="{StaticResource VsMenuSep}" />
+                                                                                        <MenuItem Header="_Download All Files(Zip)"  Template="{StaticResource VsMenuSub}" Icon="FolderDownload">
+                                                                                            <MenuItem.Resources>
+                                                                                                <Style TargetType="MenuItem">
+                                                                                                    <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                                                </Style>
+                                                                                            </MenuItem.Resources>
+                                                                                        </MenuItem>
+                                                                                        <MenuItem Header="_Share Folder"  Template="{StaticResource VsMenuSub}" Icon="FolderMove">
+                                                                                            <MenuItem.Resources>
+                                                                                                <Style TargetType="MenuItem">
+                                                                                                    <EventSetter Event="Click" Handler="Open_Folder_Creation_Popup" />
+                                                                                                </Style>
+                                                                                            </MenuItem.Resources>
+                                                                                        </MenuItem>
+                                                                                    </ContextMenu>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                        </Style>
+                                                                    </StackPanel.Style>
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </Border>
                                                     </DataTemplate>
                                                 </TreeViewItem.ItemTemplate>
                                                 <TreeViewItem.Resources>
                                                     <LinearGradientBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" EndPoint="0,1" StartPoint="0,0">
-                                                        <GradientStop Color="#ffffff" Offset="0"/>
-                                                        <GradientStop Color="#ffffff" Offset="1"/>
-                                                    </LinearGradientBrush>                                                    
+                                                        <GradientStop Color="Transparent" Offset="0"/>
+                                                        <GradientStop Color="Transparent" Offset="1"/>
+                                                    </LinearGradientBrush>
                                                 </TreeViewItem.Resources>
                                             </TreeViewItem>
                                         </TreeView>                                        

@@ -160,7 +160,8 @@ namespace IGMICloudApplication.Views
 
                     MainViewModel.Instance.FolderViewModel.EditedFolderId = 0;
                     MainViewModel.Instance.FolderViewModel.ParentFolderId = ((FolderElement)mnu.DataContext).Id;
-                }else if (mnu.Tag != null)
+                }
+                else if (mnu.Tag != null)
                 {
                     MainViewModel.Instance.FolderViewModel.EditedFolderId = 0;
                     MainViewModel.Instance.FolderViewModel.ParentFolderId = Int32.Parse(mnu.Tag.ToString());
@@ -325,7 +326,7 @@ namespace IGMICloudApplication.Views
             else
             {
                 ListView listView = sender as ListView;
-                if (listView!=null && listView.SelectedItem is FolderElement)
+                if (listView != null && listView.SelectedItem is FolderElement)
                 {
                     FolderElement folderElement = (FolderElement)listView.SelectedItem;
                     MainViewModel.Instance.FolderViewModel.SelectedItem = folderElement;
@@ -341,6 +342,37 @@ namespace IGMICloudApplication.Views
             ContextMenu cm = this.FindResource("profileMenu") as ContextMenu;
             cm.PlacementTarget = sender as Button;
             cm.IsOpen = true;
+        }
+
+        private void Mouse_LBtnDown(object sender, MouseButtonEventArgs e)
+        {
+            StackPanel stp = null;
+            var visParent = VisualTreeHelper.GetParent(sender as FrameworkElement);
+            while (stp == null && visParent != null)
+            {
+                stp = visParent as StackPanel;
+                visParent = VisualTreeHelper.GetParent(visParent);
+            }
+            if (stp == null) { return; }
+            ((Label)(sender as FrameworkElement)).Foreground = (Brush)(new BrushConverter().ConvertFrom("#313131"));
+            ((Label)(sender as FrameworkElement)).FontWeight = FontWeights.SemiBold;
+            stp.Background = Brushes.White;
+            var tree = (TreeView)mainLayout.ContentTemplate.FindName("MyFolderTree", mainLayout);
+            if (tree.Items.Count > 0)
+            {
+                ItemCollection items = tree.Items;
+                foreach (TreeViewItem tvi in items)
+                {
+                    if (tvi.Items.Count >0)
+                    {
+                        ItemCollection rootItems = tvi.Items;
+                        foreach (FolderElement rootItem in rootItems)
+                        {
+                           
+                        }
+                    }
+                }
+            }
         }
     }
 }

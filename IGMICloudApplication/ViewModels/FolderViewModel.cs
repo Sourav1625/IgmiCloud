@@ -302,6 +302,12 @@ namespace IGMICloudApplication.ViewModels
             get { return selectedFolderId; }
             set { SetProperty(ref selectedFolderId, value); }
         }
+        private int previousSelectedFolderId;
+        public int PreviousSelectedFolderId
+        {
+            get { return previousSelectedFolderId; }
+            set { SetProperty(ref previousSelectedFolderId, value); }
+        }
         public FolderViewModel()
         {
             FolderCreationRequest = new FolderCreationRequest();
@@ -388,6 +394,15 @@ namespace IGMICloudApplication.ViewModels
                     }
                 }
                 FolderCountMsg = SelectedItem.FolderName;
+                if (PreviousSelectedFolderId == 0)
+                {
+                    PreviousSelectedFolderId = SelectedItem.Id;
+                }
+                else
+                {
+                    PreviousSelectedFolderId = SelectedFolderId;
+                }
+                SelectedFolderId = SelectedItem.Id;
                 MainViewModel.Instance.LoginViewModel.SwitchView = SwitchViewEnum.FolderManagement;
             });
         }

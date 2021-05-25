@@ -23,7 +23,7 @@
                             <Setter TargetName="toggleArrow" Property="Kind" Value="ChevronDown" />
                             <Setter TargetName="toggleArrow" Property="Foreground" Value="#313131" />
                             <Setter TargetName="toggleArrow" Property="Padding" Value="0 5" />
-                            <Setter TargetName="toggleArrow" Property="Margin" Value="12 5 0 0" />
+                            <Setter TargetName="toggleArrow" Property="Margin" Value="2 5 0 0" />
                         </Trigger>
                         <DataTrigger Binding="{Binding FolderViewModel.IsRootFolderSelected}" Value="False">
                             <Setter TargetName="toggleArrow" Property="Foreground" Value="#ffffff" />
@@ -66,9 +66,11 @@
                                 ClickMode="Press"
                                 Width="25" Height="25"/>
                         </Grid>
-                        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="ItemsHost_Container">
-                            <ItemsPresenter x:Name="ItemsHost"
+                        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
+                            <StackPanel x:Name="ItemsHost_Container">
+                                <ItemsPresenter x:Name="ItemsHost"
                               Margin="20 0"/>
+                            </StackPanel>
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -412,7 +414,7 @@
             <RepeatButton Grid.Row="3" Style="{StaticResource ScrollBarLineButton}" Height="18" Command="ScrollBar.LineDownCommand" Content="M 0 0 L 4 4 L 8 0 Z"/>
         </Grid>        
     </ControlTemplate>
-    <ControlTemplate x:Key="HorizontalScrollBar" TargetType="{x:Type ScrollBar}">
+    <ControlTemplate x:Key="HorizontalScrollBar" TargetType="{x:Type ScrollBar}" >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MaxWidth="18"/>
