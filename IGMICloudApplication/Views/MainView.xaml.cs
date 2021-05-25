@@ -353,10 +353,22 @@ namespace IGMICloudApplication.Views
                 stp = visParent as StackPanel;
                 visParent = VisualTreeHelper.GetParent(visParent);
             }
-            if (stp == null) { return; }
-            ((Label)(sender as FrameworkElement)).Foreground = (Brush)(new BrushConverter().ConvertFrom("#313131"));
-            ((Label)(sender as FrameworkElement)).FontWeight = FontWeights.SemiBold;
-            stp.Background = Brushes.White;
+            if (stp == null) { return; }            
+            if (stp.DataContext is FolderElement)
+            {
+                ((Label)(sender as FrameworkElement)).Foreground = (Brush)(new BrushConverter().ConvertFrom("#313131"));
+                ((Label)(sender as FrameworkElement)).FontWeight = FontWeights.SemiBold;
+                stp.Background = Brushes.White;
+                var folderElement = (FolderElement)stp.DataContext;
+                MainViewModel.Instance.FolderViewModel.PreviousSelectedFolderId = MainViewModel.Instance.FolderViewModel.SelectedFolderId;
+                MainViewModel.Instance.FolderViewModel.SelectedFolderId = folderElement.Id;
+            }
+            else
+            {
+                MainViewModel.Instance.FolderViewModel.PreviousSelectedFolderId = MainViewModel.Instance.FolderViewModel.SelectedFolderId;
+                MainViewModel.Instance.FolderViewModel.SelectedFolderId = 0;
+            }
+
             var tree = (TreeView)mainLayout.ContentTemplate.FindName("MyFolderTree", mainLayout);
             if (tree.Items.Count > 0)
             {
@@ -366,13 +378,41 @@ namespace IGMICloudApplication.Views
                     if (tvi.Items.Count >0)
                     {
                         ItemCollection rootItems = tvi.Items;
-                        foreach (FolderElement rootItem in rootItems)
+                        for (var index= 0; index < rootItems.Count; index++)
                         {
-                           
+                            if (((FolderElement)rootItems[index]).Id == MainViewModel.Instance.FolderViewModel.PreviousSelectedFolderId)
+                            {
+                                TreeViewItem subContainer =(TreeViewItem)tvi.ItemContainerGenerator.ContainerFromIndex(index);
+                                StackPanel stackPanel = GetDescendantByType(subContainer, typeof(StackPanel)) as StackPanel;
+                                stackPanel.Background = (Brush)(new BrushConverter().ConvertFrom("#373737"));
+                                Label folderHeader = GetDescendantByType(stackPanel, typeof(Label)) as Label;
+                                folderHeader.Foreground = (Brush)(new BrushConverter().ConvertFrom("#ffffff"));
+                                folderHeader.FontWeight = FontWeights.Light;
+                                break;
+                            }
                         }
                     }
                 }
             }
+        }
+
+        public static Visual GetDescendantByType(Visual element, Type type)
+        {
+
+            if (element == null) return null;
+            if (element.GetType() == type) return element;
+            Visual foundElement = null;
+            if (element is FrameworkElement)
+                (element as FrameworkElement).ApplyTemplate();
+            for (int i = 0;i < VisualTreeHelper.GetChildrenCount(element); i++)
+            {
+
+                Visual visual = VisualTreeHelper.GetChild(element, i) as Visual;
+                foundElement = GetDescendantByType(visual, type);
+                if (foundElement != null)
+                    break;
+            }
+            return foundElement;
         }
     }
 }

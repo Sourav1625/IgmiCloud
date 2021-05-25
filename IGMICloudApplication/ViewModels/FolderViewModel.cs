@@ -393,16 +393,7 @@ namespace IGMICloudApplication.ViewModels
                         }
                     }
                 }
-                FolderCountMsg = SelectedItem.FolderName;
-                if (PreviousSelectedFolderId == 0)
-                {
-                    PreviousSelectedFolderId = SelectedItem.Id;
-                }
-                else
-                {
-                    PreviousSelectedFolderId = SelectedFolderId;
-                }
-                SelectedFolderId = SelectedItem.Id;
+                FolderCountMsg = SelectedItem.FolderName;                
                 MainViewModel.Instance.LoginViewModel.SwitchView = SwitchViewEnum.FolderManagement;
             });
         }

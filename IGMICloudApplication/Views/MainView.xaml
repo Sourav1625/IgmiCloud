@@ -259,6 +259,7 @@
                                                         <Label Content="My Files">
                                                             <Label.Resources>
                                                                 <Style TargetType="Label">
+                                                                    <EventSetter Event="MouseDown" Handler="Mouse_LBtnDown"/>
                                                                     <Setter Property="Foreground" Value="#ffffff" />
                                                                     <Setter Property="FontSize" Value="14" />
                                                                     <Setter Property="FontWeight" Value="Normal" />
@@ -268,7 +269,7 @@
                                                                             <Setter Property="FontSize" Value="14" />
                                                                             <Setter Property="FontWeight" Value="SemiBold" />
                                                                         </DataTrigger>
-                                                                    </Style.Triggers>
+                                                                    </Style.Triggers>                                                                    
                                                                 </Style>
                                                             </Label.Resources>
                                                         </Label>
