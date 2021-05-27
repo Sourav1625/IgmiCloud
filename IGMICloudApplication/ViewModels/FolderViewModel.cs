@@ -58,6 +58,7 @@ namespace IGMICloudApplication.ViewModels
         public DelegateCommand EditFolderCommand { get; private set; }
         public DelegateCommand DeleteFolderCommand { get; private set; }
         public DelegateCommand FolderNavigationCommand { get; private set; }
+        public DelegateCommand ShowAndHideOptionsCommand { get; private set; }
 
         private bool m_isFolderNameEmpty = false;
         public bool isFolderNameEmpty
@@ -308,6 +309,12 @@ namespace IGMICloudApplication.ViewModels
             get { return previousSelectedFolderId; }
             set { SetProperty(ref previousSelectedFolderId, value); }
         }
+        private bool isOptionsVisible;
+        public bool IsOptionsVisible
+        {
+            get { return isOptionsVisible; }
+            set { SetProperty(ref isOptionsVisible, value); }
+        }
         public FolderViewModel()
         {
             FolderCreationRequest = new FolderCreationRequest();
@@ -395,6 +402,9 @@ namespace IGMICloudApplication.ViewModels
                 }
                 FolderCountMsg = SelectedItem.FolderName;                
                 MainViewModel.Instance.LoginViewModel.SwitchView = SwitchViewEnum.FolderManagement;
+            });
+            ShowAndHideOptionsCommand = new DelegateCommand(() => {
+                IsOptionsVisible = !IsOptionsVisible;
             });
         }
 

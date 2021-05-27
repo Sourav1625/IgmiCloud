@@ -145,7 +145,7 @@ namespace IGMICloudApplication.Views
 
             addEditFolderButton.Text = "Add Folder";
             addEditFolderHeader.Text = "Add Folder";
-            dashboardPanel.Opacity = 0.8;
+            dashboardPanel.Opacity = 0.5;
             dashboardPanel.IsHitTestVisible = false;
             addFolderPopup.IsOpen = true;
 
@@ -185,7 +185,7 @@ namespace IGMICloudApplication.Views
 
             addEditFolderButton.Text = "Add Folder";
             addEditFolderHeader.Text = "Add Folder";
-            dashboardPanel.Opacity = 0.8;
+            dashboardPanel.Opacity = 0.5;
             dashboardPanel.IsHitTestVisible = false;
             addFolderPopup.IsOpen = true;
         }
@@ -266,7 +266,7 @@ namespace IGMICloudApplication.Views
 
             addEditFolderButton.Text = "Update Folder";
             addEditFolderHeader.Text = "Edit Existing Folder (" + folderName + ")";
-            dashboardPanel.Opacity = 0.8;
+            dashboardPanel.Opacity = 0.5;
             dashboardPanel.IsHitTestVisible = false;
             updateFolderPopup.IsOpen = true;
             MainViewModel.Instance.FolderViewModel.GetSpecificFolder(MainViewModel.Instance.FolderViewModel.EditedFolderId);
@@ -353,7 +353,7 @@ namespace IGMICloudApplication.Views
                 stp = visParent as StackPanel;
                 visParent = VisualTreeHelper.GetParent(visParent);
             }
-            if (stp == null) { return; }            
+            if (stp == null) { return; }
             if (stp.DataContext is FolderElement)
             {
                 ((Label)(sender as FrameworkElement)).Foreground = (Brush)(new BrushConverter().ConvertFrom("#313131"));
@@ -375,14 +375,14 @@ namespace IGMICloudApplication.Views
                 ItemCollection items = tree.Items;
                 foreach (TreeViewItem tvi in items)
                 {
-                    if (tvi.Items.Count >0)
+                    if (tvi.Items.Count > 0)
                     {
                         ItemCollection rootItems = tvi.Items;
-                        for (var index= 0; index < rootItems.Count; index++)
+                        for (var index = 0; index < rootItems.Count; index++)
                         {
                             if (((FolderElement)rootItems[index]).Id == MainViewModel.Instance.FolderViewModel.PreviousSelectedFolderId)
                             {
-                                TreeViewItem subContainer =(TreeViewItem)tvi.ItemContainerGenerator.ContainerFromIndex(index);
+                                TreeViewItem subContainer = (TreeViewItem)tvi.ItemContainerGenerator.ContainerFromIndex(index);
                                 StackPanel stackPanel = GetDescendantByType(subContainer, typeof(StackPanel)) as StackPanel;
                                 stackPanel.Background = (Brush)(new BrushConverter().ConvertFrom("#373737"));
                                 Label folderHeader = GetDescendantByType(stackPanel, typeof(Label)) as Label;
@@ -404,7 +404,7 @@ namespace IGMICloudApplication.Views
             Visual foundElement = null;
             if (element is FrameworkElement)
                 (element as FrameworkElement).ApplyTemplate();
-            for (int i = 0;i < VisualTreeHelper.GetChildrenCount(element); i++)
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
             {
 
                 Visual visual = VisualTreeHelper.GetChild(element, i) as Visual;
@@ -413,6 +413,25 @@ namespace IGMICloudApplication.Views
                     break;
             }
             return foundElement;
+        }
+
+        public void Open_File_Upload_Popup(object sender, RoutedEventArgs e)
+        {
+            var fileUploadPopup = (Popup)mainLayout.ContentTemplate.FindName("FileUploadPopup", mainLayout);
+            var dashboardPanel = (DockPanel)mainLayout.ContentTemplate.FindName("DashboardPanel", mainLayout);
+            dashboardPanel.Opacity = 0.5;
+            dashboardPanel.IsHitTestVisible = false;
+            fileUploadPopup.IsOpen = true;
+        }
+
+        public void Close_File_Upload_Popup(object sender, RoutedEventArgs e)
+        {
+            var fileUploadPopup = (Popup)mainLayout.ContentTemplate.FindName("FileUploadPopup", mainLayout);
+            var dashboardPanel = (DockPanel)mainLayout.ContentTemplate.FindName("DashboardPanel", mainLayout);
+            dashboardPanel.Opacity = 1;
+            dashboardPanel.Focusable = true;
+            dashboardPanel.IsHitTestVisible = true;
+            fileUploadPopup.IsOpen = false;
         }
     }
 }

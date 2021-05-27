@@ -66,6 +66,9 @@
             </DataTemplate>            
             <DataTemplate x:Key="A_DataTemplate_LoginForm" >
                 <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Icons/IGMICloudBG.png" />
+                    </Grid.Background>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.6*"/>
@@ -560,7 +563,7 @@
                                                         <iconPacks:PackIconEntypo Kind="Cog" Margin="0 7 12 7" Padding="0 2 2 2"/>
                                                         </TextBlock>
                                                     </Border>
-                                                    <Button Padding="10 2" Margin="8 0" Cursor="Hand" Style="{StaticResource Style_UploadButton}" >
+                                                    <Button Padding="10 2" Margin="8 0" Cursor="Hand" Style="{StaticResource Style_UploadButton}" Click="Open_File_Upload_Popup" >
                                                         <Button.Content>
                                                             <StackPanel Orientation="Horizontal">
                                                                 <TextBlock Text="Upload" FontWeight="UltraLight" FontSize="14" Padding="10 6 8 6"/>
@@ -760,6 +763,165 @@
                                                 </Border>
                                             </DockPanel>
                                         </Popup>
+                                        <Popup Name="FileUploadPopup" VerticalAlignment="Top" HorizontalOffset="10" VerticalOffset="10" AllowsTransparency="True" >
+                                            <DockPanel>
+                                                <Border BorderBrush="#e5e5e5" BorderThickness="1" CornerRadius="4" Margin="5 0 0 0" Width="Auto" MinHeight="420" Height="Auto">
+                                                    <StackPanel Background="White">
+                                                        <Border Name="FileUploadPopupHeader" Height="40" >
+                                                            <StackPanel Orientation="Horizontal" Width="1645" >
+                                                                <Grid>
+                                                                    <Grid.RowDefinitions/>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="6*"/>
+                                                                        <ColumnDefinition Width="1*"/>
+                                                                        <ColumnDefinition Width="3*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Grid Grid.Column="0" Width="750">
+                                                                        <Border BorderBrush="#dddddd" BorderThickness="0 0 0 1"/>
+                                                                    </Grid>
+                                                                    <Grid Grid.Column="1" Width="105">
+                                                                        <Border Padding="15 10" BorderBrush="#dddddd" BorderThickness="1 1 1 0" CornerRadius="5 5 0 0">
+                                                                            <StackPanel>
+                                                                                <TextBlock Foreground="#555555" Text="FILE UPLOAD" />
+                                                                            </StackPanel>
+                                                                        </Border>
+                                                                    </Grid>
+                                                                    <Grid Grid.Column="2" Width="790">
+                                                                        <Border BorderBrush="#dddddd" BorderThickness="0 0 0 1">
+                                                                            <Button Style="{StaticResource Style_RightActionButton}" HorizontalAlignment="Right" Click="Close_File_Upload_Popup" Cursor="Hand" >
+                                                                                <Button.Content>
+                                                                                    <iconPacks:Entypo Kind="Cross" Width="6"/>
+                                                                                </Button.Content>
+                                                                            </Button>
+                                                                        </Border>
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </StackPanel>
+                                                        </Border>
+                                                        <Border Name="FileUploadPopupBody" Cursor="Hand" Padding="20" Height="330" VerticalAlignment="Top">
+                                                            <StackPanel Cursor="Hand">
+                                                                <Image Source="Icons/upload-computer-icon.png" Margin="0 20 20 20" Width="205">
+                                                                    <Image.Style>
+                                                                        <Style TargetType="Image">
+                                                                            <Style.Triggers>
+                                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                                    <Setter Property="Opacity" Value="0.7"/>
+                                                                                </Trigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Image.Style>
+                                                                </Image>
+                                                                <TextBlock Text="DRAG &amp; DROP FILES HERE OR CLICK HERE TO BROWSE..." Foreground="#6e6e6e" FontSize="35" FontWeight="DemiBold"  TextAlignment="Center"/>
+                                                            </StackPanel>
+                                                        </Border>
+                                                        <StackPanel Name="FileUploadPopupFooter" VerticalAlignment="Top">
+                                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5 0">
+                                                                <TextBlock Cursor="Hand"  Text="OPTIONS" TextAlignment="Center" Margin="0 2 10 0" Foreground="#373e4a" FontSize="15" FontWeight="Medium">
+                                                                    <interactivity:Interaction.Triggers>
+                                                                        <interactivity:EventTrigger EventName="MouseDown">
+                                                                            <interactivity:InvokeCommandAction  Command="{Binding FolderViewModel.ShowAndHideOptionsCommand}"/>
+                                                                        </interactivity:EventTrigger>       
+                                                                    </interactivity:Interaction.Triggers>
+                                                                </TextBlock>
+                                                                <TextBlock  Text="|  Max file size: 5.00 GB." TextAlignment="Center" Margin="0 1 10 0" Foreground="#aaaaaa" FontSize="16" FontWeight="Medium"/>
+                                                            </StackPanel>
+                                                            <Border Name="AdvancedOptions" BorderBrush="#e5e5e5" BorderThickness="0 1 0 0" Margin="0 15 0 0" Visibility="Collapsed">
+                                                                <Grid Width="Auto" Margin="0 20 0 0" >
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition/>
+                                                                        <RowDefinition/>
+                                                                    </Grid.RowDefinitions>
+                                                                    <Grid Grid.Row="0" Grid.Column="0" Margin="0 0 30 0">
+                                                                        <StackPanel HorizontalAlignment="Right" >
+                                                                            <Border BorderBrush="#ebebeb" BorderThickness="0 0 0 1" Width="500" >
+                                                                                <TextBlock Text="SEND VIA EMAIL:" Margin="0 0 0 5" Foreground="#373e4a" FontSize="14" />
+                                                                            </Border>
+                                                                            <TextBlock Foreground="#646464" FontSize="12" Margin="0 12 0 10"  Text="Enter an email address below to send the list of files via email once they're uploaded."/>
+                                                                            <TextBlock Foreground="#646464" FontSize="12" Text="Email Address:"/>
+                                                                            <TextBox Background="#ffffff" Margin="0 5 0 0" Foreground="#555555" BorderBrush="#ebebeb" FontSize="12" Height="30" Padding="6 12" Text=""/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <Grid Grid.Row="0" Grid.Column="1" Margin="30 0 0 0" >
+                                                                        <StackPanel HorizontalAlignment="Left">
+                                                                            <Border BorderBrush="#ebebeb" BorderThickness="0 0 0 1">
+                                                                                <TextBlock Text="STORE IN FOLDER:" Margin="0 0 0 5" Foreground="#373e4a" FontSize="14" />
+                                                                            </Border>
+                                                                            <TextBlock Foreground="#646464" FontSize="12" Margin="0 12 0 10"  Text="Select an folder below to store these files in. All current uploads will be available within these folders."/>
+                                                                            <TextBlock Foreground="#646464" FontSize="12" Text="Folder Name:"/>
+                                                                            <TextBox Background="#ffffff" Margin="0 5 0 0" Foreground="#555555" BorderBrush="#ebebeb" FontSize="12" Height="30" Padding="6 12" Text=""/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="0 20 5 20">
+                                                                        <Button Content="Cancel" Cursor="Hand" FontSize="12" Padding="6 8" Width="65" Height="32">
+                                                                            <Button.Style>                                                                                
+                                                                                <Style TargetType="Button">
+                                                                                    <Setter Property="Foreground" Value="#303641"/>
+                                                                                    <Setter Property="Background" Value="#f0f0f1"/>
+                                                                                    <Setter Property="BorderBrush" Value="#f0f0f1"/>
+                                                                                    <Setter Property="Template">
+                                                                                        <Setter.Value>
+                                                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                                                <Border Background="{TemplateBinding Background}" CornerRadius="2">
+                                                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                                                </Border>
+                                                                                            </ControlTemplate>
+                                                                                        </Setter.Value>
+                                                                                    </Setter>
+                                                                                    <Style.Triggers>
+                                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                                            <Setter Property="Foreground" Value="#303641"/>
+                                                                                            <Setter Property="Background" Value="#dbdbdd"/>
+                                                                                            <Setter Property="BorderBrush" Value="#d0d0d3"/>
+                                                                                        </Trigger>
+                                                                                    </Style.Triggers>
+                                                                                </Style>
+                                                                            </Button.Style>
+                                                                        </Button>
+                                                                    </Grid>
+                                                                    <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5 20 0 20">
+                                                                        <Button Cursor="Hand" FontSize="13" FontWeight="Regular" Padding="6" Height="32" Width="120">
+                                                                            <Button.Content>
+                                                                                <StackPanel Orientation="Horizontal">
+                                                                                    <TextBlock Text="Save Options"/>
+                                                                                    <iconPacks:PackIconMaterial Kind="CheckBold" Padding="3" Margin="4 0"/>
+                                                                                </StackPanel>
+                                                                            </Button.Content>
+                                                                            <Button.Style>
+                                                                                <Style TargetType="Button">
+                                                                                    <Setter Property="Foreground" Value="#ffffff"/>
+                                                                                    <Setter Property="Background" Value="#21a9e1"/>
+                                                                                    <Setter Property="BorderBrush" Value="#21a9e1"/>
+                                                                                    <Setter Property="Template">
+                                                                                        <Setter.Value>
+                                                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                                                <Border Background="{TemplateBinding Background}" CornerRadius="2">
+                                                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                                                </Border>
+                                                                                            </ControlTemplate>
+                                                                                        </Setter.Value>
+                                                                                    </Setter>
+                                                                                    <Style.Triggers>
+                                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                                            <Setter Property="Foreground" Value="#ffffff"/>
+                                                                                            <Setter Property="Background" Value="#1a8fbf"/>
+                                                                                            <Setter Property="BorderBrush" Value="#1782ad"/>
+                                                                                        </Trigger>
+                                                                                    </Style.Triggers>
+                                                                                </Style>
+                                                                            </Button.Style>
+                                                                        </Button>
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </Border>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </Border>
+                                            </DockPanel>
+                                        </Popup>
                                     </Grid>
                                     <Grid Grid.Row="1" VerticalAlignment="Top">
                                         <ContentControl Content="{Binding }">
@@ -799,14 +961,14 @@
                         <Setter TargetName="LoginControl" Property="Visibility" Value="Collapsed" />
                         <Setter TargetName="DashboardPanel" Property="Visibility" Value="Visible" />
                     </DataTrigger>
+                    <DataTrigger Binding="{Binding FolderViewModel.IsOptionsVisible}" Value="True">
+                        <Setter TargetName="AdvancedOptions" Property="Visibility" Value="Visible" />
+                    </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="Icons/IGMICloudBG.png" />
-        </Grid.Background>
         <ContentPresenter  x:Name="mainLayout" Content="{Binding}" ContentTemplate="{StaticResource A_DataTemplate_MainLayout}" />
     </Grid>
 </Window>
