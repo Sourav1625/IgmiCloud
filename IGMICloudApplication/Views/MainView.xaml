@@ -768,35 +768,33 @@
                                                 <Border BorderBrush="#e5e5e5" BorderThickness="1" CornerRadius="4" Margin="5 0 0 0" Width="Auto" MinHeight="420" Height="Auto">
                                                     <StackPanel Background="White">
                                                         <Border Name="FileUploadPopupHeader" Height="40" >
-                                                            <StackPanel Orientation="Horizontal" Width="Auto" >
-                                                                <Grid>
-                                                                    <Grid.RowDefinitions/>
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="6*"/>
-                                                                        <ColumnDefinition Width="1*"/>
-                                                                        <ColumnDefinition Width="3*"/>
-                                                                    </Grid.ColumnDefinitions>
-                                                                    <Grid Grid.Column="0" Width="750">
-                                                                        <Border BorderBrush="#dddddd" BorderThickness="0 0 0 1"/>
-                                                                    </Grid>
-                                                                    <Grid Grid.Column="1" Width="105">
-                                                                        <Border Padding="15 10" BorderBrush="#dddddd" BorderThickness="1 1 1 0" CornerRadius="5 5 0 0">
-                                                                            <StackPanel>
-                                                                                <TextBlock Foreground="#555555" Text="FILE UPLOAD" />
-                                                                            </StackPanel>
-                                                                        </Border>
-                                                                    </Grid>
-                                                                    <Grid Grid.Column="2" Width="675">
-                                                                        <Border BorderBrush="#dddddd" BorderThickness="0 0 0 1" Padding="25 10 5 10">
-                                                                            <Button Style="{StaticResource Style_RightActionButton}" HorizontalAlignment="Right" Click="Close_File_Upload_Popup" Cursor="Hand" >
-                                                                                <Button.Content>
-                                                                                    <iconPacks:Entypo Kind="Cross" Width="6" />
-                                                                                </Button.Content>
-                                                                            </Button>
-                                                                        </Border>
-                                                                    </Grid>
+                                                            <Grid Width="{Binding Source={x:Static SystemParameters.FullPrimaryScreenWidth}}" >
+                                                                <Grid.RowDefinitions/>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="2*"/>
+                                                                    <ColumnDefinition Width="0.3*"/>
+                                                                    <ColumnDefinition Width="2*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid Grid.Column="0">
+                                                                    <Border BorderBrush="#dddddd" BorderThickness="0 0 0 1"/>
                                                                 </Grid>
-                                                            </StackPanel>
+                                                                <Grid Grid.Column="1">
+                                                                    <Border Padding="18 10" BorderBrush="#dddddd" BorderThickness="1 1 1 0" CornerRadius="5 5 0 0">
+                                                                        <StackPanel>
+                                                                            <TextBlock Foreground="#555555" Text="FILE UPLOAD" />
+                                                                        </StackPanel>
+                                                                    </Border>
+                                                                </Grid>
+                                                                <Grid Grid.Column="2">
+                                                                    <Border BorderBrush="#dddddd" BorderThickness="0 0 0 1" Padding="25 10 5 10">
+                                                                        <Button Style="{StaticResource Style_RightActionButton}" HorizontalAlignment="Right" Click="Close_File_Upload_Popup" Cursor="Hand" >
+                                                                            <Button.Content>
+                                                                                <iconPacks:Entypo Kind="Cross" Width="6" />
+                                                                            </Button.Content>
+                                                                        </Button>
+                                                                    </Border>
+                                                                </Grid>
+                                                            </Grid>
                                                         </Border>
                                                         <Border Name="FileUploadPopupBody" Cursor="Hand" Padding="20" Height="330" VerticalAlignment="Top">
                                                             <StackPanel Cursor="Hand">
