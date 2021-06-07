@@ -768,7 +768,7 @@
                                                 <Border BorderBrush="#e5e5e5" BorderThickness="1" CornerRadius="4" Margin="5 0 0 0" Width="Auto" MinHeight="420" Height="Auto">
                                                     <StackPanel Background="White">
                                                         <Border Name="FileUploadPopupHeader" Height="40" >
-                                                            <StackPanel Orientation="Horizontal" Width="1645" >
+                                                            <StackPanel Orientation="Horizontal" Width="Auto" >
                                                                 <Grid>
                                                                     <Grid.RowDefinitions/>
                                                                     <Grid.ColumnDefinitions>
