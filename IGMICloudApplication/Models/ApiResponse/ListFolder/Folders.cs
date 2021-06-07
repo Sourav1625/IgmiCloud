@@ -77,4 +77,39 @@ namespace IGMICloudApplication.Models.ApiResponse.ListFolder
         public int watermarkPreviews { get; set; }
         public int showDownloadLinks { get; set; }
     }
+    public class File
+    {
+        [JsonProperty("id")]       
+        public long Id { get; set; }
+
+        [JsonProperty("filename")]
+        public string Filename { get; set; }
+
+        [JsonProperty("shortUrl")]
+        public string ShortUrl { get; set; }
+
+        [JsonProperty("fileType")]
+        public string FileType { get; set; }
+
+        [JsonProperty("extension")]
+        public string Extension { get; set; }
+
+        [JsonProperty("fileSize")]        
+        public long FileSize { get; set; }
+
+        [JsonProperty("status")]
+        public string Status { get; set; }
+
+        [JsonProperty("downloads")]       
+        public long Downloads { get; set; }
+
+        [JsonProperty("folderId")]        
+        public long FolderId { get; set; }
+
+        [JsonProperty("keywords")]
+        public string Keywords { get; set; }
+
+        [JsonProperty("url_file")]
+        public Uri UrlFile { get; set; }
+    }
 }
