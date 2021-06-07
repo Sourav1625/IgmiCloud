@@ -225,6 +225,7 @@ namespace IGMICloudApplication.ViewModels
                                         SwitchView = SwitchViewEnum.FolderManagement;
                                         MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = true;
                                         MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0);
+                                        MainViewModel.Instance.FolderViewModel.GetFolderListForFileUpload(0, 0);
                                         MainViewModel.Instance.AccountViewModel.GetUserDetails();
                                     }
                                 }

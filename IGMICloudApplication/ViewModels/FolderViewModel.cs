@@ -187,6 +187,17 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref folderListForComboBox, value); }
         }
+
+        private ObservableCollection<FolderElement> folderListForFileUpload;
+        public ObservableCollection<FolderElement> FolderListForFileUpload
+        {
+            get
+            {
+                return folderListForFileUpload;
+            }
+            set { SetProperty(ref folderListForFileUpload, value); }
+        }
+
         private int parentFolderId;
         public int ParentFolderId
         {
@@ -613,6 +624,49 @@ namespace IGMICloudApplication.ViewModels
                 }
             }
             TrashFolderCountMsg = "Trash Can - " + TrashFolderList.Count + " Folders";
+        }
+
+        public ObservableCollection<FolderElement> GetFolderListForFileUpload(int folder_id, int parent_folder_id)
+        {
+            string apiResponse = getAccessToken();
+            if (apiResponse.Equals("error"))
+            {
+                Logger.Error("Could not validate access_token and account_id during GetFolderList call");
+                MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
+                return null;
+            }
+            var cloudAPIFolderObj = new IGMICloudFolderAPIs();
+            string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, parent_folder_id);
+
+            Folder folder = JsonConvert.DeserializeObject<Folder>(response);
+            FolderList = new ObservableCollection<FolderElement>();
+            FolderListForFileUpload = new ObservableCollection<FolderElement>();
+            FolderElement defaultSelected = new FolderElement();
+            defaultSelected.FolderName = "-Default-";
+            defaultSelected.Id = 0;
+            FolderListForFileUpload.Add(defaultSelected);
+            if (folder != null && folder.Data != null)
+            {
+                foreach (FolderElement folderElement in folder.Data.Folders)
+                {
+                    if (folderElement.ParentId == null && folderElement.Status == "active")
+                    {
+                        FolderList.Add(folderElement);
+                    }
+                    FolderListForFileUpload.Add(folderElement);
+                }
+            }
+            ParentFolderId = 0;
+            if (folder_id > 0)
+            {
+                ParentFolderId = folder_id;
+            }
+            if (FolderList.Count > 0)
+            {
+                IsExpanded = true;
+            }
+            FolderCountMsg = "Root Folder - " + FolderList.Count + " Folders";
+            return FolderList;
         }
     }
 }
