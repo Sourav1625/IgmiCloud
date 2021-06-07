@@ -12,7 +12,7 @@
         Title="IGMI Cloud" 
         Icon="Icons/Logo.ico"
         Background="Transparent"
-        WindowStyle="ThreeDBorderWindow" WindowState="Maximized" >    
+        WindowStyle="ThreeDBorderWindow" WindowState="Maximized">    
     <Window.Resources>        
         <ResourceDictionary>
             <ContextMenu x:Key="profileMenu" Placement="Mouse" Width="300" PlacementRectangle="30,50,0,0">
@@ -763,7 +763,7 @@
                                                 </Border>
                                             </DockPanel>
                                         </Popup>
-                                        <Popup Name="FileUploadPopup" VerticalAlignment="Top" HorizontalOffset="10" VerticalOffset="10" AllowsTransparency="True" >
+                                        <Popup Name="FileUploadPopup" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalOffset="10" VerticalOffset="10" AllowsTransparency="True" >
                                             <DockPanel>
                                                 <Border BorderBrush="#e5e5e5" BorderThickness="1" CornerRadius="4" Margin="5 0 0 0" Width="Auto" MinHeight="420" Height="Auto">
                                                     <StackPanel Background="White">
@@ -786,11 +786,11 @@
                                                                             </StackPanel>
                                                                         </Border>
                                                                     </Grid>
-                                                                    <Grid Grid.Column="2" Width="790">
-                                                                        <Border BorderBrush="#dddddd" BorderThickness="0 0 0 1">
+                                                                    <Grid Grid.Column="2" Width="675">
+                                                                        <Border BorderBrush="#dddddd" BorderThickness="0 0 0 1" Padding="25 10 5 10">
                                                                             <Button Style="{StaticResource Style_RightActionButton}" HorizontalAlignment="Right" Click="Close_File_Upload_Popup" Cursor="Hand" >
                                                                                 <Button.Content>
-                                                                                    <iconPacks:Entypo Kind="Cross" Width="6"/>
+                                                                                    <iconPacks:Entypo Kind="Cross" Width="6" />
                                                                                 </Button.Content>
                                                                             </Button>
                                                                         </Border>
@@ -856,7 +856,7 @@
                                                                         </StackPanel>
                                                                     </Grid>
                                                                     <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="0 20 5 20">
-                                                                        <Button Content="Cancel" Cursor="Hand" FontSize="12" Padding="6 8" Width="65" Height="32">
+                                                                        <Button Content="Cancel" Cursor="Hand" FontSize="12" Padding="6 8" Width="65" Height="32" Command="{Binding FolderViewModel.ShowAndHideOptionsCommand}">
                                                                             <Button.Style>                                                                                
                                                                                 <Style TargetType="Button">
                                                                                     <Setter Property="Foreground" Value="#303641"/>
