@@ -12,7 +12,7 @@ namespace IGMICloudApplication.APIs
     {
         private readonly RestClient _restClient;
         private readonly JsonSerializer _serializer;
-        private string baseUrl = "https://igmigroup.com/ucloud/ucloud/api/v2";        
+        private string baseUrl = "https://igmiweb.com/ucloud/api/v2/";        
         public IGMICloudAPIs()
         {
             var serviceBaseUri = $"{baseUrl}";

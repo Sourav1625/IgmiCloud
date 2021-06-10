@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +10,7 @@ using System.Windows.Media.Imaging;
 using IGMICloudApplication.Models;
 using IGMICloudApplication.Models.ApiResponse.ListFolder;
 using IGMICloudApplication.ViewModels;
+using Microsoft.Win32;
 using NLog;
 
 namespace IGMICloudApplication.Views
@@ -432,6 +434,29 @@ namespace IGMICloudApplication.Views
             dashboardPanel.Focusable = true;
             dashboardPanel.IsHitTestVisible = true;
             fileUploadPopup.IsOpen = false;
+        }
+
+        private void border1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //var fileContent = string.Empty;
+            //var filePath = string.Empty;
+            //OpenFileDialog openFileDialog = new OpenFileDialog();         
+            ////if (openFileDialog.ShowDialog() == true)
+            ////    MessageBox.Show(File.ReadAllText(openFileDialog.FileName));
+            //if (openFileDialog.ShowDialog() == true)
+            //{
+            //    //Get the path of specified file
+            //    filePath = openFileDialog.FileName;
+
+            //    //Read the contents of the file into a stream
+            //    var fileStream = openFileDialog.OpenFile();
+
+            //    using (StreamReader reader = new StreamReader(fileStream))
+            //    {
+            //        fileContent = reader.ReadToEnd();
+            //    }
+            //    MessageBox.Show(fileContent, "File Content at path: " + filePath);
+            }
         }
     }
 }

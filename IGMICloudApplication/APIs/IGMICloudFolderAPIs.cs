@@ -11,7 +11,7 @@ namespace IGMICloudApplication.APIs
     {
         private readonly RestClient _restClient;
         private readonly JsonSerializer _serializer;
-        private string baseUrl = "https://igmigroup.com/ucloud/ucloud/api/v2";
+        private string baseUrl = "https://igmiweb.com/ucloud/api/v2/";
         public IGMICloudFolderAPIs()
         {
             var serviceBaseUri = $"{baseUrl}";
@@ -77,17 +77,17 @@ namespace IGMICloudApplication.APIs
 
         }
 
-        public string GetFolderList(string endpoint, string access_token, int parent_folder_id)
+        public string GetFolderList(string endpoint, string access_token, int parent_folder_id, string type, int page)
         {           
             var request = new RestRequest($"{endpoint}");
             AddRequestBoilerplate(ref request);
             if (parent_folder_id > 0)
-            {
-                request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&parent_folder_id={parent_folder_id}&account_id={LoggedinProfile.accountId}", ParameterType.RequestBody);
+            {                
+               request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&parent_folder_id={parent_folder_id}&account_id={LoggedinProfile.accountId}&type={type}&page={page}", ParameterType.RequestBody);                               
             }
             else
-            {
-                request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&account_id={LoggedinProfile.accountId}", ParameterType.RequestBody);
+            {                
+               request.AddParameter("application/x-www-form-urlencoded", $"access_token={access_token}&account_id={LoggedinProfile.accountId}&type={type}&page={page}", ParameterType.RequestBody);                            
             }
             var response = _restClient.Post(request);
             if (!response.IsSuccessful)
@@ -95,10 +95,10 @@ namespace IGMICloudApplication.APIs
                 NotifyRequestFailure(request, response);
                 return null;
             }
-
                      
            return response.Content;
         }
+
         public string DeleteFolder(string endpoint, string access_token, int account_id, int folder_id)
         {
             var folder = new Folder();

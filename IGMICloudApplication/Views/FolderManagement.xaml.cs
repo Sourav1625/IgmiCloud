@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IGMICloudApplication.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace IGMICloudApplication.Views
     {
         public FolderManagement()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
         private void Open_Folder_Creation_Popup(object sender, RoutedEventArgs e)
         {
@@ -47,6 +48,23 @@ namespace IGMICloudApplication.Views
         {
             MainView parentWindow = (MainView)Window.GetWindow(this);
             parentWindow.SelectedItemChanged(sender, e);
+        }
+        private void First_Click_Folder_Listing(object sender, RoutedEventArgs e)
+        {            
+            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "first");
+        }
+        private void Previous_Click_Folder_Listing(object sender, RoutedEventArgs e)
+        {            
+            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "previous");
+        }
+        private void Next_Click_Folder_Listing(object sender, RoutedEventArgs e)
+        {           
+            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "next");
+        }
+
+        private void Last_Click_Folder_Listing(object sender, RoutedEventArgs e)
+        {            
+            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "last");
         }
     }
 }

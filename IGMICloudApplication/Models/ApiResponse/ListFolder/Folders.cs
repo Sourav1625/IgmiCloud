@@ -9,6 +9,9 @@ namespace IGMICloudApplication.Models.ApiResponse.ListFolder
         [JsonProperty("data")]
         public Data Data { get; set; }
 
+        [JsonProperty("total_page")]
+        public long TotalPage { get; set; }
+
         [JsonProperty("_status")]
         public string Status { get; set; }
 
@@ -111,5 +114,10 @@ namespace IGMICloudApplication.Models.ApiResponse.ListFolder
 
         [JsonProperty("url_file")]
         public Uri UrlFile { get; set; }
+
+        internal static string ReadAllText(string fileName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

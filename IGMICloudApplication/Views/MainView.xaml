@@ -808,7 +808,7 @@
                                                                 </Grid>
                                                             </Grid>
                                                         </Border>
-                                                        <Border Name="FileUploadPopupBody" Cursor="Hand" Padding="20" Height="330" VerticalAlignment="Top">
+                                                        <Border Name="FileUploadPopupBody" Cursor="Hand" Padding="20" Height="330" VerticalAlignment="Top" MouseLeftButtonDown="border1_MouseLeftButtonDown">                                                           
                                                             <StackPanel Cursor="Hand">
                                                                 <Image Source="Icons/upload-computer-icon.png" Margin="0 20 20 20" Width="205">
                                                                     <Image.Style>
@@ -822,7 +822,8 @@
                                                                     </Image.Style>
                                                                 </Image>
                                                                 <TextBlock Text="DRAG &amp; DROP FILES HERE OR CLICK HERE TO BROWSE..." Foreground="#6e6e6e" FontSize="35" FontWeight="DemiBold"  TextAlignment="Center"/>
-                                                            </StackPanel>
+                                                            
+                                                            </StackPanel>                                                           
                                                         </Border>
                                                         <StackPanel Name="FileUploadPopupFooter" VerticalAlignment="Top">
                                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5 0">

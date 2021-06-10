@@ -88,6 +88,67 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref isExpanded, value); }
         }
+
+        private int curentPage;
+        public int CurentPage
+        {
+            get
+            {
+                return curentPage;
+            }
+            set { SetProperty(ref curentPage, value); }
+        }
+
+        private int totalPage;
+        public int TotalPage
+        {
+            get
+            {
+                return totalPage;
+            }
+            set { SetProperty(ref totalPage, value); }
+        }
+
+        private bool isFirstButtonEnable;
+        public bool IsFirstButtonEnable
+        {
+            get
+            {
+                return isFirstButtonEnable;
+            }
+            set { SetProperty(ref isFirstButtonEnable, value); }
+        }
+
+        private bool isPreviousButtonEnable;
+        public bool IsPreviousButtonEnable
+        {
+            get
+            {
+                return isPreviousButtonEnable;
+            }
+            set { SetProperty(ref isPreviousButtonEnable, value); }
+        }
+
+        private bool isNextButtonEnable;
+        public bool IsNextButtonEnable
+        {
+            get
+            {
+                return isNextButtonEnable;
+            }
+            set { SetProperty(ref isNextButtonEnable, value); }
+        }
+
+        private bool isLastButtonEnable;
+        public bool IsLastButtonEnable
+        {
+            get
+            {
+                return isLastButtonEnable;
+            }
+            set { SetProperty(ref isLastButtonEnable, value); }
+        }       
+
         private FolderElement selectedItem;
         public FolderElement SelectedItem
         {
@@ -346,6 +407,11 @@ namespace IGMICloudApplication.ViewModels
             IsShowDownloadLinks = 1;
             EditedFolderId = 0;
             EnablePassword = 1;
+            CurentPage = 1;            
+            IsFirstButtonEnable = false;
+            IsPreviousButtonEnable = false;
+            IsNextButtonEnable = false;
+            IsLastButtonEnable = false;
             AddFolderCommand = new DelegateCommand(() =>
             {              
                 Logger.Info("Creating folder with name " + FolderName);
@@ -398,17 +464,15 @@ namespace IGMICloudApplication.ViewModels
                     MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
                 }
                 var cloudAPIFolderObj = new IGMICloudFolderAPIs();
-                string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, SelectedItem.Id);
+                string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, SelectedItem.Id, "active", CurentPage);
                 Folder folder = JsonConvert.DeserializeObject<Folder>(response);
-                SubFolderList = new ObservableCollection<FolderElement>();
+                SubFolderList = new ObservableCollection<FolderElement>();              
                 if (folder != null && folder.Data != null)
                 {
+                    TotalPage = Convert.ToInt32(folder.TotalPage);
                     foreach (FolderElement folderElement in folder.Data.Folders)
-                    {
-                        if (folderElement.Status == "active")
-                        {
-                            SubFolderList.Add(folderElement);
-                        }
+                    {                       
+                        SubFolderList.Add(folderElement);                        
                     }
                 }
                 FolderCountMsg = SelectedItem.FolderName;                
@@ -450,7 +514,7 @@ namespace IGMICloudApplication.ViewModels
             return apiResponse;
         }
 
-        public ObservableCollection<FolderElement> GetFolderList(int folder_id, int parent_folder_id)
+        public ObservableCollection<FolderElement> GetFolderList(int folder_id, int parent_folder_id, string direction)
         {
             string apiResponse=getAccessToken();
             if (apiResponse.Equals("error"))
@@ -459,8 +523,23 @@ namespace IGMICloudApplication.ViewModels
                 MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
                 return null;
             }
+            if (direction.Trim() == "")
+            {
+                CurentPage = 1;
+            }else if (direction.Trim().Equals("next"))
+            {
+                CurentPage = CurentPage + 1;
+            }
+            else if (direction.Trim().Equals("previous"))
+            {
+                CurentPage = CurentPage - 1;
+            }
+            else if (direction.Trim().Equals("first"))
+            {
+                CurentPage = 1;
+            }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
-            string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, parent_folder_id);
+            string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, parent_folder_id, "active", CurentPage);
 
             Folder folder = JsonConvert.DeserializeObject<Folder>(response);           
             FolderList = new ObservableCollection<FolderElement>();
@@ -471,13 +550,12 @@ namespace IGMICloudApplication.ViewModels
             FolderListForComboBox.Add(defaultSelected);
             if (folder != null && folder.Data != null)
             {
+                TotalPage = Convert.ToInt32(folder.TotalPage);
+                enableDisableButton();
                 foreach (FolderElement folderElement in folder.Data.Folders)
-                {
-                    if (folderElement.ParentId == null && folderElement.Status== "active")
-                    {
-                        FolderList.Add(folderElement);
-                    }
-                    FolderListForComboBox.Add(folderElement);
+                {                   
+                   FolderList.Add(folderElement);                    
+                   FolderListForComboBox.Add(folderElement);
                 }
             }
             ParentFolderId = 0;
@@ -491,6 +569,30 @@ namespace IGMICloudApplication.ViewModels
             }
             FolderCountMsg = "Root Folder - "+ FolderList.Count+ " Folders";
             return FolderList;
+        }
+
+        public void enableDisableButton()
+        {           
+            if (curentPage > 1)
+            {
+                IsFirstButtonEnable = true;
+                IsPreviousButtonEnable = true;
+            }
+            else
+            {
+                IsFirstButtonEnable = false;
+                IsPreviousButtonEnable = false;
+            }
+            if (CurentPage < TotalPage)
+            {
+                IsNextButtonEnable = true;
+                IsLastButtonEnable = true;
+            }
+            else
+            {
+                IsNextButtonEnable = false;
+                IsLastButtonEnable = false;
+            }
         }
 
         public void GetSpecificFolder(int folder_id)
@@ -557,7 +659,7 @@ namespace IGMICloudApplication.ViewModels
 
                 if (response != null)
                 {
-                    GetFolderList( 0, 0);
+                    GetFolderList( 0, 0,"");
                 }
             }
         }
@@ -579,7 +681,7 @@ namespace IGMICloudApplication.ViewModels
 
             if (response != null)
             {
-                GetFolderList(folder_id, 0);
+                GetFolderList(folder_id, 0,"");
             }
         }
 
@@ -597,7 +699,7 @@ namespace IGMICloudApplication.ViewModels
             if (response != null)
             {
                 MainViewModel.Instance.ToastViewModel.ShowSuccess("Removed 1 file.");
-                GetFolderList(folder_id, 0);
+                GetFolderList(folder_id, 0, "");
             }
         }
         public void GetTrashFolders()
@@ -609,18 +711,16 @@ namespace IGMICloudApplication.ViewModels
                 MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
             }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
-            string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, 0);//TODO need to filter data with status trash
+            string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, 0, "Trash", 1);
 
             Folder folder = JsonConvert.DeserializeObject<Folder>(response);
             TrashFolderList = new ObservableCollection<FolderElement>();
+            
             if (folder != null && folder.Data != null)
             {
                 foreach (FolderElement folderElement in folder.Data.Folders)
-                {
-                    if (folderElement.Status == "trash")
-                    {
-                        TrashFolderList.Add(folderElement);
-                    }
+                {                   
+                   TrashFolderList.Add(folderElement);                   
                 }
             }
             TrashFolderCountMsg = "Trash Can - " + TrashFolderList.Count + " Folders";
@@ -636,7 +736,7 @@ namespace IGMICloudApplication.ViewModels
                 return null;
             }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
-            string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, parent_folder_id);
+            string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, parent_folder_id, "active", 1);
 
             Folder folder = JsonConvert.DeserializeObject<Folder>(response);
             FolderList = new ObservableCollection<FolderElement>();
@@ -648,11 +748,8 @@ namespace IGMICloudApplication.ViewModels
             if (folder != null && folder.Data != null)
             {
                 foreach (FolderElement folderElement in folder.Data.Folders)
-                {
-                    if (folderElement.ParentId == null && folderElement.Status == "active")
-                    {
-                        FolderList.Add(folderElement);
-                    }
+                {                   
+                    FolderList.Add(folderElement);                   
                     FolderListForFileUpload.Add(folderElement);
                 }
             }
