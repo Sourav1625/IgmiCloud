@@ -197,6 +197,9 @@
                 <Setter Property="Background" Value="#ebebeb"/>
                 <Setter Property="Foreground" Value="#303641"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>             
+            </Trigger>
         </Style.Triggers>
     </Style>
     <Style x:Key="Popup_Header" TargetType="{x:Type StackPanel}">

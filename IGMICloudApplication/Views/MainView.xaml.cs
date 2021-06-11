@@ -456,7 +456,7 @@ namespace IGMICloudApplication.Views
             //        fileContent = reader.ReadToEnd();
             //    }
             //    MessageBox.Show(fileContent, "File Content at path: " + filePath);
-            }
+            //}
         }
     }
 }

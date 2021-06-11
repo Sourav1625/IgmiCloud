@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IGMICloudApplication.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,25 @@ namespace IGMICloudApplication.Views
         public TrashCan()
         {
             InitializeComponent();
+        }
+
+        private void First_Click_Folder_Listing(object sender, RoutedEventArgs e)
+        {            
+            MainViewModel.Instance.FolderViewModel.GetTrashFolders("first");
+        }
+        private void Previous_Click_Folder_Listing(object sender, RoutedEventArgs e)
+        {
+            MainViewModel.Instance.FolderViewModel.GetTrashFolders("previous");
+
+        }
+        private void Next_Click_Folder_Listing(object sender, RoutedEventArgs e)
+        {
+            MainViewModel.Instance.FolderViewModel.GetTrashFolders("next");
+        }
+
+        private void Last_Click_Folder_Listing(object sender, RoutedEventArgs e)
+        {
+            MainViewModel.Instance.FolderViewModel.GetTrashFolders("last");
         }
     }
 }

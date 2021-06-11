@@ -89,6 +89,66 @@ namespace IGMICloudApplication.ViewModels
             set { SetProperty(ref isExpanded, value); }
         }
 
+        private int trashCurentPage;
+        public int TrashCurentPage
+        {
+            get
+            {
+                return trashCurentPage;
+            }
+            set { SetProperty(ref trashCurentPage, value); }
+        }
+
+        private int trashTotalPage;
+        public int TrashTotalPage
+        {
+            get
+            {
+                return trashTotalPage;
+            }
+            set { SetProperty(ref trashTotalPage, value); }
+        }
+
+        private bool isTrashFirstButtonEnable;
+        public bool IsTrashFirstButtonEnable
+        {
+            get
+            {
+                return isTrashFirstButtonEnable;
+            }
+            set { SetProperty(ref isTrashFirstButtonEnable, value); }
+        }
+
+        private bool isTrashPreviousButtonEnable;
+        public bool IsTrashPreviousButtonEnable
+        {
+            get
+            {
+                return isTrashPreviousButtonEnable;
+            }
+            set { SetProperty(ref isTrashPreviousButtonEnable, value); }
+        }
+
+        private bool isTrashNextButtonEnable;
+        public bool IsTrashNextButtonEnable
+        {
+            get
+            {
+                return isTrashNextButtonEnable;
+            }
+            set { SetProperty(ref isTrashNextButtonEnable, value); }
+        }
+
+        private bool isTrashLastButtonEnable;
+        public bool IsTrashLastButtonEnable
+        {
+            get
+            {
+                return isTrashLastButtonEnable;
+            }
+            set { SetProperty(ref isTrashLastButtonEnable, value); }
+        }
+
         private int curentPage;
         public int CurentPage
         {
@@ -147,7 +207,7 @@ namespace IGMICloudApplication.ViewModels
                 return isLastButtonEnable;
             }
             set { SetProperty(ref isLastButtonEnable, value); }
-        }       
+        }
 
         private FolderElement selectedItem;
         public FolderElement SelectedItem
@@ -407,11 +467,16 @@ namespace IGMICloudApplication.ViewModels
             IsShowDownloadLinks = 1;
             EditedFolderId = 0;
             EnablePassword = 1;
-            CurentPage = 1;            
+            CurentPage = 1;
+            TrashCurentPage = 1;
             IsFirstButtonEnable = false;
             IsPreviousButtonEnable = false;
             IsNextButtonEnable = false;
             IsLastButtonEnable = false;
+            IsTrashFirstButtonEnable = false;
+            IsTrashPreviousButtonEnable = false;
+            IsTrashNextButtonEnable = false;
+            IsTrashLastButtonEnable = false;
             AddFolderCommand = new DelegateCommand(() =>
             {              
                 Logger.Info("Creating folder with name " + FolderName);
@@ -538,6 +603,10 @@ namespace IGMICloudApplication.ViewModels
             {
                 CurentPage = 1;
             }
+            else if (direction.Trim().Equals("last"))
+            {
+                CurentPage = TotalPage;
+            }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, parent_folder_id, "active", CurentPage);
 
@@ -573,7 +642,7 @@ namespace IGMICloudApplication.ViewModels
 
         public void enableDisableButton()
         {           
-            if (curentPage > 1)
+            if (CurentPage > 1)
             {
                 IsFirstButtonEnable = true;
                 IsPreviousButtonEnable = true;
@@ -593,7 +662,7 @@ namespace IGMICloudApplication.ViewModels
                 IsNextButtonEnable = false;
                 IsLastButtonEnable = false;
             }
-        }
+        }       
 
         public void GetSpecificFolder(int folder_id)
         {
@@ -702,7 +771,7 @@ namespace IGMICloudApplication.ViewModels
                 GetFolderList(folder_id, 0, "");
             }
         }
-        public void GetTrashFolders()
+        public void GetTrashFolders(string direction)
         {
             string apiResponse = getAccessToken();
             if (apiResponse.Equals("error"))
@@ -710,20 +779,66 @@ namespace IGMICloudApplication.ViewModels
                 Logger.Error("Could not validate access_token and account_id during GetFolderList call");
                 MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
             }
+            if (direction.Trim() == "")
+            {
+                TrashCurentPage = 1;
+            }
+            else if (direction.Trim().Equals("next"))
+            {
+                TrashCurentPage = TrashCurentPage + 1;
+            }
+            else if (direction.Trim().Equals("previous"))
+            {
+                TrashCurentPage = TrashCurentPage - 1;
+            }
+            else if (direction.Trim().Equals("first"))
+            {
+                TrashCurentPage = 1;
+            }
+            else if (direction.Trim().Equals("last"))
+            {
+                TrashCurentPage = TrashTotalPage;
+            }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
-            string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, 0, "Trash", 1);
+            string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, 0, "Trash", TrashCurentPage);
 
             Folder folder = JsonConvert.DeserializeObject<Folder>(response);
             TrashFolderList = new ObservableCollection<FolderElement>();
             
             if (folder != null && folder.Data != null)
             {
+                TrashTotalPage = Convert.ToInt32(folder.TotalPage);
+                enableDisableTrashButton();
                 foreach (FolderElement folderElement in folder.Data.Folders)
                 {                   
                    TrashFolderList.Add(folderElement);                   
                 }
             }
             TrashFolderCountMsg = "Trash Can - " + TrashFolderList.Count + " Folders";
+        }
+
+        public void enableDisableTrashButton()
+        {
+            if (TrashCurentPage > 1)
+            {
+                IsTrashFirstButtonEnable = true;
+                IsTrashPreviousButtonEnable = true;
+            }
+            else
+            {
+                IsTrashFirstButtonEnable = false;
+                IsTrashPreviousButtonEnable = false;
+            }
+            if (TrashCurentPage < TrashTotalPage)
+            {
+                IsTrashNextButtonEnable = true;
+                IsTrashLastButtonEnable = true;
+            }
+            else
+            {
+                IsTrashNextButtonEnable = false;
+                IsTrashLastButtonEnable = false;
+            }
         }
 
         public ObservableCollection<FolderElement> GetFolderListForFileUpload(int folder_id, int parent_folder_id)

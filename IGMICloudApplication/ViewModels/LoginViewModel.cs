@@ -97,13 +97,13 @@ namespace IGMICloudApplication.ViewModels
         {
             if (string.IsNullOrEmpty(userName))
             {
-                //UserName = "Username";
-                UserName = "niloy.bauri";
+                UserName = "Username";
+                //UserName = "niloy.bauri";
             }
             if (string.IsNullOrEmpty(password))
             {
-                //Password = "Password";
-                Password = "igmi@123";
+                Password = "Password";
+                //Password = "igmi@123";
             }
             if (string.IsNullOrEmpty(sendPasswordEmail))
             {
@@ -154,7 +154,7 @@ namespace IGMICloudApplication.ViewModels
             TrashCanManagementCommand = new DelegateCommand(() =>
             {
                 MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = false;
-                MainViewModel.Instance.FolderViewModel.GetTrashFolders();
+                MainViewModel.Instance.FolderViewModel.GetTrashFolders("");
                 SwitchView = SwitchViewEnum.TrashCan;
             });
             LogoutCommand = new DelegateCommand(() =>
