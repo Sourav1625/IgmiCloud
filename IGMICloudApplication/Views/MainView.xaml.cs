@@ -458,5 +458,10 @@ namespace IGMICloudApplication.Views
             //    MessageBox.Show(fileContent, "File Content at path: " + filePath);
             //}
         }
+
+        public void Upload_File(object sender, RoutedEventArgs e)
+        {
+            MainViewModel.Instance.FolderViewModel.UploadFile(36, "D:/File Sharing/hr.png");
+        }
     }
 }

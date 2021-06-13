@@ -894,7 +894,7 @@
                                                                         </Button>
                                                                     </Grid>
                                                                     <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5 20 0 20">
-                                                                        <Button Cursor="Hand" FontSize="13" FontWeight="Regular" Padding="6" Height="32" Width="120">
+                                                                        <Button Cursor="Hand" FontSize="13" FontWeight="Regular" Padding="6" Height="32" Width="120" Click="Upload_File">
                                                                             <Button.Content>
                                                                                 <StackPanel Orientation="Horizontal">
                                                                                     <TextBlock Text="Save Options"/>

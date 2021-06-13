@@ -121,6 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="APIs\IGMICloudFileAPIs.cs" />
     <Compile Include="APIs\IGMICloudFolderAPIs.cs" />
     <Compile Include="Models\ApiResponse\EditFolder\EditFolderResponse.cs" />
     <Compile Include="Models\EditUserResponse.cs" />

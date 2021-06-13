@@ -53,6 +53,7 @@ namespace IGMICloudApplication.ViewModels
         string editFolderEndPoint = "/folder/edit";
         string deleteFolderEndPoint = "/folder/delete";
         private string loginEndpoint = "/authorize";
+        string uploadFileEndPoint = "/file/upload";
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public DelegateCommand AddFolderCommand { get; private set; }
         public DelegateCommand EditFolderCommand { get; private set; }
@@ -168,6 +169,17 @@ namespace IGMICloudApplication.ViewModels
             }
             set { SetProperty(ref totalPage, value); }
         }
+
+        private List<int> pageNumbers;
+        public List<int> PageNumbers
+        {
+            get
+            {
+                return pageNumbers;
+            }
+            set { SetProperty(ref pageNumbers, value); }
+        }
+
 
         private bool isFirstButtonEnable;
         public bool IsFirstButtonEnable
@@ -469,6 +481,8 @@ namespace IGMICloudApplication.ViewModels
             EnablePassword = 1;
             CurentPage = 1;
             TrashCurentPage = 1;
+            PageNumbers = new List<int>();
+            PageNumbers.Add(1);
             IsFirstButtonEnable = false;
             IsPreviousButtonEnable = false;
             IsNextButtonEnable = false;
@@ -620,6 +634,7 @@ namespace IGMICloudApplication.ViewModels
             if (folder != null && folder.Data != null)
             {
                 TotalPage = Convert.ToInt32(folder.TotalPage);
+                populatePageNumbers();
                 enableDisableButton();
                 foreach (FolderElement folderElement in folder.Data.Folders)
                 {                   
@@ -640,6 +655,24 @@ namespace IGMICloudApplication.ViewModels
             return FolderList;
         }
 
+        public void populatePageNumbers()
+        {
+            if(PageNumbers!=null && PageNumbers.Count > 0)
+            {
+                PageNumbers.Clear();
+            }
+
+            int i = 1;
+            while (i <= TotalPage)
+            {
+                PageNumbers.Add(i);
+                if (i == 5)
+                {
+                    break;
+                }
+                i++;
+            }
+        }
         public void enableDisableButton()
         {           
             if (CurentPage > 1)
@@ -879,6 +912,23 @@ namespace IGMICloudApplication.ViewModels
             }
             FolderCountMsg = "Root Folder - " + FolderList.Count + " Folders";
             return FolderList;
+        }
+
+        public void UploadFile(int folder_id, string filePath)
+        {           
+            string apiResponse = getAccessToken();
+            if (apiResponse.Equals("error"))
+            {
+                Logger.Error("Could not validate access_token and account_id during EditFolder call");
+                MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
+            }
+            var cloudAPIFileObj = new IGMICloudFileAPIs();
+            string response = cloudAPIFileObj.UploadFile(uploadFileEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id, filePath);
+
+            if (response != null)
+            {
+                GetFolderList(folder_id, 0, "");
+            }
         }
     }
 }
