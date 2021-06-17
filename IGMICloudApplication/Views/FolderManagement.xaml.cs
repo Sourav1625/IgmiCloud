@@ -51,25 +51,34 @@ namespace IGMICloudApplication.Views
         }
         private void First_Click_Folder_Listing(object sender, RoutedEventArgs e)
         {            
-            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "first");
+            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "first", 0);
         }
         private void Previous_Click_Folder_Listing(object sender, RoutedEventArgs e)
         {            
-            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "previous");
+            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "previous", 0);
         }
         private void Next_Click_Folder_Listing(object sender, RoutedEventArgs e)
         {           
-            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "next");
+            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "next", 0);
         }
         private void Last_Click_Folder_Listing(object sender, RoutedEventArgs e)
         {            
-            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "last");
+            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "last", 0);
         }
         private void Page_No_Button_Click(Object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
-            String keyword = btn.Content.ToString();
-            MessageBox.Show(keyword);
+            String page_No = btn.Content.ToString();
+            int pageNo = 0;
+            try
+            {
+                pageNo = Convert.ToInt32(page_No);
+            }catch(Exception ex)
+            {
+                pageNo = 0;
+            }
+            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "last", pageNo);
+            MessageBox.Show(page_No);
         }
     }
 }

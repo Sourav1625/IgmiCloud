@@ -438,25 +438,26 @@ namespace IGMICloudApplication.Views
 
         private void border1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //var fileContent = string.Empty;
-            //var filePath = string.Empty;
-            //OpenFileDialog openFileDialog = new OpenFileDialog();         
-            ////if (openFileDialog.ShowDialog() == true)
-            ////    MessageBox.Show(File.ReadAllText(openFileDialog.FileName));
-            //if (openFileDialog.ShowDialog() == true)
-            //{
-            //    //Get the path of specified file
-            //    filePath = openFileDialog.FileName;
+            var fileContent = string.Empty;
+            var filePath = string.Empty;           
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            var fileUploadPopup = (Popup)mainLayout.ContentTemplate.FindName("FileUploadPopup", mainLayout);
+            fileUploadPopup.VerticalAlignment=VerticalAlignment.Bottom;
+           
+            if (openFileDialog.ShowDialog() == true)
+            {
+                //Get the path of specified file
+                filePath = openFileDialog.FileName;
 
-            //    //Read the contents of the file into a stream
-            //    var fileStream = openFileDialog.OpenFile();
+                //Read the contents of the file into a stream
+                var fileStream = openFileDialog.OpenFile();
 
-            //    using (StreamReader reader = new StreamReader(fileStream))
-            //    {
-            //        fileContent = reader.ReadToEnd();
-            //    }
-            //    MessageBox.Show(fileContent, "File Content at path: " + filePath);
-            //}
+                using (StreamReader reader = new StreamReader(fileStream))
+                {
+                    fileContent = reader.ReadToEnd();
+                }
+                MessageBox.Show(fileContent, "File Content at path: " + filePath);
+            }
         }
 
         public void Upload_File(object sender, RoutedEventArgs e)

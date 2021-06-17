@@ -593,7 +593,7 @@ namespace IGMICloudApplication.ViewModels
             return apiResponse;
         }
 
-        public ObservableCollection<FolderElement> GetFolderList(int folder_id, int parent_folder_id, string direction)
+        public ObservableCollection<FolderElement> GetFolderList(int folder_id, int parent_folder_id, string direction, int pageNo)
         {
             string apiResponse=getAccessToken();
             if (apiResponse.Equals("error"))
@@ -602,24 +602,32 @@ namespace IGMICloudApplication.ViewModels
                 MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
                 return null;
             }
-            if (direction.Trim() == "")
+            if (pageNo == 0)
             {
-                CurentPage = 1;
-            }else if (direction.Trim().Equals("next"))
-            {
-                CurentPage = CurentPage + 1;
+                if (direction.Trim() == "")
+                {
+                    CurentPage = 1;
+                }
+                else if (direction.Trim().Equals("next"))
+                {
+                    CurentPage = CurentPage + 1;
+                }
+                else if (direction.Trim().Equals("previous"))
+                {
+                    CurentPage = CurentPage - 1;
+                }
+                else if (direction.Trim().Equals("first"))
+                {
+                    CurentPage = 1;
+                }
+                else if (direction.Trim().Equals("last"))
+                {
+                    CurentPage = TotalPage;
+                }
             }
-            else if (direction.Trim().Equals("previous"))
+            else
             {
-                CurentPage = CurentPage - 1;
-            }
-            else if (direction.Trim().Equals("first"))
-            {
-                CurentPage = 1;
-            }
-            else if (direction.Trim().Equals("last"))
-            {
-                CurentPage = TotalPage;
+                CurentPage = pageNo;
             }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, parent_folder_id, "active", CurentPage);
@@ -761,7 +769,7 @@ namespace IGMICloudApplication.ViewModels
 
                 if (response != null)
                 {
-                    GetFolderList( 0, 0,"");
+                    GetFolderList( 0, 0,"", 0);
                 }
             }
         }
@@ -783,7 +791,7 @@ namespace IGMICloudApplication.ViewModels
 
             if (response != null)
             {
-                GetFolderList(folder_id, 0,"");
+                GetFolderList(folder_id, 0,"", 0);
             }
         }
 
@@ -801,7 +809,7 @@ namespace IGMICloudApplication.ViewModels
             if (response != null)
             {
                 MainViewModel.Instance.ToastViewModel.ShowSuccess("Removed 1 file.");
-                GetFolderList(folder_id, 0, "");
+                GetFolderList(folder_id, 0, "", 0);
             }
         }
         public void GetTrashFolders(string direction)
@@ -927,7 +935,7 @@ namespace IGMICloudApplication.ViewModels
 
             if (response != null)
             {
-                GetFolderList(folder_id, 0, "");
+                GetFolderList(folder_id, 0, "", 0);
             }
         }
     }
