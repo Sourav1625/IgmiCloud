@@ -61,10 +61,15 @@ namespace IGMICloudApplication.Views
         {           
             MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "next");
         }
-
         private void Last_Click_Folder_Listing(object sender, RoutedEventArgs e)
         {            
             MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "last");
+        }
+        private void Page_No_Button_Click(Object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            String keyword = btn.Content.ToString();
+            MessageBox.Show(keyword);
         }
     }
 }
