@@ -922,8 +922,9 @@ namespace IGMICloudApplication.ViewModels
             return FolderList;
         }
 
-        public void UploadFile(int folder_id, string filePath)
-        {           
+        public void UploadFile(string filePath)
+        {
+            Console.WriteLine("ParentFolderID : " + ParentFolderId.ToString());
             string apiResponse = getAccessToken();
             if (apiResponse.Equals("error"))
             {
@@ -931,11 +932,12 @@ namespace IGMICloudApplication.ViewModels
                 MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
             }
             var cloudAPIFileObj = new IGMICloudFileAPIs();
-            string response = cloudAPIFileObj.UploadFile(uploadFileEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, folder_id, filePath);
+            string response = cloudAPIFileObj.UploadFile(uploadFileEndPoint, LoggedinProfile.accessToken, LoggedinProfile.accountId, ParentFolderId, filePath);
 
             if (response != null)
             {
-                GetFolderList(folder_id, 0, "", 0);
+                MainViewModel.Instance.ToastViewModel.ShowSuccess("Upload Complete");
+                GetFolderList(0, ParentFolderId, "", 0);               
             }
         }
     }

@@ -25,7 +25,10 @@ namespace IGMICloudApplication.APIs
             var request = new RestRequest(Method.POST);            
             request.AddParameter("access_token", access_token);
             request.AddParameter("account_id", account_id);
-            request.AddParameter("folder_id", folder_id);
+            if (folder_id > 0)
+            {
+                request.AddParameter("folder_id", folder_id);
+            }
             request.AddFile("upload_file", filePath);
             IRestResponse response = client.Execute(request);
             Console.WriteLine(response.Content);

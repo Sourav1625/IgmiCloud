@@ -21,6 +21,7 @@ namespace IGMICloudApplication.Views
     public partial class MainView : Window
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        string uploadFilePath;
         public MainView()
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace IGMICloudApplication.Views
             this.Left = (screenWidth / 2) - (windowWidth / 2);
             this.Top = (screenHeight / 2) - (windowHeight / 2);
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            uploadFilePath = null;
         }
 
         void OnInputFieldFocused(object sender, RoutedEventArgs e)
@@ -438,8 +440,7 @@ namespace IGMICloudApplication.Views
 
         private void border1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var fileContent = string.Empty;
-            var filePath = string.Empty;           
+            var fileContent = string.Empty;                   
             OpenFileDialog openFileDialog = new OpenFileDialog();
             var fileUploadPopup = (Popup)mainLayout.ContentTemplate.FindName("FileUploadPopup", mainLayout);
             //fileUploadPopup.VerticalAlignment=VerticalAlignment.Bottom;
@@ -447,7 +448,7 @@ namespace IGMICloudApplication.Views
             if (openFileDialog.ShowDialog(this) == true)
             {
                 //Get the path of specified file
-                filePath = openFileDialog.FileName;
+                uploadFilePath = openFileDialog.FileName;
 
                 //Read the contents of the file into a stream
                 var fileStream = openFileDialog.OpenFile();
@@ -456,7 +457,7 @@ namespace IGMICloudApplication.Views
                 {
                     fileContent = reader.ReadToEnd();
                 }
-                //MessageBox.Show(fileContent, "File Content at path: " + filePath);
+                //MessageBox.Show(fileContent, "File Content at path: " + uploadFilePath);
                 fileUploadPopup.IsOpen = true;
             }
             else
@@ -466,8 +467,11 @@ namespace IGMICloudApplication.Views
         }
 
         public void Upload_File(object sender, RoutedEventArgs e)
-        {
-            MainViewModel.Instance.FolderViewModel.UploadFile(36, "D:/File Sharing/hr.png");
+        {           
+            if (uploadFilePath != null && uploadFilePath.Trim() != "")
+            {
+                MainViewModel.Instance.FolderViewModel.UploadFile(uploadFilePath);
+            }
         }
     }
 }
