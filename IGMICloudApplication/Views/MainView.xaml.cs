@@ -442,9 +442,9 @@ namespace IGMICloudApplication.Views
             var filePath = string.Empty;           
             OpenFileDialog openFileDialog = new OpenFileDialog();
             var fileUploadPopup = (Popup)mainLayout.ContentTemplate.FindName("FileUploadPopup", mainLayout);
-            fileUploadPopup.VerticalAlignment=VerticalAlignment.Bottom;
-           
-            if (openFileDialog.ShowDialog() == true)
+            //fileUploadPopup.VerticalAlignment=VerticalAlignment.Bottom;
+            fileUploadPopup.IsOpen = false; 
+            if (openFileDialog.ShowDialog(this) == true)
             {
                 //Get the path of specified file
                 filePath = openFileDialog.FileName;
@@ -456,8 +456,13 @@ namespace IGMICloudApplication.Views
                 {
                     fileContent = reader.ReadToEnd();
                 }
-                MessageBox.Show(fileContent, "File Content at path: " + filePath);
+                //MessageBox.Show(fileContent, "File Content at path: " + filePath);
+                fileUploadPopup.IsOpen = true;
             }
+            else
+            {
+                fileUploadPopup.IsOpen = true;
+            }          
         }
 
         public void Upload_File(object sender, RoutedEventArgs e)
