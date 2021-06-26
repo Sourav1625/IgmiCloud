@@ -77,8 +77,7 @@ namespace IGMICloudApplication.Views
             {
                 pageNo = 0;
             }
-            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "last", pageNo);
-            MessageBox.Show(page_No);
+            MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "last", pageNo);            
         }
     }
 }

@@ -180,6 +180,16 @@ namespace IGMICloudApplication.ViewModels
             set { SetProperty(ref pageNumbers, value); }
         }
 
+        private List<int> trashPageNumbers;
+        public List<int> TrashPageNumbers
+        {
+            get
+            {
+                return trashPageNumbers;
+            }
+            set { SetProperty(ref trashPageNumbers, value); }
+        }
+
 
         private bool isFirstButtonEnable;
         public bool IsFirstButtonEnable
@@ -480,9 +490,7 @@ namespace IGMICloudApplication.ViewModels
             EditedFolderId = 0;
             EnablePassword = 1;
             CurentPage = 1;
-            TrashCurentPage = 1;
-            PageNumbers = new List<int>();
-            PageNumbers.Add(1);
+            TrashCurentPage = 1;          
             IsFirstButtonEnable = false;
             IsPreviousButtonEnable = false;
             IsNextButtonEnable = false;
@@ -665,7 +673,12 @@ namespace IGMICloudApplication.ViewModels
 
         public void populatePageNumbers()
         {
-            if(PageNumbers!=null && PageNumbers.Count > 0)
+            if (PageNumbers == null)
+            {
+                PageNumbers = new List<int>();
+            }
+
+            if (PageNumbers!=null && PageNumbers.Count > 0)
             {
                 PageNumbers.Clear();
             }
@@ -849,6 +862,7 @@ namespace IGMICloudApplication.ViewModels
             if (folder != null && folder.Data != null)
             {
                 TrashTotalPage = Convert.ToInt32(folder.TotalPage);
+                populateTrashPageNumbers();
                 enableDisableTrashButton();
                 foreach (FolderElement folderElement in folder.Data.Folders)
                 {                   
@@ -856,6 +870,30 @@ namespace IGMICloudApplication.ViewModels
                 }
             }
             TrashFolderCountMsg = "Trash Can - " + TrashFolderList.Count + " Folders";
+        }
+
+        public void populateTrashPageNumbers()
+        {
+            if (TrashPageNumbers == null)
+            {
+                TrashPageNumbers = new List<int>();
+            }
+
+            if (TrashPageNumbers != null && TrashPageNumbers.Count > 0)
+            {
+                TrashPageNumbers.Clear();
+            }
+
+            int i = 1;
+            while (i <= TrashTotalPage)
+            {
+                TrashPageNumbers.Add(i);
+                if (i == 5)
+                {
+                    break;
+                }
+                i++;
+            }
         }
 
         public void enableDisableTrashButton()

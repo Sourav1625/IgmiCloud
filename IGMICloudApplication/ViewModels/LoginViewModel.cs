@@ -97,13 +97,13 @@ namespace IGMICloudApplication.ViewModels
         {
             if (string.IsNullOrEmpty(userName))
             {
-                UserName = "Username";
-                //UserName = "niloy.bauri";
+                //UserName = "Username";
+                UserName = "niloy.bauri";
             }
             if (string.IsNullOrEmpty(password))
             {
-                Password = "Password";
-                //Password = "igmi@123";
+                //Password = "Password";
+                Password = "igmi@123";
             }
             if (string.IsNullOrEmpty(sendPasswordEmail))
             {
@@ -225,7 +225,7 @@ namespace IGMICloudApplication.ViewModels
                                         SwitchView = SwitchViewEnum.FolderManagement;
                                         MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = true;
                                         MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0,"", 0);
-                                        MainViewModel.Instance.FolderViewModel.GetFolderListForFileUpload(0, 0);
+                                        MainViewModel.Instance.FolderViewModel.GetFolderListForFileUpload(0, 0);                                        
                                         MainViewModel.Instance.AccountViewModel.GetUserDetails();
                                     }
                                 }

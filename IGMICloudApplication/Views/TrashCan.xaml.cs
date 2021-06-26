@@ -44,5 +44,21 @@ namespace IGMICloudApplication.Views
         {
             MainViewModel.Instance.FolderViewModel.GetTrashFolders("last");
         }
+
+        private void Page_No_Button_Click(Object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            String page_No = btn.Content.ToString();
+            int pageNo = 0;
+            try
+            {
+                pageNo = Convert.ToInt32(page_No);
+            }
+            catch (Exception ex)
+            {
+                pageNo = 0;
+            }
+            //MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "last", pageNo);
+        }
     }
 }

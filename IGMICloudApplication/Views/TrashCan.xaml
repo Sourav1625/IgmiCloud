@@ -216,13 +216,25 @@
                             </StackPanel>
                         </Button.Content>
                     </Button>
-                    <Button x:Name="btnCurrent" IsEnabled="False" Foreground="#ffffff" Background="Black" BorderThickness="0" Width="30" >
+                    <!--<Button x:Name="btnCurrent" IsEnabled="False" Foreground="#ffffff" Background="Black" BorderThickness="0" Width="30" >
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" Background="Black">
                                 <TextBlock Text="{Binding Path=FolderViewModel.TrashCurentPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="8"/>
                             </StackPanel>
                         </Button.Content>
-                    </Button>
+                    </Button>-->
+                    <ItemsControl ItemsSource="{Binding Path=FolderViewModel.TrashPageNumbers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Foreground="#ffffff" Background="Black" BorderThickness="0" Width="30" Content="{Binding}" Margin="0,0,5,0" Click="Page_No_Button_Click" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                     <Button x:Name="btnNext" Style="{StaticResource Style_RightActionButton}" Click="Next_Click_Folder_Listing" IsEnabled="{Binding Path=FolderViewModel.IsTrashNextButtonEnable, Mode=TwoWay}" Foreground="#646464" Width="80" >
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" >
