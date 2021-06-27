@@ -602,7 +602,7 @@ namespace IGMICloudApplication.ViewModels
         }
 
         public ObservableCollection<FolderElement> GetFolderList(int folder_id, int parent_folder_id, string direction, int pageNo)
-        {
+        {            
             string apiResponse=getAccessToken();
             if (apiResponse.Equals("error"))
             {
@@ -639,7 +639,7 @@ namespace IGMICloudApplication.ViewModels
             }
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, parent_folder_id, "active", CurentPage);
-
+            
             Folder folder = JsonConvert.DeserializeObject<Folder>(response);           
             FolderList = new ObservableCollection<FolderElement>();
             FolderListForComboBox = new ObservableCollection<FolderElement>();
@@ -719,7 +719,7 @@ namespace IGMICloudApplication.ViewModels
         }       
 
         public void GetSpecificFolder(int folder_id)
-        {
+        {            
             string apiResponse = getAccessToken();
             if (apiResponse.Equals("error"))
             {
@@ -825,7 +825,7 @@ namespace IGMICloudApplication.ViewModels
                 GetFolderList(folder_id, 0, "", 0);
             }
         }
-        public void GetTrashFolders(string direction)
+        public void GetTrashFolders(string direction, int pageNo)
         {
             string apiResponse = getAccessToken();
             if (apiResponse.Equals("error"))
@@ -833,26 +833,35 @@ namespace IGMICloudApplication.ViewModels
                 Logger.Error("Could not validate access_token and account_id during GetFolderList call");
                 MainViewModel.Instance.ToastViewModel.ShowError("Could not validate access_token and account_id");
             }
-            if (direction.Trim() == "")
+
+            if (pageNo == 0)
             {
-                TrashCurentPage = 1;
+                if (direction.Trim() == "")
+                {
+                    TrashCurentPage = 1;
+                }
+                else if (direction.Trim().Equals("next"))
+                {
+                    TrashCurentPage = TrashCurentPage + 1;
+                }
+                else if (direction.Trim().Equals("previous"))
+                {
+                    TrashCurentPage = TrashCurentPage - 1;
+                }
+                else if (direction.Trim().Equals("first"))
+                {
+                    TrashCurentPage = 1;
+                }
+                else if (direction.Trim().Equals("last"))
+                {
+                    TrashCurentPage = TrashTotalPage;
+                }
             }
-            else if (direction.Trim().Equals("next"))
+            else
             {
-                TrashCurentPage = TrashCurentPage + 1;
+                TrashCurentPage = pageNo;
             }
-            else if (direction.Trim().Equals("previous"))
-            {
-                TrashCurentPage = TrashCurentPage - 1;
-            }
-            else if (direction.Trim().Equals("first"))
-            {
-                TrashCurentPage = 1;
-            }
-            else if (direction.Trim().Equals("last"))
-            {
-                TrashCurentPage = TrashTotalPage;
-            }
+           
             var cloudAPIFolderObj = new IGMICloudFolderAPIs();
             string response = cloudAPIFolderObj.GetFolderList(getFolderDetailsEndPoint, LoggedinProfile.accessToken, 0, "Trash", TrashCurentPage);
 

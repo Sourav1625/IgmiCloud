@@ -201,7 +201,7 @@
                 <Setter Property="Cursor" Value="Hand"/>             
             </Trigger>
         </Style.Triggers>
-    </Style>
+    </Style>    
     <Style x:Key="Popup_Header" TargetType="{x:Type StackPanel}">
         <Setter Property="Height" Value="15" />
         <Style.Resources>

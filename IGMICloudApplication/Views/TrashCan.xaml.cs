@@ -28,21 +28,21 @@ namespace IGMICloudApplication.Views
 
         private void First_Click_Folder_Listing(object sender, RoutedEventArgs e)
         {            
-            MainViewModel.Instance.FolderViewModel.GetTrashFolders("first");
+            MainViewModel.Instance.FolderViewModel.GetTrashFolders("first",0);
         }
         private void Previous_Click_Folder_Listing(object sender, RoutedEventArgs e)
         {
-            MainViewModel.Instance.FolderViewModel.GetTrashFolders("previous");
+            MainViewModel.Instance.FolderViewModel.GetTrashFolders("previous",0);
 
         }
         private void Next_Click_Folder_Listing(object sender, RoutedEventArgs e)
         {
-            MainViewModel.Instance.FolderViewModel.GetTrashFolders("next");
+            MainViewModel.Instance.FolderViewModel.GetTrashFolders("next",0);
         }
 
         private void Last_Click_Folder_Listing(object sender, RoutedEventArgs e)
         {
-            MainViewModel.Instance.FolderViewModel.GetTrashFolders("last");
+            MainViewModel.Instance.FolderViewModel.GetTrashFolders("last",0);
         }
 
         private void Page_No_Button_Click(Object sender, RoutedEventArgs e)
@@ -58,7 +58,7 @@ namespace IGMICloudApplication.Views
             {
                 pageNo = 0;
             }
-            //MainViewModel.Instance.FolderViewModel.GetFolderList(0, 0, "last", pageNo);
+            MainViewModel.Instance.FolderViewModel.GetTrashFolders("", pageNo);
         }
     }
 }

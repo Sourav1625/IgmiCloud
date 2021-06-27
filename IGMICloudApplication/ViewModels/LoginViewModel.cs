@@ -154,7 +154,7 @@ namespace IGMICloudApplication.ViewModels
             TrashCanManagementCommand = new DelegateCommand(() =>
             {
                 MainViewModel.Instance.FolderViewModel.IsRootFolderSelected = false;
-                MainViewModel.Instance.FolderViewModel.GetTrashFolders("");
+                MainViewModel.Instance.FolderViewModel.GetTrashFolders("",0);
                 SwitchView = SwitchViewEnum.TrashCan;
             });
             LogoutCommand = new DelegateCommand(() =>
